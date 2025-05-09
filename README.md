@@ -2,10 +2,10 @@
 
 Built with:
 
-- [Bun]()
-- [Vite]()
-- [React]()
-- [Tailwind CSS]()
+- [Bun](https://bun.sh/)
+- [Vite](https://vite.dev/)
+- [React](https://react.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
 - etc.
 
 ## Visit

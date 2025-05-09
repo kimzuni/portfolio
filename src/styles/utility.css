@@ -1,0 +1,22 @@
+@utility before-backdrop-blur-* {
+	&:before {
+		@apply content-[""];
+		@apply absolute inset-0 -z-50;
+		@apply w-full h-full;
+		@apply backdrop-blur-[--value(--blur-*,[length])];
+	}
+}
+
+@utility textBorder-* {
+	--shadow-color: --value(--color-*, [*]);
+	text-shadow:
+		1px 0px var(--shadow-color),
+		0px 1px var(--shadow-color),
+		-1px 0px var(--shadow-color),
+		0px -1px var(--shadow-color),
+		1px 1px var(--shadow-color),
+		-1px 1px var(--shadow-color),
+		1px -1px var(--shadow-color),
+		-1px -1px var(--shadow-color)
+	;
+}

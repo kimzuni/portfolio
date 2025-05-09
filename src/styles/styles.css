@@ -1,0 +1,51 @@
+:root {
+	@apply scroll-smooth antialiased;
+	@apply bg-theme-bg-light text-theme-text-dark;
+} html {
+	@apply min-h-full flex flex-col;
+} body, #root {
+	@apply flex-1 flex flex-col;
+} main {
+	@apply flex-1;
+}
+
+
+
+a, button {
+	@apply cursor-pointer transition-colors;
+	@apply hover:text-theme-primary [&.active]:text-theme-primary;
+}
+
+
+
+.menuBtn {
+	--bg: var(--color-theme-text-dark);
+	--bd: var(--color-theme-bg-light);
+
+	.container {
+		@apply relative w-full h-full;
+	} span {
+		@apply block rounded-full;
+		@apply w-full h-[calc(100%*15/100)];
+		@apply bg-(--bg,var(--color-theme-bg-dark));
+		@apply border-1 border-(--bd,var(--color-theme-bg-light));
+		@apply absolute top-[50%] -translate-y-1/2;
+		@apply transition-[opacity_transform];
+	}
+
+	.top {
+		@apply top-1/4;
+	} .left, .right {
+		@apply top-2/4;
+	} .bottom {
+		@apply top-3/4;
+	} &.active {
+		.top, .bottom {
+			@apply opacity-0;
+		} .left {
+			@apply rotate-45;
+		} .right {
+			@apply -rotate-45;
+		}
+	}
+}

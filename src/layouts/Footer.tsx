@@ -12,7 +12,8 @@ export default function Footer({
 			role={role}
 			className={`
 				h-16 leading-16
-				text-theme-text-dark-sub text-center
+				text-theme-text-dark-sub
+				text-center text-sm
 				${className}
 			`.replace(/\s+/g, " ").trim()}
 			{...props}

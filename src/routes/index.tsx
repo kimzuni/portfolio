@@ -2,8 +2,8 @@ import { RouteObject } from "react-router";
 
 import Layout from "../layouts";
 import NotFound from "../pages/404";
-import Home from "../pages/home";
-import Projects from "../pages/projects";
+import Home from "../pages/Home";
+import Projects from "../pages/Projects";
 import * as project from "./projects";
 
 

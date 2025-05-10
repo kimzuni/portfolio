@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
-import { Link, NavLink, useLocation } from "react-router";
+import { NavLink } from "react-router";
 
-import { useVisibility } from "../hooks";
+import { useVisibility, useIsInViewport } from "../hooks";
 
 import { UList } from "../components";
 import { MenuBtn } from "../components";
@@ -19,10 +19,11 @@ export interface SocialItem {
 	href: string;
 }
 
-export interface NavbarProps extends Omit<React.ComponentPropsWithoutRef<"nav">, "children"> {
-	text: string;
+export interface NavbarProps extends React.ComponentPropsWithoutRef<"nav"> {
 	items?: NavbarItem[];
 	socials?: SocialItem[];
+	isOpen: boolean;
+	setNavOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 
@@ -36,60 +37,45 @@ const bodyOverflowHidden = (hidden: boolean): undefined | number => {
 }
 
 export default function Navbar({
-	text,
 	items=[],
 	socials=[],
+	isOpen,
+	setNavOpen,
 	className="",
 	style={},
+	children,
 	...props
 }: NavbarProps) {
-	const { pathname } = useLocation();
-	const [isMobile, setIsMobile] = useState(false);
-	const [navOpen, setNavOpen] = useState(false);
+	const [isSmallScreen, setIsSmallScreen] = useState(false);
 	const [headerTop, setHeaderTop] = useState(0);
-	const btnRef = useRef<HTMLButtonElement>(null);
 	const headerRef = useRef<HTMLElement>(null);
-	const navRef = useVisibility(navOpen, { hidden: true });
-
-	const btnOnClick = () => {
-		setNavOpen(p => !p);
-	};
+	const navRef = useVisibility(isOpen, { collapseOnHide: true });
+	const [btnRef, btnIsInViewport] = useIsInViewport<HTMLButtonElement>();
 
 	useEffect(() => {
+		setIsSmallScreen(btnIsInViewport);
 		setNavOpen(false);
-	}, [pathname]);
+	}, [btnIsInViewport, setNavOpen]);
 
 	useEffect(() => {
-		bodyOverflowHidden(navOpen);
+		bodyOverflowHidden(isOpen);
 
 		const header = headerRef.current;
 		if (header) {
 			const { innerHeight } = window;
 			const { top, bottom, height } = header.getBoundingClientRect();
 			const toTop = 0 < innerHeight - (top + bottom);
-			setHeaderTop( !navOpen ? 0 : toTop ? -top : Math.max(0, innerHeight - top - height) )
+			setHeaderTop( !isOpen ? 0 : toTop ? -top : Math.max(0, innerHeight - top - height) )
 		}
-	}, [navOpen]);
-
-	useEffect(() => {
-		const btn = btnRef.current;
-		if (!btn) return;
-
-		const abserver = new IntersectionObserver(([entry]) => {
-			setIsMobile(entry.isIntersecting);
-			setNavOpen(false);
-		});
-
-		abserver.observe(btn);
-		return () => abserver.disconnect();
-	}, []);
+	}, [isOpen]);
 
 	return (
 		<header
 			ref={headerRef}
 			className={`
 				@container-[size]/navbar
-				sticky top-0 z-50 bottom-0 -mt-2
+				sticky top-0 bottom-0 z-50
+				-mt-2 mb-2
 				flex gap-x-4 px-4
 				h-16 leading-16
 				text-lg font-bold
@@ -106,14 +92,10 @@ export default function Navbar({
 			} as React.CSSProperties}
 			{...props}
 		>
-			<h1 className="flex-1">
-				<Link
-					to="/"
-					className="inline-block text-theme-text-dark"
-					children={text}
-					tabIndex={1}
-				/>
-			</h1>
+			<h1
+				className="flex-1 flex items-center px-2 text-theme-text-dark"
+				children={children}
+			/>
 			<nav
 				id="nav"
 				ref={navRef}
@@ -128,7 +110,7 @@ export default function Navbar({
 					md:bg-transparent md:translate-0!
 				`.replace(/\s+/g, " ").trim()}
 				aria-label="Main Navigation"
-				aria-hidden={!navOpen}
+				aria-hidden={isSmallScreen && !isOpen}
 			>
 				<div
 					className={`
@@ -154,7 +136,7 @@ export default function Navbar({
 						`.replace(/\s+/g, " ").trim()}
 					/>
 
-					{isMobile &&
+					{isSmallScreen &&
 						<UList
 							items={socials}
 							render={({ href, icon }) => <a className="p-2 text-xl" href={href} target="_blank" rel="noopener noreferrer">{getIcon(icon)}</a>}
@@ -168,12 +150,12 @@ export default function Navbar({
 				className={`
 					md:hidden p-4
 					h-[100cqh] w-[100cqh]
-					${navOpen ? "active" : ""}
+					${isOpen ? "active" : ""}
 				`.replace(/\s+/g, " ").trim()}
-				onClick={btnOnClick}
-				aria-expanded={navOpen}
+				onClick={() => setNavOpen(p => !p)}
+				aria-expanded={isOpen}
 				aria-controls="nav"
-				tabIndex={2}
+				tabIndex={1}
 			/>
 		</header>
 	);

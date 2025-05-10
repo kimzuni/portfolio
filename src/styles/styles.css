@@ -1,12 +1,17 @@
 :root {
 	@apply scroll-smooth antialiased;
 	@apply bg-theme-bg-light text-theme-text-dark;
+} ::selection {
+	@apply bg-theme-primary;
+	@apply text-theme-text-dark;
 } html {
 	@apply min-h-full flex flex-col;
 } body, #root {
 	@apply flex-1 flex flex-col;
 } main {
 	@apply flex-1;
+} * {
+	cursor: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIuOHJlbSIgaGVpZ2h0PSIuOHJlbSIgZmlsbD0iIzVjYzlmZiIgc3Ryb2tlPSJibGFjayI+PGNpcmNsZSBjeD0iLjRyZW0iIGN5PSIuNHJlbSIgcj0iLjRyZW0iLz48L3N2Zz4=) 6 6, auto !important;
 }
 
 

@@ -22,6 +22,14 @@
 	--color-theme-bg-dark-sub: color-mix(in oklab, var(--color-theme-bg-dark) 95%, white);
 }
 
+@custom-variant hovero { /* hover original */
+	&:hover {
+		@media (hover: hover) {
+			@slot;
+		}
+	}
+}
+
 @custom-variant hover {
 	&:hover {
 		@media (hover: hover) and (pointer: fine) {

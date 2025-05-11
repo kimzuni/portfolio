@@ -2,6 +2,7 @@ import * as items from "../../items";
 
 import Intro from "./Intro";
 import About from "./About";
+import Skills from "./Skills";
 
 
 
@@ -14,6 +15,9 @@ export default function Home() {
 		<About
 			avatar="/avatar.png"
 			items={items.about}
+		/>
+		<Skills
+			items={items.skills}
 		/>
 		<div>
 			home<br/>home<br/>home<br/>home<br/>home<br/>home<br/>home<br/>home<br/>home<br/>home<br/>

@@ -1,0 +1,23 @@
+@import "swiper/css";
+@import "swiper/css/effect-fade";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
+
+
+
+.swiper {
+	--swiper-theme-color: var(--color-theme-primary);
+
+	.swiper-pagination-bullet-active {
+		@apply cursor-auto;
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		[class^="swiper-button-"]:hover {
+			--swiper-theme-color: var(--color-theme-dark);
+		} .swiper-pagination-clickable [class~="swiper-pagination-bullet"]:hover {
+			--swiper-pagination-bullet-inactive-color: var(--color-theme-dark);
+			--swiper-pagination-bullet-inactive-opacity: 1;
+		}
+	}
+}

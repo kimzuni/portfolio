@@ -7,7 +7,7 @@ export interface UListProps<T> extends Omit<React.ComponentPropsWithoutRef<"ul">
 
 
 
-export default function UL<T>({
+export default function UList<T>({
 	items,
 	render,
 	...props

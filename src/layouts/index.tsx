@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { Outlet, useLocation, useNavigate, ScrollRestoration } from "react-router";
 import { FaAngleLeft } from "@react-icons/all-files/fa/FaAngleLeft";
 
-import Navbar, { NavbarItem, SocialItem } from "./Navbar";
+import * as items from "../items";
+import Navbar from "./Navbar";
 import Footer from "./Footer";
 
 
@@ -12,30 +13,6 @@ export interface useLayoutContextType {
 	setNavOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	goBack: () => void;
 };
-
-
-
-const navItems: NavbarItem[] = [
-	{
-		label: "Home",
-		href: "/",
-	},
-	{
-		label: "Projects",
-		href: "/projects",
-	},
-];
-
-const socials: SocialItem[] = [
-	{
-		icon: "github",
-		href: "https://github.com/jh1950",
-	},
-	{
-		icon: "github",
-		href: "https://github.com/kimzuni",
-	},
-];
 
 
 
@@ -63,8 +40,8 @@ export default function Layout() {
 		<ScrollRestoration/>
 		<main className="flex flex-col">
 			<Navbar
-				items={navItems}
-				socials={socials}
+				items={items.nav}
+				socials={items.socials}
 				isOpen={navOpen}
 				setNavOpen={setNavOpen}
 			>
@@ -76,7 +53,7 @@ export default function Layout() {
 				goBack,
 			}}/>
 		</main>
-		<Footer translate="no">
+		<Footer translate="no" socials={items.socials}>
 			&copy; {new Date().getFullYear()} zuni.kim
 		</Footer>
 	</>);

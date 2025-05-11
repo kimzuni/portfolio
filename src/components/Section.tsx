@@ -8,13 +8,13 @@ export type SectionProps = React.ComponentPropsWithoutRef<"section">;
 export interface DivProps extends React.ComponentPropsWithoutRef<"div">, Omit<UseVisibilityOptions, "collapseOnHide" | "showTransition" | "hideTransition"> {
 };
 
-const Component = ({
+const Section = ({
 	className="",
 	...props
 }: SectionProps) => {
 	return (
 		<section
-			className={`${className} px-6`.trim()}
+			className={`${className} px-6 pb-48 md:pb-64 [&_.title]:text-2xl [&_.title]:font-extrabold [&_.title]:mb-4`.trim()}
 			{...props}
 		/>
 	);
@@ -45,9 +45,6 @@ const Animation = ({
 	);
 };
 
-const Section = {
-	Component,
-	Animation,
-};
+Section.Animation = Animation;
 
 export default Section;

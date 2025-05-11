@@ -5,17 +5,12 @@ import { useVisibility, useIsInViewport } from "../hooks";
 
 import { UList } from "../components";
 import { MenuBtn } from "../components";
-import { getIcon, IconType } from "./icons";
+import Socials, { SocialItem } from "./Socials";
 
 
 
 export interface NavbarItem {
 	label: string;
-	href: string;
-}
-
-export interface SocialItem {
-	icon: IconType;
 	href: string;
 }
 
@@ -65,7 +60,7 @@ export default function Navbar({
 			const { innerHeight } = window;
 			const { top, bottom, height } = header.getBoundingClientRect();
 			const toTop = 0 < innerHeight - (top + bottom);
-			setHeaderTop( !isOpen ? 0 : toTop ? -top : Math.max(0, innerHeight - top - height) )
+			setHeaderTop( !isOpen ? 0 : toTop ? -top-8 : Math.max(0, innerHeight - top - height) )
 		}
 	}, [isOpen]);
 
@@ -74,10 +69,10 @@ export default function Navbar({
 			ref={headerRef}
 			className={`
 				@container-[size]/navbar
-				sticky top-0 bottom-0 z-50
-				-mt-2 mb-2
+				sticky -top-2 bottom-0 z-50
+				-mt-2 pt-2
 				flex gap-x-4 px-4
-				h-16 leading-16
+				h-18 leading-16
 				text-lg font-bold
 				before-backdrop-blur-xs
 				textBorder-theme-bg-light
@@ -117,7 +112,7 @@ export default function Navbar({
 						flex flex-col gap-y-4
 						py-8 overflow-auto h-full
 						[&>ul]:flex [&>ul]:justify-center
-						[&>ul]:mx-auto [&_a]:block
+						[&>ul]:mx-auto
 
 						md:flex-row md:p-0 md:h-auto md:gap-x-1
 						md:overflow-visible
@@ -125,7 +120,7 @@ export default function Navbar({
 				>
 					<UList
 						items={items}
-						render={({ href, label }) => <NavLink className="outline-current md:px-2" to={href}>{label}</NavLink>}
+						render={({ href, label }) => <NavLink className="block outline-current md:px-2" to={href}>{label}</NavLink>}
 						className={`
 							flex-col w-64 leading-13
 							[&>li]:border-b-1
@@ -136,13 +131,7 @@ export default function Navbar({
 						`.replace(/\s+/g, " ").trim()}
 					/>
 
-					{isSmallScreen &&
-						<UList
-							items={socials}
-							render={({ href, icon }) => <a className="p-2 text-xl" href={href} target="_blank" rel="noopener noreferrer">{getIcon(icon)}</a>}
-							className={`flex items-center ${className}`.trim()}
-						/>
-					}
+					{isSmallScreen && <Socials items={socials}/>}
 				</div>
 			</nav>
 			<MenuBtn

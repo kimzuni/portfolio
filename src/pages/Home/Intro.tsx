@@ -4,17 +4,28 @@ import { Section, SectionProps } from "../../components";
 
 
 
+export interface IntroItem {
+	title: string;
+	subtitle: string;
+	description: React.ReactElement;
+}
+
+export interface IntroProps extends SectionProps {
+	item: IntroItem;
+}
+
 export default function Intro({
+	item,
 	id="intro",
 	className="",
 	...props
-}: SectionProps) {
+}: IntroProps) {
 	return (
-		<Section.Component
+		<Section
 			id={id}
 			className={`
 				${className}
-				pb-16
+				pb-[calc(100lvh-100svh+64px)]!
 				bg-theme-bg-dark text-theme-text-light
 				flex flex-col justify-center items-center
 				font-extrabold text-center
@@ -38,18 +49,16 @@ export default function Intro({
 						gradient
 						text-[1.25em]
 					`.replace(/\s+/g, " ").trim()}
-					children="KIM JOON HEE"
+					children={item.title}
 				/>
 				<p
 					className="gradient"
-					children="Web Portfolio"
+					children={item.subtitle}
 				/>
 				<p
 					className="pt-4 text-xl text-center leading-8"
-				>
-					Welcome to my Portfolio<br/>
-					This is a description
-				</p>
+					children={item.description}
+				/>
 			</Section.Animation>
 			<Section.Animation
 				className={`
@@ -61,6 +70,6 @@ export default function Intro({
 				<CgScrollV size="36" className="p-1 animate-bounce"/>
 				<span>Scroll Down</span>
 			</Section.Animation>
-		</Section.Component>
+		</Section>
 	);
 }

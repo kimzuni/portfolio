@@ -1,10 +1,10 @@
-export type ButtonProps<E extends React.ElementType> = React.PropsWithChildren<React.ComponentPropsWithoutRef<E> & {
+export type ButtonProps<E extends React.ElementType = "button"> = React.PropsWithChildren<React.ComponentPropsWithoutRef<E> & {
 	as?: E;
 }>;
 
 
 
-export default function Button<E extends React.ElementType>({
+export default function Button<E extends React.ElementType = "button">({
 	as,
 	type="button",
 	className="",

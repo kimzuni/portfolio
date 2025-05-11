@@ -9,6 +9,7 @@
 
 @utility textBorder-* {
 	--shadow-color: --value(--color-*, [*]);
+	--shadow-color: --value("inherit", "transparent");
 	text-shadow:
 		1px 0px var(--shadow-color),
 		0px 1px var(--shadow-color),

@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+@import "./swiper";
 @import "./utility.css";
 @import "./styles.css" layer(base);
 

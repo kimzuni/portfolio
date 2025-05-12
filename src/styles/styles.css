@@ -2,7 +2,7 @@
 	@apply scroll-smooth antialiased;
 	@apply bg-theme-bg-light text-theme-text-dark;
 } ::selection {
-	@apply bg-theme-primary;
+	@apply bg-theme-primary/85;
 	@apply text-theme-text-dark;
 } html {
 	@apply min-h-full flex flex-col;

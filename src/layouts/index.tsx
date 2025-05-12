@@ -53,7 +53,7 @@ export default function Layout() {
 				goBack,
 			}}/>
 		</main>
-		<Footer translate="no" socials={items.socials}>
+		<Footer translate="no">
 			&copy; {new Date().getFullYear()} zuni.kim
 		</Footer>
 	</>);

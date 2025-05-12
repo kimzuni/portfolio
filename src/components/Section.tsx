@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { forwardRef, useState, useEffect } from "react";
 
 import { useMergedRefs, useVisibility, useIsInViewport, UseVisibilityOptions } from "../hooks";
 
@@ -14,24 +14,24 @@ const Section = ({
 }: SectionProps) => {
 	return (
 		<section
-			className={`${className} px-6 pb-48 md:pb-64 [&_.title]:text-2xl [&_.title]:font-extrabold [&_.title]:mb-4`.trim()}
+			className={`${className} px-6 pb-48 md:pb-64 [&_.title]:text-2xl [&_.title]:font-extrabold [&_.title]:mb-4 font-semibold`.trim()}
 			{...props}
 		/>
 	);
 };
 
-const Animation = ({
+const Animation = forwardRef<HTMLDivElement, DivProps>(({
 	delay,
 	duration="1000ms",
 	timingFunction,
 	translateValue,
 	...props
-}: DivProps) => {
+}, propsRef) => {
 	const [isVisibility, setIsVisibility] = useState(false);
 	const [ref1, isInViewport] = useIsInViewport<HTMLDivElement>();
 	const ref2 = useVisibility<HTMLDivElement>(isVisibility, { delay, duration, timingFunction, translateValue, hideTransition: false });
 
-	const ref = useMergedRefs(ref1, ref2);
+	const ref = useMergedRefs(ref1, ref2, propsRef);
 
 	useEffect(() => {
 		setIsVisibility(isInViewport);
@@ -43,7 +43,7 @@ const Animation = ({
 			{...props}
 		/>
 	);
-};
+});
 
 Section.Animation = Animation;
 

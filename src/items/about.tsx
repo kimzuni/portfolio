@@ -10,7 +10,7 @@ const age2 = age1 - (date.getMonth()+1 < birthNumber[1] || (date.getMonth()+1 ==
 
 const items: AboutItem[] = [
 	{
-		title: "WHO I AM?",
+		title: "WHO AM I?",
 		items: [
 			{
 				th: "이름",
@@ -21,17 +21,10 @@ const items: AboutItem[] = [
 				td: `${birthString.join(".")}. ${age1}세(만 ${age2})`,
 			},
 			{
-				th: "이메일",
-				td: <>
-					<a href="mailto:rlawnsgl191@gmail.com">rlawnsgl191@gmail.com</a><br/>
-					<a href="mailto:me@zuni.kim">me@zuni.kim</a><br/>
-				</>,
-			},
-			{
 				th: "학력",
 				td: <>
 					영남이공대학교 (사이버보안과/전문학사)<br/>
-					경북기계공업고등학교 (기계설계과/중퇴)<br/>
+					경북기계공업고등학교 (마이스터6기/중퇴)<br/>
 				</>,
 			},
 			{
@@ -44,7 +37,7 @@ const items: AboutItem[] = [
 		],
 	},
 	{
-		title: "WHO I AM?",
+		title: "WHO AM I?",
 		items: [
 			{
 				th: "수상",

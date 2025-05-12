@@ -1,6 +1,7 @@
 import { CgScrollV } from "@react-icons/all-files/cg/CgScrollV";
 
 import { Section, SectionProps } from "../../components";
+import { useIsInViewport } from "../../hooks";
 
 
 
@@ -20,6 +21,8 @@ export default function Intro({
 	className="",
 	...props
 }: IntroProps) {
+	const [ref, isIn] = useIsInViewport<HTMLDivElement>();
+
 	return (
 		<Section
 			id={id}
@@ -28,7 +31,7 @@ export default function Intro({
 				pb-[calc(100lvh-100svh+64px)]!
 				bg-theme-bg-dark text-theme-text-light
 				flex flex-col justify-center items-center
-				font-extrabold text-center
+				font-extrabold! text-center
 				text-3xl md:text-4xl
 
 				[&>*]:w-full [&>*]:max-w-160
@@ -45,10 +48,7 @@ export default function Intro({
 				`.replace(/\s+/g, " ").trim()}
 			>
 				<h2
-					className={`
-						gradient
-						text-[1.25em]
-					`.replace(/\s+/g, " ").trim()}
+					className="gradient text-[1.25em]"
 					children={item.title}
 				/>
 				<p
@@ -61,13 +61,20 @@ export default function Intro({
 				/>
 			</Section.Animation>
 			<Section.Animation
+				ref={ref}
 				className={`
 					py-8
 					flex flex-col justify-center items-center gap-2
 					text-theme-text-light-sub/50 text-sm
 				`.replace(/\s+/g, " ").trim()}
 			>
-				<CgScrollV size="36" className="p-1 animate-bounce"/>
+				<CgScrollV
+					size="36"
+					className="p-1 animate-bounce"
+					style={{
+						animationPlayState: isIn ? "running" : "paused",
+					}}
+				/>
 				<span>Scroll Down</span>
 			</Section.Animation>
 		</Section>

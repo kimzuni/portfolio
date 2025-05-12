@@ -1,4 +1,5 @@
 import { Section, SectionProps, Img } from "../../components";
+import { useIsInViewport } from "../../hooks";
 
 
 
@@ -23,6 +24,8 @@ export const Card = ({
 	className="",
 	...props
 }: CardProps) => {
+	icon = icon ?? label.toLowerCase().replace(/\./g, "");
+
 	return (
 		<div className={`relative size-16 hovero:scale-125 hovero:[&_.card]:opacity-100 transition-[scale] ${className}`.trim()} {...props}>
 			<div
@@ -42,7 +45,7 @@ export const Card = ({
 					}[level]}
 				`.replace(/\s+/g, " ").trim()}
 			/>
-			<Img className="size-full" alt={label} src={`https://skillicons.dev/icons?i=${icon ?? label.toLowerCase()}`}/>
+			<Img className="size-full" alt={label} src={`https://skillicons.dev/icons?i=${icon}`}/>
 			<p className="flex justify-center">{label}</p>
 		</div>
 	);
@@ -59,19 +62,27 @@ export default function Skills({
 	className="",
 	...props
 }: SkillsProps) {
+	const [ref, isIn] = useIsInViewport<HTMLParagraphElement>();
+
 	return (
-		<Section
-			className={`
-				${className}
-				flex flex-col gap-12
-				text-center
-			`.replace(/\s+/g, " ").trim()}
-			{...props}
-		>
-			<span className="text-theme-text-dark/25 animate-pulse">각 스킬에 마우스를 올리거나 터치해 보세요!</span>
+		<Section className={`${className} flex flex-col gap-12 text-center`.trim()} {...props}>
+			<Section.Animation>
+				저는 이런 것들을 다룰 줄 알아요!<br/>
+				작은 프로젝트라도 진행한 것들만 모아봤어요!
+			</Section.Animation>
+			<Section.Animation>
+				<p
+					ref={ref}
+					className="text-theme-text-dark/25 animate-pulse"
+					style={{
+						animationPlayState: isIn ? "running" : "paused",
+					}}
+					children="각 스킬에 마우스를 올리거나 터치해 보세요!"
+				/>
+			</Section.Animation>
 			{items.map(({title, cards}) => <Section.Animation key={title} className="mb-[1.6em]">
 				<h2 className="title text-center break-all">{title}</h2>
-				<div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-12 font-semibold">
+				<div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-12">
 					{cards.map(card => <Card key={card.label} {...card}/>)}
 				</div>
 			</Section.Animation>)}

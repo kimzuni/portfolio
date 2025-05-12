@@ -1,5 +1,5 @@
 import { UList, UListProps } from "../components";
-import { getIcon, IconType } from "./icons";
+import { getIcon, IconType } from "../utils";
 
 
 

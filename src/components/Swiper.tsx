@@ -1,4 +1,3 @@
-import { NavigationOptions } from "swiper/types";
 import { EffectFade, Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper as SwiperBase, SwiperProps as SwiperPropsBase, SwiperSlide } from "swiper/react";
 
@@ -8,7 +7,6 @@ import { FaAngleRight } from "@react-icons/all-files/fa/FaAngleRight";
 
 
 export interface SwiperProps<T> extends Omit<SwiperPropsBase, "children" | "modules"> {
-	navigation?: boolean | Omit<NavigationOptions, "nextEl" | "prevEl">;
 	items?: T[];
 	render?: (item: T) => React.ReactNode;
 };
@@ -58,14 +56,16 @@ export default function Swiper<T>({
 					: item as React.ReactNode
 				}
 			</SwiperSlide>)}
-			<button
-				className="swiper-button-prev after:content-['']! px-1"
-				children={<FaAngleLeft/>}
-			/>
-			<button
-				className="swiper-button-next after:content-['']! px-1"
-				children={<FaAngleRight/>}
-			/>
+			{!navigation || (navigation.nextEl || navigation.prevEl) ? undefined : <>
+				<button
+					className="swiper-button-prev after:content-['']! px-1"
+					children={<FaAngleLeft/>}
+				/>
+				<button
+					className="swiper-button-next after:content-['']! px-1"
+					children={<FaAngleRight/>}
+				/>
+			</>}
 		</SwiperBase>
 	);
 }

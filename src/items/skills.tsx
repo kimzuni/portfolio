@@ -16,7 +16,6 @@ const items: SkillsItem[] = [
 			},
 			{
 				label: "JavaScript",
-				icon: "js",
 				level: "high",
 			},
 			{
@@ -29,13 +28,16 @@ const items: SkillsItem[] = [
 			},
 			{
 				label: "TypeScript",
-				icon: "ts",
 				level: "medium",
+			},
+			{
+				label: "C",
+				level: "low",
 			},
 		],
 	},
 	{
-		title: "Framework/Library",
+		title: "Frameworks/Libraries",
 		cards: [
 			{
 				label: "Django",
@@ -84,7 +86,6 @@ const items: SkillsItem[] = [
 			},
 			{
 				label: "Node.js",
-				icon: "nodejs",
 				level: "medium",
 			},
 			{

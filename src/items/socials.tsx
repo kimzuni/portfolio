@@ -1,16 +1,9 @@
 import type { SocialItem } from "../layouts/Socials";
 
+import contacts from "./contacts";
 
 
-const socials: SocialItem[] = [
-	{
-		icon: "github",
-		href: "https://github.com/jh1950",
-	},
-	{
-		icon: "github",
-		href: "https://github.com/kimzuni",
-	},
-];
+
+const socials: SocialItem[] = contacts.filter(x => x.icon === "github");
 
 export default socials;

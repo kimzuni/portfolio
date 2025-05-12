@@ -25,8 +25,8 @@ export default function About({
 		<Section
 			className={`
 				${className}
-				flex flex-col items-center gap-y-16 px-0!
-				md:flex-row md:pt-64!
+				flex flex-col items-center gap-y-8 px-0!
+				md:flex-row md:items-stretch md:pt-64!
 			`.replace(/\s+/g, " ").trim()}
 			{...props}
 		>
@@ -34,24 +34,32 @@ export default function About({
 				<Section.Animation
 					className={`
 						md:flex md:justify-center md:items-center
-						md:bg-theme-bg-light-sub
-						md:rounded-r-4xl md:max-w-130
+						md:bg-theme-bg-light-sub md:shadow-lg
+						md:rounded-r-4xl
 					`.replace(/\s+/g, " ").trim()}
 				>
 					<Img
 						src={avatar}
-						className="md:max-h-80 md:p-[10%]"
+						className="md:max-h-80 md:p-[10%] rounded-b-4xl md:rounded-none"
 					/>
 				</Section.Animation>
 			}
-			<Section.Animation className="flex-1 px-6 w-full max-w-130 md:min-w-130 md:max-w-none">
+			<Section.Animation className="m-auto flex-1 px-6 w-full max-w-130 md:min-w-130 md:max-w-130">
+				<p
+					className={`
+						mb-16 md:mb-4 px-14
+						text-center md:text-left
+					`.replace(/\s+/g, " ").trim()}
+				>
+					안녕하세요! 아, 제가 누구냐구요?
+				</p>
 				<Swiper
-					className="px-8! md:max-w-130 md:px-12!"
+					className="px-8! md:px-12! font-medium"
 					slidesPerView={1}
 					navigation={true}
 					items={items}
 					render={(item) => <>
-						<h2 className={`title flex-1 px-2 text-center md:text-left`.trim()}>{item.title}</h2>
+						<h2 className="title flex-1 px-2 text-center md:text-left">{item.title}</h2>
 						<table
 							className={`
 								[&_a]:underline

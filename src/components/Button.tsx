@@ -17,10 +17,12 @@ export default function Button<E extends React.ElementType = "button">({
 			type={as === "button" ? type : undefined}
 			className={`
 				${className}
+				block
 				bg-theme-primary hover:bg-theme-dark
 				rounded-full py-2 px-4
 				text-theme-text-dark
 				text-sm font-semibold
+				transition-[background]
 			`.replace(/\s+/g, " ").trim()}
 			{...props}
 		/>

@@ -41,6 +41,7 @@ export default function About({
 					<Img
 						src={avatar}
 						className="md:max-h-80 md:p-[10%] rounded-b-4xl md:rounded-none"
+						loading="eager"
 					/>
 				</Section.Animation>
 			}

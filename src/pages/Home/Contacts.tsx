@@ -1,6 +1,6 @@
 import { getIcon } from "../../utils";
 import { SocialItem } from "../../layouts/Socials";
-import { Button, Section, SectionProps } from "../../components";
+import { Link, Button, Section, SectionProps } from "../../components";
 
 
 
@@ -26,7 +26,7 @@ export default function Contacts({
 			{...props}
 		>
 			<Section.Animation className="text-center">
-				<h2 className="title">Contact</h2>
+				<h2 className="title">Contacts</h2>
 				<div
 					className={`
 						my-8
@@ -40,10 +40,15 @@ export default function Contacts({
 					</p>
 					<div className="flex-1 flex flex-col items-center font-normal md:items-start">
 						{items.map(({ label, icon, href }) =>
-							<a key={label} href={href} className="flex justify-center items-center gap-1">
-								{getIcon(icon)}
-								{label}
-							</a>
+							<Link
+								key={label}
+								to={href}
+								className="flex justify-center items-center gap-1"
+								children={<>
+									{getIcon(icon)}
+									{label}
+								</>}
+							/>
 						)}
 					</div>
 				</div>
@@ -54,10 +59,8 @@ export default function Contacts({
 					children="혹시 익명으로 저에게 할 말이 있으신가요?"
 				/>
 				<Button
-					as="a"
-					href="https://mail.kimzuni.com"
-					target="_blank"
-					rel="noopener noreferrer"
+					as={Link}
+					to="https://mail.kimzuni.com"
 					children="그렇다면 저를 따라오세요!"
 				/>
 			</Section.Animation>

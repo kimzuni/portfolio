@@ -4,7 +4,9 @@ import Layout from "../layouts";
 import NotFound from "../pages/404";
 import Home from "../pages/Home";
 import Projects from "../pages/Projects";
-import * as project from "./projects";
+import Project from "../pages/Project";
+
+import { items } from "../items/projects";
 
 
 
@@ -21,9 +23,9 @@ export default [
 				path: "/projects",
 				element: <Projects/>,
 			},
-			...project.list.map(id => ({
+			...items.map(([id, item]) => ({
 				path: `/projects/${id}`,
-				element: project.router(id),
+				element: <Project {...item}/>,
 			})),
 		],
 	},

@@ -12,11 +12,16 @@ export default function useIsInViewport<E extends HTMLElement>(options?: Interse
 
 		const observer = new IntersectionObserver(([entry]) => {
 			setIsInViewport(entry.isIntersecting);
-		}, options);
+		}, {
+			threshold: 0.01,
+			...options,
+		});
 
 		observer.observe(node);
-		return () => observer.disconnect();
-	}, [ref, options]);
+		return () => {
+			observer.disconnect();
+		}
+	}, [options]);
 
 	return [ref, isInViewport] as const;
 }

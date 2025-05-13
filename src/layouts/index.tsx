@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Outlet, useLocation, useNavigate, ScrollRestoration } from "react-router";
 import { FaAngleLeft } from "@react-icons/all-files/fa/FaAngleLeft";
 
@@ -29,12 +29,16 @@ export default function Layout() {
 		}
 	};
 
-	useEffect(() => {
+	const updatePathname = useCallback(() => {
 		if (document.activeElement instanceof HTMLElement) {
 			document.activeElement.blur();
 		}
 		setNavOpen(false);
-	}, [pathname]);
+	}, []);
+
+	useEffect(() => {
+		updatePathname();
+	}, [pathname, updatePathname]);
 
 	return (<>
 		<ScrollRestoration/>
@@ -43,9 +47,9 @@ export default function Layout() {
 				items={items.nav}
 				socials={items.socials}
 				isOpen={navOpen}
-				setNavOpen={setNavOpen}
+				setIsOpen={setNavOpen}
 			>
-				{pathname !== "/" && <button type="button" aria-label="Back" onClick={goBack}><FaAngleLeft/></button>}
+				{pathname !== "/" && <button className="mr-0.5" type="button" aria-label="Back" onClick={goBack}><FaAngleLeft size="1.2rem"/></button>}
 				<span translate="no">KIM JOON HEE</span>
 			</Navbar>
 			<Outlet context={{

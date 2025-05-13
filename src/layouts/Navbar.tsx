@@ -1,7 +1,7 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { NavLink } from "react-router";
 
-import { useVisibility, useIsInViewport } from "../hooks";
+import { useAnimateInView, useIsInViewport } from "../hooks";
 
 import { UList } from "../components";
 import { MenuBtn } from "../components";
@@ -18,7 +18,7 @@ export interface NavbarProps extends React.ComponentPropsWithoutRef<"nav"> {
 	items?: NavbarItem[];
 	socials?: SocialItem[];
 	isOpen: boolean;
-	setNavOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 
@@ -35,34 +35,36 @@ export default function Navbar({
 	items=[],
 	socials=[],
 	isOpen,
-	setNavOpen,
+	setIsOpen,
 	className="",
 	style={},
 	children,
 	...props
 }: NavbarProps) {
-	const [isSmallScreen, setIsSmallScreen] = useState(false);
 	const [headerTop, setHeaderTop] = useState(0);
 	const headerRef = useRef<HTMLElement>(null);
-	const navRef = useVisibility(isOpen, { collapseOnHide: true });
-	const [btnRef, btnIsInViewport] = useIsInViewport<HTMLButtonElement>();
+	const navRef = useAnimateInView(isOpen, { collapseOnHide: true });
+	const [btnRef, btnIsVisible] = useIsInViewport<HTMLButtonElement>();
 
 	useEffect(() => {
-		setIsSmallScreen(btnIsInViewport);
-		setNavOpen(false);
-	}, [btnIsInViewport, setNavOpen]);
+		setIsOpen(false);
+	}, [btnIsVisible, setIsOpen]);
+
+	const updateHeaderTop = useCallback(() => {
+		const header = headerRef.current;
+		if (!header) return;
+
+		const { innerHeight } = window;
+		const { top, bottom, height } = header.getBoundingClientRect();
+		const toTop = 0 < innerHeight - (top + bottom);
+		const offset = !isOpen ? 0 : toTop ? -top-8 : Math.max(0, innerHeight - top - height);
+		setHeaderTop(offset);
+	}, [isOpen]);
 
 	useEffect(() => {
 		bodyOverflowHidden(isOpen);
-
-		const header = headerRef.current;
-		if (header) {
-			const { innerHeight } = window;
-			const { top, bottom, height } = header.getBoundingClientRect();
-			const toTop = 0 < innerHeight - (top + bottom);
-			setHeaderTop( !isOpen ? 0 : toTop ? -top-8 : Math.max(0, innerHeight - top - height) )
-		}
-	}, [isOpen]);
+		updateHeaderTop();
+	}, [isOpen, updateHeaderTop]);
 
 	return (
 		<header
@@ -105,7 +107,7 @@ export default function Navbar({
 					md:bg-transparent md:translate-0!
 				`.replace(/\s+/g, " ").trim()}
 				aria-label="Main Navigation"
-				aria-hidden={isSmallScreen && !isOpen}
+				aria-hidden={btnIsVisible && !isOpen}
 			>
 				<div
 					className={`
@@ -131,7 +133,7 @@ export default function Navbar({
 						`.replace(/\s+/g, " ").trim()}
 					/>
 
-					{isSmallScreen && <Socials items={socials}/>}
+					{btnIsVisible && <Socials items={socials} className="md:hidden!"/>}
 				</div>
 			</nav>
 			<MenuBtn
@@ -141,7 +143,7 @@ export default function Navbar({
 					h-[100cqh] w-[100cqh]
 					${isOpen ? "active" : ""}
 				`.replace(/\s+/g, " ").trim()}
-				onClick={() => setNavOpen(p => !p)}
+				onClick={() => setIsOpen(p => !p)}
 				aria-expanded={isOpen}
 				aria-controls="nav"
 				tabIndex={1}

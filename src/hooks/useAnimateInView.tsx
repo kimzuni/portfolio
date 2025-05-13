@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 
 
 
-export interface UseVisibilityOptions {
+export interface UseAnimateInViewOptions {
 	delay?: React.CSSProperties["transitionDelay"];
 	duration?: React.CSSProperties["transitionDuration"];
 	timingFunction?: React.CSSProperties["transitionTimingFunction"];
@@ -12,10 +12,7 @@ export interface UseVisibilityOptions {
 	hideTransition?: boolean;
 }
 
-const getCSSVar = (name: `--${string}`) => {
-	return getComputedStyle(document.documentElement).getPropertyValue(name);
-};
-
+const getCSSVar = (name: `--${string}`) => getComputedStyle(document.documentElement).getPropertyValue(name);
 const defaultDelay = getCSSVar("--default-transition-delay");
 const defaultDuration = getCSSVar("--default-transition-duration");
 const defaultTiming = getCSSVar("--default-transition-timing-function");
@@ -27,8 +24,9 @@ const strToMs = (string: React.CSSProperties["transitionDuration"]) => {
 	return Number(string);
 };
 
-export default function useVisibility<E extends HTMLElement = HTMLElement>(isVisible: boolean, options?: UseVisibilityOptions) {
+export default function useAnimateInView<E extends HTMLElement = HTMLElement>(isVisible: boolean, options?: UseAnimateInViewOptions) {
 	const ref = useRef<E>(null);
+	const timer = useRef(0);
 
 	useEffect(() => {
 		const node = ref.current;
@@ -44,19 +42,18 @@ export default function useVisibility<E extends HTMLElement = HTMLElement>(isVis
 			hideTransition=true,
 		} = options ?? {};
 
-		const immediate = (isVisible && !showTransition) || (!isVisible && !hideTransition);
-
-		let hideTimer: number;
 		if (collapseOnHide) {
 			if (isVisible) {
 				node.style.display = "";
 			} else {
-				hideTimer = setTimeout(() => {
+				clearTimeout(timer.current);
+				timer.current = setTimeout(() => {
 					node.style.display = "none";
 				}, strToMs(duration));
 			}
 		}
 
+		const immediate = (isVisible && !showTransition) || (!isVisible && !hideTransition);
 		setTimeout(() => {
 			node.style.opacity = `${isVisible ? 1 : 0}`;
 			node.style.translate = isVisible ? "0px" : `${translateValue}`;
@@ -67,9 +64,9 @@ export default function useVisibility<E extends HTMLElement = HTMLElement>(isVis
 		}, 0);
 
 		return () => {
-			clearTimeout(hideTimer);
+			clearTimeout(timer.current);
 		};
-	}, [ref, isVisible, options]);
+	}, [isVisible, options]);
 
 	return ref;
 }

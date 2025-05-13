@@ -21,7 +21,7 @@ export default function Intro({
 	className="",
 	...props
 }: IntroProps) {
-	const [ref, isIn] = useIsInViewport<HTMLDivElement>();
+	const [ref, isInViewport] = useIsInViewport<HTMLDivElement>();
 
 	return (
 		<Section
@@ -72,7 +72,7 @@ export default function Intro({
 					size="36"
 					className="p-1 animate-bounce"
 					style={{
-						animationPlayState: isIn ? "running" : "paused",
+						animationPlayState: isInViewport ? "running" : "paused",
 					}}
 				/>
 				<span>Scroll Down</span>

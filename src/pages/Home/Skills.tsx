@@ -62,7 +62,7 @@ export default function Skills({
 	className="",
 	...props
 }: SkillsProps) {
-	const [ref, isIn] = useIsInViewport<HTMLParagraphElement>();
+	const [ref, isInViewport] = useIsInViewport<HTMLParagraphElement>();
 
 	return (
 		<Section className={`${className} flex flex-col gap-12 text-center`.trim()} {...props}>
@@ -75,7 +75,7 @@ export default function Skills({
 					ref={ref}
 					className="text-theme-text-dark/25 animate-pulse"
 					style={{
-						animationPlayState: isIn ? "running" : "paused",
+						animationPlayState: isInViewport ? "running" : "paused",
 					}}
 					children="각 스킬에 마우스를 올리거나 터치해 보세요!"
 				/>

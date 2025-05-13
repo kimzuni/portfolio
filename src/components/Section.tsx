@@ -1,11 +1,11 @@
 import { forwardRef, useState, useEffect } from "react";
 
-import { useMergedRefs, useVisibility, useIsInViewport, UseVisibilityOptions } from "../hooks";
+import { useMergedRefs, useAnimateInView, useIsInViewport, UseAnimateInViewOptions } from "../hooks";
 
 
 
 export type SectionProps = React.ComponentPropsWithoutRef<"section">;
-export interface DivProps extends React.ComponentPropsWithoutRef<"div">, Omit<UseVisibilityOptions, "collapseOnHide" | "showTransition" | "hideTransition"> {
+export interface DivProps extends React.ComponentPropsWithoutRef<"div">, Omit<UseAnimateInViewOptions, "collapseOnHide" | "showTransition" | "hideTransition"> {
 };
 
 const Section = ({
@@ -29,7 +29,7 @@ const Animation = forwardRef<HTMLDivElement, DivProps>(({
 }, propsRef) => {
 	const [isVisibility, setIsVisibility] = useState(false);
 	const [ref1, isInViewport] = useIsInViewport<HTMLDivElement>();
-	const ref2 = useVisibility<HTMLDivElement>(isVisibility, { delay, duration, timingFunction, translateValue, hideTransition: false });
+	const ref2 = useAnimateInView<HTMLDivElement>(isVisibility, { delay, duration, timingFunction, translateValue, hideTransition: false });
 
 	const ref = useMergedRefs(ref1, ref2, propsRef);
 

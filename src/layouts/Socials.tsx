@@ -1,4 +1,4 @@
-import { UList, UListProps } from "../components";
+import { Link, UList, UListProps } from "../components";
 import { getIcon, IconType } from "../utils";
 
 
@@ -20,7 +20,7 @@ export default function Socials({
 	return (
 		<UList
 			items={items}
-			render={({ href, icon }) => <a className="block p-2 text-xl" href={href} target="_blank" rel="noopener noreferrer">{getIcon(icon)}</a>}
+			render={({ href, icon }) => <Link className="block p-2 text-xl" to={href} children={getIcon(icon)}/>}
 			className={`flex items-center ${className}`.trim()}
 			{...props}
 		/>

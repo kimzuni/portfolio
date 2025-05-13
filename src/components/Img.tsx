@@ -4,24 +4,23 @@ import { useIsInViewport } from "../hooks";
 
 
 
-export interface ImgProps extends Omit<React.ComponentPropsWithoutRef<"img">, "loading"> {
-	lazy?: boolean;
-};
+export type ImgProps = React.ComponentPropsWithoutRef<"img">;
 
-export default function Img({ lazy=true, src, ...props }: ImgProps) {
+export default function Img({ loading="lazy", src, ...props }: ImgProps) {
+	const isLazy = loading === "lazy";
 	const [ref, isVisible] = useIsInViewport<HTMLImageElement>();
-	const [isLoaded, setisLoaded] = useState(!lazy);
+	const [isLoaded, setisLoaded] = useState(!isLazy);
 
 	useEffect(() => {
-		if (!lazy || !isVisible) return;
+		if (!isLazy || !isVisible) return;
 		setisLoaded(true);
-	}, [lazy, isVisible]);
+	}, [isLazy, isVisible]);
 
 	return (
 		<img
 			ref={ref}
-			src={lazy !== true || isLoaded === true ? src : undefined}
-			loading={!lazy ? undefined : "lazy"}
+			src={isLazy !== true || isLoaded === true ? src : undefined}
+			loading={loading}
 			{...props}
 		/>
 	);

@@ -81,7 +81,7 @@ export default function Skills({
 				/>
 			</Section.Animation>
 			{items.map(({title, cards}) => <Section.Animation key={title} className="mb-[1.6em]">
-				<h2 className="title text-center break-all">{title}</h2>
+				<h2 className="title break-all">{title}</h2>
 				<div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-12">
 					{cards.map(card => <Card key={card.label} {...card}/>)}
 				</div>

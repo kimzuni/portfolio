@@ -1,12 +1,15 @@
-import Img from "./Img";
+import Img, { ImgProps } from "./Img";
 import Link from "./Link";
 
 
 
-export type Service = keyof Badge;
+export type BadgeService = keyof Badge;
 
 export interface Badge {
-	github: 
+	badge:
+		| `${string}-${string}`
+	;
+	github:
 		| "stars"
 		| "forks"
 		| "watchers"
@@ -14,11 +17,12 @@ export interface Badge {
 		| "lastCommit"
 		| "tag"
 		| "release"
+		| "workflow"
 		| "codeSize"
 		| "repoSize"
 		| "license"
 	;
-	docker: 
+	docker:
 		| "automated"
 		| "cloud/automated"
 		| "cloud/build"
@@ -29,62 +33,105 @@ export interface Badge {
 	;
 }
 
-export interface BadgeOptional {
-	style?: "flat" | "flat-square" | "plastic" | "for-the-badge" | "social";
-	logo?: string;
-	logoColor?: string;
-	logoSize?: string;
-	label?: string;
-	labelColor?: string;
-	color?: string;
-	cacheSeconds?: string;
+const badgeOptionList = [
+	"style",
+	"logo",
+	"logoColor",
+	"logoSize",
+	"label",
+	"labelColor",
+	"color",
+	"cacheSeconds",
+] as const;
+
+export type BadgeOption = typeof badgeOptionList[number];
+
+export type BadgeOptions = {
+	[key in BadgeOption]?:
+	key extends "style" ? "flat" | "flat-square" | "plastic" | "for-the-badge" | "social" :
+	string;
 };
 
-export interface ShieldProps<S extends Service> {
-	service: S;
-	badge: Badge[S];
-	user: string;
-	repo: string;
-	tag?: string;
+
+
+export interface CustomBadgeProps extends BadgeOptions {
+	service: "badge";
+	badge: Badge["badge"],
 	link?: string;
-	options?: BadgeOptional;
 }
 
-export default function Shield<S extends Service>({
-	service,
-	badge,
-	user,
-	repo,
-	tag,
-	link,
-	options={},
-}: ShieldProps<S>) {
-	const path = `
-		${
-			["release", "tag", "imageVersion"].includes(badge) ? "/v" :
-			badge === "codeSize" ? "/languages" :
-			""
-		}
-		${
-			["imageVersion"].includes(badge) ? "" :
-			`/${badge.replace(/([A-Z])/g, "-$1").toLowerCase()}`
-		}
-		/${user}/${repo}
-		${
-			["imageSize", "imageVersion"].includes(badge) && tag ? `/${tag}` :
-			""
-		}
-	`.replace(/\s+/g, "").trim();
+export interface BadgeProps<S extends "github" | "docker"> extends BadgeOptions {
+	service: S;
+	badge: Exclude<Badge[S], "workflow" | "imageSize" | "imageVersion">,
+	user: string;
+	repo: string;
+	link?: string;
+}
 
-	const query = Object.entries(options)
-		.filter(([key, val]) => key && val)
-		.map(x => x.join("="))
+export interface WorkflowBadgeProps extends Omit<BadgeProps<"github">, "badge"> {
+	badge: "workflow";
+	workflow: string;
+	provider?: "github" | "shield"
+}
+
+export interface TagBadgeProps extends Omit<BadgeProps<"docker">, "badge"> {
+	badge: "imageSize" | "imageVersion";
+	tag: string;
+}
+
+export type ShieldProps =
+	| CustomBadgeProps
+	| BadgeProps<"github">
+	| BadgeProps<"docker">
+	| WorkflowBadgeProps
+	| TagBadgeProps
+;
+
+
+
+export default function Shield({
+	loading="eager",
+	link,
+	...props
+}: {
+	loading?: ImgProps["loading"];
+} & ShieldProps) {
+	const path =
+		props.service === "badge"
+		? `/${props.badge}` :
+		props.badge === "workflow" && props.provider === "github"
+		? `https://github.com/${props.user}/${props.repo}/actions/workflows/${props.workflow}/badge.svg`
+		: `
+			${
+				["release", "tag", "imageVersion"].includes(props.badge) ? "/v" :
+				props.badge === "workflow" ? "/actions" :
+				props.badge === "codeSize" ? "/languages" :
+				""
+			}
+			${
+				["imageVersion"].includes(props.badge) ? "" :
+				`/${props.badge.replace(/([A-Z])/g, "-$1").toLowerCase()}`
+			}
+			${
+				["workflow"].includes(props.badge) ? "/status" :
+				""
+			}
+			/${props.user}/${props.repo}
+			${props.badge === "imageSize" || props.badge === "imageVersion" ? `/${props.tag}` : ""}
+			${props.badge === "workflow" ? `/${props.workflow}` : ""}
+		`.replace(/\s+/g, "").trim()
+	;
+
+	const query = badgeOptionList
+		.filter(key => props[key])
+		.map(key => `${key}=${props[key]}`)
 		.join("&")
 	;
 
 	const img = <Img
-		alt={`${service} repo ${badge}`}
-		src={`https://img.shields.io/${service}${path}${query ? `?${query}` : ""}`}
+		loading={loading}
+		alt={`shields.io ${props.service} ${props.badge}`}
+		src={path.startsWith("http") ? path : `https://img.shields.io/${props.service}${path}${query ? `?${query}` : ""}`}
 	/>;
 
 	return (<>

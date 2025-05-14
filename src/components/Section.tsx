@@ -14,7 +14,7 @@ const Section = ({
 }: SectionProps) => {
 	return (
 		<section
-			className={`${className} px-6 pb-48 md:pb-64 [&_.title]:text-2xl [&_.title]:font-extrabold [&_.title]:mb-4 font-semibold`.trim()}
+			className={`${className} px-6 pb-48 font-semibold md:pb-64 [&_.title]:text-center [&_.title]:font-extrabold [&_.title]:text-2xl [&_.title]:mb-4`.trim()}
 			{...props}
 		/>
 	);

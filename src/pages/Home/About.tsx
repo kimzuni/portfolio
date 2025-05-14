@@ -60,7 +60,7 @@ export default function About({
 					navigation={true}
 					items={items}
 					render={(item) => <>
-						<h2 className="title flex-1 px-2 text-center md:text-left">{item.title}</h2>
+						<h2 className="title flex-1 px-2 md:text-left!">{item.title}</h2>
 						<table
 							className={`
 								[&_a]:underline

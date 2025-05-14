@@ -43,7 +43,7 @@ export default function Contacts({
 							<Link
 								key={label}
 								to={href}
-								className="flex justify-center items-center gap-1"
+								className="flex justify-center items-center gap-1 underline"
 								children={<>
 									{getIcon(icon)}
 									{label}

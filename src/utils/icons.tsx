@@ -1,6 +1,7 @@
 import { FaGithub } from "@react-icons/all-files/fa/FaGithub";
 import { FaEnvelope } from "@react-icons/all-files/fa/FaEnvelope";
 import { FaInstagram } from "@react-icons/all-files/fa/FaInstagram";
+import { SiGravatar } from "@react-icons/all-files/si/SiGravatar";
 
 
 
@@ -16,6 +17,10 @@ const icons = [
 	{
 		icon: "envelope",
 		svg: <FaEnvelope/>,
+	},
+	{
+		icon: "gravatar",
+		svg: <SiGravatar/>,
 	},
 ] as const;
 

@@ -1,4 +1,6 @@
-import { Img, Section, SectionProps, Swiper } from "../../components";
+import { Img, ScrollFade, Swiper } from "../../components";
+
+import Section, { SectionProps } from "./Section";
 
 
 
@@ -6,7 +8,7 @@ export interface AboutItem {
 	title: string;
 	items: Array<{
 		th: string;
-		td: string | React.ReactElement;
+		td: string | React.ReactNode;
 	}>;
 }
 
@@ -25,13 +27,13 @@ export default function About({
 		<Section
 			className={`
 				${className}
-				flex flex-col items-center gap-y-8 px-0!
-				md:flex-row md:items-stretch md:pt-64!
+				flex flex-col items-center gap-y-8 px-0
+				md:flex-row md:items-stretch md:pt-64 md:pr-(--section-px) md:gap-x-(--section-px)
 			`.replace(/\s+/g, " ").trim()}
 			{...props}
 		>
 			{avatar &&
-				<Section.Animation
+				<ScrollFade
 					className={`
 						md:flex md:justify-center md:items-center
 						md:bg-theme-bg-light-sub md:shadow-lg
@@ -40,12 +42,13 @@ export default function About({
 				>
 					<Img
 						src={avatar}
+						alt="profile image"
 						className="md:max-h-80 md:p-[10%] rounded-b-4xl md:rounded-none"
 						loading="eager"
 					/>
-				</Section.Animation>
+				</ScrollFade>
 			}
-			<Section.Animation className="m-auto flex-1 px-6 w-full max-w-130 md:min-w-130 md:max-w-130">
+			<ScrollFade className="flex-1 w-[calc(100%-var(--section-px)/2)] max-w-130 md:m-auto md:min-w-130 md:max-w-130">
 				<p
 					className={`
 						mb-16 md:mb-4 px-14
@@ -55,16 +58,16 @@ export default function About({
 					안녕하세요! 아, 제가 누구냐구요?
 				</p>
 				<Swiper
-					className="px-8! md:px-12! font-medium"
+					className="px-12! font-medium"
 					slidesPerView={1}
 					navigation={true}
 					items={items}
 					render={(item) => <>
-						<h2 className="title flex-1 px-2 md:text-left!">{item.title}</h2>
+						<h2 className="title flex-1 px-2 md:text-left">{item.title}</h2>
 						<table
 							className={`
+								mx-auto w-full leading-7
 								[&_a]:underline
-								leading-7 mx-auto
 								[&_th,&_td]:py-1
 								[&_th,&_td]:align-text-top
 
@@ -91,7 +94,7 @@ export default function About({
 						</table>
 					</>}
 				/>
-			</Section.Animation>
+			</ScrollFade>
 		</Section>
 	);
 }

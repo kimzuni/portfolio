@@ -22,6 +22,14 @@ a, button {
 	@apply hover:textBorder-transparent [&.active]:textBorder-transparent;
 } :where(a, button).link-primary, .link-primary :where(a, button) {
 	@apply text-theme-primary hover:text-theme-dark [&.active]:text-theme-dark;
+} section {
+	--section-px: calc(var(--spacing) * 12);
+	@apply px-(--section-px) font-semibold;
+
+	.title {
+		@apply mb-4 text-2xl;
+		@apply text-center font-extrabold;
+	}
 }
 
 

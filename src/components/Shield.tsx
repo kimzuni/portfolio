@@ -54,18 +54,23 @@ export type BadgeOptions = {
 
 
 
-export interface CustomBadgeProps extends BadgeOptions {
+const urls = {
+	"github": "https://github.com",
+	"docker": "https://hub.docker.com/r",
+};
+
+export type BadgeLinkProps<S extends BadgeService> = S extends "badge" ? { link?: string } : { link?: string | boolean };
+
+export interface CustomBadgeProps extends BadgeOptions, BadgeLinkProps<"badge"> {
 	service: "badge";
-	badge: Badge["badge"],
-	link?: string;
+	badge: Badge["badge"];
 }
 
-export interface BadgeProps<S extends "github" | "docker"> extends BadgeOptions {
+export type BadgeProps<S extends "github" | "docker"> = BadgeOptions & BadgeLinkProps<S> & {
 	service: S;
 	badge: Exclude<Badge[S], "workflow" | "imageSize" | "imageVersion">,
 	user: string;
 	repo: string;
-	link?: string;
 }
 
 export interface WorkflowBadgeProps extends Omit<BadgeProps<"github">, "badge"> {
@@ -91,7 +96,6 @@ export type ShieldProps =
 
 export default function Shield({
 	loading="eager",
-	link,
 	...props
 }: {
 	loading?: ImgProps["loading"];
@@ -130,11 +134,16 @@ export default function Shield({
 
 	const img = <Img
 		loading={loading}
-		alt={`shields.io ${props.service} ${props.badge}`}
+		alt={`shields.io badge`}
+		aria-label={`${props.service !== "badge" ? props.service : "custom"} badge - ${props.badge}`}
 		src={path.startsWith("http") ? path : `https://img.shields.io/${props.service}${path}${query ? `?${query}` : ""}`}
 	/>;
 
 	return (<>
-		{!link ? img : <Link to={link} children={img}/>}
+		{!props.link ? img : <Link
+			className="transition-[filter] drop-shadow-md drop-shadow-transparent hover:drop-shadow-theme-primary"
+			to={props.service === "badge" ? props.link : props.link !== true ? props.link : `${urls[props.service]}/${props.user}/${props.repo}`}
+			children={img}
+		/>}
 	</>);
 }

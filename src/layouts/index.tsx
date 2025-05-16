@@ -5,6 +5,7 @@ import { FaAngleLeft } from "@react-icons/all-files/fa/FaAngleLeft";
 import * as items from "../items";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import bodyOverflowHidden from "./bodyOverflowHidden";
 
 
 
@@ -12,9 +13,8 @@ export interface useLayoutContextType {
 	navOpen: boolean;
 	setNavOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	goBack: () => void;
+	bodyOverflowHidden: typeof bodyOverflowHidden;
 };
-
-
 
 export default function Layout() {
 	const navigate = useNavigate();
@@ -54,10 +54,10 @@ export default function Layout() {
 			</Navbar>
 			<Outlet context={{
 				navOpen, setNavOpen,
-				goBack,
+				goBack, bodyOverflowHidden,
 			}}/>
 		</main>
-		<Footer translate="no">
+		<Footer translate="no" className="mt-20">
 			&copy; {new Date().getFullYear()} zuni.kim
 		</Footer>
 	</>);

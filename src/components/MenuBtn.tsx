@@ -2,20 +2,24 @@ import { forwardRef } from "react";
 
 
 
-export type MenuBtnProps = React.ComponentPropsWithRef<"button">;
+export interface MenuBtnProps extends React.ComponentPropsWithRef<"button"> {
+	isOpen?: boolean;
+};
 
 
 
-const MenuBtnBtn = forwardRef<HTMLButtonElement, MenuBtnProps>(({
-	type="button",
+const MenuBtn = forwardRef<HTMLButtonElement, MenuBtnProps>(({
+	isOpen=false,
 	className="",
 	...props
 }, ref) => {
 	return (
 		<button
 			ref={ref}
-			type={type}
+			type="button"
 			className={`menuBtn ${className}`.trim()}
+			aria-expanded={isOpen}
+			aria-label={"Toggle Menu"}
 			{...props}
 		>
 			<div className="container">
@@ -28,4 +32,4 @@ const MenuBtnBtn = forwardRef<HTMLButtonElement, MenuBtnProps>(({
 	);
 });
 
-export default MenuBtnBtn;
+export default MenuBtn;

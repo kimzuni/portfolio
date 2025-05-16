@@ -1,6 +1,8 @@
 import { getIcon } from "../../utils";
 import { SocialItem } from "../../layouts/Socials";
-import { Link, Button, Section, SectionProps } from "../../components";
+import { Link, Button, ScrollFade } from "../../components";
+
+import Section, { SectionProps } from "./Section";
 
 
 
@@ -18,14 +20,8 @@ export default function Contacts({
 	...props
 }: ContactsProps) {
 	return (
-		<Section
-			className={`
-				${className}
-				pb-0!
-			`.replace(/\s+/g, " ").trim()}
-			{...props}
-		>
-			<Section.Animation className="text-center">
+		<Section className={`${className} pb-0!`.trim()} {...props}>
+			<ScrollFade className="text-center">
 				<h2 className="title">Contacts</h2>
 				<div
 					className={`
@@ -52,10 +48,10 @@ export default function Contacts({
 						)}
 					</div>
 				</div>
-			</Section.Animation>
-			<Section.Animation className="flex flex-col items-center my-20 text-center">
+			</ScrollFade>
+			<ScrollFade className="flex flex-col items-center mt-20 text-center">
 				<h3
-					className="title text-lg!"
+					className="title text-lg"
 					children="혹시 익명으로 저에게 할 말이 있으신가요?"
 				/>
 				<Button
@@ -63,7 +59,7 @@ export default function Contacts({
 					to="https://mail.kimzuni.com"
 					children="그렇다면 저를 따라오세요!"
 				/>
-			</Section.Animation>
+			</ScrollFade>
 		</Section>
 	);
 }

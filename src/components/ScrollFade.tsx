@@ -4,23 +4,12 @@ import { useMergedRefs, useAnimateInView, useIsInViewport, UseAnimateInViewOptio
 
 
 
-export type SectionProps = React.ComponentPropsWithoutRef<"section">;
 export interface DivProps extends React.ComponentPropsWithoutRef<"div">, Omit<UseAnimateInViewOptions, "collapseOnHide" | "showTransition" | "hideTransition"> {
 };
 
-const Section = ({
-	className="",
-	...props
-}: SectionProps) => {
-	return (
-		<section
-			className={`${className} px-6 pb-48 font-semibold md:pb-64 [&_.title]:text-center [&_.title]:font-extrabold [&_.title]:text-2xl [&_.title]:mb-4`.trim()}
-			{...props}
-		/>
-	);
-};
 
-const Animation = forwardRef<HTMLDivElement, DivProps>(({
+
+const ScrollFade = forwardRef<HTMLDivElement, DivProps>(({
 	delay,
 	duration="1000ms",
 	timingFunction,
@@ -45,6 +34,4 @@ const Animation = forwardRef<HTMLDivElement, DivProps>(({
 	);
 });
 
-Section.Animation = Animation;
-
-export default Section;
+export default ScrollFade;

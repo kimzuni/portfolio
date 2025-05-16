@@ -6,6 +6,7 @@ import { useAnimateInView, useIsInViewport } from "../hooks";
 import { UList } from "../components";
 import { MenuBtn } from "../components";
 import Socials, { SocialItem } from "./Socials";
+import bodyOverflowHidden from "./bodyOverflowHidden";
 
 
 
@@ -22,14 +23,6 @@ export interface NavbarProps extends React.ComponentPropsWithoutRef<"nav"> {
 }
 
 
-
-const bodyOverflowHidden = (hidden: boolean): undefined | number => {
-	const scrollWidth = window.innerWidth - document.body.clientWidth;
-	const body = document.body;
-	body.style.overflow = hidden ? "hidden": "";
-	body.style.paddingRight = hidden ? `${scrollWidth}px`: "";
-	return !hidden ? undefined : scrollWidth;
-}
 
 export default function Navbar({
 	items=[],
@@ -138,14 +131,15 @@ export default function Navbar({
 			</nav>
 			<MenuBtn
 				ref={btnRef}
+				isOpen={isOpen}
 				className={`
 					md:hidden p-4
 					h-[100cqh] w-[100cqh]
 					${isOpen ? "active" : ""}
 				`.replace(/\s+/g, " ").trim()}
 				onClick={() => setIsOpen(p => !p)}
-				aria-expanded={isOpen}
 				aria-controls="nav"
+				aria-label="Toggle Navigation"
 				tabIndex={1}
 			/>
 		</header>

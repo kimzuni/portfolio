@@ -1,9 +1,11 @@
-import type { ProjectItem } from "../../pages/Project";
+import type { ProjectProps } from "../../pages/Project";
 
 
 
-export const items: Array<[string, ProjectItem]> = Object.entries(
-	import.meta.glob<true, string, { default: ProjectItem }>([
+export type Item = ProjectProps;
+
+export const items: Array<[string, Item]> = Object.entries(
+	import.meta.glob<true, string, { default: Item }>([
 		"./*.tsx",
 		"!**/index.tsx",
 	], { eager: true })

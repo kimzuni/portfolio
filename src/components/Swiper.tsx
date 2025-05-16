@@ -44,7 +44,7 @@ export default function Swiper<T>({
 			}}
 			modules={modules}
 			style={{
-				"--swiper-navigation-sides-offset": "0px",
+				"--swiper-navigation-sides-offset": "10px",
 				...style,
 			} as React.CSSProperties}
 			{...props}

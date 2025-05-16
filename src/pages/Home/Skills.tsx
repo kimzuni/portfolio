@@ -1,5 +1,7 @@
-import { Section, SectionProps, Img } from "../../components";
+import { ScrollFade, Img } from "../../components";
 import { useIsInViewport } from "../../hooks";
+
+import Section, { SectionProps } from "./Section";
 
 
 
@@ -45,7 +47,7 @@ export const Card = ({
 					}[level]}
 				`.replace(/\s+/g, " ").trim()}
 			/>
-			<Img className="size-full" alt={label} src={`https://skillicons.dev/icons?i=${icon}`}/>
+			<Img className="size-full" alt={label} aria-label={`lavel: ${level}`} src={`https://skillicons.dev/icons?i=${icon}`}/>
 			<p className="flex justify-center">{label}</p>
 		</div>
 	);
@@ -66,11 +68,11 @@ export default function Skills({
 
 	return (
 		<Section className={`${className} flex flex-col gap-12 text-center`.trim()} {...props}>
-			<Section.Animation>
+			<ScrollFade>
 				저는 이런 것들을 다룰 줄 알아요!<br/>
 				작은 프로젝트라도 진행한 것들만 모아봤어요!
-			</Section.Animation>
-			<Section.Animation>
+			</ScrollFade>
+			<ScrollFade>
 				<p
 					ref={ref}
 					className="text-theme-text-dark/25 animate-pulse"
@@ -79,13 +81,13 @@ export default function Skills({
 					}}
 					children="각 스킬에 마우스를 올리거나 터치해 보세요!"
 				/>
-			</Section.Animation>
-			{items.map(({title, cards}) => <Section.Animation key={title} className="mb-[1.6em]">
+			</ScrollFade>
+			{items.map(({title, cards}) => <ScrollFade key={title} className="mb-[1.6em]">
 				<h2 className="title break-all">{title}</h2>
 				<div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-12">
 					{cards.map(card => <Card key={card.label} {...card}/>)}
 				</div>
-			</Section.Animation>)}
+			</ScrollFade>)}
 		</Section>
 	);
 }

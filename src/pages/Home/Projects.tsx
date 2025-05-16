@@ -1,4 +1,6 @@
-import { Section, SectionProps } from "../../components";
+import { ScrollFade } from "../../components";
+
+import Section, { SectionProps } from "./Section";
 
 
 
@@ -9,12 +11,12 @@ export default function Projects({
 }: ProjectsProps) {
 	return (
 		<Section {...props}>
-			<Section.Animation>
+			<ScrollFade>
 				<div>
 					home<br/>home<br/>home<br/>home<br/>home<br/>home<br/>home<br/>home<br/>home<br/>home<br/>
 					home<br/>home<br/>home<br/>home<br/>home<br/>home<br/>home<br/>home<br/>home<br/>home<br/>
 				</div>
-			</Section.Animation>
+			</ScrollFade>
 		</Section>
 	);
 }

@@ -6,8 +6,6 @@ export type { LinkProps };
 
 export default function Link({
 	to,
-	target,
-	rel,
 	...props
 }: LinkProps) {
 	const isBlank = typeof to === "string" && to.startsWith("http");
@@ -15,8 +13,9 @@ export default function Link({
 	return (
 		<Base
 			to={to}
-			target={target ?? (isBlank ? "_blank" : undefined)}
-			rel={rel ?? (isBlank ? "noopener noreferrer" : undefined)}
+			target={isBlank ? "_blank" : undefined}
+			rel={isBlank ? "noopener noreferrer" : undefined}
+			aria-label={!isBlank ? undefined : "open in a new tab"}
 			{...props}
 		/>
 	);

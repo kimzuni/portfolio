@@ -1,5 +1,7 @@
 import { useRef, useEffect } from "react";
 
+import { strToMs } from "../utils";
+
 
 
 export interface UseAnimateInViewOptions {
@@ -16,13 +18,6 @@ const getCSSVar = (name: `--${string}`) => getComputedStyle(document.documentEle
 const defaultDelay = getCSSVar("--default-transition-delay");
 const defaultDuration = getCSSVar("--default-transition-duration");
 const defaultTiming = getCSSVar("--default-transition-timing-function");
-
-const strToMs = (string: React.CSSProperties["transitionDuration"]) => {
-	if (!string) return strToMs(defaultDuration);
-	if (string.endsWith("ms")) return parseFloat(string);
-	if (string.endsWith("s")) return parseFloat(string) * 1000;
-	return Number(string);
-};
 
 export default function useAnimateInView<E extends HTMLElement = HTMLElement>(isVisible: boolean, options?: UseAnimateInViewOptions) {
 	const ref = useRef<E>(null);
@@ -45,10 +40,12 @@ export default function useAnimateInView<E extends HTMLElement = HTMLElement>(is
 		if (collapseOnHide) {
 			if (isVisible) {
 				node.style.display = "";
+				node.removeAttribute("hidden");
 			} else {
 				clearTimeout(timer.current);
 				timer.current = setTimeout(() => {
 					node.style.display = "none";
+					node.setAttribute("hidden", "");
 				}, strToMs(duration));
 			}
 		}

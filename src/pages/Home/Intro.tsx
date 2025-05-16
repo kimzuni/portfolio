@@ -1,7 +1,9 @@
 import { CgScrollV } from "@react-icons/all-files/cg/CgScrollV";
 
-import { Section, SectionProps } from "../../components";
+import { ScrollFade } from "../../components";
 import { useIsInViewport } from "../../hooks";
+
+import Section, { SectionProps } from "./Section";
 
 
 
@@ -31,14 +33,14 @@ export default function Intro({
 				pb-[calc(100lvh-100svh+64px)]!
 				bg-theme-bg-dark text-theme-text-light
 				flex flex-col justify-center items-center
-				font-extrabold! text-center
+				font-extrabold text-center
 				text-3xl md:text-4xl
 
 				[&>*]:w-full [&>*]:max-w-160
 			`.replace(/\s+/g, " ").trim()}
 			{...props}
 		>
-			<Section.Animation
+			<ScrollFade
 				className={`
 					pt-24
 					flex-1 flex flex-col justify-center items-center gap-6
@@ -59,8 +61,8 @@ export default function Intro({
 					className="pt-4 text-xl text-center leading-8"
 					children={item.description}
 				/>
-			</Section.Animation>
-			<Section.Animation
+			</ScrollFade>
+			<ScrollFade
 				ref={ref}
 				className={`
 					py-8
@@ -76,7 +78,7 @@ export default function Intro({
 					}}
 				/>
 				<span>Scroll Down</span>
-			</Section.Animation>
+			</ScrollFade>
 		</Section>
 	);
 }

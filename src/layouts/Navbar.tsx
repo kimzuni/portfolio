@@ -36,7 +36,7 @@ export default function Navbar({
 }: NavbarProps) {
 	const [headerTop, setHeaderTop] = useState(0);
 	const headerRef = useRef<HTMLElement>(null);
-	const navRef = useAnimateInView(isOpen, { collapseOnHide: true });
+	const navRef = useAnimateInView(isOpen, { collapseOnHide: "style" });
 	const [btnRef, btnIsVisible] = useIsInViewport<HTMLButtonElement>();
 
 	useEffect(() => {

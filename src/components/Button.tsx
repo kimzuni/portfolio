@@ -17,7 +17,7 @@ export default function Button<E extends React.ElementType = "button">({
 			type={as === "button" ? type : undefined}
 			className={`
 				${className}
-				block
+				block shadow-md
 				bg-theme-primary hover:bg-theme-dark
 				rounded-full py-2 px-4
 				text-theme-text-dark

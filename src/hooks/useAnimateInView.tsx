@@ -9,7 +9,7 @@ export interface UseAnimateInViewOptions {
 	duration?: React.CSSProperties["transitionDuration"];
 	timingFunction?: React.CSSProperties["transitionTimingFunction"];
 	translateValue?: React.CSSProperties["translate"];
-	collapseOnHide?: boolean;
+	collapseOnHide?: boolean | "style" | "attr";
 	showTransition?: boolean;
 	hideTransition?: boolean;
 }
@@ -39,13 +39,13 @@ export default function useAnimateInView<E extends HTMLElement = HTMLElement>(is
 
 		if (collapseOnHide) {
 			if (isVisible) {
-				node.style.display = "";
-				node.removeAttribute("hidden");
+				if (collapseOnHide !== "attr") node.style.display = "";
+				if (collapseOnHide !== "style") node.removeAttribute("hidden");
 			} else {
 				clearTimeout(timer.current);
 				timer.current = setTimeout(() => {
-					node.style.display = "none";
-					node.setAttribute("hidden", "");
+					if (collapseOnHide !== "attr") node.style.display = "none";
+					if (collapseOnHide !== "style") node.setAttribute("hidden", "");
 				}, strToMs(duration));
 			}
 		}

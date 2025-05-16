@@ -10,6 +10,7 @@ export interface ModalProps extends Omit<React.ComponentPropsWithoutRef<"div">, 
 	isOpen: boolean;
 	backdropColor?: string;
 	onClose: () => void;
+	closeOnBackdropClick?: boolean;
 }
 
 export default function Modal({
@@ -17,6 +18,7 @@ export default function Modal({
 	isOpen=false,
 	backdropColor="color-mix(in oklab, var(--color-theme-bg-dark) 30%, transparent)",
 	onClose,
+	closeOnBackdropClick=true,
 	className="",
 	children,
 	...props
@@ -36,12 +38,12 @@ export default function Modal({
 			role="dialog"
 			aria-modal={true}
 			aria-labelledby={`${modalTitle}-modalTitle`}
-			onClick={onClose}
+			onClick={closeOnBackdropClick ? onClose : undefined}
 			className={`
 				bg-(--bg)
 				fixed top-0 left-0 z-999
 				flex justify-center items-center
-				p-6 h-full w-full
+				p-8 h-full w-full
 				mr-(--body-hidden-scroll-width)
 			`.replace(/\s+/g, " ").trim()}
 			style={{
@@ -52,26 +54,26 @@ export default function Modal({
 			<div
 				ref={modalRef}
 				className={`
-					${className}
-					bg-theme-bg-light drop-shadow-2xl rounded-lg
-					w-full max-w-[550px]
+					relative
+					bg-theme-bg-light shadow-2xl rounded-2xl
+					min-w-[min(100%,350px)] w-full max-w-[min(100%,550px)]
 				`.replace(/\s+/g, " ").trim()}
 				onClick={e => e.stopPropagation()}
-				{...props}
 			>
-				<div className="p-2 pl-4 flex items-center">
+				<div className="p-6 pl-8 pb-0 flex items-center">
 					<h3
 						id={`${modalTitle}-modalTitle`}
-						className="flex-1 font-semibold text-lg"
+						className="flex-1 font-semibold text-lg pt-1 pr-[2.4rem]"
 						children={modalTitle}
 					/>
 					<button
 						aria-label="close this modal"
 						onClick={onClose}
-						children={<IoIosClose size="2rem"/>}
+						className="absolute top-4 right-6"
+						children={<IoIosClose size="2.4rem"/>}
 					/>
 				</div>
-				<div className="p-4 pt-2 max-h-[80svh] min-h-[350px] overflow-auto">
+				<div className={`px-8 pb-8 pt-4 max-h-[80svh] overflow-auto ${className}`.trim()} {...props}>
 					{children}
 				</div>
 			</div>

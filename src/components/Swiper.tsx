@@ -49,7 +49,7 @@ export default function Swiper<T>({
 			} as React.CSSProperties}
 			{...props}
 		>
-			{items.map((item, idx) => <SwiperSlide key={idx}>
+			{items.map((item, idx) => <SwiperSlide key={idx} className="h-auto!">
 				{
 					render !== undefined
 					? render(item)

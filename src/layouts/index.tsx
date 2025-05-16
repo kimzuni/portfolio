@@ -44,12 +44,13 @@ export default function Layout() {
 		<ScrollRestoration/>
 		<main className="flex flex-col">
 			<Navbar
+				className={pathname === "/" ? "" : "pl-2"}
 				items={items.nav}
 				socials={items.socials}
 				isOpen={navOpen}
 				setIsOpen={setNavOpen}
 			>
-				{pathname !== "/" && <button className="mr-0.5" type="button" aria-label="Back" onClick={goBack}><FaAngleLeft size="1.2rem"/></button>}
+				{pathname !== "/" && <button className="p-1" type="button" aria-label="Back" onClick={goBack}><FaAngleLeft size="1.2rem"/></button>}
 				<span translate="no">KIM JOON HEE</span>
 			</Navbar>
 			<Outlet context={{

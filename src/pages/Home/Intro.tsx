@@ -45,6 +45,7 @@ export default function Intro({
 					pt-24
 					flex-1 flex flex-col justify-center items-center gap-6
 
+					[&_.gradient]:bg-theme-primary
 					[&_.gradient]:bg-linear-to-r [&_.gradient]:from-theme-primary [&_.gradient]:to-green-500
 					[&_.gradient]:bg-clip-text [&_.gradient]:text-transparent
 				`.replace(/\s+/g, " ").trim()}

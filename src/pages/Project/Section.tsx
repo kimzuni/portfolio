@@ -6,7 +6,7 @@ export default function Section({
 }: SectionProps) {
 	return (
 		<section
-			className={`${className} my-8 md:my-16`.trim()}
+			className={`${className} mt-8 md:mt-16`.trim()}
 			{...props}
 		/>
 	);

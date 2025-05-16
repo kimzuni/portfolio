@@ -2,57 +2,71 @@ import { useIsInViewport } from "../hooks";
 
 
 
-export interface ProgressbarProps extends Omit<React.ComponentPropsWithoutRef<"div">, "aria-valuenow"> {
+export interface ProgressbarOptions {
 	value: number;
+	valuemin?: number;
+	valuemax?: number;
 	color?: string;
 	bgColor?: string;
-	barColor?: string;
+	barFromColor?: string;
+	barToColor?: string;
 	barRadius?: string;
+}
+
+export interface ProgressbarProps extends Omit<React.ComponentPropsWithoutRef<"div">, "children" | "aria-valuenow" | "aria-valuemin" | "aria-valuemax">, ProgressbarOptions {
 }
 
 
 
 export default function Progressbar({
 	value=0,
+	valuemin=0,
+	valuemax=100,
 	color="var(--color-theme-text-dark)",
 	bgColor="var(--color-theme-bg-light-sub)",
-	barColor="var(--color-theme-primary)",
+	barFromColor="var(--color-theme-primary)",
+	barToColor="var(--color-green-500)",
 	barRadius="calc(infinity * 1px)",
 	...props
 }: ProgressbarProps) {
-	const [ref, isInViewport] = useIsInViewport<HTMLDivElement>({ threshold: 1 });
-	value = Math.min(100, Math.max(0, value));
+	const [ref, isInViewport] = useIsInViewport<HTMLDivElement>();
+	value = Math.min(valuemax, Math.max(valuemin, value));
 
 	return (
 		<div
 			ref={ref}
 			className={`
 				relative overflow-hidden
-				w-full h-6 leading-6
-				text-center text-sm text-(--text)
-				bg-(--bg) rounded-full
-
-				before:content-[attr(aria-valuenow)"%"]
-				before:block
-				before:bg-(--bar) before:rounded-(--r)
-				before:max-w-full before:h-full
-				before:transition-[width]
-				before:duration-500
-				${isInViewport ? "before:w-(--v)" : "before:w-[0%]"}
+				rounded-full w-full h-6 leading-6
+				text-center text-sm font-semibold
+				text-(--text) bg-(--bg)
 			`.replace(/\s+/g, " ").trim()}
 			style={{
 				"--text": color,
 				"--bg": bgColor,
-				"--bar": barColor,
+				"--bar-from": barFromColor,
+				"--bar-to": barToColor,
 				"--r": barRadius,
-				"--v": `${value}%`,
+				"--v": `${Math.max(0, value)}%`,
 			} as React.CSSProperties}
 			role="progressbar"
 			aria-label="Progress"
 			aria-valuenow={value}
-			aria-valuemin={0}
-			aria-valuemax={100}
+			aria-valuemin={valuemin}
+			aria-valuemax={valuemax}
 			{...props}
+			children={<span
+				className={`
+					block h-full max-w-full
+					bg-(--bar-from) rounded-(--r)
+					transition-[width] duration-500
+					bg-linear-to-r from-(--bar-from) to-(--bar-to)
+					${isInViewport ? "w-(--v)" : "w-[0%]"}
+					before:content-[attr(data-content)"%"]
+					before:px-2
+				`.replace(/\s+/g, " ").trim()}
+				data-content={value}
+			/>}
 		/>
 	);
 }

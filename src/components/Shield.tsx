@@ -1,3 +1,5 @@
+import { FaLink } from "@react-icons/all-files/fa/FaLink";
+
 import Img, { ImgProps } from "./Img";
 import Link from "./Link";
 
@@ -59,7 +61,13 @@ const urls = {
 	"docker": "https://hub.docker.com/r",
 };
 
-export type BadgeLinkProps<S extends BadgeService> = S extends "badge" ? { link?: string } : { link?: string | boolean };
+export type BadgeLinkProps<S extends BadgeService> = (S extends "badge" ? {
+	link?: string;
+} : {
+	link?: string | boolean;
+}) & {
+	linkIcon?: boolean;
+};
 
 export interface CustomBadgeProps extends BadgeOptions, BadgeLinkProps<"badge"> {
 	service: "badge";
@@ -137,13 +145,17 @@ export default function Shield({
 		alt={`shields.io badge`}
 		aria-label={`${props.service !== "badge" ? props.service : "custom"} badge - ${props.badge}`}
 		src={path.startsWith("http") ? path : `https://img.shields.io/${props.service}${path}${query ? `?${query}` : ""}`}
+		className={props.link ? "transition-[filter] drop-shadow-md drop-shadow-transparent group-hover:drop-shadow-theme-primary" : undefined}
 	/>;
 
 	return (<>
 		{!props.link ? img : <Link
-			className="transition-[filter] drop-shadow-md drop-shadow-transparent hover:drop-shadow-theme-primary"
+			className="inline-flex items-center gap-0.25 group"
 			to={props.service === "badge" ? props.link : props.link !== true ? props.link : `${urls[props.service]}/${props.user}/${props.repo}`}
-			children={img}
+			children={<>
+				{props.linkIcon !== false && <FaLink className="p-0.5"/>}
+				{img}
+			</>}
 		/>}
 	</>);
 }

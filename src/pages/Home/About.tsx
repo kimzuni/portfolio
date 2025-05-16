@@ -28,7 +28,7 @@ export default function About({
 			className={`
 				${className}
 				flex flex-col items-center gap-y-8 px-0
-				md:flex-row md:items-stretch md:pt-64 md:pr-(--section-px) md:gap-x-(--section-px)
+				md:flex-row md:items-stretch md:pt-64
 			`.replace(/\s+/g, " ").trim()}
 			{...props}
 		>
@@ -43,12 +43,12 @@ export default function About({
 					<Img
 						src={avatar}
 						alt="profile image"
-						className="md:max-h-80 md:p-[10%] rounded-b-4xl md:rounded-none"
+						className="md:min-w-80 md:max-w-[35vw] md:max-h-80 md:p-[10%] md:rounded-none"
 						loading="eager"
 					/>
 				</ScrollFade>
 			}
-			<ScrollFade className="flex-1 w-[calc(100%-var(--section-px)/2)] max-w-130 md:m-auto md:min-w-130 md:max-w-130">
+			<ScrollFade className="flex-1 m-auto w-[calc(100%-var(--section-px)/2)] max-w-130 md:max-w-150 md:px-(--section-px)">
 				<p
 					className={`
 						mb-16 md:mb-4 px-14

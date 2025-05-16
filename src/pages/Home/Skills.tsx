@@ -84,7 +84,7 @@ export default function Skills({
 			</ScrollFade>
 			{items.map(({title, cards}) => <ScrollFade key={title} className="mb-[1.6em]">
 				<h2 className="title break-all">{title}</h2>
-				<div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-12">
+				<div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-12 px-(--section-px)">
 					{cards.map(card => <Card key={card.label} {...card}/>)}
 				</div>
 			</ScrollFade>)}

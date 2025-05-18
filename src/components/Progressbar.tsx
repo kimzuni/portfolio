@@ -57,8 +57,7 @@ export default function Progressbar({
 			{...props}
 			children={<span
 				className={`
-					block h-full max-w-full
-					bg-(--bar-from) rounded-(--r)
+					block rounded-(--r) h-full max-w-full
 					transition-[width] duration-500
 					bg-linear-to-r from-(--bar-from) to-(--bar-to)
 					${isInViewport ? "w-(--v)" : "w-[0%]"}

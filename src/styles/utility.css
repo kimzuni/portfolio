@@ -1,3 +1,7 @@
+@import "./text-gradient.css";
+
+
+
 @utility before-backdrop-blur-* {
 	&:before {
 		@apply content-[""];

@@ -6,7 +6,7 @@ import Home from "../pages/Home";
 import Projects from "../pages/Projects";
 import Project from "../pages/Project";
 
-import { items } from "../items/projects";
+import { projects } from "../items";
 
 
 
@@ -23,7 +23,7 @@ export default [
 				path: "/projects",
 				element: <Projects/>,
 			},
-			...items.map(([id, item]) => ({
+			...projects.map(([id, item]) => ({
 				path: `/projects/${id}`,
 				element: <Project {...item}/>,
 			})),

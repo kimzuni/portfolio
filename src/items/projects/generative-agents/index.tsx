@@ -1,16 +1,16 @@
-import type { Item } from "./";
+import type { Item } from "../";
 
-import n25 from "./imgs/generative-agents-n25.png";
-import dashboard from "./imgs/generative-agents-dashboard.png";
-import play from "./imgs/generative-agents-play.gif";
-import payloadDetails from "./imgs/generative-agents-play.png";
-import modal from "./imgs/generative-agents-modal.png";
+import n25 from "./n25.png";
+import dashboard from "./dashboard.png";
+import play from "./play.gif";
+import modal from "./modal.png";
 
 
 
 const item: Item = {
 	title: "Generative Agents",
-	date: ["2024.09.02", "2024.12.04"],
+	date: [new Date("2024-09-02"), new Date("2024-12-04")],
+	categories: ["Frontend", "Backend", "Docker"],
 	contribution: [
 		{ label: "Frontend", percentage: 100 },
 		{ label: "Backend", percentage: 100 },
@@ -77,10 +77,6 @@ const item: Item = {
 				{
 					src: play,
 					alt: "simulation preview",
-				},
-				{
-					src: payloadDetails,
-					alt: "payload details",
 				},
 				{
 					src: modal,

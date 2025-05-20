@@ -2,6 +2,13 @@
 
 
 
+@utility scrollbar-hide {
+	&::-webkit-scrollbar {
+		@apply hidden;
+	}
+	scrollbar-width: none;
+}
+
 @utility before-backdrop-blur-* {
 	&:before {
 		@apply content-[""];

@@ -67,7 +67,7 @@ export default function Skills({
 	const [ref, isInViewport] = useIsInViewport<HTMLParagraphElement>();
 
 	return (
-		<Section className={`${className} flex flex-col gap-12 text-center`.trim()} {...props}>
+		<Section id="skills" className={`${className} flex flex-col gap-12 text-center`.trim()} {...props}>
 			<ScrollFade>
 				저는 이런 것들을 다룰 줄 알아요!<br/>
 				작은 프로젝트라도 진행한 것들만 모아봤어요!

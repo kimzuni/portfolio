@@ -11,3 +11,5 @@ export const items: Array<[string, Item]> = Object.entries(
 		"./**/*.tsx",
 	], { eager: true })
 ).map(([path, module]) => [path.slice(2).split(".tsx")[0].replace("/index", ""), module.default]);
+
+export const sorted = [...items].sort((a, b) => [...b[1].date].reverse()[0].getTime() - [...a[1].date].reverse()[0].getTime());

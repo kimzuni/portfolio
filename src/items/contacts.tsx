@@ -1,26 +1,26 @@
-import { Contact } from "../pages/Home/Contacts";
+import { ContactItem } from "../pages/Home/Contacts";
 
 
 
-const items: Contact[] = [
+const items: ContactItem[] = [
 	{
 		label: "me@zuni.kim",
-		icon: "envelope",
+		icon: "Envelope",
 		href: "mailto:me@zuni.kim",
 	},
 	{
 		label: "rlawnsgl191@gmail.com",
-		icon: "envelope",
+		icon: "Envelope",
 		href: "mailto:rlawnsgl191@gmail.com",
 	},
 	{
 		label: "jh1950",
-		icon: "github",
+		icon: "GitHub",
 		href: "https://github.com/jh1950",
 	},
 	{
 		label: "kimzuni",
-		icon: "github",
+		icon: "GitHub",
 		href: "https://github.com/kimzuni",
 	},
 ];

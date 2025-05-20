@@ -1,10 +1,10 @@
-import { Link, UList, UListProps } from "../components";
-import { getIcon, IconType } from "../utils";
+import { Link, UList, UListProps, IconName } from "../components";
+import { getIcon } from "../utils";
 
 
 
 export interface SocialItem {
-	icon: IconType;
+	icon: IconName;
 	href: string;
 }
 

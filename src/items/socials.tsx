@@ -4,6 +4,6 @@ import contacts from "./contacts";
 
 
 
-const socials: SocialItem[] = contacts.filter(x => x.icon === "github");
+const socials: SocialItem[] = contacts.filter(x => x.icon === "GitHub");
 
 export default socials;

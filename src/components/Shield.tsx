@@ -1,4 +1,5 @@
-import { FaLink } from "@react-icons/all-files/fa/FaLink";
+import { Icons } from "../components";
+import { shieldLinkURLs } from "../common";
 
 import Img, { ImgProps } from "./Img";
 import Link from "./Link";
@@ -55,11 +56,6 @@ export type BadgeOptions = {
 };
 
 
-
-const urls = {
-	"github": "https://github.com",
-	"docker": "https://hub.docker.com/r",
-};
 
 export type BadgeLinkProps<S extends BadgeService> = (S extends "badge" ? {
 	link?: string;
@@ -151,9 +147,9 @@ export default function Shield({
 	return (<>
 		{!props.link ? img : <Link
 			className="inline-flex items-center gap-0.25 group"
-			to={props.service === "badge" ? props.link : props.link !== true ? props.link : `${urls[props.service]}/${props.user}/${props.repo}`}
+			to={props.service === "badge" ? props.link : props.link !== true ? props.link : `${shieldLinkURLs[props.service]}/${props.user}/${props.repo}`}
 			children={<>
-				{props.linkIcon !== false && <FaLink className="p-0.5"/>}
+				{props.linkIcon !== false && <Icons.Link className="p-0.5"/>}
 				{img}
 			</>}
 		/>}

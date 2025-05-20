@@ -25,6 +25,7 @@ export default function About({
 }: AboutProps) {
 	return (
 		<Section
+			id="about"
 			className={`
 				${className}
 				flex flex-col items-center gap-y-8 px-0

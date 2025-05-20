@@ -1,6 +1,4 @@
-import { CgScrollV } from "@react-icons/all-files/cg/CgScrollV";
-
-import { ScrollFade } from "../../components";
+import { ScrollFade, Icons } from "../../components";
 import { useIsInViewport } from "../../hooks";
 
 import Section, { SectionProps } from "./Section";
@@ -19,7 +17,6 @@ export interface IntroProps extends SectionProps {
 
 export default function Intro({
 	item,
-	id="intro",
 	className="",
 	...props
 }: IntroProps) {
@@ -27,7 +24,7 @@ export default function Intro({
 
 	return (
 		<Section
-			id={id}
+			id="intro"
 			className={`
 				${className}
 				pb-[calc(100lvh-100svh+64px)]!
@@ -70,7 +67,7 @@ export default function Intro({
 					text-theme-text-light-sub/50 text-sm
 				`.replace(/\s+/g, " ").trim()}
 			>
-				<CgScrollV
+				<Icons.Scroll
 					size="36"
 					className="p-1 animate-bounce"
 					style={{

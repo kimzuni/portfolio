@@ -5,4 +5,4 @@ export { default as about } from "./about";
 export { default as skills } from "./skills";
 export { default as contacts } from "./contacts";
 
-export { items as projects } from "./projects";
+export { sorted as projects } from "./projects";

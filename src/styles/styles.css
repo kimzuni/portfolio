@@ -1,11 +1,13 @@
 :root {
-	@apply scroll-smooth antialiased;
+	/* @apply scroll-smooth antialiased; */
 	@apply bg-theme-bg-light text-theme-text-dark;
 } ::selection {
 	@apply bg-theme-primary/85;
 	@apply text-theme-text-dark;
 } html {
 	@apply min-h-full flex flex-col;
+} body {
+	@apply overflow-x-hidden;
 } body, #root {
 	@apply flex-1 flex flex-col;
 } main {

@@ -1,11 +1,12 @@
 import { useState, useEffect, useCallback } from "react";
 import { Outlet, useLocation, useNavigate, ScrollRestoration } from "react-router";
-import { FaAngleLeft } from "@react-icons/all-files/fa/FaAngleLeft";
 
+import { Icons } from "../components";
 import * as items from "../items";
+
+import bodyOverflowHidden from "./bodyOverflowHidden";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import bodyOverflowHidden from "./bodyOverflowHidden";
 
 
 
@@ -50,7 +51,7 @@ export default function Layout() {
 				isOpen={navOpen}
 				setIsOpen={setNavOpen}
 			>
-				{pathname !== "/" && <button className="p-1" type="button" aria-label="Back" onClick={goBack}><FaAngleLeft size="1.2rem"/></button>}
+				{pathname !== "/" && <button className="p-1" type="button" aria-label="Back" onClick={goBack}><Icons.Left size="1.2rem"/></button>}
 				<span translate="no">KIM JOON HEE</span>
 			</Navbar>
 			<Outlet context={{

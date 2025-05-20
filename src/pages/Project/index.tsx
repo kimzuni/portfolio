@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { shieldLinkURLs, ShieldLinkURL } from "../../common";
 import { ScrollFade, Shield, Img, Swiper, Progressbar, Modal, Button } from "../../components";
 import type { ShieldProps, CustomBadgeProps, BadgeProps, WorkflowBadgeProps, TagBadgeProps, BadgeOptions, BadgeLinkProps, ProgressbarOptions } from "../../components";
 
@@ -7,13 +8,10 @@ import Section from "./Section";
 
 
 
-export type URPartial<T extends ShieldProps> = Omit<T, "user" | "repo"> & {
-	user?: string;
-	repo?: string;
-};
+export type URPartial<T extends ShieldProps> = Omit<T, "user" | "repo"> & Partial<Record<"user" | "repo", string>>;
 
 export type URPartialProps =
-	| CustomBadgeProps
+	| Omit<CustomBadgeProps, "link"> & ({ link?: string | false, linkBaseUrl?: never } | { link: true, linkBaseUrl: ShieldLinkURL})
 	| URPartial<BadgeProps<"github">>
 	| URPartial<BadgeProps<"docker">>
 	| URPartial<WorkflowBadgeProps>
@@ -70,7 +68,7 @@ export default function Project({
 	}
 
 	return (<>
-		<Section className="md:mb-8">
+		<Section className="md:mb-8 [&>*]:last:mb-0">
 			<ScrollFade>
 				<h2 className="title">{title}</h2>
 			</ScrollFade>
@@ -83,10 +81,13 @@ export default function Project({
 				<div className="my-8 flex flex-col gap-4">
 					{badges && <ScrollFade className="flex flex-col gap-2">
 						{badges.items.map((box, idx) => <div key={idx} className="flex justify-center flex-wrap gap-2">
-							{(box as unknown as ShieldProps[][] | URPartialProps[][]).map((props, idx) =>
+							{(box as unknown as ShieldProps[] | URPartialProps[]).map(({ link, ...props }, idx) =>
 								// @ts-expect-error: TS2322
 								<Shield
 									key={idx}
+									style="flat"
+									// @ts-expect-error: TS7053, TS2339
+									link={props.service === "badge" && link === true ? `${shieldLinkURLs[props.linkBaseUrl!]}/${badges.user}/${badges.repo}` : link}
 									{...badges}
 									{...props}
 								/>
@@ -124,7 +125,7 @@ export default function Project({
 			return (
 				<Section key={idx} className={`flex flex-col gap-10 mt-16 px-0 [&_a]:underline [&_a]:text-theme-primary [&_a]:hover:text-theme-dark ${reverse ? "md:flex-row-reverse" : "md:flex-row"} md:px-(--section-px) md:items-center`}>
 					{images.length !== 0 &&
-						<ScrollFade className={`shadow-xl overflow-hidden md:rounded-3xl ${description ? "flex-1" : "p-12 bg-white md:w-full"}`}><Swiper
+						<ScrollFade className={`shadow-xl overflow-hidden md:rounded-3xl ${description ? "flex-1" : "bg-white md:w-full md:p-[5%]"}`}><Swiper
 							effect="slide"
 							items={images}
 							render={img => <Img {...img} className="min-h-full min-w-full md:border-1 md:border-theme-text-dark-sub/25"/>}

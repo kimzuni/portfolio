@@ -5,7 +5,8 @@ import intro from "./intro.png";
 
 
 const item: Item = {
-	title: "Web Portfolio",
+	pin: true,
+	title: "웹 포트폴리오",
 	date: [new Date("2025-05-08")],
 	categories: ["Frontend"],
 	skills: [

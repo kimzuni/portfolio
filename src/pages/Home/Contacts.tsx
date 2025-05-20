@@ -6,12 +6,12 @@ import Section, { SectionProps } from "./Section";
 
 
 
-export interface Contact extends SocialItem {
+export interface ContactItem extends SocialItem {
 	label: string;
 };
 
 export interface ContactsProps extends SectionProps {
-	items: Contact[];
+	items: ContactItem[];
 };
 
 export default function Contacts({
@@ -20,7 +20,7 @@ export default function Contacts({
 	...props
 }: ContactsProps) {
 	return (
-		<Section className={`${className} pb-0!`.trim()} {...props}>
+		<Section id="contacts" className={`${className} pb-0!`.trim()} {...props}>
 			<ScrollFade className="text-center">
 				<h2 className="title">Contacts</h2>
 				<div
@@ -51,13 +51,13 @@ export default function Contacts({
 			</ScrollFade>
 			<ScrollFade className="flex flex-col items-center mt-20 text-center">
 				<h3
-					className="title text-lg"
-					children="혹시 익명으로 저에게 할 말이 있으신가요?"
+					className="title text-base"
+					children="익명으로 전하고 싶은 말이 있으신가요?"
 				/>
 				<Button
 					as={Link}
 					to="https://mail.kimzuni.com"
-					children="그렇다면 저를 따라오세요!"
+					children="그렇다면 이쪽으로!"
 				/>
 			</ScrollFade>
 		</Section>

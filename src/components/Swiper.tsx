@@ -1,9 +1,8 @@
 import type { SwiperModule } from "swiper/types";
-import { EffectFade, A11y, Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper as SwiperBase, SwiperProps as SwiperPropsBase, SwiperSlide } from "swiper/react";
+import { EffectFade, EffectCards, A11y, Autoplay, Navigation, Pagination, FreeMode } from "swiper/modules";
 
-import { FaAngleLeft } from "@react-icons/all-files/fa/FaAngleLeft";
-import { FaAngleRight } from "@react-icons/all-files/fa/FaAngleRight";
+import { Icons } from "../components";
 
 
 
@@ -19,53 +18,75 @@ export default function Swiper<T>({
 	fadeEffect={},
 	a11y={},
 	navigation,
+	pagination,
 	className="",
 	style={},
 	loop=false,
+	cardsEffect={},
 	...props
 }: SwiperProps<T>) {
 	const modules: SwiperModule[] = [];
+	if (items.length === 0) return undefined;
 
-	if (a11y) modules.push(A11y);
+	if (props.freeMode) modules.push(FreeMode);
 	if (props.autoplay) modules.push(Autoplay);
-	if (props.pagination) modules.push(Pagination);
-	if (effect === "fade") modules.push(EffectFade);
+	if (pagination) {
+		modules.push(Pagination);
+		pagination = {
+			clickable: true,
+			...(pagination === true ? {} : pagination),
+		};
+	}
+	if (effect === "fade") {
+		modules.push(EffectFade);
+		fadeEffect = {
+			crossFade: true,
+			...fadeEffect,
+		};
+	}
+	if (effect === "cards") {
+		modules.push(EffectCards);
+		cardsEffect = {
+			...cardsEffect,
+		};
+	}
+	if (a11y) {
+		modules.push(A11y);
+		a11y = {
+			...(!navigation ? {} : {
+				prevSlideMessage: "Previous slide",
+				nextSlideMessage: "Next slide",
+			}),
+			...a11y,
+		};
+	}
 	if (navigation) {
 		modules.push(Navigation);
 		navigation = navigation === true ? {} : navigation;
 	}
 
-	if (items.length === 0) return undefined;
-
 	return (
 		<SwiperBase
-			a11y={{
-				...(!navigation ? {} : {
-					prevSlideMessage: "Previous slide",
-					nextSlideMessage: "Next slide",
-				}),
-				...a11y,
-			}}
-			className={`@container/swiper ${className}`.trim()}
+			a11y={a11y}
 			effect={effect}
-			fadeEffect={effect !== "fade" ? undefined : {
-				crossFade: true,
-				...fadeEffect,
-			}}
+			modules={modules}
+			fadeEffect={fadeEffect}
+			cardsEffect={cardsEffect}
+			pagination={pagination}
 			navigation={navigation && {
 				nextEl: ".swiper-button-next",
 				prevEl: ".swiper-button-prev",
 				...navigation,
 			}}
-			modules={modules}
+			loop={items.length <= 1 ? false : loop}
+			className={`@container/swiper ${className}`.trim()}
 			style={{
 				"--swiper-navigation-sides-offset": "10px",
 				...style,
 			} as React.CSSProperties}
-			loop={items.length <= 1 ? false : loop}
 			{...props}
 		>
-			{items.map((item, idx) => <SwiperSlide key={idx} className="h-auto!">
+			{items.map((item, idx) => <SwiperSlide key={idx} className="h-auto! w-full!">
 				{
 					render !== undefined
 					? render(item)
@@ -75,11 +96,11 @@ export default function Swiper<T>({
 			{!navigation || (navigation.nextEl || navigation.prevEl) ? undefined : <>
 				<button
 					className="swiper-button-prev after:content-['']! px-1"
-					children={<FaAngleLeft/>}
+					children={<Icons.Left/>}
 				/>
 				<button
 					className="swiper-button-next after:content-['']! px-1"
-					children={<FaAngleRight/>}
+					children={<Icons.Right/>}
 				/>
 			</>}
 		</SwiperBase>

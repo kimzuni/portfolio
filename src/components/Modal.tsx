@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { IoIosClose } from "@react-icons/all-files/io/IoIosClose";
 
+import { Icons } from "../components";
 import { useLayoutContext, useAnimateInView } from "../hooks";
 
 
@@ -70,7 +70,7 @@ export default function Modal({
 						aria-label="close this modal"
 						onClick={onClose}
 						className="absolute top-4 right-6"
-						children={<IoIosClose size="2.4rem"/>}
+						children={<Icons.XMark size="2.4rem"/>}
 					/>
 				</div>
 				<div className={`px-8 pb-8 pt-4 max-h-[80svh] overflow-auto ${className}`.trim()} {...props}>

@@ -1,21 +1,27 @@
 export { default as Img } from "./Img";
+export { default as Icons } from "./icons";
 export { default as Link } from "./Link";
 export { default as UList } from "./UList";
 export { default as Button } from "./Button";
 export { default as MenuBtn } from "./MenuBtn";
 export { default as Modal } from "./Modal";
+export { default as ProjectBox } from "./ProjectBox";
 export { default as ScrollFade } from "./ScrollFade";
 export { default as Progressbar } from "./Progressbar";
+export { default as NoImage } from "./NoImage";
 export { default as Swiper } from "./Swiper";
 export { default as Shield } from "./Shield";
 
 export type * from "./Img";
+export type * from "./icons";
 export type * from "./Link";
 export type * from "./UList";
 export type * from "./Button";
 export type * from "./MenuBtn";
 export type * from "./Modal";
+export type * from "./ProjectBox";
 export type * from "./ScrollFade";
 export type * from "./Progressbar";
+export type * from "./NoImage";
 export type * from "./Swiper";
 export type * from "./Shield";

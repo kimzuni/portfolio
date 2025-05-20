@@ -1,15 +1,17 @@
 import { strToMs } from "../utils";
 
-export interface bodyOverflowHiddenOptions {
+
+
+export interface BodyOverflowHiddenOptions {
 	delay?: React.CSSProperties["transitionDelay"];
 	showDelay?: React.CSSProperties["transitionDelay"];
 	hideDelay?: React.CSSProperties["transitionDelay"];
 }
 
-export default function bodyOverflowHidden(hidden: boolean, { delay, showDelay, hideDelay }: bodyOverflowHiddenOptions = {}): undefined | number {
-	const scrollWidth = window.innerWidth - document.body.clientWidth;
-	const px = `${scrollWidth}px`;
+export default function bodyOverflowHidden(hidden: boolean, { delay, showDelay, hideDelay }: BodyOverflowHiddenOptions = {}): undefined | number {
 	const body = document.body;
+	const scrollWidth = window.innerWidth - body.clientWidth;
+	const px = `${scrollWidth}px`;
 
 	setTimeout(() => {
 		body.style.overflow = hidden ? "hidden": "";

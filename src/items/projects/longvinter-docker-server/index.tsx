@@ -1,5 +1,7 @@
 import type { Item } from "..";
 
+import header from "./header.jpg";
+
 
 
 const item: Item = {
@@ -40,8 +42,8 @@ const item: Item = {
 		{
 			images: [
 				{
-					src: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1635450/header.jpg",
-					alt: "thumb",
+					src: header,
+					alt: "Longvinter 메인 헤더 = 출처: https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1635450/header.jpg",
 				},
 			],
 			descriptions: [

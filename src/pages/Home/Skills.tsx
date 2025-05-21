@@ -29,15 +29,11 @@ export const Card = ({
 	icon = icon ?? label.toLowerCase().replace(/\./g, "");
 
 	return (
-		<div className={`relative size-16 hovero:scale-125 hovero:[&_.card]:opacity-100 transition-[scale] ${className}`.trim()} {...props}>
+		<div className={`relative size-16 hovero:scale-125 hovero:[&_.backdrop]:opacity-100 transition-[scale] ${className}`.trim()} {...props}>
 			<div
 				data-level={level}
 				className={`
-					card
-					absolute h-full w-full
-					bg-black/50 rounded-[24%]
-					transition-[opacity] opacity-0
-					flex justify-center items-center
+					backdrop rounded-[24%]
 					text-sm capitalize textBorder-theme-text-dark
 					before:content-[attr(data-level)]
 					${{

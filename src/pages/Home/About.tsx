@@ -1,4 +1,4 @@
-import { Img, ScrollFade, Swiper } from "../../components";
+import { Img, ImgProps, ScrollFade, Swiper } from "../../components";
 
 import Section, { SectionProps } from "./Section";
 
@@ -14,7 +14,7 @@ export interface AboutItem {
 
 export interface AboutProps extends SectionProps {
 	items: AboutItem[];
-	avatar?: string;
+	avatar?: ImgProps["src"];
 }
 
 export default function About({

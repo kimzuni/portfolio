@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import tailwindcss from '@tailwindcss/vite'
 import prerender from '@prerenderer/rollup-plugin'
+import { imagetools } from 'vite-imagetools'
 
 import projects from "./src/items/projects/deploy";
 
@@ -10,6 +11,16 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
+    imagetools({
+      defaultDirectives: (url) => new URLSearchParams(
+        url.pathname.endsWith(".gif") ? {} : {
+          w: "320;640;900;1280",
+          format: "webp;avif;jpg",
+          quality: "80",
+          as: "picture",
+        }
+      ),
+    }),
     prerender({
       routes: [
         "/",

@@ -15,7 +15,7 @@ export default function Home() {
 			className="order-first h-lvh pt-0 pb-[calc(100lvh-100svh+64px)]"
 		/>
 		<About
-			avatar="/avatar.png"
+			avatar={items.avatar}
 			items={items.about}
 		/>
 		<Skills

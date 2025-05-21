@@ -41,7 +41,12 @@ a, button {
 
 
 
-.menuBtn {
+.backdrop {
+	@apply bg-black/50;
+	@apply absolute top-0 left-0 h-full w-full;
+	@apply flex justify-center items-center;
+	@apply transition-[opacity] opacity-0;
+} .menuBtn {
 	--bg: var(--color-theme-text-dark);
 	--bd: var(--color-theme-bg-light);
 

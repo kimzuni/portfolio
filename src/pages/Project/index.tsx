@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { shieldLinkURLs, ShieldLinkURL } from "../../common";
 import { SEO, ScrollFade, Shield, Img, Swiper, Progressbar, Modal, Button } from "../../components";
-import type { ShieldProps, CustomBadgeProps, BadgeProps, WorkflowBadgeProps, TagBadgeProps, BadgeOptions, BadgeLinkProps, ProgressbarOptions } from "../../components";
+import type { ImgProps, ShieldProps, CustomBadgeProps, BadgeProps, WorkflowBadgeProps, TagBadgeProps, BadgeOptions, BadgeLinkProps, ProgressbarOptions } from "../../components";
 
 import Section from "./Section";
 
@@ -41,10 +41,7 @@ export interface ProjectProps {
 	badges?: BadgeOptions1 | BadgeOptions2;
 	sections?: Array<{
 		reverse?: boolean;
-		images?: Array<{
-			src: string;
-			alt?: string;
-		}>;
+		images?: Array<ImgProps>;
 		descriptions?: React.ReactNode[];
 	}>;
 }

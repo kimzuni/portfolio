@@ -1,3 +1,5 @@
+export { default as avatar } from "./avatar.png";
+
 export { default as nav } from "./nav";
 export { default as socials } from "./socials";
 export { default as intro } from "./intro";

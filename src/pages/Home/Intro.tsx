@@ -64,7 +64,7 @@ export default function Intro({
 				className={`
 					py-8
 					flex flex-col justify-center items-center gap-2
-					text-theme-text-light-sub/50 text-sm
+					text-theme-text-light-sub/75 text-sm
 				`.replace(/\s+/g, " ").trim()}
 			>
 				<Icons.Scroll

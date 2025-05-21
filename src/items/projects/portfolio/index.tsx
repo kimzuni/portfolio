@@ -24,6 +24,11 @@ const item: Item = {
 				badge: "lastCommit",
 				link: true,
 			},
+			{
+				service: "github",
+				badge: "workflow",
+				workflow: "release.yml",
+			},
 		],
 	},
 	sections: [

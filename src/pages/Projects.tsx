@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
 
-import { ScrollFade, ProjectBox, Icons } from "../components";
+import { SEO, ScrollFade, ProjectBox, Icons } from "../components";
 import { useAnimateInView } from "../hooks";
 import { projects } from "../items";
 
@@ -24,7 +24,6 @@ const Btn = ({
 
 export interface ProjectsProps {
 	categories?: string[];
-	cover?: string;
 }
 
 const getOffset = (box: Element, btn: Element) => {
@@ -38,6 +37,7 @@ const getOffset = (box: Element, btn: Element) => {
 
 export default function Projects() {
 	const ALL = "ALL";
+	const KEY = "category";
 	const navigate = useNavigate();
 	const { search } = useLocation();
 	const [isVisible, setIsVisible] = useState(true);
@@ -45,7 +45,7 @@ export default function Projects() {
 	const tablistRef = useRef<HTMLDivElement>(null);
 
 	const categories = [...new Set(projects.map(x => x[1].categories).flat().filter(Boolean))] as string[];
-	const { category } = Object.fromEntries(search.slice(1).split("&").map(x => x.split("="))) as Record<string, string>;
+	const category = new URLSearchParams(search).get(KEY) ?? ALL;
 	const tab = categories.includes(category) ? category : ALL;
 	const items = projects.filter(x => tab === ALL || x[1].categories?.includes(tab));
 	const panelId = `panel-${tab}`;
@@ -79,7 +79,7 @@ export default function Projects() {
 
 		setIsVisible(false);
 		setTimeout(() => {
-			navigate(label === ALL ? "" : { search: `category=${label}` }, { replace: true })
+			navigate(label === ALL ? "" : { search: `${KEY}=${label}` }, { replace: true })
 			setIsVisible(true);
 		}, 100);
 	}
@@ -94,6 +94,13 @@ export default function Projects() {
 	};
 
 	return (<>
+		<SEO
+			title="프로젝트 목록"
+			description="저의 성장 과정이 담긴 프로젝트 목록입니다."
+			keywords={["Projects", ...categories]}
+			url={{ search: tab === ALL ? "" : `?${KEY}=${tab}` }}
+		/>
+
 		<section className="my-(--section-px)">
 			<h2 className="text-2xl font-semibold text-center">Projects</h2>
 		</section>
@@ -102,11 +109,13 @@ export default function Projects() {
 			<div className="relative">
 				<Btn
 					className="left-0"
+					aria-label="left scroll"
 					children={<Icons.Left/>}
 					onClick={() => arrowClick("left")}
 				/>
 				<Btn
 					className="right-0"
+					aria-label="right scroll"
 					children={<Icons.Right/>}
 					onClick={() => arrowClick("right")}
 				/>

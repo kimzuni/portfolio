@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1024" height="1024"><svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 64 64">
+	<g fill="#5cc9ff" stroke-width="0">
+		<path d="m 0,32 h 32 v 5 l -24,22 h 24 v 5 h -32 v -5 l 24,-22 h -24 z"></path>
+		<path d="m 36,24 h 24 v 3.75 l -18,16.5 h 18 v 3.75 h -24 v -3.75 l 18,-16.5 h -18 z"></path>
+		<path d="m 26,4 h 16 v 2.5 l -12,11 h 12 v 2.5 h -16 v -2.5 l 12,-11 h -12 z"></path>
+		<path d="m 52.8,0 h 11.2 v 1.75 l -8.4,7.7 h 8.4 v 1.75 h -11.2 v -1.75 l 8.4,-7.7 h -8.4 z"></path>
+	</g>
+</svg><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
+@media (prefers-color-scheme: dark) { :root { filter: none; } }
+</style></svg>

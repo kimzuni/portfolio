@@ -4,5 +4,4 @@ export { default as intro } from "./intro";
 export { default as about } from "./about";
 export { default as skills } from "./skills";
 export { default as contacts } from "./contacts";
-
-export { sorted as projects } from "./projects";
+export { default as projects } from "./projects";

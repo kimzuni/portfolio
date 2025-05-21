@@ -44,7 +44,7 @@ const item: Item = {
 					alt: "thumb",
 				},
 			],
-			description: [
+			descriptions: [
 				"Steam 게임 Palworld용 도커 이미지 소스코드를 Longvinter 게임에 맞게 수정하여 배포하였습니다. 기존 이미지와 마찬가지로 AMD64 및 ARM64 아키텍처를 모두 지원하며, Palworld 관련 코드는 제외하고 Longvinter 전용 코드를 추가하여 완벽한 호환성을 제공합니다.",
 			],
 		},

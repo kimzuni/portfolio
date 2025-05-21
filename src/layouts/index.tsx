@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Outlet, useLocation, useNavigate, ScrollRestoration } from "react-router";
 
-import { Icons } from "../components";
+import { SEO, Icons } from "../components";
 import * as items from "../items";
 
 import bodyOverflowHidden from "./bodyOverflowHidden";
@@ -42,6 +42,7 @@ export default function Layout() {
 	}, [pathname, updatePathname]);
 
 	return (<>
+		<SEO/>
 		<ScrollRestoration/>
 		<main className="flex flex-col">
 			<Navbar

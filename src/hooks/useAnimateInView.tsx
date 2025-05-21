@@ -21,7 +21,7 @@ const defaultTiming = getCSSVar("--default-transition-timing-function");
 
 export default function useAnimateInView<E extends HTMLElement = HTMLElement>(isVisible: boolean, options?: UseAnimateInViewOptions) {
 	const ref = useRef<E>(null);
-	const timer = useRef(0);
+	const timer = useRef<NodeJS.Timeout>(null);
 
 	useEffect(() => {
 		const node = ref.current;
@@ -42,7 +42,7 @@ export default function useAnimateInView<E extends HTMLElement = HTMLElement>(is
 				if (collapseOnHide !== "attr") node.style.display = "";
 				if (collapseOnHide !== "style") node.removeAttribute("hidden");
 			} else {
-				clearTimeout(timer.current);
+				clearTimeout(timer.current ?? 0);
 				timer.current = setTimeout(() => {
 					if (collapseOnHide !== "attr") node.style.display = "none";
 					if (collapseOnHide !== "style") node.setAttribute("hidden", "");
@@ -61,7 +61,7 @@ export default function useAnimateInView<E extends HTMLElement = HTMLElement>(is
 		}, 0);
 
 		return () => {
-			clearTimeout(timer.current);
+			clearTimeout(timer.current ?? 0);
 		};
 	}, [isVisible, options]);
 

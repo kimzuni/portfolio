@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { shieldLinkURLs, ShieldLinkURL } from "../../common";
-import { ScrollFade, Shield, Img, Swiper, Progressbar, Modal, Button } from "../../components";
+import { SEO, ScrollFade, Shield, Img, Swiper, Progressbar, Modal, Button } from "../../components";
 import type { ShieldProps, CustomBadgeProps, BadgeProps, WorkflowBadgeProps, TagBadgeProps, BadgeOptions, BadgeLinkProps, ProgressbarOptions } from "../../components";
 
 import Section from "./Section";
@@ -30,7 +30,9 @@ export interface BadgeOptions2 extends BadgeOptions {
 
 export interface ProjectProps {
 	title: string;
+	description?: string;
 	date: [Date] | [Date, Date];
+	cover?: string;
 	contribution?: Array<{
 		label: string;
 		percentage: number;
@@ -43,7 +45,7 @@ export interface ProjectProps {
 			src: string;
 			alt?: string;
 		}>;
-		description?: React.ReactNode[];
+		descriptions?: React.ReactNode[];
 	}>;
 }
 
@@ -55,7 +57,9 @@ const dateToString = (date?: Date) => {
 
 export default function Project({
 	title,
+	description,
 	date,
+	cover,
 	contribution,
 	skills,
 	badges,
@@ -68,6 +72,12 @@ export default function Project({
 	}
 
 	return (<>
+		<SEO
+			title={`프로젝트 - ${title}`}
+			description={description ?? (typeof sections[0]?.descriptions?.[0] === "string" ? sections[0]?.descriptions?.[0] : `프로젝트 ${title}의 상세 내용 페이지입니다.`)}
+			keywords={["Project", title, ...(((skills ?? [])?.map(x => x.label?.replace(/_/g, " ")).filter(Boolean) ?? []) as string[])]}
+			image={cover}
+		/>
 		<Section className="md:mb-8 [&>*]:last:mb-0">
 			<ScrollFade>
 				<h2 className="title">{title}</h2>
@@ -119,13 +129,13 @@ export default function Project({
 			</ScrollFade>}
 		</Section>
 
-		{sections.map(({ images=[], description, reverse }, idx) => {
+		{sections.map(({ images=[], descriptions, reverse }, idx) => {
 			reverse = reverse || (idx & 1) === 1;
 
 			return (
 				<Section key={idx} className={`flex flex-col gap-10 mt-16 px-0 [&_a]:underline [&_a]:text-theme-primary [&_a]:hover:text-theme-dark ${reverse ? "md:flex-row-reverse" : "md:flex-row"} md:px-(--section-px) md:items-center`}>
 					{images.length !== 0 &&
-						<ScrollFade className={`shadow-xl overflow-hidden md:rounded-3xl ${description ? "flex-1" : "bg-white md:w-full md:p-[5%]"}`}><Swiper
+						<ScrollFade className={`shadow-xl overflow-hidden md:rounded-3xl ${descriptions ? "flex-1" : "bg-white md:w-full md:p-[5%]"}`}><Swiper
 							effect="slide"
 							items={images}
 							render={img => <Img {...img} className="min-h-full min-w-full md:border-1 md:border-theme-text-dark-sub/25"/>}
@@ -133,9 +143,9 @@ export default function Project({
 							loop={true}
 						/></ScrollFade>
 					}
-					{description &&
+					{descriptions &&
 						<ScrollFade className={`flex-1 flex flex-col gap-6 mx-auto text-center px-(--section-px) leading-7 ${reverse ? "md:text-right" : "md:text-left"}`}>
-							{description.map((x, i) => {
+							{descriptions.map((x, i) => {
 								const Elem = typeof x === "string" ? "p" : "div";
 								return <Elem
 									key={i}

@@ -1,3 +1,6 @@
+import { title, description, image, card, keywords } from "./SEO";
+
+export const SEO = { title, description, image, card, keywords };
 export { default as avatar } from "./avatar.png";
 
 export { default as nav } from "./nav";

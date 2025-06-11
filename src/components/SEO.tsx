@@ -1,16 +1,12 @@
 import { Path, useLocation } from "react-router";
 import { Helmet } from "react-helmet-async";
 
+import { SEO as items } from "../items";
+
 
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const SITE_TITLE = import.meta.env.VITE_SITE_TITLE;
-
-const defaultKeywords = [
-	"KIM JOON HEE", "kimzuni", "jh1950", "김준희",
-	"Full-Stack Developer", "풀스택 개발자",
-	"Web Portfolio", "웹 포트폴리오",
-];
 
 export interface SEOProps {
 	title?: string;
@@ -22,18 +18,18 @@ export interface SEOProps {
 }
 
 export default function SEO({
-	title="웹 포트폴리오",
-	description="보안까지 더하는 풀스택 개발자 김준희의 웹 포트폴리오입니다.",
+	title=items.title,
+	description=items.description,
 	keywords=[],
 	url={},
-	card="summary_large_image",
-	image="/meta-image.png",
+	image=items.image,
+	card=items.card,
 }: SEOProps) {
 	const SITE_NAME = "KIM JOON HEE's Web Portfolio";
 	const { pathname } = useLocation();
 	const pageURL = `${BASE_URL}${url.pathname ?? pathname}${url.search ?? ""}${url.hash ?? ""}`;
 	title = `${SITE_TITLE} | ${title}`;
-	keywords = [...new Set([...defaultKeywords].concat(Array.isArray(keywords) ? keywords : keywords.split(",").map(x => x.trim()).filter(Boolean)))];
+	keywords = [...new Set([...items.keywords].concat(Array.isArray(keywords) ? keywords : keywords.split(",").map(x => x.trim()).filter(Boolean)))];
 
 	return (
 		<Helmet>

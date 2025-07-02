@@ -12,7 +12,7 @@ const item: Item = {
 	skills: [
 		{ label: "Vite", color: "646CFF", },
 		{ label: "React", color: "58c4dc" },
-		{ label: "Tailwindcss", color: "38bdf8" },
+		{ label: "TailwindCSS", color: "38bdf8" },
 		{ label: "TypeScript", color: "3178C6" },
 	],
 	badges: {

@@ -60,7 +60,7 @@ const items: SkillsItem[] = [
 				level: "medium",
 			},
 			{
-				label: "Tailwindcss",
+				label: "TailwindCSS",
 				level: "medium",
 			},
 			{

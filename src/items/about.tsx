@@ -6,7 +6,7 @@ const date = new Date();
 const birthString = ["1999", "06", "23"];
 const birthNumber = birthString.map(x => Number(x));
 const age1 = date.getFullYear() - birthNumber[0] + 1;
-const age2 = age1 - (date.getMonth()+1 < birthNumber[1] || (date.getMonth()+1 == birthNumber[1] && date.getDate() < birthNumber[2]) ? 1 : 0);
+const age2 = age1 - 1 - (date.getMonth()+1 < birthNumber[1] || (date.getMonth()+1 == birthNumber[1] && date.getDate() < birthNumber[2]) ? 1 : 0);
 
 const items: AboutItem[] = [
 	{

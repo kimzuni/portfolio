@@ -137,7 +137,6 @@ export default function Project({
 							items={images}
 							render={img => <Img {...img} className="min-h-full min-w-full md:border-1 md:border-theme-text-dark-sub/25"/>}
 							navigation={true}
-							loop={true}
 						/></ScrollFade>
 					}
 					{descriptions &&

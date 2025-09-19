@@ -92,6 +92,11 @@ const items: SkillsItem[] = [
 				label: "Bun",
 				level: "medium",
 			},
+			{
+				label: "GitHub Actions",
+				icon: "githubactions",
+				level: "medium",
+			},
 		],
 	},
 ];

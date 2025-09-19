@@ -20,7 +20,7 @@ export default function Footer({
 			{...props}
 		>
 			<Socials items={socials}/>
-			<span className="leading-16 font-semibold text-sm text-theme-text-dark-sub">{children}</span>
+			<span className="leading-16 font-semibold text-sm text-theme-text-dark-sub/85">{children}</span>
 		</footer>
 	);
 }

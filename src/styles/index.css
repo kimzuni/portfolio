@@ -12,9 +12,9 @@
 	--color-theme-light: oklch(0.88 0.1254 233.02);
 
 	--color-theme-text-light: var(--color-neutral-200);
-	--color-theme-text-light-sub: var(--color-neutral-500);
+	--color-theme-text-light-sub: var(--color-neutral-400);
 	--color-theme-text-dark: var(--color-neutral-800);
-	--color-theme-text-dark-sub: var(--color-neutral-500);
+	--color-theme-text-dark-sub: var(--color-neutral-600);
 
 	--color-theme-bg-light: var(--color-neutral-100);
 	--color-theme-bg-light-sub: var(--color-neutral-200);

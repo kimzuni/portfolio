@@ -10,6 +10,7 @@ const item: Item = {
 	date: [new Date("2024-03-24")],
 	categories: ["Docker"],
 	skills: [
+		{ label: "GitHub_Actions", color: "2088FF", logo: "github-actions" },
 		{ label: "Docker", color: "1D63ED" },
 		{ label: "Bash", color: "4EAA25", logo: "gnubash" },
 		{ label: "Discord_Webhook", color: "5865F2", logo: "discord" },
@@ -27,7 +28,7 @@ const item: Item = {
 			},
 			{
 				service: "github",
-				badge: "lastCommit",
+				badge: "stars",
 				link: true,
 			},
 			{
@@ -35,6 +36,10 @@ const item: Item = {
 				badge: "pulls",
 				logo: "docker",
 				link: true,
+			},
+			{
+				service: "github",
+				badge: "lastCommit",
 			},
 		],
 	},
@@ -47,7 +52,9 @@ const item: Item = {
 				},
 			],
 			descriptions: [
-				"Steam 게임 Palworld용 도커 이미지 소스코드를 Longvinter 게임에 맞게 수정하여 배포하였습니다. 기존 이미지와 마찬가지로 AMD64 및 ARM64 아키텍처를 모두 지원하며, Palworld 관련 코드는 제외하고 Longvinter 전용 코드를 추가하여 완벽한 호환성을 제공합니다.",
+				"Steam 게임인 Palworld용 도커 이미지 소스코드를 Longvinter에 맞게 수정하여 배포했습니다.",
+				"기존 이미지와 마찬가지로 AMD64 및 ARM64 아키텍처를 모두 지원하며, Palworld 관련 기능은 제외하고 Longvinter에 필요한 기능을 구현하여 완벽한 호환성을 제공합니다.",
+				"CVE 등 취약점을 고려하여 보안을 강화했으며, GitHub Actions를 활용해 빌드 및 배포를 자동화했습니다.",
 			],
 		},
 	],

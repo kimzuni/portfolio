@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 import { shieldLinkURLs, ShieldLinkURL } from "../../common";
-import { SEO, ScrollFade, Shield, Img, Swiper, Progressbar, Modal, Button } from "../../components";
-import type { ImgProps, ShieldProps, CustomBadgeProps, BadgeProps, WorkflowBadgeProps, TagBadgeProps, BadgeOptions, BadgeLinkProps, ProgressbarOptions } from "../../components";
+import { SEO, ScrollFade, Shield, Media, Swiper, Progressbar, Modal, Button } from "../../components";
+import type { MediaProps, ShieldProps, CustomBadgeProps, BadgeProps, WorkflowBadgeProps, TagBadgeProps, BadgeOptions, BadgeLinkProps, ProgressbarOptions } from "../../components";
 
 import Section from "./Section";
 
@@ -41,7 +41,7 @@ export interface ProjectProps {
 	badges?: BadgeOptions1 | BadgeOptions2;
 	sections?: Array<{
 		reverse?: boolean;
-		images?: Array<ImgProps>;
+		media?: Array<MediaProps<"image"> | MediaProps<"video">>;
 		descriptions?: React.ReactNode[];
 	}>;
 }
@@ -126,16 +126,16 @@ export default function Project({
 			</ScrollFade>}
 		</Section>
 
-		{sections.map(({ images=[], descriptions, reverse }, idx) => {
+		{sections.map(({ media=[], descriptions, reverse }, idx) => {
 			reverse = reverse || (idx & 1) === 1;
 
 			return (
 				<Section key={idx} className={`flex flex-col gap-10 mt-16 px-0 [&_a]:underline [&_a]:text-theme-primary [&_a]:hover:text-theme-dark ${reverse ? "md:flex-row-reverse" : "md:flex-row"} md:px-(--section-px) md:items-center`}>
-					{images.length !== 0 &&
+					{media.length !== 0 &&
 						<ScrollFade className={`shadow-xl overflow-hidden md:rounded-3xl ${descriptions ? "flex-1" : "bg-white md:w-full md:p-[5%]"}`}><Swiper
 							effect="slide"
-							items={images}
-							render={img => <Img {...img} className="min-h-full min-w-full md:border-1 md:border-theme-text-dark-sub/25"/>}
+							items={media}
+							render={mediaProps => <Media {...mediaProps} className="min-h-full min-w-full md:border-1 md:border-theme-text-dark-sub/25"/>}
 							navigation={true}
 						/></ScrollFade>
 					}

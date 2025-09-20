@@ -39,7 +39,7 @@ export default function Projects({
 					<ProjectBox
 						id={id}
 						title={item.title}
-						cover={item.cover ?? item.sections?.[0].images?.[0].src}
+						cover={item.cover ?? item.sections?.[0].media?.[0].src}
 						className={`
 							h-96! scale-100!
 							[&>*]:opacity-100!

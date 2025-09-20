@@ -1,4 +1,4 @@
-import { ScrollFade, Img } from "../../components";
+import { ScrollFade, Media } from "../../components";
 import { useIsInViewport } from "../../hooks";
 
 import Section, { SectionProps } from "./Section";
@@ -43,7 +43,7 @@ export const Card = ({
 					}[level]}
 				`.replace(/\s+/g, " ").trim()}
 			/>
-			<Img className="size-full" alt={label} aria-label={`lavel: ${level}`} src={`https://skillicons.dev/icons?i=${icon}`}/>
+			<Media className="size-full" alt={label} aria-label={`lavel: ${level}`} src={`https://skillicons.dev/icons?i=${icon}`}/>
 			<p className="flex justify-center">{label}</p>
 		</div>
 	);

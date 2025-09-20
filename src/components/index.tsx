@@ -1,5 +1,5 @@
 export { default as SEO } from "./SEO";
-export { default as Img } from "./Img";
+export { default as Media } from "./Media";
 export { default as Icons } from "./icons";
 export { default as Link } from "./Link";
 export { default as UList } from "./UList";
@@ -14,7 +14,7 @@ export { default as Swiper } from "./Swiper";
 export { default as Shield } from "./Shield";
 
 export type * from "./SEO";
-export type * from "./Img";
+export type * from "./Media";
 export type * from "./icons";
 export type * from "./Link";
 export type * from "./UList";

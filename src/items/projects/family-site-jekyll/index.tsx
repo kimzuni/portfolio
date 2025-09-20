@@ -37,10 +37,12 @@ const item: Item = {
 	},
 	sections: [
 		{
-			images: [
+			media: [
 				{
 					src: home,
 					alt: "Main Site",
+					loading: "eager",
+					fetchPriority: "high",
 				},
 				{
 					src: blog,
@@ -53,7 +55,7 @@ const item: Item = {
 			],
 		},
 		{
-			images: [
+			media: [
 				{
 					src: mail,
 					alt: "mail",

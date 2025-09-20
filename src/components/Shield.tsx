@@ -1,7 +1,7 @@
 import { Icons } from "../components";
 import { shieldLinkURLs } from "../common";
 
-import Img, { ImgProps } from "./Img";
+import Media, { ImageProps } from "./Media";
 import Link from "./Link";
 
 
@@ -102,7 +102,7 @@ export default function Shield({
 	loading="eager",
 	...props
 }: {
-	loading?: ImgProps["loading"];
+	loading?: ImageProps["loading"];
 } & ShieldProps) {
 	const path =
 		props.service === "badge"
@@ -136,7 +136,7 @@ export default function Shield({
 		.join("&")
 	;
 
-	const img = <Img
+	const img = <Media
 		loading={loading}
 		alt={`shields.io badge`}
 		aria-label={`${props.service !== "badge" ? props.service : "custom"} badge - ${props.badge}`}

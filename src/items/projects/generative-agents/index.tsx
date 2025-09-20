@@ -63,10 +63,12 @@ const item: Item = {
 	},
 	sections: [
 		{
-			images: [
+			media: [
 				{
 					src: n25,
 					alt: "Hacker Ville",
+					loading: "eager",
+					fetchPriority: "high",
 				},
 				{
 					src: dashboard,
@@ -79,7 +81,7 @@ const item: Item = {
 			],
 		},
 		{
-			images: [
+			media: [
 				{
 					src: forkComparison,
 					alt: "comparison the fork",
@@ -95,7 +97,7 @@ const item: Item = {
 			],
 		},
 		{
-			images: [
+			media: [
 				{
 					src: play,
 					alt: "simulation preview",

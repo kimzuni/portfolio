@@ -45,10 +45,12 @@ const item: Item = {
 	},
 	sections: [
 		{
-			images: [
+			media: [
 				{
 					src: header,
 					alt: "Longvinter 메인 헤더 = 출처: https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1635450/header.jpg",
+					loading: "eager",
+					fetchPriority: "high",
 				},
 			],
 			descriptions: [

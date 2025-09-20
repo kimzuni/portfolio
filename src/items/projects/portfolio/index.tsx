@@ -33,10 +33,12 @@ const item: Item = {
 	},
 	sections: [
 		{
-			images: [
+			media: [
 				{
 					src: intro,
 					alt: "home intro",
+					loading: "eager",
+					fetchPriority: "high",
 				},
 			],
 			descriptions: [

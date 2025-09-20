@@ -1,4 +1,4 @@
-import { Img, ImgProps, ScrollFade, Swiper } from "../../components";
+import { Media, ImageProps, ScrollFade, Swiper } from "../../components";
 
 import Section, { SectionProps } from "./Section";
 
@@ -14,7 +14,7 @@ export interface AboutItem {
 
 export interface AboutProps extends SectionProps {
 	items: AboutItem[];
-	avatar?: ImgProps["src"];
+	avatar?: ImageProps["src"];
 }
 
 export default function About({
@@ -41,7 +41,7 @@ export default function About({
 						md:rounded-r-4xl
 					`.replace(/\s+/g, " ").trim()}
 				>
-					<Img
+					<Media
 						src={avatar}
 						alt="profile image"
 						className="md:min-w-80 md:max-w-[35vw] md:max-h-80 md:p-[10%] md:rounded-none"

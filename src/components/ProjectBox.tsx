@@ -1,4 +1,4 @@
-import Img, { ImgProps } from "./Img";
+import Media, { ImageProps } from "./Media";
 import Link from "./Link";
 
 
@@ -6,7 +6,7 @@ import Link from "./Link";
 export interface ProjectBoxProps {
 	id: string;
 	title: string;
-	cover?: ImgProps["src"];
+	cover?: ImageProps["src"];
 	className?: string;
 }
 
@@ -27,7 +27,7 @@ export default function ProjectBox({
 				${className}
 			`.replace(/\s+/g, " ").trim()}
 		>
-			<Img
+			<Media
 				className="object-cover object-center h-full w-full"
 				src={cover}
 				alt={`project-${title}-thumbnail`}

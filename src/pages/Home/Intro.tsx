@@ -58,6 +58,10 @@ export default function Intro({
 					className="pt-4 text-xl text-center leading-8"
 					children={item.description}
 				/>
+				<p
+					className="pt-4 text-base text-center text-theme-text-light-sub/85 font-semibold"
+					children={`Last Updated: ${import.meta.env.VITE_RELEASE_VERSION}`}
+				/>
 			</ScrollFade>
 			<ScrollFade
 				ref={ref}

@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build && bun scripts/prepare-depoly.ts",
+    "dev": "bunx --bun vite",
+    "build": "tsc -b && bunx --bun vite build && bun scripts/prepare-depoly.ts",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "bunx --bun vite preview"
   },
   "dependencies": {
     "@react-icons/all-files": "^4.1.0",

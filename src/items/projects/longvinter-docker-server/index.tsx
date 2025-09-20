@@ -56,7 +56,7 @@ const item: Item = {
 			descriptions: [
 				"Steam 게임인 Palworld용 도커 이미지 소스코드를 Longvinter에 맞게 수정하여 배포했습니다.",
 				"기존 이미지와 마찬가지로 AMD64 및 ARM64 아키텍처를 모두 지원하며, Palworld 관련 기능은 제외하고 Longvinter에 필요한 기능을 구현하여 완벽한 호환성을 제공합니다.",
-				"CVE 등 취약점을 고려하여 보안을 강화했으며, GitHub Actions를 활용해 빌드 및 배포를 자동화했습니다.",
+				"GitHub Actions로 빌드 및 배포를 자동화하고, Trivy로 컨테이너 취약점을 스캔해 그 결과를 Security 탭에 업로드합니다. 발견된 취약점은 가능한 한 패치한 후 배포합니다.",
 			],
 		},
 	],

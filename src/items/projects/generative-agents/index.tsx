@@ -2,7 +2,7 @@ import type { Item } from "../";
 
 import n25 from "./n25.png";
 import dashboard from "./dashboard.png";
-import forkComparison from "./fork-comparison.gif";
+import forkComparison from "./fork-comparison.mp4";
 import api from "./docker-api.gif";
 import play from "./play.gif";
 import modal from "./modal.png";
@@ -83,8 +83,8 @@ const item: Item = {
 		{
 			media: [
 				{
+					type: "video",
 					src: forkComparison,
-					alt: "comparison the fork",
 				},
 				{
 					src: api,

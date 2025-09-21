@@ -44,7 +44,7 @@ export const Card = ({
 				`.replace(/\s+/g, " ").trim()}
 			/>
 			<Media className="size-full" alt={label} aria-label={`lavel: ${level}`} src={`https://skillicons.dev/icons?i=${icon}`}/>
-			<p className="flex justify-center">{label}</p>
+			<p className="flex justify-center leading-4.25 py-1">{label}</p>
 		</div>
 	);
 };

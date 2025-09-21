@@ -60,7 +60,7 @@ export default function Intro({
 				/>
 				<p
 					className="pt-4 text-base text-center text-theme-text-light-sub/85 font-semibold"
-					children={`Last Updated: ${import.meta.env.VITE_RELEASE_VERSION.slice(0, 10)}`}
+					children={`Last Updated: ${import.meta.env.VITE_RELEASE_VERSION?.split("-")[0]}`}
 				/>
 			</ScrollFade>
 			<ScrollFade

@@ -41,7 +41,7 @@ export default function Projects({
 						title={item.title}
 						cover={item.cover ?? item.sections?.[0].media?.[0].src}
 						className={`
-							h-96! scale-100!
+							mx-10 h-96! scale-100!
 							[&>*]:opacity-100!
 							hover:[&_*]:text-theme-primary
 							hover:[&_*]:textBorder-transparent

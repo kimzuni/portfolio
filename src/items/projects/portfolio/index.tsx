@@ -10,11 +10,12 @@ const item: Item = {
 	date: [new Date("2025-05-08")],
 	categories: ["Frontend"],
 	skills: [
+		{ label: "Bun", color: "000000", },
 		{ label: "GitHub_Actions", color: "2088FF", logo: "github-actions" },
-		{ label: "Vite", color: "646CFF", },
 		{ label: "React", color: "58c4dc" },
 		{ label: "TailwindCSS", color: "38bdf8" },
 		{ label: "TypeScript", color: "3178C6" },
+		{ label: "Vite", color: "646CFF", },
 	],
 	badges: {
 		user: "kimzuni",

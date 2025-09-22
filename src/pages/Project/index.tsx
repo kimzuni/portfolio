@@ -32,6 +32,7 @@ export interface ProjectProps {
 	title: string;
 	description?: string;
 	date: [Date] | [Date, Date];
+	team?: boolean | number;
 	cover?: string;
 	contribution?: Array<{
 		label: string;
@@ -55,6 +56,7 @@ const dateToString = (date?: Date) => {
 export default function Project({
 	title,
 	description,
+	team,
 	date,
 	cover,
 	contribution,
@@ -79,10 +81,15 @@ export default function Project({
 			<ScrollFade>
 				<h2 className="title">{title}</h2>
 			</ScrollFade>
-			<ScrollFade className="flex justify-center flex-wrap gap-2 mb-8">
-				<span>{dateToString(date[0])}</span>
-				<span>~</span>
-				<span className="empty:hidden">{dateToString(date[1])}</span>
+			<ScrollFade className="flex flex-col gap-4 mb-8">
+				<div className="flex justify-center flex-wrap gap-2">
+					<span>{dateToString(date[0])}</span>
+					<span>~</span>
+					<span className="empty:hidden">{dateToString(date[1])}</span>
+				</div>
+				<div className="text-center">
+					<span>{team === true ? "팀" : typeof team === "number" ? `${team}인` : "개인"} 프로젝트</span>
+				</div>
 			</ScrollFade>
 			{(badges || skills) &&
 				<div className="my-8 flex flex-col gap-4">

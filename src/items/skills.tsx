@@ -7,32 +7,32 @@ const items: SkillsItem[] = [
 		title: "Languages",
 		cards: [
 			{
+				label: "Bash",
+				level: "expert",
+			},
+			{
 				label: "HTML",
-				level: "high",
+				level: "expert",
 			},
 			{
 				label: "CSS",
-				level: "high",
+				level: "expert",
 			},
 			{
 				label: "JavaScript",
-				level: "high",
-			},
-			{
-				label: "Python",
-				level: "high",
-			},
-			{
-				label: "Bash",
-				level: "high",
+				level: "advanced",
 			},
 			{
 				label: "TypeScript",
-				level: "medium",
+				level: "advanced",
+			},
+			{
+				label: "Python",
+				level: "advanced",
 			},
 			{
 				label: "C",
-				level: "low",
+				level: "junior",
 			},
 		],
 	},
@@ -40,32 +40,32 @@ const items: SkillsItem[] = [
 		title: "Frameworks/Libraries",
 		cards: [
 			{
+				label: "Elysia",
+				level: "expert",
+			},
+			{
 				label: "Django",
-				level: "high",
+				level: "expert",
 			},
 			{
 				label: "Express",
-				level: "high",
-			},
-			{
-				label: "Elysia",
-				level: "medium",
-			},
-			{
-				label: "Flask",
-				level: "medium",
+				level: "advanced",
 			},
 			{
 				label: "React",
-				level: "medium",
+				level: "advanced",
 			},
 			{
 				label: "TailwindCSS",
-				level: "medium",
+				level: "intermediate",
 			},
 			{
 				label: "Bootstrap",
-				level: "medium",
+				level: "intermediate",
+			},
+			{
+				label: "Flask",
+				level: "intermediate",
 			},
 		],
 	},
@@ -74,28 +74,28 @@ const items: SkillsItem[] = [
 		cards: [
 			{
 				label: "Debian",
-				level: "high",
+				level: "advanced",
 			},
 			{
 				label: "Git",
-				level: "medium",
+				level: "advanced",
 			},
 			{
 				label: "Docker",
-				level: "medium",
-			},
-			{
-				label: "Node.js",
-				level: "medium",
+				level: "advanced",
 			},
 			{
 				label: "Bun",
-				level: "medium",
+				level: "advanced",
+			},
+			{
+				label: "Node.js",
+				level: "advanced",
 			},
 			{
 				label: "GitHub Actions",
 				icon: "githubactions",
-				level: "medium",
+				level: "intermediate",
 			},
 		],
 	},

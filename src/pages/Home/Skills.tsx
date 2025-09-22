@@ -8,7 +8,7 @@ import Section, { SectionProps } from "./Section";
 export interface Card {
 	label: string;
 	icon?: string;
-	level: "high" | "medium" | "low";
+	level: "expert" | "advanced" | "intermediate" | "junior" | "beginner";
 }
 
 export interface SkillsItem {
@@ -37,9 +37,11 @@ export const Card = ({
 					text-sm capitalize textBorder-theme-text-dark
 					before:content-[attr(data-level)]
 					${{
-						high: "text-green-500",
-						medium: "text-yellow-300",
-						low: "text-white",
+						expert: "text-red-600",
+						advanced: "text-orange-400",
+						intermediate: "text-blue-500",
+						junior: "text-yellow-300",
+						beginner: "text-white",
 					}[level]}
 				`.replace(/\s+/g, " ").trim()}
 			/>

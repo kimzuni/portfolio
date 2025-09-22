@@ -168,7 +168,7 @@ export default function Projects() {
 							key={id}
 							id={id}
 							title={item.title}
-							cover={item.cover ?? item.sections?.[0]?.media?.[0].src}
+							cover={item.cover ?? item.sections?.find(x => x.media)?.media?.[0].src}
 						/>
 					)}
 				</div>

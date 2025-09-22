@@ -84,7 +84,7 @@ export default function Project({
 				<span>~</span>
 				<span className="empty:hidden">{dateToString(date[1])}</span>
 			</ScrollFade>
-			{badges && skills &&
+			{(badges || skills) &&
 				<div className="my-8 flex flex-col gap-4">
 					{badges && <ScrollFade className="flex flex-col gap-2">
 						{badges.items.map((box, idx) => <div key={idx} className="flex justify-center flex-wrap gap-2">
@@ -127,7 +127,7 @@ export default function Project({
 		</Section>
 
 		{sections.map(({ media=[], descriptions, reverse }, idx) => {
-			reverse = reverse || (idx & 1) === 1;
+			reverse = reverse !== undefined ? reverse : (idx & 1) === 1;
 
 			return (
 				<Section key={idx} className={`flex flex-col gap-10 mt-16 px-0 [&_a]:underline [&_a]:text-theme-primary [&_a]:hover:text-theme-dark ${reverse ? "md:flex-row-reverse" : "md:flex-row"} md:px-(--section-px) md:items-center`}>

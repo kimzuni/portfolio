@@ -146,7 +146,7 @@ export default function Shield({
 
 	return (<>
 		{!props.link ? img : <Link
-			className="inline-flex items-center gap-0.25 group"
+			className="inline-flex items-center gap-0.25 group text-theme-text-dark! hovero:text-theme-primary!"
 			to={props.service === "badge" ? props.link : props.link !== true ? props.link : `${shieldLinkURLs[props.service]}/${props.user}/${props.repo}`}
 			children={<>
 				{props.linkIcon !== false && <Icons.Link className="p-0.5"/>}

@@ -1,0 +1,39 @@
+{
+	"name": "portfolio",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "bun --bun next dev",
+		"build": "bun --bun next build",
+		"start": "bun --bun serve out",
+		"lint": "bun lint:eslint",
+		"lint:eslint": "bun --bun eslint",
+		"shadcn:add": "bunx --bun shadcn@latest add"
+	},
+	"dependencies": {
+		"next": "16.1.4",
+		"react": "19.2.3",
+		"react-dom": "19.2.3"
+	},
+	"devDependencies": {
+		"@stylistic/eslint-plugin": "^5.7.1",
+		"@tailwindcss/postcss": "^4.1.18",
+		"@types/node": "^25.0.10",
+		"@types/react": "^19.2.9",
+		"@types/react-dom": "^19.2.3",
+		"babel-plugin-react-compiler": "1.0.0",
+		"eslint": "^9.39.2",
+		"eslint-config-next": "16.1.4",
+		"serve": "^14.2.5",
+		"tailwindcss": "^4.1.18",
+		"typescript": "^5.9.3"
+	},
+	"ignoreScripts": [
+		"sharp",
+		"unrs-resolver"
+	],
+	"trustedDependencies": [
+		"sharp",
+		"unrs-resolver"
+	]
+}

@@ -1,7 +1,9 @@
 import {
 	type LucideProps,
+	ArrowDown,
 	Check,
 	ChevronRight,
+	ChevronsDown,
 	Moon,
 	Sun,
 } from "lucide-react";
@@ -9,8 +11,10 @@ import {
 
 
 const lucideIcons = {
+	ArrowDown,
 	Check,
 	ChevronRight,
+	ChevronsDown,
 	Moon,
 	Sun,
 };

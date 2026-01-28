@@ -12,3 +12,7 @@ export const formatDate = (date: Date) => date.toLocaleDateString("ko", {
 	month: "numeric",
 	day: "numeric",
 });
+
+export const compareFn = (a: string, b: string) => a
+	.toLowerCase()
+	.localeCompare(b.toLowerCase());

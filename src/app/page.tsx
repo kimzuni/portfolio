@@ -5,6 +5,7 @@ import * as contents from "@/contents/home";
 
 import { Hero } from "./_components/page/hero";
 import { About } from "./_components/page/about";
+import { Skills } from "./_components/page/skills";
 
 
 
@@ -33,6 +34,12 @@ export default function Home() {
 				id="about"
 				className="container"
 				{...contents.about}
+			/>
+
+			<Skills
+				id="skills"
+				className="container"
+				{...contents.skills}
 			/>
 		</>
 	);

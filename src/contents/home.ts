@@ -1,7 +1,9 @@
 import type { HomeHeroData } from "@/app/_components/page/hero";
 import type { HomeAboutData } from "@/app/_components/page/about";
+import type { HomeSkillsData } from "@/app/_components/page/skills";
 
 import { about as aboutContent } from "./about";
+import { skills as skillsContent } from "./skills";
 
 
 
@@ -42,4 +44,12 @@ export const about: HomeAboutData = {
 		iconTranslateX: 5,
 		iconPosition: "right",
 	},
+};
+
+
+
+export const skills: HomeSkillsData = {
+	heading: "What I Use",
+	message: "프로젝트를 진행할 때 주로 사용하는 기술들이에요!",
+	items: skillsContent,
 };

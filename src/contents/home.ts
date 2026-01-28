@@ -1,4 +1,7 @@
 import type { HomeHeroData } from "@/app/_components/page/hero";
+import type { HomeAboutData } from "@/app/_components/page/about";
+
+import { about as aboutContent } from "./about";
 
 
 
@@ -20,4 +23,23 @@ export const hero: HomeHeroData = {
 			iconPosition: "right",
 		},
 	],
+};
+
+
+
+export const about: HomeAboutData = {
+	message: "안녕하세요! 아, 제가 누구냐구요?",
+	heading: aboutContent.introduction.heading,
+	philosophy: aboutContent.philosophy,
+	certificates: aboutContent.certificates.length,
+	awards: aboutContent.awards.length,
+	button: {
+		variant: "default",
+		label: "More about me",
+		href: "/about",
+		size: "lg",
+		icon: "ArrowRight",
+		iconTranslateX: 5,
+		iconPosition: "right",
+	},
 };

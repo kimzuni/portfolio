@@ -4,6 +4,7 @@ import { Icon } from "@/components/icon";
 import * as contents from "@/contents/home";
 
 import { Hero } from "./_components/page/hero";
+import { About } from "./_components/page/about";
 
 
 
@@ -28,7 +29,11 @@ export default function Home() {
 				</div>
 			</Hero>
 
-			<section id="about">About</section>
+			<About
+				id="about"
+				className="container"
+				{...contents.about}
+			/>
 		</>
 	);
 }

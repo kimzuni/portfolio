@@ -9,4 +9,9 @@
 .container {
 	@apply mx-auto w-full;
 	@apply p-6 md:p-12 xl:p-16;
+	@apply pb-20;
+} .title {
+	@apply text-3xl font-bold tracking-tight;
+} .message {
+	@apply text-lg text-muted-foreground;
 }

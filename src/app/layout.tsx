@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Noto_Sans_Mono } from "next/font/google";
 import localFont from "next/font/local";
+import { ThemeProvider } from "next-themes";
+
+import { ModeToggle } from "@/components/mode-toggle";
 
 import "./styles/index.css";
 
@@ -56,25 +59,36 @@ export default function RootLayout({
 		<html
 			lang="ko"
 			data-scroll-behavior="smooth"
+			suppressHydrationWarning
 		>
 			<body
 				className={`${pretendard.variable} ${notoSansMono.variable} font-sans antialiased`}
 			>
-				<header>
-					Header
-				</header>
-				<hr/>
-				<nav>
-					Nav
-				</nav>
-				<hr/>
-				<main>
-					{children}
-				</main>
-				<hr/>
-				<footer>
-					Footer
-				</footer>
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="system"
+					enableSystem
+					enableColorScheme
+					disableTransitionOnChange={false}
+				>
+					<header>
+						Header
+					</header>
+					<hr/>
+					<nav>
+						Nav
+					</nav>
+					<hr/>
+					<ModeToggle suppressHydrationWarning/>
+					<hr/>
+					<main>
+						{children}
+					</main>
+					<hr/>
+					<footer>
+						Footer
+					</footer>
+				</ThemeProvider>
 			</body>
 		</html>
 	);

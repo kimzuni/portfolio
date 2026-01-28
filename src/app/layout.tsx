@@ -53,11 +53,29 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="ko">
+		<html
+			lang="ko"
+			data-scroll-behavior="smooth"
+		>
 			<body
 				className={`${pretendard.variable} ${notoSansMono.variable} font-sans antialiased`}
-				children={children}
-			/>
+			>
+				<header>
+					Header
+				</header>
+				<hr/>
+				<nav>
+					Nav
+				</nav>
+				<hr/>
+				<main>
+					{children}
+				</main>
+				<hr/>
+				<footer>
+					Footer
+				</footer>
+			</body>
 		</html>
 	);
 }

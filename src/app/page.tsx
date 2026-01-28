@@ -1,7 +1,15 @@
+import { Link } from "@/components/link";
+
+
+
 export default function Home() {
 	return (
-		<div>
-			Main
-		</div>
+		<>
+			Main page
+			<br/>
+			<Link href="/about">About</Link>
+			<br/>
+			<Link href="/projects">Projects</Link>
+		</>
 	);
 }

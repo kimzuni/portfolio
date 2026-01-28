@@ -10,6 +10,57 @@ export default function Home() {
 			<Link href="/about">About</Link>
 			<br/>
 			<Link href="/projects">Projects</Link>
+			<br/>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
+			<p>xxxxx</p>
 		</>
 	);
 }

@@ -7,15 +7,18 @@ export type OGImage = Exclude<Exclude<Metadata["openGraph"], null | undefined>["
 
 export interface MetadataOptions {
 	title: string;
-	description: string;
+	description: string | string[];
 	cover?: StaticImageData | OGImage;
 }
 
 export function createMetadata({
 	title,
-	description,
 	...opts
 }: MetadataOptions): Metadata {
+	const description = Array.isArray(opts.description)
+		? opts.description.join("\n")
+		: opts.description;
+
 	const cover = typeof opts.cover === "object" && "src" in opts.cover
 		? opts.cover.src
 		: opts.cover;

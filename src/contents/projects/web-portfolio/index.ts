@@ -5,6 +5,7 @@ import hero from "./hero.png";
 
 
 export default {
+	pin: true,
 	cover: hero,
 	title: "Web Portfolio",
 	description: "개발자로서의 여정을 담은 개인 웹 포트폴리오입니다. 지금까지의 프로젝트와 기술 스택을 정리하고, 앞으로의 성장을 기록합니다.",

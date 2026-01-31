@@ -10,6 +10,7 @@ const forkComparison = "/videos/fork-comparison.mp4";
 
 
 export default {
+	pin: true,
 	cover: n25,
 	title: "LLM을 활용한 해킹 공격 및 방어 시뮬레이션 환경 구축",
 	description: [

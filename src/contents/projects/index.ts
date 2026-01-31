@@ -3,6 +3,7 @@ import path from "node:path";
 
 import type { ProjectMeta, ProjectsPageData } from "@/app/projects/client";
 import type { ProjectData } from "@/app/projects/[slug]/page";
+import type { HomeProjectsData } from "@/app/_components/page/projects";
 
 
 
@@ -18,7 +19,7 @@ export const tags = [
 
 
 
-export interface ProjectContent extends Omit<ProjectData, "slug"> {
+export interface ProjectContent extends Omit<ProjectData & HomeProjectsData["items"][number], "slug"> {
 }
 
 

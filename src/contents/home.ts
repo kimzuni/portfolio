@@ -1,9 +1,11 @@
 import type { HomeHeroData } from "@/app/_components/page/hero";
 import type { HomeAboutData } from "@/app/_components/page/about";
 import type { HomeSkillsData } from "@/app/_components/page/skills";
+import type { HomeProjectsData } from "@/app/_components/page/projects";
 
 import { about as aboutContent } from "./about";
 import { skills as skillsContent } from "./skills";
+import { projects as projectItems } from "./projects";
 
 
 
@@ -52,4 +54,20 @@ export const skills: HomeSkillsData = {
 	heading: "What I Use",
 	message: "프로젝트를 진행할 때 주로 사용하는 기술들이에요!",
 	items: skillsContent,
+};
+
+
+
+export const projects: HomeProjectsData = {
+	heading: "What I Built",
+	message: "작지만 소중한 프로젝트들, 앞으로도 계속 채워집니다!",
+	linkButton: {
+		variant: "outline",
+		label: "More Projects",
+		size: "lg",
+		icon: "ArrowRight",
+		iconTranslateX: 5,
+		iconPosition: "right",
+	},
+	items: projectItems,
 };

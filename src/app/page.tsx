@@ -6,6 +6,7 @@ import * as contents from "@/contents/home";
 import { Hero } from "./_components/page/hero";
 import { About } from "./_components/page/about";
 import { Skills } from "./_components/page/skills";
+import { Projects } from "./_components/page/projects";
 
 
 
@@ -40,6 +41,12 @@ export default function Home() {
 				id="skills"
 				className="container"
 				{...contents.skills}
+			/>
+
+			<Projects
+				id="projects"
+				className="container"
+				{...contents.projects}
 			/>
 		</>
 	);

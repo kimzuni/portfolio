@@ -13,6 +13,9 @@ import { TagBadge, SkillBadge } from "../_components/badge";
 export interface ProjectBoxProps extends ProjectMeta {
 	maxSkills?: number;
 	className?: string;
+	badgeOnClick?: (key: "tag" | "skill", value: string) => unknown;
+	activeTags?: string[] | null;
+	activeSkills?: string[] | null;
 }
 
 export function ProjectBox({
@@ -26,6 +29,9 @@ export function ProjectBox({
 	team,
 	maxSkills = 5,
 	className,
+	badgeOnClick,
+	activeTags,
+	activeSkills,
 }: ProjectBoxProps) {
 	const href = `/projects/${slug}/`;
 	const avgContribution = !team
@@ -72,12 +78,22 @@ export function ProjectBox({
 					{tags.map(tag => <TagBadge
 						key={tag}
 						label={tag}
+						active={activeTags?.includes(tag)}
+						activeIcon={badgeOnClick ? "FunnelX" : undefined}
+						icon={badgeOnClick ? "FunnelPlus" : undefined}
+						href={!badgeOnClick ? `/projects/?tags=${tag}` : undefined}
+						onClick={!badgeOnClick ? undefined : () => badgeOnClick("tag", tag)}
 					/>)}
 				</div>
 				<div>
 					{skills.slice(0, maxSkills).map(skill => <SkillBadge
 						key={skill}
 						label={skill}
+						active={activeSkills?.includes(skill)}
+						activeIcon={badgeOnClick ? "FunnelX" : undefined}
+						icon={badgeOnClick ? "FunnelPlus" : undefined}
+						href={!badgeOnClick ? `/projects/?skills=${skill}` : undefined}
+						onClick={!badgeOnClick ? undefined : () => badgeOnClick("skill", skill)}
 					/>)}
 					{skills.length > maxSkills && <SkillBadge label={`+${skills.length - maxSkills}`}/>}
 				</div>

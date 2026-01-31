@@ -271,6 +271,7 @@ export default async function Project({ params }: Props) {
 					{tags.map(tag => <TagBadge
 						key={tag}
 						label={tag}
+						href={`/projects/?tags=${tag}`}
 					/>)}
 				</div>
 
@@ -278,6 +279,7 @@ export default async function Project({ params }: Props) {
 					{skills.map(skill => <SkillBadge
 						key={skill}
 						label={skill}
+						href={`/projects/?skills=${skill}`}
 					/>)}
 				</div>
 			</div>

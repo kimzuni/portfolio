@@ -1,29 +1,25 @@
 import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
+import { LinkBadge, type LinkBadgeProps } from "@/components/link-badge";
 
 
 
-type BadgeProps = React.ComponentProps<typeof Badge>;
-
-
-
-export interface TagBadgeProps extends Omit<BadgeProps, "variant" | "asChild" | "children"> {
-	label: string;
+export interface TagBadgeProps extends Omit<LinkBadgeProps, "variant"> {
 }
 
 export function TagBadge({
-	label,
+	icon = "Funnel",
 	className,
 	...props
 }: TagBadgeProps) {
 	return (
-		<Badge
+		<LinkBadge
+			icon={icon}
 			variant="default"
 			className={cn(
 				"bg-primary/10 text-primary font-mono",
+				(props.href || props.onClick) && "hover:text-background data-[active=true]:text-background",
 				className,
 			)}
-			children={label}
 			{...props}
 		/>
 	);
@@ -31,23 +27,22 @@ export function TagBadge({
 
 
 
-export interface SkillBadgeProps extends Omit<BadgeProps, "variant" | "asChild" | "children"> {
-	label: string;
+export interface SkillBadgeProps extends Omit<LinkBadgeProps, "variant"> {
 }
 
 export function SkillBadge({
-	label,
+	icon = "Funnel",
 	className,
 	...props
 }: SkillBadgeProps) {
 	return (
-		<Badge
+		<LinkBadge
+			icon={icon}
 			variant="secondary"
 			className={cn(
 				"font-mono",
 				className,
 			)}
-			children={label}
 			{...props}
 		/>
 	);

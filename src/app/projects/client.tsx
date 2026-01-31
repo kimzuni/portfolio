@@ -13,7 +13,7 @@ import { PageBadge } from "@/components/page-badge";
 import { LinkButton, type LinkButtonProps } from "@/components/link-button";
 import { ComboboxMultiple } from "@/components/combobox";
 import { Fade } from "@/components/fade";
-import { ProjectBox } from "./_components/project-box";
+import { ProjectBox, type ProjectBoxProps } from "./_components/project-box";
 
 import type { Skill } from "@/contents/skills";
 import type { Tag } from "@/contents/projects";
@@ -147,6 +147,15 @@ export default function Client({
 		});
 	}, [projects, matchAllTags, matchAllSkills, selectedYears, selectedTags, selectedSkills]);
 
+	const badgeOnClick: ProjectBoxProps["badgeOnClick"] = (_key, value) => {
+		const key = _key === "tag" ? "tags" : "skills";
+		const arr: string[] = (key === "tags" ? selectedTags : selectedSkills) ?? [];
+		const nextArr = arr.includes(value)
+			? arr.filter(x => x !== value)
+			: [...arr, value];
+		updateSearchParams(key, nextArr);
+	};
+
 	return (
 		<>
 			<section className="container space-y-12">
@@ -237,6 +246,9 @@ export default function Client({
 						<ProjectBox
 							{...project}
 							key={project.slug}
+							badgeOnClick={badgeOnClick}
+							activeTags={selectedTags}
+							activeSkills={selectedSkills}
 						/>
 					))}
 					{

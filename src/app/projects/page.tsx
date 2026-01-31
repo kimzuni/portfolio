@@ -1,33 +1,17 @@
 import { createMetadata } from "@/lib/seo";
-import { Link } from "@/components/link";
 
-import { projectsMeta } from "@/contents/projects";
+import { page } from "@/contents/projects";
 
+import Client from "./client";
 
 
 export const metadata = createMetadata({
-	title: "프로젝트 목록",
-	description: "Projects",
+	title: page.heading,
+	description: page.heading,
 });
 
 
 
 export default function Page() {
-	return (
-		<>
-			<p>Projects:</p>
-			<ul>
-				{
-					projectsMeta.map(({ slug, title }) => (
-						<li key={slug}>
-							<Link
-								href={`/projects/${slug}`}
-								children={title}
-							/>
-						</li>
-					))
-				}
-			</ul>
-		</>
-	);
+	return <Client {...page}/>;
 }

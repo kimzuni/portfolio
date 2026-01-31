@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import type { ProjectMeta, ProjectsPageData } from "@/app/projects/client";
 import type { ProjectData } from "@/app/projects/[slug]/page";
 
 
@@ -18,9 +19,6 @@ export const tags = [
 
 
 export interface ProjectContent extends Omit<ProjectData, "slug"> {
-}
-
-export interface ProjectMeta extends Pick<ProjectData, "slug" | "cover" | "title"> {
 }
 
 
@@ -58,4 +56,26 @@ export const projectsMeta = projects.map(x => ({
 	slug: x.slug,
 	cover: x.cover,
 	title: x.title,
+	description: x.description,
+	period: x.period,
+	tags: x.tags,
+	skills: x.skills,
+	team: x.team,
 } satisfies ProjectMeta as ProjectMeta));
+
+
+
+export const page: ProjectsPageData = {
+	label: "Projects",
+	heading: "프로젝트 목록",
+	resetButton: {
+		variant: "outline",
+		label: "필터 초기화",
+		size: "lg",
+		icon: "RotateCcw",
+		iconScale: 1.2,
+		iconRotate: -90,
+		iconPosition: "left",
+	},
+	projects,
+};

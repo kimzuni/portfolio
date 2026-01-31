@@ -19,8 +19,11 @@ export const tags = [
 
 
 
-export interface ProjectContent extends Omit<ProjectData & HomeProjectsData["items"][number], "slug"> {
-}
+export interface ProjectContent extends Omit<
+	& ProjectData
+	& HomeProjectsData["items"][number],
+	"slug"
+> {}
 
 
 

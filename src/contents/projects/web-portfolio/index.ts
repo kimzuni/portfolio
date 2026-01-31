@@ -20,6 +20,7 @@ export default {
 		"TypeScript",
 		"Tailwind CSS",
 		"shadcn/ui",
+		"Next.js",
 	],
 	shields: [
 		{
@@ -45,8 +46,8 @@ export default {
 						alt: "메인 페이지 hero 섹션 캡쳐",
 					},
 					lines: [[
-						"React와 TypeScript 기반으로 제작되었으며,",
-						"Bun 및 Vite의 빠른 빌드 환경과 shadcn/ui 및 Tailwind CSS를 활용하여 반응형 디자인을 적용했습니다.",
+						"Next.js 기반으로 제작되었으며, shadcn/ui와 Tailwind CSS를 활용하여 반응형 디자인을 적용했습니다.",
+						"Next.js의 정적 내보내기(Static Export) 기능을 활용하여 배포의 편의성을 높였습니다.",
 					]],
 				},
 			],

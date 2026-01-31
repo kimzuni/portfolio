@@ -7,6 +7,7 @@ import { Hero } from "./_components/page/hero";
 import { About } from "./_components/page/about";
 import { Skills } from "./_components/page/skills";
 import { Projects } from "./_components/page/projects";
+import { Contact } from "./_components/page/contact";
 
 
 
@@ -47,6 +48,12 @@ export default function Home() {
 				id="projects"
 				className="container"
 				{...contents.projects}
+			/>
+
+			<Contact
+				id="contact"
+				className="container"
+				{...contents.contact}
 			/>
 		</>
 	);

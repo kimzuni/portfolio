@@ -2,10 +2,12 @@ import type { HomeHeroData } from "@/app/_components/page/hero";
 import type { HomeAboutData } from "@/app/_components/page/about";
 import type { HomeSkillsData } from "@/app/_components/page/skills";
 import type { HomeProjectsData } from "@/app/_components/page/projects";
+import type { HomeContactData } from "@/app/_components/page/contact";
 
 import { about as aboutContent } from "./about";
 import { skills as skillsContent } from "./skills";
 import { projects as projectItems } from "./projects";
+import { contact as contactItems } from "./contact";
 
 
 
@@ -70,4 +72,13 @@ export const projects: HomeProjectsData = {
 		iconPosition: "right",
 	},
 	items: projectItems,
+};
+
+
+
+export const contact: HomeContactData = {
+	heading: "Get In Touch",
+	message: "제가 해야 할 일이 있나요? 언제든지 편하게 말씀해 주세요!",
+	iconSize: "lg",
+	items: contactItems,
 };

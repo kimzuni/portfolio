@@ -3,13 +3,18 @@ import type { ProjectContent } from "../";
 import overview from "./overview.png";
 import config from "./config.png";
 
+const vscode = "/videos/yamllint-js-vscode-preview.webm";
+
 
 
 export default {
 	pin: true,
 	cover: overview,
 	title: "yamllint-js",
-	description: "Python의 yamllint를 Node.js 환경에서 사용할 수 있도록 포팅하였습니다.",
+	description: [
+		"Python의 yamllint를 Node.js 환경에서 사용할 수 있도록 포팅하였습니다.",
+		"IDE에서 손쉽게 사용할 수 있도록 VSCode 확장으로도 배포하였습니다.",
+	],
 	period: [
 		new Date("2025-11-02"),
 	],
@@ -58,6 +63,10 @@ export default {
 			label: "NPM",
 			href: "https://www.npmjs.com/package/yamllint-js",
 		},
+		{
+			label: "VSCode Marketplace",
+			href: "https://marketplace.visualstudio.com/items?itemName=kimzuni.vscode-yamllint-js",
+		},
 	],
 	sections: [
 		{
@@ -83,6 +92,19 @@ export default {
 					lines: [[
 						"기존 yamllint 설정 파일을 그대로 사용할 수 있을 뿐만 아니라, 추가적으로 Node.js 환경에 최적화된 설정 방식을 지원합니다.",
 						"이를 통해 기존 yamllint 사용자는 물론, Node.js 기반 프로젝트 사용자 역시 쉽고 빠르게 YAML 린트 환경을 구성할 수 있도록 합니다.",
+					]],
+				},
+			],
+		},
+		{
+			blocks: [
+				{
+					media: {
+						type: "video",
+						src: vscode,
+					},
+					lines: [[
+						"VSCode 확장 사용 시, yamllint-js의 구성 파일을 그대로 사용할 수 있습니다.",
 					]],
 				},
 			],

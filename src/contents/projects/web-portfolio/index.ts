@@ -27,7 +27,8 @@ export default {
 			service: "github",
 			user: "kimzuni",
 			repo: "portfolio",
-			badge: "last-commit",
+			badge: "release",
+			label: "last release",
 		},
 	],
 	badges: [

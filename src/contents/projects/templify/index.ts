@@ -6,7 +6,6 @@ import cli from "./cli.png";
 
 
 export default {
-	pin: true,
 	cover: core,
 	title: "templify",
 	description: "Node.js 환경에서 템플릿 문자열을 간단하게 처리할 수 있는 라이브러리와 CLI 툴을 제작하였습니다",

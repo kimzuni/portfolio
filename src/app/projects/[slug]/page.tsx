@@ -179,6 +179,7 @@ function Section({ blocks }: Section) {
 							className={cn(
 								"text-muted-foreground font-medium py-2 flex flex-col gap-2 justify-center-safe items-start",
 								!block.media && "row-span-2",
+								blocks.length === 1 && "items-center-safe",
 							)}
 						>
 							{block.lines.map((line) => {

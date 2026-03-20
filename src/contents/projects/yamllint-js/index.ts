@@ -78,7 +78,7 @@ export default {
 					media: {
 						type: "image",
 						src: config,
-						alt: "yamllint.config.js 자동 완성",
+						alt: "yamllint-js.config.js 자동 완성",
 					},
 					lines: [[
 						"기존 yamllint 설정 파일을 그대로 사용할 수 있을 뿐만 아니라, 추가적으로 Node.js 환경에 최적화된 설정 방식을 지원합니다.",

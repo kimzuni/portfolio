@@ -22,14 +22,11 @@ export default {
 		"Backend",
 	],
 	skills: [
-		"HTML",
-		"CSS",
 		"JavaScript",
 		"Node.js",
 		"Express",
 		"Sequelize",
 		"WebSocket",
-		"Axios",
 	],
 	sections: [
 		{

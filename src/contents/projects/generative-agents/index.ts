@@ -2,10 +2,10 @@ import type { ProjectContent } from "../";
 
 import n25 from "./n25.png";
 import dashboard from "./dashboard.png";
-import api from "./docker-api.gif";
-import play from "./play.gif";
 
-const forkComparison = "/videos/fork-comparison.mp4";
+const play = "/videos/generative-agents-play.webm";
+const api = "/videos/generative-agents-docker-api.webm";
+const forkComparison = "/videos/generative-agents-fork-comparison.webm";
 
 
 
@@ -116,9 +116,8 @@ export default {
 				},
 				{
 					media: {
-						type: "image",
+						type: "video",
 						src: play,
-						alt: "시뮬레이션 플레이 (GIF)",
 					},
 					lines: [[
 						"결과에 대한 상세 정보는 대시보드에서 제공되는 모달과 플레이 페이지에서 확인할 수 있습니다.",
@@ -131,9 +130,8 @@ export default {
 			blocks: [
 				{
 					media: {
-						type: "image",
+						type: "video",
 						src: api,
-						alt: "docker 명령어로 API 조회 (GIF)",
 					},
 					lines: [[
 						"전용 도커 이미지를 통해 서버를 쉽게 구성할 수 있으며, 프론트엔드, 백엔드, API 조회 등 주요 서비스를 손쉽게 실행할 수 있습니다.",

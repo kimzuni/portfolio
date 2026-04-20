@@ -15,4 +15,9 @@ export const nav: SidebarNavGroup[] = [
 		href: "/projects",
 		label: "Projects",
 	},
+	{
+		href: "/contributions",
+		label: "Contrib... (Coming Soon)",
+		disabled: true,
+	},
 ];

@@ -1,15 +1,21 @@
 import type { ProjectContent } from "../";
 
-import hero from "./hero.png";
+import lightSrc from "./hero-light.png";
+import darkSrc from "./hero-dark.png";
 
 
 
 export default {
 	pin: true,
-	cover: hero,
+	cover: {
+		lightSrc: lightSrc,
+		darkSrc: darkSrc,
+	},
 	title: "Web Portfolio",
 	description: [
-		"개발자로서의 여정을 담은 개인 웹 포트폴리오입니다. 지금까지의 프로젝트와 기술 스택을 정리하고, 앞으로의 성장을 기록합니다.",
+		"고유한 아이덴티티를 담은 `zuni.kim` 도메인을 기반으로, 기술 스택과 프로젝트를 정돈된 UI로 제안하는 개인 웹 사이트입니다.",
+		"Next.js의 Static Export를 활용한 CSR 구조로 빌드되었으며, Tailwind CSS와 shadcn/ui를 통해 직관적이고 일관된 사용자 경험을 구현했습니다.",
+		"단순히 이력을 나열하는 것에 그치지 않고 오픈소스 기여 내역 등을 함께 조망하며, 개발 생태계 내에서의 활동 반경을 넓혀가는 과정을 기록합니다.",
 	],
 	period: [
 		new Date("2025-05-08"),
@@ -45,12 +51,13 @@ export default {
 				{
 					media: {
 						type: "image",
-						src: hero,
+						src: "",
+						lightSrc,
+						darkSrc,
 						alt: "메인 페이지 hero 섹션 캡쳐",
 					},
 					text: [
-						"Next.js 기반으로 제작되었으며, shadcn/ui와 Tailwind CSS를 활용하여 반응형 디자인을 적용했습니다.",
-						"Next.js의 정적 내보내기(Static Export) 기능을 활용하여 배포의 편의성을 높였습니다.",
+						"지금 서 있는 곳, 그곳이 바로 이 프로젝트의 시작점이자 결과입니다.",
 					],
 				},
 			],

@@ -3,16 +3,20 @@ import type { ProjectContent } from "../";
 import home from "./home.png";
 import postOnHome from "./post-on-home.png";
 import userProfile from "./user-profile.png";
-import chatting from "./chatting.png";
 import upload from "./upload.png";
 import dbDiagram from "./db-diagram.png";
+
+const chatting = "/videos/inst@gram-chatting.webm";
 
 
 
 export default {
 	cover: dbDiagram,
 	title: "Inst@gram",
-	description: "백엔드 중심의 개인 프로젝트로, 인스타그램의 주요 기능을 일부 구현하였습니다.",
+	description: [
+		"인스타그램의 핵심 기능을 일부 구현한 백엔드 중심 프로젝트입니다.",
+		"데이터 무결성을 확보하기 위해 제3정규형(3NF)을 준수하여 데이터베이스를 설계하였습니다.",
+	],
 	period: [
 		new Date("2023-03-02"),
 		new Date("2023-06-20"),
@@ -68,31 +72,7 @@ export default {
 						alt: "게시글 (modal)",
 					},
 					text: [
-						"게시글에서는 댓글과 답글을 작성하고, 게시글과 댓글에 대한 좋아요를 표시할 수 있습니다.",
-					],
-				},
-			],
-		},
-		{
-			blocks: [
-				{
-					media: {
-						type: "image",
-						src: userProfile,
-						alt: "유저 프로필 페이지",
-					},
-					text: [
-						"프로필 페이지에서는 해당 사용자가 작성한 게시글, 팔로워, 팔로잉 수와 목록을 볼 수 있습니다.",
-					],
-				},
-				{
-					media: {
-						type: "image",
-						src: chatting,
-						alt: "1:1 채팅",
-					},
-					text: [
-						"1:1 채팅 페이지에서는 나와 다른 사용자간의 실시간 채팅을 할 수 있습니다.",
+						"게시글에서는 댓글과 답글을 작성하고, 이에 대한 좋아요를 표시할 수 있습니다.",
 					],
 				},
 			],
@@ -107,6 +87,30 @@ export default {
 					},
 					text: [
 						"게시글 작성 시 사진을 직접 선택하거나 drag & drop을 통해 사진을 업로드할 수 있습니다.",
+					],
+				},
+				{
+					media: {
+						type: "image",
+						src: userProfile,
+						alt: "유저 프로필 페이지",
+					},
+					text: [
+						"프로필 페이지에서는 해당 사용자가 작성한 게시글, 팔로워, 팔로잉 수를 볼 수 있습니다.",
+					],
+				},
+			],
+		},
+		{
+			blocks: [
+				{
+					media: {
+						type: "video",
+						src: chatting,
+					},
+					text: [
+						"사용자의 팔로워 및 팔로잉 수를 클릭하면 그 목록을 볼 수 있으며,",
+						"Message 버튼을 통해 새로운 채팅방을 생성하거나 사용자와의 채팅방으로 이동하여 실시간 채팅을 할 수 있습니다.",
 					],
 				},
 			],

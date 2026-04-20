@@ -85,6 +85,9 @@ const data = {
 				label: "Django",
 			},
 			{
+				label: "FastAPI",
+			},
+			{
 				label: "Flask",
 				hidden: true,
 			},

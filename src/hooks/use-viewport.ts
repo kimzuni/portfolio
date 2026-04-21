@@ -19,24 +19,40 @@ export function useIsInViewport<E extends HTMLElement>(
 
 	const threshold = useMemo(() => {
 		if (typeof thresholdOption === "number") {
-			return [thresholdOption, thresholdOption];
+			return [thresholdOption];
 		}
-		return thresholdOption ?? [0.01, 0.15];
+
+		const fallback = [0.01, 0.15] as const;
+		if (!thresholdOption || thresholdOption.length === 0) {
+			return [...fallback];
+		}
+
+		return [...thresholdOption].sort((a, b) => a - b);
 	}, [thresholdOption]);
 
 	useEffect(() => {
 		const node = ref.current;
 		if (!node) return;
 
-		const observer = new IntersectionObserver(([{ intersectionRatio }]) => {
-			if (intersectionRatio < threshold[0]) {
+		const observer = new IntersectionObserver(([entry]) => {
+			const { intersectionRatio, isIntersecting } = entry;
+			const minThreshold = threshold[0] ?? 0;
+			const maxThreshold = threshold.at(-1) ?? minThreshold;
+
+			if (intersectionRatio <= minThreshold) {
 				setIsInViewport(false);
-			} else if (intersectionRatio > threshold.at(-1)!) {
+				return;
+			}
+
+			if (intersectionRatio >= maxThreshold) {
 				setIsInViewport(true);
 				if (once) {
 					observer.disconnect();
 				}
+				return;
 			}
+
+			setIsInViewport(prev => prev || isIntersecting);
 		}, {
 			root: root,
 			rootMargin: rootMargin,

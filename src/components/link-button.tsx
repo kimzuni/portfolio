@@ -7,9 +7,9 @@ import { Icon, type IconName } from "./icon";
 
 
 export interface LinkButtonProps extends Omit<React.ComponentProps<typeof Button>, "asChild" | "children"> {
-	icon?: IconName;
 	label: string;
 	href?: string;
+	icon?: IconName;
 	iconPosition?: "left" | "right";
 	iconScale?: number;
 	iconRotate?: number;

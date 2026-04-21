@@ -7,8 +7,8 @@ import { createMetadata } from "@/lib/seo";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Item, ItemContent, ItemActions, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item";
 import { Separator } from "@/components/ui/separator";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { LinkButton } from "@/components/link-button";
 import { PageBadge } from "@/components/page-badge";
 import { Heading } from "@/components/heading";
 import { Icon } from "@/components/icon";
@@ -101,10 +101,11 @@ export async function generateMetadata({ params }: Props) {
 function ContributionDialog({ description, contributions }: { description?: string; contributions: Contribution[] }) {
 	return (
 		<Dialog>
-			<DialogTrigger asChild>
-				<Button variant="secondary" className="hover:text-primary">
-					기여도 보기
-				</Button>
+			<DialogTrigger className="border hover:text-primary hover:border-primary! dark:border-input" asChild>
+				<LinkButton
+					variant="secondary"
+					label="기여도 보기"
+				/>
 			</DialogTrigger>
 			<DialogContent className="**:data-[slot=dialog-close]:cursor-pointer">
 				<DialogHeader>

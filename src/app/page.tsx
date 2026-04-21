@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Icon } from "@/components/icon";
+import { Time } from "@/components/time";
 
 import * as contents from "@/contents/home";
 
@@ -10,6 +11,10 @@ import { Projects } from "./_components/page/projects";
 import { Contact } from "./_components/page/contact";
 
 
+
+const NODE_ENV = process.env.NODE_ENV;
+const IS_LOCAL = !process.env.GITHUB_WORKFLOW && !process.env.GITHUB_ACTION;
+const buildDate = new Date();
 
 export default function Home() {
 	return (
@@ -27,6 +32,17 @@ export default function Home() {
 				className="container min-h-[calc(100svh-var(--header-height))]"
 				{...contents.hero}
 			>
+				<p className="flex flex-wrap gap-1 justify-center-safe text-sm text-muted-foreground">
+					<span>Last updated:</span>
+					{
+						NODE_ENV === "production"
+							? <Time date={buildDate}/>
+							: <span>{NODE_ENV} mode</span>
+					}
+					{NODE_ENV === "production" && IS_LOCAL && (
+						<span>(local build)</span>
+					)}
+				</p>
 				<div className="mx-auto w-fit text-muted-foreground">
 					<Icon icon="ChevronsDown" className="animate-bounce"/>
 				</div>

@@ -1,30 +1,56 @@
 import ExportedImage, { type ExportedImageProps } from "next-image-export-optimizer";
 
 import { cn } from "@/lib/utils";
+import { Figure, type FigureOption } from "@/components/figure";
 
 
 
-export const Image = ExportedImage;
-export interface ImageProps extends ExportedImageProps {
+export interface ImageProps extends ExportedImageProps, FigureOption {
 }
 
-export interface VideoProps extends React.ComponentProps<"video"> {
+export function Image({
+	caption,
+	captionPosition,
+	alwaysWrap,
+	...props
+}: ImageProps) {
+	return (
+		<Figure
+			caption={caption}
+			captionPosition={captionPosition}
+			alwaysWrap={alwaysWrap}
+		>
+			<ExportedImage {...props}/>
+		</Figure>
+	);
+}
+
+export interface VideoProps extends React.ComponentProps<"video">, FigureOption {
 }
 
 export function Video({
+	caption,
+	captionPosition,
+	alwaysWrap,
 	className,
 	...props
 }: VideoProps) {
 	return (
-		<video
-			className={cn("mx-auto", className)}
-			loop
-			autoPlay
-			muted
-			playsInline
-			controls
-			{...props}
-		/>
+		<Figure
+			caption={caption}
+			captionPosition={captionPosition}
+			alwaysWrap={alwaysWrap}
+		>
+			<video
+				className={cn("mx-auto", className)}
+				loop
+				autoPlay
+				muted
+				playsInline
+				controls
+				{...props}
+			/>
+		</Figure>
 	);
 }
 

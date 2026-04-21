@@ -1,22 +1,17 @@
-import { Slot, SlotProps } from "@radix-ui/react-slot";
-
 import { cn } from "@/lib/utils";
+import { MarkdownBox, MarkdownBoxProps } from "@/components/markdown-box";
 
 
 
-export interface MessageProps extends SlotProps {
-	asChild?: boolean;
+export interface MessageProps extends MarkdownBoxProps {
 }
 
 export function Message({
-	asChild,
 	className,
 	...props
 }: MessageProps) {
-	const Comp = asChild ? Slot : "div";
-
 	return (
-		<Comp
+		<MarkdownBox
 			className={cn("empty:hidden text-lg text-muted-foreground", className)}
 			{...props}
 		/>

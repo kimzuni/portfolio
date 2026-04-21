@@ -16,6 +16,7 @@ export const hero: HomeHeroData = {
 	subheading: "Full-stack Developer",
 	tagline: [
 		"무언가에 깊게 빠져드는 것을 좋아합니다.",
+		"",
 		"서비스를 만드는 데 필요한 것이라면 영역을 가리지 않고 다루고 있습니다.",
 	],
 	buttons: [

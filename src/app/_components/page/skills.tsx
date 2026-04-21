@@ -1,3 +1,5 @@
+import type { MarkdownValue } from "@/lib/utils";
+
 import { Card, CardContent, CardTitle, CardDescription } from "@/components/ui/card";
 import { SkillIcon, type SkillIconOptions } from "@/components/skill-icon";
 import { Icon, type IconName } from "@/components/icon";
@@ -67,7 +69,7 @@ function SkillCard({
 
 export interface HomeSkillsData {
 	heading: string;
-	message: string;
+	message: MarkdownValue;
 	items: Record<string, SkillGroupData>;
 }
 
@@ -89,8 +91,8 @@ export function Skills({
 					children={heading}
 				/>
 				<Message
+					source={message}
 					className="text-center"
-					children={message}
 				/>
 			</Fade>
 			<div className="grid grid-cols-[repeat(auto-fit,minmax(auto,350px))] gap-6 justify-center">

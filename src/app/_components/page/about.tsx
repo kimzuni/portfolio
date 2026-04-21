@@ -1,3 +1,5 @@
+import type { MarkdownValue } from "@/lib/utils";
+
 import { LinkButton, type LinkButtonProps } from "@/components/link-button";
 import { Heading } from "@/components/heading";
 import { Message } from "@/components/message";
@@ -10,7 +12,7 @@ import { Section, type SectionProps } from "./section";
 
 
 export interface HomeAboutData extends Pick<AboutData, "philosophy"> {
-	message: string;
+	message: MarkdownValue;
 	heading: string;
 	certificates: number;
 	awards: number;
@@ -33,8 +35,7 @@ export function About({
 		<Section {...props}>
 			<Fade className="text-center space-y-8 pb-8">
 				<Message
-					className="font-bold"
-					children={message}
+					source={message}
 				/>
 				<Heading
 					level={2}

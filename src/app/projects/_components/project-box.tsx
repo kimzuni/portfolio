@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn, htmlStrip } from "@/lib/utils";
 import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter } from "@/components/ui/card";
 import { Image } from "@/components/media";
 import { Link } from "@/components/link";
@@ -77,9 +77,7 @@ export function ProjectBox({
 				</Link>
 
 				<p className="empty:hidden line-clamp-2 text-sm text-muted-foreground">
-					{
-						Array.isArray(description) ? description.join(" ") : description
-					}
+					{htmlStrip(description)}
 				</p>
 			</CardContent>
 			<CardFooter className="flex-col justify-center-safe items-start pt-2 gap-2 *:flex *:flex-wrap *:gap-1 *:empty:hidden">

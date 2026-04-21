@@ -77,11 +77,11 @@ export default {
 						src: overview,
 						alt: "린팅 결과 캡쳐",
 					},
-					lines: [[
+					text: [
 						"Node.js 생태계에는 Python의 yamllint 수준에 필적하는 강력한 YAML 린터가 존재하지 않아 직접 구현하게 되었습니다.",
 						"Python 의존성 없이 Node.js 환경만으로 yamllint와 동일한 린트 경험을 제공하는 것을 목표로 합니다.",
 						"기존 yamllint와의 100% 호환성을 위해 모든 테스트 코드를 최대한 그대로 구현하였습니다.",
-					]],
+					],
 				},
 				{
 					media: {
@@ -89,10 +89,10 @@ export default {
 						src: config,
 						alt: "yamllint-js.config.js 자동 완성",
 					},
-					lines: [[
+					text: [
 						"기존 yamllint 설정 파일을 그대로 사용할 수 있을 뿐만 아니라, 추가적으로 Node.js 환경에 최적화된 설정 방식을 지원합니다.",
 						"이를 통해 기존 yamllint 사용자는 물론, Node.js 기반 프로젝트 사용자 역시 쉽고 빠르게 YAML 린트 환경을 구성할 수 있도록 합니다.",
-					]],
+					],
 				},
 			],
 		},
@@ -103,9 +103,9 @@ export default {
 						type: "video",
 						src: vscode,
 					},
-					lines: [[
+					text: [
 						"VSCode 확장 사용 시, yamllint-js의 구성 파일을 그대로 사용할 수 있습니다.",
-					]],
+					],
 				},
 			],
 		},

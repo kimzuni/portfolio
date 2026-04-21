@@ -1,3 +1,5 @@
+import type { MarkdownValue } from "@/lib/utils";
+
 import { LinkButton, type LinkButtonProps } from "@/components/link-button";
 import { Heading } from "@/components/heading";
 import { Message } from "@/components/message";
@@ -9,7 +11,7 @@ import { Section, type SectionProps } from "./section";
 
 export interface HomeContactData {
 	heading: string;
-	message: string;
+	message: MarkdownValue;
 	iconSize?: LinkButtonProps["size"];
 	items: LinkButtonProps[];
 }
@@ -33,7 +35,7 @@ export function Contact({
 					children={heading}
 				/>
 				<Message
-					children={message}
+					source={message}
 				/>
 			</Fade>
 			<Fade

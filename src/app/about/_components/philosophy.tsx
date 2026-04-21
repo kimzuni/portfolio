@@ -1,12 +1,13 @@
-import { cn } from "@/lib/utils";
+import { cn, type MarkdownValue } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
+import { MarkdownBox } from "@/components/markdown-box";
 import { Fade } from "@/components/fade";
 
 
 
 export interface PhilosophyItem {
 	label: string;
-	description: string;
+	description: MarkdownValue;
 }
 
 export interface PhilosophyProps extends Omit<React.ComponentProps<"div">, "children"> {
@@ -29,9 +30,10 @@ export function Philosophy({
 					<article className="space-y-2">
 						<h3 className="text-xl font-bold text-foreground font-mono">{item.label}</h3>
 						<Separator className="bg-primary"/>
-						<p className="text-muted-foreground leading-relaxed text-sm md:text-base">
-							{item.description}
-						</p>
+						<MarkdownBox
+							source={item.description}
+							className="text-muted-foreground leading-relaxed text-sm md:text-base"
+						/>
 					</article>
 				</Fade>
 			))}

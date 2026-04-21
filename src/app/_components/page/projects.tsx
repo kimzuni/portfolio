@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn, type MarkdownValue } from "@/lib/utils";
 import {
 	Carousel,
 	CarouselContent,
@@ -19,7 +19,7 @@ import { Section, type SectionProps } from "./section";
 
 export interface HomeProjectsData {
 	heading: string;
-	message: string;
+	message: MarkdownValue;
 	linkButton: LinkButtonProps;
 	items: Array<ProjectData & {
 		pin?: boolean;
@@ -52,7 +52,7 @@ export function Projects({
 				</div>
 
 				<Message
-					children={message}
+					source={message}
 				/>
 			</Fade>
 

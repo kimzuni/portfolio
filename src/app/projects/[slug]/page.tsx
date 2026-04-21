@@ -2,12 +2,13 @@ import { notFound } from "next/navigation";
 import type { StaticImageData } from "next/image";
 
 import type { Period as PeriodType } from "@/types";
-import { cn } from "@/lib/utils";
+import { cn, type MarkdownValue } from "@/lib/utils";
 import { createMetadata } from "@/lib/seo";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Item, ItemContent, ItemActions, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
+import { MarkdownBox } from "@/components/markdown-box";
 import { LinkButton } from "@/components/link-button";
 import { PageBadge } from "@/components/page-badge";
 import { Heading } from "@/components/heading";
@@ -31,7 +32,7 @@ export interface Props extends PageProps<"/projects/[slug]"> {
 
 export interface Block {
 	colSpan?: number;
-	lines?: Array<string | string[]>;
+	text?: MarkdownValue;
 	media?: MediaProps;
 }
 
@@ -59,7 +60,7 @@ export interface ProjectData {
 	isOngoing?: boolean;
 	cover: StaticImageData | Pick<ImageProps, "lightSrc" | "darkSrc">;
 	title: string;
-	description: string | string[];
+	description: MarkdownValue;
 	period: PeriodType;
 	tags: Tag[];
 	skills: Skill[];
@@ -176,19 +177,16 @@ function Section({ blocks }: Section) {
 						</div>
 					)}
 
-					{block.lines && (
-						<div
+					{block.text && (
+						<MarkdownBox
+							source={block.text}
 							className={cn(
-								"text-muted-foreground font-medium py-2 flex flex-col gap-2 justify-center-safe items-start",
-								!block.media && "row-span-2",
+								"text-muted-foreground font-medium py-2 flex flex-col gap-2 justify-start items-start",
+								"[&_a]:underline [&_a]:text-primary [&_a]:hover:text-primary/80 [&_a]:transition-colors",
+								!block.media && "row-span-2 justify-center-safe",
 								blocks.length === 1 && "items-center-safe",
 							)}
-						>
-							{block.lines.map((line) => {
-								const text = Array.isArray(line) ? line.join(" ") : line;
-								return <p key={text}>{text}</p>;
-							})}
-						</div>
+						/>
 					)}
 				</div>
 			))}
@@ -246,9 +244,10 @@ export default async function Project({ params }: Props) {
 					children={title}
 				/>
 
-				<p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-3xl">
-					{Array.isArray(description) ? description.join(" ") : description}
-				</p>
+				<MarkdownBox
+					source={description}
+					className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-3xl"
+				/>
 			</header>
 
 			{/* badges */}

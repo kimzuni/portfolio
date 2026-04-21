@@ -1,9 +1,10 @@
 import type { Period } from "@/types";
-import { formatDate } from "@/lib/utils";
+import { formatDate, type MarkdownValue } from "@/lib/utils";
 import { createMetadata, type MetadataOptions } from "@/lib/seo";
 import { Card, CardHeader, CardContent, CardFooter, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { PageBadge } from "@/components/page-badge";
+import { MarkdownBox } from "@/components/markdown-box";
 import { Heading as BaseHeading } from "@/components/heading";
 import { Fade } from "@/components/fade";
 import { Time } from "@/components/time";
@@ -19,7 +20,7 @@ export const metadata = createMetadata(about.metadata);
 
 export interface Introduction {
 	heading: string;
-	messages: string[];
+	messages: MarkdownValue;
 }
 
 export interface CertificateItem {
@@ -130,11 +131,10 @@ export default function About() {
 					</header>
 				</Fade>
 				<Fade asChild>
-					<div className="space-y-6 text-lg md:text-xl text-muted-foreground leading-relaxed">
-						{about.introduction.messages.map(msg => (
-							<p key={msg}>{msg}</p>
-						))}
-					</div>
+					<MarkdownBox
+						source={about.introduction.messages}
+						className="space-y-6 text-lg md:text-xl text-muted-foreground leading-relaxed"
+					/>
 				</Fade>
 			</section>
 

@@ -65,7 +65,7 @@ export function Projects({
 				>
 					<CarouselContent className="py-2 items-stretch">
 						{items.filter(x => x.pin).map(project => <CarouselItem key={project.slug} className="basis-auto flex">
-							<ProjectBox {...project}/>
+							<ProjectBox className="select-none" {...project}/>
 						</CarouselItem>)}
 					</CarouselContent>
 					<CarouselPrevious/>

@@ -308,7 +308,7 @@ export function Shield({
 			aria-label={alt}
 			src={`${src}${query ? `?${query}` : ""}`}
 			className={cn(
-				"h-[20px]",
+				"h-5",
 				props.link ? "object-cover transition-[filter] drop-shadow-md drop-shadow-transparent group-hover:drop-shadow-theme-primary" : "object-cover",
 			)}
 		/>

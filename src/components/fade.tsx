@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { Slot, SlotProps } from "@radix-ui/react-slot";
+import { Slot, type SlotProps } from "@radix-ui/react-slot";
 
 import { useViewportFade, type UseViewportFadeOptions } from "@/hooks/use-viewport";
 

@@ -34,9 +34,7 @@ export interface SidebarNavLink {
 	disabled?: boolean;
 }
 
-export interface SidebarNavGroup {
-	href: string;
-	label: string;
+export interface SidebarNavGroup extends SidebarNavLink {
 	items?: SidebarNavLink[];
 }
 

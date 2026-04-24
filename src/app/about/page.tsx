@@ -4,6 +4,7 @@ import { createMetadata, type MetadataOptions } from "@/lib/seo";
 import { Card, CardHeader, CardContent, CardFooter, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { PageBadge } from "@/components/page-badge";
+import { Heading as BaseHeading } from "@/components/heading";
 import { Fade } from "@/components/fade";
 import { Time } from "@/components/time";
 import { Philosophy, type PhilosophyItem } from "./_components/philosophy";
@@ -58,8 +59,9 @@ function Heading({
 	children: React.ReactNode;
 }) {
 	return (
-		<h2
-			className="title mb-12 border-l-4 border-primary pl-4 font-mono"
+		<BaseHeading
+			level={2}
+			className="mb-12 border-l-4 border-primary pl-4 font-mono"
 			children={children}
 		/>
 	);

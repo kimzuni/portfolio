@@ -7,6 +7,8 @@ import {
 	CarouselNext,
 } from "@/components/ui/carousel";
 import { LinkButton, type LinkButtonProps } from "@/components/link-button";
+import { Heading } from "@/components/heading";
+import { Message } from "@/components/message";
 import { Fade } from "@/components/fade";
 
 import type { ProjectData } from "../../projects/[slug]/page";
@@ -39,8 +41,8 @@ export function Projects({
 		<Section className={cn("@container", className)} {...props}>
 			<Fade className="space-y-6">
 				<div className="flex items-center justify-between gap-2">
-					<h2
-						className="title"
+					<Heading
+						level={2}
 						children={heading}
 					/>
 					<LinkButton
@@ -49,8 +51,7 @@ export function Projects({
 					/>
 				</div>
 
-				<p
-					className="empty:hidden message"
+				<Message
 					children={message}
 				/>
 			</Fade>

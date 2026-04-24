@@ -10,6 +10,7 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { PageBadge } from "@/components/page-badge";
+import { Heading } from "@/components/heading";
 import { Icon } from "@/components/icon";
 import { Fade } from "@/components/fade";
 import { Period } from "@/components/period";
@@ -239,9 +240,10 @@ export default async function Project({ params }: Props) {
 					className="text-muted-foreground text-sm"
 				/>
 
-				<h1 className="title">
-					{title}
-				</h1>
+				<Heading
+					level={1}
+					children={title}
+				/>
 
 				<p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-3xl">
 					{Array.isArray(description) ? description.join(" ") : description}

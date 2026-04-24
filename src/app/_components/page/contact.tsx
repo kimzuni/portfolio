@@ -1,4 +1,6 @@
 import { LinkButton, type LinkButtonProps } from "@/components/link-button";
+import { Heading } from "@/components/heading";
+import { Message } from "@/components/message";
 import { Fade } from "@/components/fade";
 
 import { Section, type SectionProps } from "./section";
@@ -26,12 +28,11 @@ export function Contact({
 	return (
 		<Section {...props}>
 			<Fade className="space-y-4 text-center">
-				<h2
-					className="title"
+				<Heading
+					level={2}
 					children={heading}
 				/>
-				<p
-					className="empty:hidden message"
+				<Message
 					children={message}
 				/>
 			</Fade>

@@ -1,6 +1,8 @@
 import { Card, CardContent, CardTitle, CardDescription } from "@/components/ui/card";
 import { SkillIcon, type SkillIconOptions } from "@/components/skill-icon";
 import { Icon, type IconName } from "@/components/icon";
+import { Heading } from "@/components/heading";
+import { Message } from "@/components/message";
 import { Fade } from "@/components/fade";
 
 import { Section, type SectionProps } from "./section";
@@ -81,12 +83,13 @@ export function Skills({
 	return (
 		<Section {...props}>
 			<Fade className="space-y-4">
-				<h2
-					className="title text-center"
+				<Heading
+					level={2}
+					className="text-center"
 					children={heading}
 				/>
-				<p
-					className="message text-center"
+				<Message
+					className="text-center"
 					children={message}
 				/>
 			</Fade>

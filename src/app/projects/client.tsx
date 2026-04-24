@@ -12,6 +12,7 @@ import { Switch } from "@/components/ui/switch";
 import { PageBadge } from "@/components/page-badge";
 import { LinkButton, type LinkButtonProps } from "@/components/link-button";
 import { ComboboxMultiple } from "@/components/combobox";
+import { Heading } from "@/components/heading";
 import { Fade } from "@/components/fade";
 import { ProjectBox, type ProjectBoxProps } from "./_components/project-box";
 
@@ -172,7 +173,10 @@ export default function Client({
 					/>
 				</div>
 
-				<h1 className="title">{heading}</h1>
+				<Heading
+					level={1}
+					children={heading}
+				/>
 
 				{/* filter */}
 				<div className="space-y-6 *:space-y-3 *:w-full *:max-w-md">

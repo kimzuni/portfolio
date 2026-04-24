@@ -1,4 +1,6 @@
 import { LinkButton, type LinkButtonProps } from "@/components/link-button";
+import { Heading } from "@/components/heading";
+import { Message } from "@/components/message";
 import { Fade } from "@/components/fade";
 import { Philosophy } from "@/app/about/_components/philosophy";
 import type { AboutData } from "@/app/about/page";
@@ -30,12 +32,14 @@ export function About({
 	return (
 		<Section {...props}>
 			<Fade className="text-center space-y-8 pb-8">
-				<p className="message font-bold">
-					{message}
-				</p>
-				<h2 className="title">
-					{heading}
-				</h2>
+				<Message
+					className="font-bold"
+					children={message}
+				/>
+				<Heading
+					level={2}
+					children={heading}
+				/>
 			</Fade>
 
 			<Philosophy items={philosophy}/>

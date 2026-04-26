@@ -34,6 +34,15 @@ export function ProjectBox({
 	activeSkills,
 }: ProjectBoxProps) {
 	const href = `/projects/${slug}/`;
+	const coverProps = "src" in cover
+		? {
+			src: cover,
+		}
+		: {
+			src: cover.lightSrc ?? cover.darkSrc ?? "",
+			lightSrc: cover.lightSrc,
+			darkSrc: cover.darkSrc,
+		};
 	const avgContribution = !team
 		? 100
 		: Math.round(
@@ -59,7 +68,7 @@ export function ProjectBox({
 							<Icon icon="ArrowRightCircle"/>
 						</div>
 						<Image
-							src={cover}
+							{...coverProps}
 							alt={`${title} cover`}
 							loading="lazy"
 							className="w-full h-full object-cover"

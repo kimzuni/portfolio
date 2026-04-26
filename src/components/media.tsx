@@ -6,21 +6,52 @@ import { Figure, type FigureOption } from "@/components/figure";
 
 
 export interface ImageProps extends ExportedImageProps, FigureOption {
+	lightSrc?: ExportedImageProps["src"];
+	darkSrc?: ExportedImageProps["src"];
 }
 
 export function Image({
 	caption,
 	captionPosition,
 	alwaysWrap,
+	lightSrc,
+	darkSrc,
+	src,
+	className,
 	...props
 }: ImageProps) {
+	const lightImageSrc = lightSrc ?? src;
+	const darkImageSrc = darkSrc ?? src;
+	const hasThemeVariants = lightImageSrc !== darkImageSrc;
+
 	return (
 		<Figure
 			caption={caption}
 			captionPosition={captionPosition}
 			alwaysWrap={alwaysWrap}
 		>
-			<ExportedImage {...props}/>
+			{hasThemeVariants
+				? (
+					<>
+						<ExportedImage
+							src={lightImageSrc}
+							className={cn("dark:hidden", className)}
+							{...props}
+						/>
+						<ExportedImage
+							src={darkImageSrc}
+							className={cn("not-dark:hidden", className)}
+							{...props}
+						/>
+					</>
+				)
+				: (
+					<ExportedImage
+						src={src}
+						className={className}
+						{...props}
+					/>
+				)}
 		</Figure>
 	);
 }

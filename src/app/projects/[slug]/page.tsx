@@ -15,7 +15,7 @@ import { Icon } from "@/components/icon";
 import { Fade } from "@/components/fade";
 import { Period } from "@/components/period";
 import { LinkBadge, type LinkBadgeProps } from "@/components/link-badge";
-import { Media, type MediaProps } from "@/components/media";
+import { Media, type MediaProps, type ImageProps } from "@/components/media";
 import { Shield, type ShieldProps } from "@/components/shield";
 import { TagBadge, SkillBadge } from "../_components/badge";
 
@@ -57,7 +57,7 @@ export interface Team {
 export interface ProjectData {
 	slug: string;
 	isOngoing?: boolean;
-	cover: StaticImageData | string;
+	cover: StaticImageData | Pick<ImageProps, "lightSrc" | "darkSrc">;
 	title: string;
 	description: string | string[];
 	period: PeriodType;
@@ -92,7 +92,7 @@ export async function generateMetadata({ params }: Props) {
 	return createMetadata({
 		title: `프로젝트 - ${title}`,
 		description: description,
-		cover: cover,
+		cover: "src" in cover ? cover : cover.lightSrc ?? cover.darkSrc,
 	});
 }
 

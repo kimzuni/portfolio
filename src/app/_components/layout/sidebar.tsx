@@ -31,6 +31,7 @@ import { Link } from "@/components/link";
 export interface SidebarNavLink {
 	href: string;
 	label: string;
+	disabled?: boolean;
 }
 
 export interface SidebarNavGroup {
@@ -68,10 +69,10 @@ export function Sidebar({
 					<SidebarGroupLabel>{label}</SidebarGroupLabel>
 					<SidebarGroupContent className="font-mono">
 						<SidebarMenu>
-							{navGroups.map(({ label, href, items }) => (
+							{navGroups.map(({ label, href, disabled, items }) => (
 								<Collapsible key={href} className="group/collapsible" defaultOpen asChild>
 									<SidebarMenuItem>
-										<SidebarMenuButton isActive={isActive(href)} asChild>
+										<SidebarMenuButton className={!disabled ? undefined : "pointer-events-none opacity-50"} isActive={isActive(href)} asChild>
 											<Link href={href}><span>{label}</span></Link>
 										</SidebarMenuButton>
 										{items && (
@@ -86,7 +87,7 @@ export function Sidebar({
 													<SidebarMenuSub>
 														{items.map(item => (
 															<SidebarMenuSubItem key={item.href}>
-																<SidebarMenuSubButton isActive={isActive(item.href)} asChild>
+																<SidebarMenuSubButton className={!item.disabled ? undefined : "pointer-events-none opacity-50"} isActive={isActive(item.href)} asChild>
 																	<Link href={item.href}><span>{item.label}</span></Link>
 																</SidebarMenuSubButton>
 															</SidebarMenuSubItem>

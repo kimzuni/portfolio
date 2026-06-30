@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+	<defs>
+		<text id="z">Z</text>
+	</defs>
+
+	<g
+		fill="#5cc9ff"
+		stroke-width="0"
+		font-weight="bold"
+		font-family="sans-serif"
+		text-anchor="middle"
+		dominant-baseline="middle"
+	>
+		<use
+			href="#z"
+			x="0"
+			y="32"
+			text-anchor="start"
+			dominant-baseline="auto"
+			font-size="24"
+		/>
+		<use
+			href="#z"
+			x="18"
+			y="15"
+			text-anchor="start"
+			dominant-baseline="hanging"
+			font-size="16"
+		/>
+		<use
+			href="#z"
+			x="16"
+			y="12"
+			text-anchor="middle"
+			dominant-baseline="auto"
+			font-size="12"
+		/>
+		<use
+			href="#z"
+			x="30"
+			y="2"
+			text-anchor="end"
+			dominant-baseline="hanging"
+			font-size="8"
+		/>
+	</g>
+</svg>

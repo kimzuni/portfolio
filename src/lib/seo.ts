@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 
+import * as markdown from "@/lib/markdown";
+
 
 
 export interface MetadataOptions extends Omit<Metadata, "description"> {
 	title?: Metadata["title"];
-	description?: string | string[];
+	description?: markdown.Source;
 }
 
 export function createMetadata({
@@ -12,9 +14,7 @@ export function createMetadata({
 	description,
 	...opts
 }: MetadataOptions): Metadata {
-	description = Array.isArray(description)
-		? description.join(" ")
-		: description;
+	description = markdown.getLines(description)?.join(" ");
 
 	return {
 		title,

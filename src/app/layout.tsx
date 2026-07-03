@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans_Mono } from "next/font/google";
 import localFont from "next/font/local";
 
+import { cn } from "@/lib/utils";
 import * as seo from "@/lib/seo";
 
 import * as contents from "@/contents";
@@ -60,7 +61,7 @@ export default function RootLayout({
 	return (
 		<html
 			lang="ko"
-			className={`${pretendard.variable} ${notoSansMono.variable} h-full antialiased`}
+			className={cn("h-full", "antialiased", "font-sans", pretendard.variable, notoSansMono.variable)}
 		>
 			<body className="min-h-full flex flex-col">{children}</body>
 		</html>

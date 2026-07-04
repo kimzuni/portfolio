@@ -62,8 +62,12 @@ export default function RootLayout({
 		<html
 			lang="ko"
 			className={cn("h-full", "antialiased", "font-sans", pretendard.variable, notoSansMono.variable)}
+			data-scroll-behavior="smooth"
+			suppressHydrationWarning
 		>
-			<body className="min-h-full flex flex-col">{children}</body>
+			<body className="min-h-full flex flex-col">
+				{children}
+			</body>
 		</html>
 	);
 }

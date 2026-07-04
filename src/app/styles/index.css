@@ -2,6 +2,9 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+@plugin "@tailwindcss/typography";
+
+@import "./utilities.css";
 @import "./styles.css" layer(style);
 
 

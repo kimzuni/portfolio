@@ -1,3 +1,5 @@
+export * as notFound from "./404";
+
 export * as app from "./app";
 export * as link from "./link";
 

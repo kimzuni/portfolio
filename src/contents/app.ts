@@ -5,6 +5,7 @@ import * as markdown from "@/lib/markdown";
 export const _item = {
 	mode: process.env.NODE_ENV,
 	url: "https://zuni.kim",
+	email: "me@zuni.kim",
 	service: "web-portfolio",
 	title: "kimzuni - 웹 포트폴리오",
 	description: "풀스택 개발자 김준희의 웹 포트폴리오입니다.",
@@ -25,6 +26,7 @@ export const item: Item = {
 export interface ItemRaw {
 	mode: typeof process.env.NODE_ENV
 	url: string;
+	email: string;
 	service: string;
 	title: string;
 	description: markdown.Source;

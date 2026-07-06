@@ -21,11 +21,6 @@ export const _items = [
 		href: "/contributions",
 		disabled: true,
 	},
-	{
-		label: "Contact (Coming Soon)",
-		href: "/contact",
-		hidden: true,
-	},
 ] as const satisfies ItemRaw[];
 
 

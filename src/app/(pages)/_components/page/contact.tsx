@@ -3,6 +3,7 @@ import { Heading } from "@/components/heading";
 
 import { Section, type SectionProps } from "./section";
 import { Message } from "./message";
+import { ContactForm } from "./contact-form";
 
 import type * as contents from "@/contents";
 
@@ -16,6 +17,7 @@ export function Contact({
 	message,
 	iconSize,
 	items,
+	form,
 	...props
 }: ContactProps) {
 	return (
@@ -37,6 +39,14 @@ export function Contact({
 					/>
 				))}
 			</div>
+			{form?.enable && (
+				<ContactForm
+					url={form.server.href}
+					to={form.to}
+					message={form.message}
+					className="mx-auto max-w-2xl w-full"
+				/>
+			)}
 		</Section>
 	);
 }

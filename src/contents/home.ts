@@ -124,11 +124,16 @@ export const projects: Projects = {
 
 
 
+export interface ContactForm extends _contact.Form {
+	message?: string;
+};
+
 export interface Contacts {
 	heading: string;
 	message: string;
 	iconSize?: LinkButtonProps["size"];
 	items: _contact.Item[];
+	form?: ContactForm;
 }
 
 export const contacts: Contacts = {
@@ -136,4 +141,8 @@ export const contacts: Contacts = {
 	message: "제가 해야 할 일이 있나요? 언제든지 편하게 말씀해 주세요!",
 	iconSize: "lg",
 	items: _contact.items,
+	form: {
+		..._contact.form,
+		message: "지금 바로 메일을 보낼 수도 있어요!",
+	},
 };

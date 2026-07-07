@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
+import { useRef, useEffect, startTransition } from "react";
 
+import { cn } from "@/lib/utils";
+import { setCookie } from "@/app/actions";
 import { useNavigation } from "@/hooks/use-navigation";
 
 import {
@@ -22,8 +24,11 @@ import {
 	SidebarMenuSub,
 	SidebarMenuSubItem,
 	SidebarMenuSubButton,
+	SidebarFooter,
 	useSidebar,
 } from "@/components/ui/sidebar";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Icon } from "@/components/icon";
 import { Link } from "@/components/link";
 
@@ -34,21 +39,43 @@ import type * as contents from "@/contents";
 export interface SidebarProps extends Omit<React.ComponentProps<typeof Base>, "children"> {
 	label: string;
 	items: contents.link.Item[];
+	autoClose: boolean;
+	autoCloseKey: string;
 }
 
 export function Sidebar({
 	label,
 	items,
+	autoClose = false,
+	autoCloseKey,
 	...props
 }: SidebarProps) {
-	const { isMobile, open, setOpenMobile } = useSidebar();
+	const { isMobile, open, setOpenMobile, setOpen } = useSidebar();
 	const navigation = useNavigation();
+	const prevPath = useRef(navigation.pathname);
 
 	useEffect(() => {
 		if (isMobile) {
 			setOpenMobile(false);
 		}
 	}, [navigation.pathname, isMobile, setOpenMobile]);
+
+	useEffect(() => {
+		if (autoClose && prevPath.current !== navigation.pathname) {
+			setOpen(false);
+		}
+		prevPath.current = navigation.pathname;
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [navigation.pathname, autoClose]);
+
+	const onCheckedChange = (checked: boolean) => {
+		if (autoCloseKey !== undefined) {
+			startTransition(async () => {
+				await setCookie(autoCloseKey, `${checked}`);
+			});
+		}
+	};
 
 	return (
 		<Base inert={!open} {...props}>
@@ -105,6 +132,28 @@ export function Sidebar({
 					</SidebarGroupContent>
 				</SidebarGroup>
 			</SidebarContent>
+			{!isMobile && (
+				<SidebarFooter>
+					<FieldGroup>
+						<Field orientation="horizontal" className="w-fit mx-auto">
+							<Checkbox
+								id="sidebar-auto-close-on-page-change"
+								checked={autoClose}
+								onCheckedChange={onCheckedChange}
+							/>
+							<FieldLabel
+								htmlFor="sidebar-auto-close-on-page-change"
+								className={cn(
+									"text-xs",
+									!autoClose && "text-muted-foreground",
+								)}
+							>
+								Auto-close on page change
+							</FieldLabel>
+						</Field>
+					</FieldGroup>
+				</SidebarFooter>
+			)}
 		</Base>
 	);
 }

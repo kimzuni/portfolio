@@ -16,6 +16,7 @@ import * as contents from "@/contents";
 
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
+const SIDEBAR_AUTO_CLOSE_KEY = "sidebar_autoclose";
 
 export default async function AppLayout({
 	children,
@@ -24,6 +25,7 @@ export default async function AppLayout({
 }>) {
 	const data = contents.app.item;
 	const cookieStore = await cookies();
+	const autoClose = cookieStore.get(SIDEBAR_AUTO_CLOSE_KEY)?.value === "true";
 	const sidebarOpen = cookieStore.get(SIDEBAR_COOKIE_NAME)?.value !== "false";
 
 	return (
@@ -40,6 +42,8 @@ export default async function AppLayout({
 						items={contents.link.items}
 						label="Navigation"
 						variant="floating"
+						autoClose={autoClose}
+						autoCloseKey={SIDEBAR_AUTO_CLOSE_KEY}
 					/>
 					<div
 						className="flex-1 flex flex-col z-10"

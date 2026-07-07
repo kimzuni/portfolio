@@ -25,7 +25,7 @@ export function Hero({
 			<div
 				id="hero-background"
 				className={cn(
-					"absolute inset-0 -top-(--header-height) h-svh -z-1",
+					"absolute right-0 -top-(--header-height) w-svw h-svh -z-1",
 					"from-primary/15 dark:from-primary/10 via-transparent to-transparent",
 					"bg-linear-to-b dark:bg-linear-to-br",
 				)}

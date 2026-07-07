@@ -44,6 +44,7 @@ export default async function AppLayout({
 						variant="floating"
 						autoClose={autoClose}
 						autoCloseKey={SIDEBAR_AUTO_CLOSE_KEY}
+						className="z-100"
 					/>
 					<div
 						className="flex-1 flex flex-col z-10"

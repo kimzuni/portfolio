@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import * as seo from "@/lib/seo";
 import type * as markdown from "@/lib/markdown";
 
+import { FadeSection } from "@/components/fade";
 import { PageBadge } from "@/components/page-badge";
 import { Heading } from "@/components/heading";
 
@@ -207,7 +208,7 @@ export default async function Projects({
 
 	return (
 		<div className="page-content space-y-12">
-			<section>
+			<FadeSection>
 				<div className="flex items-center justify-between mb-0">
 					<PageBadge
 						className="mb-4"
@@ -225,9 +226,9 @@ export default async function Projects({
 				</div>
 
 				<Heading>{title}</Heading>
-			</section>
+			</FadeSection>
 
-			<section>
+			<FadeSection>
 				<FilterTabs
 					years={{
 						key: "years",
@@ -253,9 +254,9 @@ export default async function Projects({
 						},
 					}}
 				/>
-			</section>
+			</FadeSection>
 
-			<section
+			<FadeSection
 				className={cn(
 					"container pt-0 grid gap-6",
 					"grid-cols-[repeat(auto-fill,minmax(0,300px))] justify-center",
@@ -292,7 +293,7 @@ export default async function Projects({
 								</p>
 							)
 					}
-			</section>
+			</FadeSection>
 		</div>
 	);
 }

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { cn } from "@/lib/utils";
 import * as seo from "@/lib/seo";
 
+import { Fade, FadeSection } from "@/components/fade";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Item, ItemContent, ItemActions, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item";
 import { Separator } from "@/components/ui/separator";
@@ -114,7 +115,8 @@ function Article({ blocks }: contents.project.Article) {
 			} as React.CSSProperties}
 		>
 			{blocks.map((block, idx) => (
-				<article
+				<Fade
+					tagName="article"
 					key={idx}
 					className="col-span-1 md:col-span-(--col-span) grid grid-rows-subgrid row-span-2 items-center-safe gap-y-2"
 					style={{
@@ -142,7 +144,7 @@ function Article({ blocks }: contents.project.Article) {
 							)}
 						/>
 					)}
-				</article>
+				</Fade>
 			))}
 		</div>
 	);
@@ -178,7 +180,7 @@ export default async function Project(props: Props) {
 	return (
 		<div className="page-content space-y-8">
 			{/* Header */}
-			<header className="space-y-4">
+			<Fade tagName="header" className="space-y-4">
 				<div className="flex flex-wrap items-center gap-3">
 					<PageBadge label="Project Detail"/>
 					{isOngoing && (
@@ -201,9 +203,9 @@ export default async function Project(props: Props) {
 					source={description}
 					className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-3xl"
 				/>
-			</header>
+			</Fade>
 
-			<section className="space-y-8">
+			<FadeSection className="space-y-8">
 				{/* badges */}
 				<div className="space-y-6 *:flex *:flex-wrap *:gap-2 *:empty:hidden">
 					<div>
@@ -262,15 +264,15 @@ export default async function Project(props: Props) {
 				)}
 
 				<Separator/>
-			</section>
+			</FadeSection>
 
 			{/* Sections */}
-			<section className="*:mt-16">
+			<FadeSection className="*:mt-16">
 				{articles.map((article, idx) => <Article
 					key={idx}
 					{...article}
 				/>)}
-			</section>
+			</FadeSection>
 		</div>
 	);
 }

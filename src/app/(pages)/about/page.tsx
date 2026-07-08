@@ -1,6 +1,7 @@
 import * as seo from "@/lib/seo";
 import * as format from "@/lib/format";
 
+import { FadeSection } from "@/components/fade";
 import { Card, CardHeader, CardContent, CardFooter, CardTitle, CardDescription } from "@/components/ui/card";
 import { Time } from "@/components/time";
 import { Badge } from "@/components/ui/badge";
@@ -45,7 +46,7 @@ function CertAndAwardsSection({
 	}>;
 }) {
 	return (
-		<section className="space-y-4">
+		<FadeSection className="space-y-4">
 			<Heading>{heading}</Heading>
 			{items.map(({ title, date, label }) => (
 				<article key={title}>
@@ -62,7 +63,7 @@ function CertAndAwardsSection({
 					</Card>
 				</article>
 			))}
-		</section>
+		</FadeSection>
 	);
 }
 
@@ -72,7 +73,7 @@ export default async function About() {
 	return (
 		<div className="page-content space-y-32">
 			{/* Intro Section */}
-			<section className="space-y-8 max-w-3xl">
+			<FadeSection className="space-y-8 max-w-3xl">
 				<header>
 					<PageBadge
 						className="mb-4"
@@ -88,19 +89,19 @@ export default async function About() {
 					className="prose-xl"
 					source={data.introduction}
 				/>
-			</section>
+			</FadeSection>
 
 			{/* Philosophies Section */}
-			<section>
+			<FadeSection>
 				<Heading>Values</Heading>
 				<Philosophies
 					items={data.philosophies}
 				/>
-			</section>
+			</FadeSection>
 
 			<div className="grid md:grid-cols-2 gap-16 md:gap-24">
 				{/* Left Column, Education */}
-				<section className="space-y-6">
+				<FadeSection className="space-y-6">
 					<Heading>Education</Heading>
 					{data.educations.map(edu => (
 						<article key={`${edu.school}/${edu.major}`}>
@@ -122,7 +123,7 @@ export default async function About() {
 							</Card>
 						</article>
 					))}
-				</section>
+				</FadeSection>
 
 				{/* Right Column */}
 				<div className="space-y-20">

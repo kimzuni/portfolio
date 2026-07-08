@@ -1,8 +1,10 @@
 import { cn } from "@/lib/utils";
 
+import { FadeSection, type FadeSectionProps } from "@/components/fade";
 
 
-export interface SectionProps extends React.ComponentProps<"section"> {
+
+export interface SectionProps extends FadeSectionProps {
 }
 
 export function Section({
@@ -10,7 +12,8 @@ export function Section({
 	...props
 }: SectionProps) {
 	return (
-		<section
+		<FadeSection
+			once={false}
 			className={cn(
 				"py-28 space-y-12 flex flex-col justify-center-safe",
 				className,

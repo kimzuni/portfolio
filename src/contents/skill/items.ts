@@ -9,6 +9,7 @@ import * as level from "./level";
 
 export const _items = [
 	{
+		pin: true,
 		group: "language-and-runtime",
 		category: "language",
 		slug: "javascript",
@@ -18,6 +19,7 @@ export const _items = [
 		],
 	},
 	{
+		pin: true,
 		group: "language-and-runtime",
 		category: "language",
 		slug: "typescript",
@@ -27,6 +29,7 @@ export const _items = [
 		],
 	},
 	{
+		pin: true,
 		group: "language-and-runtime",
 		category: "language",
 		slug: "python",
@@ -64,6 +67,7 @@ export const _items = [
 	},
 
 	{
+		pin: true,
 		group: "language-and-runtime",
 		category: "runtime",
 		slug: "node-js",
@@ -73,6 +77,7 @@ export const _items = [
 		],
 	},
 	{
+		pin: true,
 		group: "language-and-runtime",
 		category: "runtime",
 		slug: "bun",
@@ -85,6 +90,7 @@ export const _items = [
 
 
 	{
+		pin: true,
 		group: "backend",
 		category: "framework",
 		slug: "elysia",
@@ -94,6 +100,7 @@ export const _items = [
 		],
 	},
 	{
+		pin: true,
 		group: "backend",
 		category: "framework",
 		slug: "fastapi",
@@ -103,6 +110,7 @@ export const _items = [
 		],
 	},
 	{
+		pin: true,
 		group: "backend",
 		category: "framework",
 		slug: "express-js",
@@ -112,6 +120,7 @@ export const _items = [
 		],
 	},
 	{
+		pin: true,
 		group: "backend",
 		category: "framework",
 		slug: "django",
@@ -152,6 +161,7 @@ export const _items = [
 		],
 	},
 	{
+		pin: true,
 		group: "frontend-and-ui",
 		category: "style",
 		slug: "tailwind-css",
@@ -171,6 +181,7 @@ export const _items = [
 	},
 
 	{
+		pin: true,
 		group: "frontend-and-ui",
 		category: "framework",
 		slug: "react",
@@ -180,6 +191,7 @@ export const _items = [
 		],
 	},
 	{
+		pin: true,
 		group: "frontend-and-ui",
 		category: "framework",
 		slug: "next-js",
@@ -199,6 +211,7 @@ export const _items = [
 	},
 
 	{
+		pin: true,
 		group: "frontend-and-ui",
 		category: "library",
 		slug: "shadcn-ui",
@@ -239,6 +252,7 @@ export const _items = [
 
 
 	{
+		pin: true,
 		group: "data-and-storage",
 		category: "database",
 		slug: "mariadb",
@@ -267,6 +281,7 @@ export const _items = [
 	},
 
 	{
+		pin: true,
 		group: "data-and-storage",
 		category: "cache",
 		slug: "redis",
@@ -277,6 +292,7 @@ export const _items = [
 	},
 
 	{
+		pin: true,
 		icon: "drizzle",
 		group: "data-and-storage",
 		category: "orm",
@@ -327,6 +343,7 @@ export const _items = [
 
 
 	{
+		pin: true,
 		group: "devops-and-infra",
 		category: "os-shell",
 		slug: "bash",
@@ -336,6 +353,7 @@ export const _items = [
 		],
 	},
 	{
+		pin: true,
 		group: "devops-and-infra",
 		category: "os-shell",
 		slug: "linux",
@@ -346,6 +364,7 @@ export const _items = [
 	},
 
 	{
+		pin: true,
 		group: "devops-and-infra",
 		category: "cloud-container",
 		slug: "docker",
@@ -365,6 +384,7 @@ export const _items = [
 	},
 
 	{
+		pin: true,
 		group: "devops-and-infra",
 		category: "ci-cd",
 		slug: "github-actions",
@@ -377,6 +397,7 @@ export const _items = [
 
 
 	{
+		pin: true,
 		group: "tools",
 		category: "collaboration",
 		slug: "git",
@@ -432,6 +453,7 @@ export const _items = [
 	},
 
 	{
+		pin: true,
 		group: "tools",
 		category: "testing",
 		slug: "vitest",

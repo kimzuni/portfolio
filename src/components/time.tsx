@@ -1,18 +1,36 @@
-import * as format from "@/lib/format";
+const DEFAULT_FORMAT: Intl.DateTimeFormatOptions = {
+	year: "numeric",
+	month: "numeric",
+	day: "numeric",
+};
 
 
 
-export interface TimeProps extends Omit<React.ComponentProps<"time">, "children"> {
-	date: Date;
+export type TimeValue = string | Date | number;
+
+export interface TimeProps extends React.ComponentProps<"time"> {
+	value: TimeValue;
+	format?: Intl.DateTimeFormatOptions;
 }
 
-export function Time({ date, ...props }: TimeProps) {
+
+
+export function Time({
+	value,
+	format = DEFAULT_FORMAT,
+	...props
+}: TimeProps) {
+	const date = value instanceof Date ? value : new Date(value);
+
+	const isoString = date.toISOString();
+	const string = new Intl.DateTimeFormat("ko-KR", format).format(date);
+
 	return (
 		<time
-			dateTime={date.toISOString().split("T")[0]}
+			dateTime={isoString}
 			{...props}
 		>
-			{format.date(date)}
+			{string}
 		</time>
 	);
 }

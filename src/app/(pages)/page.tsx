@@ -38,7 +38,7 @@ export default async function Home() {
 				<p className="flex flex-col gap-1 items-center-safe text-sm text-muted-foreground">
 					<span>
 						{isLatest ? "Last Updated" : "Release Date"}
-						: <Time date={app.item.releaseDate}/>
+						: <Time value={app.item.releaseDate}/>
 					</span>
 					{app.item.mode !== "production" && (
 						<span>({app.item.mode} mode)</span>

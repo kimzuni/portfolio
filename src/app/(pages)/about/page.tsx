@@ -63,7 +63,7 @@ function CertAndAwardsSection({
 						<CardContent className="flex-1 space-y-2">
 							<CardTitle>{title}</CardTitle>
 							<CardDescription>
-								<Time date={date}/>
+								<Time value={date}/>
 							</CardDescription>
 						</CardContent>
 						<CardFooter className="border-l border-primary rounded-none pl-2 max-w-28">

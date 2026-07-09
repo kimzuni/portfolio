@@ -1,10 +1,12 @@
 import { useRender, mergeProps } from "@base-ui/react";
 
-import { Time } from "@/components/time";
+import { Time, type TimeProps, type TimeValue } from "@/components/time";
 
 
 
-export type Period = [start: Date, end?: Date];
+export type { TimeValue };
+
+export type Period<T extends TimeValue = TimeValue> = [start: T, end?: T];
 
 interface Option1 {
 	start: Period[0];
@@ -16,6 +18,7 @@ interface Option2 {
 }
 
 interface CommonOption {
+	format?: TimeProps["format"];
 	fallback?: React.ReactNode;
 }
 
@@ -31,6 +34,7 @@ export function PeriodBox({
 	// @ts-expect-error: ts(2339)
 	start: _start, end: _end, period,
 
+	format,
 	fallback,
 	render,
 	...props
@@ -41,9 +45,9 @@ export function PeriodBox({
 
 	const defaultProps: useRender.ElementProps<"p"> = {
 		children: <>
-			<Time date={start}/>
+			<Time value={start} format={format}/>
 			{!isSame && " ~ "}
-			{!isSame && end ? <Time date={end}/> : fallback}
+			{!isSame && end ? <Time value={end} format={format}/> : fallback}
 		</>,
 	};
 

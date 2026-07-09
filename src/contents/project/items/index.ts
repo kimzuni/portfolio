@@ -1,6 +1,3 @@
-import fs from "fs/promises";
-import path from "path";
-
 import * as markdown from "@/lib/markdown";
 
 import * as skill from "@/contents/skill";
@@ -11,46 +8,53 @@ import type { ItemRaw, Item } from "./types";
 
 
 
-const filename = new URL(import.meta.url).pathname;
-const dirname = path.dirname(filename);
+const importSlugs = [
+	"bun-elysiajs-drizzle-orm-restful-api",
+	"generative-agents",
+	"inst@gram",
+	"longvinter-docker-server",
+	"templify",
+	"web-portfolio",
+	"yamllint-js",
+] as const;
 
-export const map: Record<string, Item> = await fs
-	.readdir(dirname, { withFileTypes: true })
-	.then(arr => arr.filter(x => x.isDirectory()))
-	.then(arr => Promise.all(arr.map(cur => (
-		import(`@/contents/project/items/${cur.name}`)
-			.then(async (x: { item?: ItemRaw }) => (!x.item ? null : [cur.name, {
-				...x.item,
-				slug: cur.name,
-				cover: typeof x.item.cover === "object" && "lightSrc" in x.item.cover ? x.item.cover : {
-					lightSrc: x.item.cover,
-					darkSrc: x.item.cover,
-				},
-				description: await markdown.render(x.item.description),
-				tags: x.item.tags.map(x => tag.map[x]!),
-				skills: x.item.skills.map(x => skill.map[x]!),
-				team: x.item.team && {
-					...x.item.team,
-					description: await markdown.render(x.item.team.description),
-					contributions: await markdown.renders(x.item.team.contributions, "description"),
-				},
-				articles: await Promise.all(x.item.articles.map(async s => ({
-					...s,
-					blocks: await markdown.renders(s.blocks, "text").then(arr => arr.map(b => ({
-						...b,
-						media: (
-							!b.media || b.media.type !== "video" || typeof b.media.src !== "string" || b.media.src.startsWith("http") || b.media.src.startsWith("/") || b.media.src.startsWith(".")
-							? b.media
-							: {
-								...b.media,
-								src: `/media/${cur.name}/${b.media.src}`,
-							}
-						),
-					}))),
+const promises = importSlugs.map(async slug => (
+	import(`./${slug}`)
+		.then(x => x.item as ItemRaw)
+		.then(async item => [slug, {
+			...item,
+			slug: slug,
+			cover: typeof item.cover === "object" && "lightSrc" in item.cover ? item.cover : {
+				lightSrc: item.cover,
+				darkSrc: item.cover,
+			},
+			description: await markdown.render(item.description),
+			tags: item.tags.map(x => tag.map[x]!),
+			skills: item.skills.map(x => skill.map[x]!),
+			team: item.team && {
+				...item.team,
+				description: await markdown.render(item.team.description),
+				contributions: await markdown.renders(item.team.contributions, "description"),
+			},
+			articles: await Promise.all(item.articles.map(async s => ({
+				...s,
+				blocks: await markdown.renders(s.blocks, "text").then(arr => arr.map(b => ({
+					...b,
+					media: (
+						!b.media || b.media.type !== "video" || typeof b.media.src !== "string" || b.media.src.startsWith("http") || b.media.src.startsWith("/") || b.media.src.startsWith(".")
+						? b.media
+						: {
+							...b.media,
+							src: `/media/${slug}/${b.media.src}`,
+						}
+					),
 				}))),
-			} satisfies Item] as const))
-			.catch(() => null)
-	))))
+			}))),
+		} satisfies Item] as const)
+		.catch(() => null)
+));
+
+export const map: Record<string, Item> = await Promise.all(promises)
 	.then(arr => arr.filter(x => x !== null))
 	.then(arr => Object.fromEntries(arr))
 	.catch(() => ({}));

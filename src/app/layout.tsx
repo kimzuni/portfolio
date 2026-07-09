@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Noto_Sans_Mono } from "next/font/google";
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { cn } from "@/lib/utils";
 import * as seo from "@/lib/seo";
@@ -67,6 +69,8 @@ export default function RootLayout({
 		>
 			<body className="min-h-full flex flex-col">
 				{children}
+				<Analytics/>
+				<SpeedInsights/>
 			</body>
 		</html>
 	);

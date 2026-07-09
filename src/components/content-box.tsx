@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 export interface ContentBoxProps extends React.ComponentProps<"div"> {
 }
 
-export async function ContentBox({
+export function ContentBox({
 	className,
 	...props
 }: ContentBoxProps) {

@@ -8,7 +8,7 @@ export interface MarkdownBoxProps extends Omit<ContentBoxProps, "children" | "da
 	source: markdown.Result;
 }
 
-export async function MarkdownBox({
+export function MarkdownBox({
 	source,
 	...props
 }: MarkdownBoxProps) {

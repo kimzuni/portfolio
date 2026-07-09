@@ -13,7 +13,7 @@ export const metadata = seo.createMetadata(contents.notFound.metadata);
 
 
 
-export default async function NotFound() {
+export default function NotFound() {
 	const {
 		messages,
 		button,

@@ -67,7 +67,7 @@ function CertAndAwardsSection({
 	);
 }
 
-export default async function About() {
+export default function About() {
 	const data = contents.about.item;
 
 	return (

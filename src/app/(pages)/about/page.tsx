@@ -10,7 +10,7 @@ import { PageBadge } from "@/components/page-badge";
 import { Heading as BaseHeading, type HeadingProps as BaseHeadingProps } from "@/components/heading";
 import { MarkdownBox } from "@/components/markdown-box";
 
-import { Philosophies } from "./_components/philosophies";
+import { Features } from "./_components/features";
 
 import * as contents from "@/contents";
 
@@ -137,11 +137,11 @@ export default function About() {
 				/>
 			</FadeHeader>
 
-			{/* Philosophies Section */}
+			{/* Features Section */}
 			<FadeSection>
-				<Heading>Values</Heading>
-				<Philosophies
-					items={data.philosophies}
+				<Heading>Features</Heading>
+				<Features
+					items={data.features}
 				/>
 			</FadeSection>
 

@@ -40,7 +40,7 @@ export const hero: Hero = {
 
 
 
-export interface About extends Pick<_about.Item, "philosophies"> {
+export interface About extends Pick<_about.Item, "features"> {
 	heading: string;
 	message: string;
 	certificates: number;
@@ -51,7 +51,7 @@ export interface About extends Pick<_about.Item, "philosophies"> {
 export const about: About = {
 	heading: _about.item.title,
 	message: "안녕하세요! 아, 제가 누구냐구요?",
-	philosophies: _about.item.philosophies,
+	features: _about.item.features,
 	certificates: _about.item.certificates.length,
 	awards: _about.item.awards.length,
 	linkButton: {

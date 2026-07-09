@@ -14,7 +14,7 @@ export const _item = {
 		"",
 		"어제보다 조금 더 나은 개발자가 되기 위해 오늘도 어김없이 배우고 고민합니다.",
 	],
-	philosophies: [
+	features: [
 		{
 			label: "Why?",
 			description: [
@@ -90,7 +90,7 @@ export const metadata: seo.MetadataOptions = {
 export const item: Item = {
 	..._item,
 	introduction: await markdown.render(_item.introduction),
-	philosophies: await markdown.renders(_item.philosophies, "description"),
+	features: await markdown.renders(_item.features, "description"),
 	educations: _item.educations.sort((a, b) => b.period[1].getTime() - a.period[1].getTime()),
 	certificates: _item.certificates.sort((a, b) => b.date.getTime() - a.date.getTime()),
 	awards: _item.awards.sort((a, b) => b.date.getTime() - a.date.getTime()),
@@ -98,12 +98,12 @@ export const item: Item = {
 
 
 
-export interface PhilosophyRaw {
+export interface FeatureRaw {
 	label: string;
 	description: markdown.Source;
 }
 
-export interface Philosophy extends Omit<PhilosophyRaw, "description"> {
+export interface Feature extends Omit<FeatureRaw, "description"> {
 	description: markdown.Result;
 }
 
@@ -159,15 +159,15 @@ export interface ItemRaw {
 	label: string;
 	title: string;
 	introduction: markdown.Source;
-	philosophies: PhilosophyRaw[];
+	features: FeatureRaw[];
 	educations: EducationRaw[];
 	certificates: CertificateRaw[];
 	awards: AwardRaw[];
 }
 
-export interface Item extends Omit<ItemRaw, "introduction" | "philosophies" | "educations" | "certificates" | "awards"> {
+export interface Item extends Omit<ItemRaw, "introduction" | "features" | "educations" | "certificates" | "awards"> {
 	introduction: markdown.Result;
-	philosophies: Philosophy[];
+	features: Feature[];
 	educations: Education[];
 	certificates: Certificate[];
 	awards: Award[];

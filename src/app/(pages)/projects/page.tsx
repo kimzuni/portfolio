@@ -275,7 +275,7 @@ export default async function Projects({
 							: (
 								<p className="text-center">
 									{
-										projects.length
+										!projects.length
 										? "아직 진행한 프로젝트가 없어요 :("
 										: <>
 											선택한 필터 조건에 맞는 프로젝트가 없어요!

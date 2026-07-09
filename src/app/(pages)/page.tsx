@@ -50,6 +50,7 @@ export default async function Home() {
 							href={app.item.url.href}
 							label="최신 릴리즈 버전 보러 가기"
 							className="text-sm"
+							iconPosition="right"
 						/>
 					)}
 				</p>

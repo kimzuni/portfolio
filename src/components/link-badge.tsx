@@ -39,8 +39,13 @@ export function LinkBadge({
 	children: _children,
 	...props
 }: LinkBadgeProps) {
-	icon ??= href && EXTERNAL_REGEX.test(href) ? "ExternalLink" : "Link";
-	activeIcon ??= icon;
+	// null means no icon, undefined means auto-detect
+	if (icon === undefined) {
+		icon = href && EXTERNAL_REGEX.test(href) ? "ExternalLink" : "Link";
+	}
+	if (activeIcon === undefined) {
+		activeIcon = icon;
+	}
 
 	const Comp = href ? Link : onClick ? "button" : "span";
 	const isInteractive = Comp !== "span";

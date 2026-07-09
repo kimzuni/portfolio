@@ -1,35 +1,24 @@
 import type { Metadata } from "next";
-import type { StaticImageData } from "next/image";
+
+import * as markdown from "@/lib/markdown";
 
 
 
-export type OGImage = Exclude<Exclude<Metadata["openGraph"], null | undefined>["images"], undefined | Array<unknown>>;
-
-export interface MetadataOptions {
-	title: string;
-	description: string | string[];
-	cover?: StaticImageData | OGImage;
+export interface MetadataOptions extends Omit<Metadata, "description"> {
+	title?: Metadata["title"];
+	description?: markdown.Source;
 }
 
 export function createMetadata({
 	title,
+	description,
 	...opts
 }: MetadataOptions): Metadata {
-	const description = Array.isArray(opts.description)
-		? opts.description.join("\n")
-		: opts.description;
-
-	const cover = typeof opts.cover === "object" && "src" in opts.cover
-		? opts.cover.src
-		: opts.cover;
+	description = markdown.getLines(description)?.join(" ");
 
 	return {
 		title,
 		description,
-		openGraph: {
-			title,
-			description,
-			images: cover,
-		},
+		...opts,
 	};
 }

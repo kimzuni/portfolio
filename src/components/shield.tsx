@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
-import { Icon } from "./icon";
-import { Link } from "./link";
+import { Icon } from "@/components/icon";
+import { Link } from "@/components/link";
 
 
 
@@ -303,10 +303,11 @@ export function Shield({
 	const img = (
 		// eslint-disable-next-line @next/next/no-img-element
 		<img
-			loading="lazy"
 			alt={alt}
 			aria-label={alt}
 			src={`${src}${query ? `?${query}` : ""}`}
+			loading="lazy"
+			decoding="async"
 			className={cn(
 				"h-5",
 				props.link ? "object-cover transition-[filter] drop-shadow-md drop-shadow-transparent group-hover:drop-shadow-theme-primary" : "object-cover",
@@ -321,11 +322,10 @@ export function Shield({
 				<Link
 					className="inline-flex items-center gap-0.5 hover:text-primary transition-colors"
 					href={link}
-					children={<>
-						<Icon icon="LinkIcon" size={12}/>
-						{img}
-					</>}
-				/>
+				>
+					<Icon icon="Link" size={12}/>
+					{img}
+				</Link>
 			)
 	);
 }

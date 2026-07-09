@@ -3,32 +3,35 @@ import type { NextConfig } from "next";
 
 
 const nextConfig: NextConfig = {
-	output: "export",
 	reactCompiler: true,
-	trailingSlash: true,
-	typescript: {
-		ignoreBuildErrors: true,
-	},
-	images: {
-		loader: "custom",
-		imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-		deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-	},
-	transpilePackages: [
-		"next-image-export-optimizer",
-	],
 	env: {
-		nextImageExportOptimizer_imageFolderPath: "public/images",
-		nextImageExportOptimizer_exportFolderPath: "out",
-		nextImageExportOptimizer_quality: "75",
-		nextImageExportOptimizer_storePicturesInWEBP: "false",
-		nextImageExportOptimizer_exportFolderName: "nextImageExportOptimizer",
-		nextImageExportOptimizer_generateAndUseBlurImages: "true",
-		nextImageExportOptimizer_remoteImageCacheTTL: "0",
+		BUILD_TIME: `${Date.now()}`,
 	},
-	allowedDevOrigins: [
-		"192.168.0.*",
-	],
+	async headers() {
+		return [
+			{
+				source: "/api/:path*",
+				headers: [
+					{
+						key: "Access-Control-Allow-Origin",
+						value: "*",
+					},
+					{
+						key: "Access-Control-Allow-Methods",
+						value: "*",
+					},
+					{
+						key: "Access-Control-Allow-Headers",
+						value: "*",
+					},
+					{
+						key: "Cache-Control",
+						value: "no-store, max-age=0",
+					},
+				],
+			},
+		];
+	},
 };
 
 export default nextConfig;

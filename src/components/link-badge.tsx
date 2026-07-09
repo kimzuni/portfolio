@@ -1,12 +1,12 @@
 import { cn } from "@/lib/utils";
 
-import { Badge } from "./ui/badge";
-import { Link } from "./link";
-import { Icon, type IconName } from "./icon";
+import { Badge } from "@/components/ui/badge";
+import { Link } from "@/components/link";
+import { Icon, type IconName } from "@/components/icon";
 
 
 
-export interface LinkBadgeProps extends Omit<React.ComponentProps<typeof Badge>, "asChild" | "children"> {
+export interface LinkBadgeProps extends Omit<React.ComponentProps<typeof Badge>, "render" | "children"> {
 	icon?: IconName;
 	label: string;
 	href?: string;
@@ -16,8 +16,10 @@ export interface LinkBadgeProps extends Omit<React.ComponentProps<typeof Badge>,
 
 
 
+export const EXTERNAL_REGEX = /^https?:\/\//i;
+
 export function LinkBadge({
-	icon = "LinkIcon",
+	icon,
 	label,
 	href,
 	active,
@@ -26,13 +28,13 @@ export function LinkBadge({
 	variant = "secondary",
 	...props
 }: LinkBadgeProps) {
+	icon ??= href && EXTERNAL_REGEX.test(href) ? "ExternalLink" : "Link";
 	activeIcon ??= icon;
 
 	const Comp = href ? Link : onClick ? "button" : "span";
 	const isInteractive = Comp !== "span";
 	const children = (
 		<Comp
-
 			// @ts-expect-error: ts(2322)
 			href={href}
 			onClick={onClick}
@@ -52,9 +54,8 @@ export function LinkBadge({
 
 	return (
 		<Badge
-			asChild
 			variant={variant}
-			children={children}
+			render={children}
 			{...props}
 		/>
 	);

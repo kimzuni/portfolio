@@ -1,71 +1,31 @@
+import type { LucideProps } from "lucide-react";
+import * as lucide from "lucide-react";
+import type { IconType as SiIconType } from "@icons-pack/react-simple-icons";
 import {
-	type LucideProps,
-	ArrowDown,
-	ArrowRight,
-	ArrowRightCircle,
-	ChartBar,
-	Check,
-	ChevronRight,
-	ChevronsDown,
-	Circle,
-	Cloud,
-	Code2,
-	Database,
-	Funnel,
-	FunnelPlus,
-	FunnelX,
-	Home,
-	Layout,
-	LinkIcon,
-	Mail,
-	Moon,
-	RefreshCcw,
-	RotateCcw,
-	Server,
-	Sun,
-	Wrench,
-} from "lucide-react";
-import {
-	type IconType as SiIconType,
 	SiGithub as GitHub,
 } from "@icons-pack/react-simple-icons";
 
 
 
-const lucideIcons = {
-	ArrowDown,
-	ArrowRight,
-	ArrowRightCircle,
-	ChartBar,
-	Check,
-	ChevronRight,
-	ChevronsDown,
-	Circle,
-	Cloud,
-	Code2,
-	Database,
-	Funnel,
-	FunnelPlus,
-	FunnelX,
-	Home,
-	Layout,
-	LinkIcon,
-	Mail,
-	Moon,
-	RefreshCcw,
-	RotateCcw,
-	Server,
-	Sun,
-	Wrench,
-};
+type _LucideIconName = keyof typeof lucide extends infer T
+	? T extends `Lucide${infer U}`
+		? U
+		: never
+	: never;
 
-export type LucideIconName = keyof typeof lucideIcons;
+export type LucideIconName = _LucideIconName | null;
 export interface LucideIconProps extends LucideProps {
 	icon: LucideIconName;
 }
 
 export function LucideIcon({ icon, ...props }: LucideIconProps) {
-	const I = lucideIcons[icon];
+	if (icon === null) {
+		return null;
+	}
+
+	const I = lucide[`Lucide${icon}`];
+
+	// @ts-expect-error: ts(2322)
 	return <I {...props}/>;
 }
 
@@ -75,26 +35,40 @@ const simpleIcons = {
 	GitHub,
 };
 
-export type SimpleIconName = keyof typeof simpleIcons;
+export type SimpleIconName = keyof typeof simpleIcons | null;
 export interface SimpleIconProps extends React.ComponentProps<SiIconType> {
 	icon: SimpleIconName;
 }
 
 export function SimpleIcon({ icon, ...props }: SimpleIconProps) {
+	if (icon === null) {
+		return null;
+	}
+
 	const I = simpleIcons[icon];
 	return <I {...props}/>;
 }
 
 
 
-export type IconProps = LucideIconProps | SimpleIconProps;
-export type IconName = IconProps["icon"];
+export type IconName = LucideIconName | SimpleIconName;
+export type IconProps<N extends IconName = IconName> =
+	& { icon: N }
+	& (
+		N extends LucideIconName
+			? LucideProps
+			: React.ComponentProps<SiIconType>
+	);
 
-export function Icon({
+export function Icon<N extends IconName>({
 	icon,
 	...props
-}: IconProps) {
-	const I = icon in lucideIcons ? LucideIcon : SimpleIcon;
+}: IconProps<N>) {
+	if (icon === null) {
+		return null;
+	}
+
+	const I = icon in simpleIcons ? SimpleIcon : LucideIcon;
 
 	// @ts-expect-error: ts(2322)
 	return <I icon={icon} {...props}/>;

@@ -19,11 +19,11 @@ export interface SkillData {
 }
 
 export interface TooltipWithMobileProps extends React.ComponentProps<typeof TooltipTrigger> {
-	text: string;
+	tooltip: React.ReactNode;
 }
 
 export function TooltipWithMobile({
-	text,
+	tooltip,
 	className,
 	...props
 }: TooltipWithMobileProps) {
@@ -39,10 +39,9 @@ export function TooltipWithMobile({
 				className={cn("size-fit", className)}
 				{...props}
 			/>
-			<TooltipContent
-				className="font-mono"
-				children={text}
-			/>
+			<TooltipContent className="font-mono flex-col">
+				{tooltip}
+			</TooltipContent>
 		</Tooltip>
 	);
 }

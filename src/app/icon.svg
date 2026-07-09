@@ -1,14 +1,47 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!--
-   - © 2023 kimzuni <hello@kimzuni.com>
-   - Create Date : 2023.01.12
-   - Latest Date : 2023.01.13
-   -->
-<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 64 64">
-	<g fill="#5cc9ff" stroke-width="0">
-		<path d="m 0,32 h 32 v 5 l -24,22 h 24 v 5 h -32 v -5 l 24,-22 h -24 z"/>
-		<path d="m 36,24 h 24 v 3.75 l -18,16.5 h 18 v 3.75 h -24 v -3.75 l 18,-16.5 h -18 z"/>
-		<path d="m 26,4 h 16 v 2.5 l -12,11 h 12 v 2.5 h -16 v -2.5 l 12,-11 h -12 z"/>
-		<path d="m 52.8,0 h 11.2 v 1.75 l -8.4,7.7 h 8.4 v 1.75 h -11.2 v -1.75 l 8.4,-7.7 h -8.4 z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+	<defs>
+		<text id="z">Z</text>
+	</defs>
+
+	<g
+		fill="#5cc9ff"
+		stroke-width="0"
+		font-weight="bold"
+		font-family="sans-serif"
+		text-anchor="middle"
+		dominant-baseline="middle"
+	>
+		<use
+			href="#z"
+			x="0"
+			y="32"
+			text-anchor="start"
+			dominant-baseline="auto"
+			font-size="24"
+		/>
+		<use
+			href="#z"
+			x="18"
+			y="15"
+			text-anchor="start"
+			dominant-baseline="hanging"
+			font-size="16"
+		/>
+		<use
+			href="#z"
+			x="16"
+			y="12"
+			text-anchor="middle"
+			dominant-baseline="auto"
+			font-size="12"
+		/>
+		<use
+			href="#z"
+			x="30"
+			y="2"
+			text-anchor="end"
+			dominant-baseline="hanging"
+			font-size="8"
+		/>
 	</g>
 </svg>

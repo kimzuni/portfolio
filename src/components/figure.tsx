@@ -33,6 +33,7 @@ export function Figure({
 	captionPosition = "bottom",
 	caption,
 	children,
+	className,
 	...props
 }: FigureProps) {
 	if (!caption && !alwaysWrap) {
@@ -40,7 +41,13 @@ export function Figure({
 	}
 
 	return (
-		<figure {...props}>
+		<figure
+			className={cn(
+				"size-fit",
+				className,
+			)}
+			{...props}
+		>
 			{captionPosition === "top" && <FigCaption>{caption}</FigCaption>}
 			{children}
 			{captionPosition === "bottom" && <FigCaption>{caption}</FigCaption>}

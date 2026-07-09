@@ -1,0 +1,8 @@
+* {
+	@apply pointer-fine:cursor-[url("/cursor-light.svg")_5_5,auto]!;
+	@apply pointer-fine:dark:cursor-[url("/cursor-dark.svg")_5_5,auto]!;
+} :root {
+	@apply scroll-smooth antialiased;
+} ::selection {
+	@apply bg-primary/70 text-background;
+}

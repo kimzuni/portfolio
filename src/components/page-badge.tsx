@@ -1,11 +1,11 @@
 import { cn } from "@/lib/utils";
 
-import { Badge } from "./ui/badge";
-import { Icon } from "./icon";
+import { Badge } from "@/components//ui/badge";
+import { Icon } from "@/components/icon";
 
 
 
-export interface PageBadgeProps extends Omit<React.ComponentProps<typeof Badge>, "asChild" | "children"> {
+export interface PageBadgeProps extends Omit<React.ComponentProps<typeof Badge>, "render" | "children"> {
 	label: string;
 }
 
@@ -16,8 +16,8 @@ export function PageBadge({
 }: PageBadgeProps) {
 	return (
 		<Badge variant="default" className={cn("font-mono", className)} {...props}>
-			<Icon icon="Circle" className="fill-background size-2!"/>
-			{label}
+			<Icon icon="Circle" className="fill-background px-0.5"/>
+			<span>{label}</span>
 		</Badge>
 	);
 }

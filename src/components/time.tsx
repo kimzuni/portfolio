@@ -1,4 +1,4 @@
-import { formatDate } from "@/lib/utils";
+import * as format from "@/lib/format";
 
 
 
@@ -10,8 +10,9 @@ export function Time({ date, ...props }: TimeProps) {
 	return (
 		<time
 			dateTime={date.toISOString().split("T")[0]}
-			children={formatDate(date)}
 			{...props}
-		/>
+		>
+			{format.date(date)}
+		</time>
 	);
 }

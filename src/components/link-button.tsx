@@ -1,12 +1,12 @@
 import { cn } from "@/lib/utils";
 
-import { Button } from "./ui/button";
-import { Link } from "./link";
-import { Icon, type IconName } from "./icon";
+import { Button } from "@/components/ui/button";
+import { Link } from "@/components/link";
+import { Icon, type IconName } from "@/components/icon";
 
 
 
-export interface LinkButtonProps extends Omit<React.ComponentProps<typeof Button>, "asChild" | "children"> {
+export interface LinkButtonProps extends Omit<React.ComponentProps<typeof Button>, "render" | "children"> {
 	label: string;
 	href?: string;
 	icon?: IconName;
@@ -56,21 +56,20 @@ export function LinkButton({
 
 	return (
 		<Button
-			asChild
+			variant={variant}
+			nativeButton={!href}
 			className={cn(
 				"group flex items-center",
 				iconPosition === "left" ? "flex-row" : "flex-row-reverse",
 				variant === "default" ? "rounded-full" : "",
 				className,
 			)}
-			variant={variant}
-			{...props}
-		>
-			{
+			render={
 				!href
 					? <button>{children}</button>
 					: <Link href={href}>{children}</Link>
 			}
-		</Button>
+			{...props}
+		/>
 	);
 }

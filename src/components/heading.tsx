@@ -15,7 +15,10 @@ export function Heading({
 
 	return (
 		<Comp
-			className={cn("text-3xl font-bold tracking-tight", className)}
+			className={cn(
+				"text-3xl font-bold tracking-tight",
+				className,
+			)}
 			{...props}
 		/>
 	);

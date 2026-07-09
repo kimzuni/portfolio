@@ -2,14 +2,14 @@
 
 import { useTheme } from "next-themes";
 
-import { Button } from "./ui/button";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import { Icon } from "./icon";
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { Icon } from "@/components/icon";
 
 
 
@@ -21,13 +21,13 @@ export function ModeToggle(props: ModeToggleProps) {
 
 	return (
 		<DropdownMenu modal={false}>
-			<DropdownMenuTrigger asChild>
-				<Button variant="outline" size="icon" {...props}>
+			<DropdownMenuTrigger
+				render={<Button variant="ghost" size="icon" {...props}>
 					<Icon icon="Sun" className="scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"/>
 					<Icon icon="Moon" className="absolute scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"/>
 					<span className="sr-only">Toggle theme</span>
-				</Button>
-			</DropdownMenuTrigger>
+				</Button>}
+			/>
 			<DropdownMenuContent align="end">
 				{themes.map(curr => (
 					<DropdownMenuItem
@@ -35,10 +35,9 @@ export function ModeToggle(props: ModeToggleProps) {
 						onClick={() => setTheme(curr)}
 						className="flex justify-between items-center gap-2"
 					>
-						<span
-							className="capitalize font-mono"
-							children={curr}
-						/>
+						<span className="capitalize font-mono">
+							{curr}
+						</span>
 						{theme === curr && <Icon icon="Check" className="text-primary"/>}
 					</DropdownMenuItem>
 				))}

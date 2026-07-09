@@ -1,4 +1,4 @@
-import { TooltipWithMobile } from "./tooltip-with-mobile";
+import { TooltipWithMobile } from "@/components/tooltip-with-mobile";
 
 
 
@@ -8,32 +8,52 @@ export interface SkillIconOptions {
 	provider?: Provider;
 	icon?: string;
 	label: string;
+	level: string;
 }
 
-export interface SkillIconProps extends SkillIconOptions, Omit<React.ComponentProps<typeof TooltipWithMobile>, "children" | "src" | "alt" | "text"> {
+export interface SkillIconProps extends SkillIconOptions, Omit<React.ComponentProps<typeof TooltipWithMobile>, "children" | "src" | "alt" | "tooltip"> {
 	perline?: number;
 	alt?: string;
+	width?: number;
+	height?: number;
 }
 
 export function SkillIcon({
 	icon,
 	label,
+	level,
 	provider = "syvixor",
 	perline = 5,
+	width = 48,
+	height = 48,
 	...props
 }: SkillIconProps) {
-	const baseURL = provider === "tandpfun" ? "https://skillicons.dev" : "https://skills.syvixor.com/api";
-	icon = icon ?? label.toLowerCase().replace(/[ /.]/, "");
+	let src: string;
+	if (!icon?.includes("/")) {
+		const baseURL = provider === "tandpfun" ? "https://skillicons.dev" : "https://skills.syvixor.com/api";
+		icon = icon ?? label.toLowerCase().replace(/[ /.]/, "");
+		src = `${baseURL}/icons?perline=${perline}&i=${icon}`;
+	} else {
+		src = icon ?? "";
+	}
 
 	return (
-		<TooltipWithMobile text={label} {...props}>
+		<TooltipWithMobile
+			tooltip={<>
+				<p>{level}</p>
+				<p>{label}</p>
+			</>}
+			{...props}
+		>
 			{/* eslint-disable-next-line @next/next/no-img-element */}
 			<img
-				src={`${baseURL}/icons?perline=${perline}&i=${icon}`}
+				src={src}
 				alt={`Skill - ${icon}`}
 				aria-label={`Skill - ${icon}`}
-				className="size-[48px]"
+				width={width}
+				height={height}
 				loading="lazy"
+				decoding="async"
 			/>
 		</TooltipWithMobile>
 	);

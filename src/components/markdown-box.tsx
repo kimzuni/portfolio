@@ -1,23 +1,20 @@
-import { cn, markdownToHtml, type MarkdownValue } from "@/lib/utils";
+import type * as markdown from "@/lib/markdown";
+
+import { ContentBox, type ContentBoxProps } from "@/components/content-box";
 
 
 
-export interface MarkdownBoxProps extends Omit<React.ComponentProps<"div">, "children"> {
-	/**
-	 * @warning Used for `dangerouslySetInnerHTML`.
-	 */
-	source: MarkdownValue;
+export interface MarkdownBoxProps extends Omit<ContentBoxProps, "children" | "dangerouslySetInnerHTML"> {
+	source: markdown.Result;
 }
 
-export function MarkdownBox({
+export async function MarkdownBox({
 	source,
-	className,
 	...props
 }: MarkdownBoxProps) {
 	return (
-		<div
-			className={cn("markdown-box", className)}
-			dangerouslySetInnerHTML={{ __html: markdownToHtml(source) }}
+		<ContentBox
+			dangerouslySetInnerHTML={{ __html: source.html ?? "" }}
 			{...props}
 		/>
 	);

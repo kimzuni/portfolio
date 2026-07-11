@@ -1,12 +1,13 @@
+import { cn } from "@/lib/utils";
 import * as seo from "@/lib/seo";
-import * as format from "@/lib/format";
 
 import { FadeHeader, FadeSection } from "@/components/fade";
 import { Card, CardHeader, CardContent, CardFooter, CardTitle, CardDescription } from "@/components/ui/card";
 import { Time } from "@/components/time";
+import { PeriodBox } from "@/components/period-box";
 import { Badge } from "@/components/ui/badge";
 import { PageBadge } from "@/components/page-badge";
-import { Heading as BaseHeading } from "@/components/heading";
+import { Heading as BaseHeading, type HeadingProps as BaseHeadingProps } from "@/components/heading";
 import { MarkdownBox } from "@/components/markdown-box";
 
 import { Philosophies } from "./_components/philosophies";
@@ -19,13 +20,21 @@ export const metadata = seo.createMetadata(contents.about.metadata);
 
 
 
-function Heading(props: {
-	children: React.ReactNode;
-}) {
+interface HeadingProps extends BaseHeadingProps {
+}
+
+function Heading({
+	level = 2,
+	className,
+	...props
+}: HeadingProps) {
 	return (
 		<BaseHeading
-			level={2}
-			className="mb-12 border-l-4 border-primary pl-4 font-mono"
+			level={level}
+			className={cn(
+				"mb-12 border-l-4 border-primary pl-4 font-mono",
+				className,
+			)}
 			{...props}
 		/>
 	);
@@ -53,11 +62,48 @@ function CertAndAwardsSection({
 					<Card className="flex-row items-center-safe gap-0">
 						<CardContent className="flex-1 space-y-2">
 							<CardTitle>{title}</CardTitle>
-							<CardDescription>{format.date(date)}</CardDescription>
+							<CardDescription>
+								<Time date={date}/>
+							</CardDescription>
 						</CardContent>
 						<CardFooter className="border-l border-primary rounded-none pl-2 max-w-28">
 							<CardDescription className="font-medium text-end">
 								{label}
+							</CardDescription>
+						</CardFooter>
+					</Card>
+				</article>
+			))}
+		</FadeSection>
+	);
+}
+
+/**
+ * for Educations
+ */
+function EducationsSection({
+	heading,
+	items,
+}: {
+	heading: string;
+	items: contents.about.Education[];
+}) {
+	return (
+		<FadeSection className="space-y-6">
+			<Heading>{heading}</Heading>
+			{items.map(({ school, major, status, period }) => (
+				<article key={`${school}/${major}`}>
+					<Card className="gap-1">
+						<CardHeader className="flex justify-between items-start">
+							<CardTitle className="text-lg font-bold">{school}</CardTitle>
+							<Badge variant="outline">{status}</Badge>
+						</CardHeader>
+						<CardContent>
+							<CardDescription className="font-medium">{major}</CardDescription>
+						</CardContent>
+						<CardFooter>
+							<CardDescription>
+								<PeriodBox period={period}/>
 							</CardDescription>
 						</CardFooter>
 					</Card>
@@ -101,29 +147,10 @@ export default function About() {
 
 			<div className="grid md:grid-cols-2 gap-16 md:gap-24">
 				{/* Left Column, Education */}
-				<FadeSection className="space-y-6">
-					<Heading>Education</Heading>
-					{data.educations.map(edu => (
-						<article key={`${edu.school}/${edu.major}`}>
-							<Card className="gap-1">
-								<CardHeader className="flex justify-between items-start">
-									<CardTitle className="text-lg font-bold">{edu.school}</CardTitle>
-									<Badge variant="outline">{edu.status}</Badge>
-								</CardHeader>
-								<CardContent>
-									<CardDescription className="font-medium">{edu.major}</CardDescription>
-								</CardContent>
-								<CardFooter>
-									<CardDescription>
-										<Time date={edu.period[0]}/>
-										{" ~ "}
-										{edu.period[1] ? <Time date={edu.period[1]}/> : "Present"}
-									</CardDescription>
-								</CardFooter>
-							</Card>
-						</article>
-					))}
-				</FadeSection>
+				<EducationsSection
+					heading="Education"
+					items={data.educations}
+				/>
 
 				{/* Right Column */}
 				<div className="space-y-20">

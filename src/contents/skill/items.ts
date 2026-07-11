@@ -567,5 +567,5 @@ export type Item =
 		level: level.Item;
 		group: category.group.Item;
 		category: category.Item;
-		description: markdown.Result<ItemRaw<category.group.Slug>["description"]>;
+		description: markdown.Result;
 	};

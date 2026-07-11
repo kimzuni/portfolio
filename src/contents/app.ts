@@ -34,7 +34,7 @@ export interface ItemRaw {
 }
 
 export interface Item extends Omit<ItemRaw, "description" | "releaseDate" | "url"> {
-	description: markdown.Result<ItemRaw["description"]>;
+	description: markdown.Result;
 	releaseDate: Date;
 	url: URL;
 }

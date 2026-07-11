@@ -53,7 +53,7 @@ export default function NotFound() {
 				transition={{ delay: 0.4, duration: 0.5 }}
 				className="text-muted-foreground text-lg"
 			>
-				<MarkdownBox source={messages}/>
+				<MarkdownBox source={messages.lines}/>
 			</Motion>
 
 			<Motion

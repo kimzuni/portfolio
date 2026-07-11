@@ -218,7 +218,7 @@ export function ComboboxMultiple<V extends string>({
 												{label}
 											</ItemTitle>
 											<ItemDescription className="empty:hidden">
-												{description?.text}
+												{description?.lines?.join(" ")}
 											</ItemDescription>
 										</ItemContent>
 									</Item>

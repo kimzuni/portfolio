@@ -19,7 +19,7 @@ export interface ContributionRaw {
 }
 
 export interface Contribution extends Omit<ContributionRaw, "description"> {
-	description: markdown.Result<ContributionRaw["description"]>;
+	description: markdown.Result;
 }
 
 
@@ -32,7 +32,7 @@ export interface TeamRaw {
 }
 
 export interface Team extends Omit<TeamRaw, "description" | "contributions"> {
-	description: markdown.Result<TeamRaw["description"]>;
+	description: markdown.Result;
 	contributions: Contribution[];
 }
 
@@ -45,7 +45,7 @@ export interface BlockRaw {
 }
 
 export interface Block extends Omit<BlockRaw, "text"> {
-	text: markdown.Result<BlockRaw["text"]>;
+	text: markdown.Result;
 }
 
 
@@ -78,7 +78,7 @@ export interface ItemRaw {
 export interface Item extends Omit<ItemRaw, "cover"| "description" | "tags" | "skills" | "team" | "articles"> {
 	slug: string;
 	cover: GenerateImageThemedMap<StaticImageData>;
-	description: markdown.Result<ItemRaw["description"]>;
+	description: markdown.Result;
 	tags: tag.Item[];
 	skills: contents.skill.Item[];
 	team?: Team;

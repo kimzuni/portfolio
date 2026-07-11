@@ -16,7 +16,7 @@ export const metadata: seo.MetadataOptions = {
 	title: {
 		absolute: _app.item.title,
 	},
-	description: _app.item.description.raw,
+	description: _app.item.description.lines,
 };
 
 

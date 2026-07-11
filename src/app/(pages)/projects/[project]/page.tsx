@@ -66,7 +66,7 @@ function ContributionDialog({
 					<DialogTitle>기여도</DialogTitle>
 					<DialogDescription
 						className="empty:hidden"
-						render={<MarkdownBox source={description}/>}
+						render={<MarkdownBox source={description.lines}/>}
 					/>
 				</DialogHeader>
 				<div className="space-y-4 mt-4">
@@ -89,7 +89,7 @@ function ContributionDialog({
 									"--percentage": `${percentage}%`,
 								} as React.CSSProperties}
 							/>
-							<MarkdownBox className="prose-sm" source={description}/>
+							<MarkdownBox className="prose-sm" source={description.lines}/>
 						</div>
 					))}
 				</div>
@@ -133,9 +133,9 @@ function Article({ blocks }: contents.project.Article) {
 							/>
 					)}
 
-					{block.text && (
+					{!!block.text.lines?.length && (
 						<MarkdownBox
-							source={block.text}
+							source={block.text.lines}
 							className={cn(
 								"h-full text-muted-foreground font-medium py-2 flex flex-col gap-2 justify-start items-start",
 								"[&_a]:underline [&_a]:text-primary [&_a]:hover:text-primary/80 [&_a]:transition-colors",
@@ -199,7 +199,7 @@ export default async function Project(props: Props) {
 				<Heading level={1}>{title}</Heading>
 
 				<MarkdownBox
-					source={description}
+					source={description.lines}
 					className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-3xl"
 				/>
 			</Fade>

@@ -41,5 +41,5 @@ export interface ItemRaw {
 }
 
 export interface Item extends Omit<ItemRaw, "messages"> {
-	messages: markdown.Result<ItemRaw["messages"]>;
+	messages: markdown.Result;
 }

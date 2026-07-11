@@ -18,7 +18,7 @@ const title: Metadata["title"] = {
 	default: contents.app.item.title,
 	template: `%s | ${contents.app.item.title}`,
 };
-const description = contents.app.item.description.raw;
+const description = contents.app.item.description.lines;
 
 
 

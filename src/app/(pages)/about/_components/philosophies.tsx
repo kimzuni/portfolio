@@ -24,7 +24,7 @@ export function Philosophy({
 			<Separator className="bg-primary"/>
 			<MarkdownBox
 				className="prose-base"
-				source={description}
+				source={description.lines}
 			/>
 		</>,
 	};

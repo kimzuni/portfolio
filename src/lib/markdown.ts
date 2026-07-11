@@ -1,52 +1,59 @@
-import { cache } from "react";
-
-import { unified } from "unified";
-import remarkParse from "remark-parse";
-import remarkGfm from "remark-gfm";
-import remarkRehype from "remark-rehype";
-import rehypeSanitize from "rehype-sanitize";
-import rehypeStringify from "rehype-stringify";
- 
-
-
-type RorU<T, R> = T extends undefined ? undefined : R;
-
 export type Source = string | string[];
 
-export interface Result<S extends Source | undefined = Source | undefined> {
-	raw: RorU<S, string[]>;
-	text: RorU<S, string>;
-	html: RorU<S, string>;
+interface BaseResult {
+	raw: Source;
+	lines: string[];
 }
 
+type AllUndefined<T> = { [K in keyof T]: undefined };
 
-
-const processor = unified()
-	.use(remarkParse)
-	.use(remarkGfm)
-	.use(remarkRehype)
-	.use(rehypeSanitize)
-	.use(rehypeStringify);
-
-const renderWithCache = cache(async (value: Source): Promise<Result<Source>> => {
-	const raw = getLines(value);
-	const text = raw.join("\n");
-	const html = String(await processor.process(text));
-	return { raw, text, html };
-});
+export type Result = BaseResult | AllUndefined<BaseResult>;
 
 
 
-export function getLines<S extends Source | undefined>(value: S): RorU<S, string[]>;
-export function getLines(value: Source | undefined) {
-	if (value === undefined) return undefined;
-	return Array.isArray(value) ? value : [value];
-}
+const SPACE_REGEXP = /^\s*/;
+const NEW_LINE_REGEXP = /\r?\n/;
 
-export async function render<S extends Source | undefined>(value: S): Promise<Result<S>>;
-export async function render(value: Source | undefined) {
-	const { raw, html } = value === undefined ? {} : await renderWithCache(value);
-	return { raw, html };
+export const getLines = (value: Source | undefined): Result["lines"] => {
+	let tmp: string[];
+	if (typeof value === "string") {
+		tmp = [value];
+	} else if (Array.isArray(value) && value[0] !== undefined) {
+		tmp = value;
+	} else {
+		return undefined;
+	}
+
+	const detectSpaceLength = (line: string) => {
+		return line.match(SPACE_REGEXP)?.[0].length ?? 0
+	}
+
+	let spaceLength: number | undefined;
+	const arr: string[] = [];
+	for (const x of tmp) {
+		const split = x.split(NEW_LINE_REGEXP);
+		for (let line of split) {
+			if (spaceLength === undefined && !line.trim()) {
+				continue;
+			}
+			spaceLength ??= detectSpaceLength(line);
+
+			line = line.slice(spaceLength);
+			arr.push(line);
+		}
+	}
+	return arr;
+};
+
+export async function render(raw: Source | undefined): Promise<Result> {
+	const lines = getLines(raw);
+	if (!raw || !lines) {
+		return {
+			raw: undefined,
+			lines: undefined,
+		};
+	}
+	return { raw, lines };
 }
 
 export async function renders<
@@ -61,18 +68,13 @@ export async function renders<
 	& {
 		[P in K]:
 			V extends Source | undefined
-				? Result<V>
+				? Result
 				: never
 	}
 >>;
-export async function renders(value: Array<{ [K in string]: Source | undefined }>, key: string) {
+export async function renders(value: Array<Record<string, Source | undefined>>, key: string) {
 	return await Promise.all(value.map(async v => ({
 		...v,
 		[key]: await render(v[key]),
 	})))
-}
-
-export async function process<S extends Source | undefined>(value: S): Promise<RorU<S, string>>;
-export async function process(value: Source | undefined) {
-	return await render(value).then(x => x.html);
 }

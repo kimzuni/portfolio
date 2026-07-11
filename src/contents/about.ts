@@ -104,7 +104,7 @@ export interface PhilosophyRaw {
 }
 
 export interface Philosophy extends Omit<PhilosophyRaw, "description"> {
-	description: markdown.Result<PhilosophyRaw["description"]>;
+	description: markdown.Result;
 }
 
 
@@ -166,7 +166,7 @@ export interface ItemRaw {
 }
 
 export interface Item extends Omit<ItemRaw, "introduction" | "philosophies" | "educations" | "certificates" | "awards"> {
-	introduction: markdown.Result<ItemRaw["introduction"]>;
+	introduction: markdown.Result;
 	philosophies: Philosophy[];
 	educations: Education[];
 	certificates: Certificate[];

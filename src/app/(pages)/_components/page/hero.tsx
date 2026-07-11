@@ -39,7 +39,7 @@ export function Hero({
 						{subheading}
 					</p>
 					<MarkdownBox
-						source={tagline}
+						source={tagline.lines}
 						className="pt-4 font-medium md:text-lg max-w-2xl mx-auto leading-relaxed *:m-0"
 					/>
 					<div className="empty:hidden flex flex-wrap items-center justify-center gap-4 pt-8">

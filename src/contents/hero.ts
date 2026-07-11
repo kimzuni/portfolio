@@ -26,5 +26,5 @@ export interface ItemRaw {
 }
 
 export interface Item extends Omit<ItemRaw, "tagline"> {
-	tagline: markdown.Result<ItemRaw["tagline"]>;
+	tagline: markdown.Result;
 }

@@ -87,7 +87,7 @@ export default function About() {
 				</header>
 				<MarkdownBox
 					className="prose-xl"
-					source={data.introduction}
+					source={data.introduction.lines}
 				/>
 			</FadeSection>
 

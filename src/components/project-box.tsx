@@ -104,7 +104,7 @@ export function ProjectBox({
 				</Link>
 
 				<p className="empty:hidden line-clamp-2 text-sm text-muted-foreground">
-					{description.text}
+					{description.lines?.join(" ")}
 				</p>
 			</CardContent>
 			<CardFooter className="flex-1 flex-col items-start pt-2 gap-2 *:flex *:flex-wrap *:gap-1 *:empty:hidden">

@@ -19,7 +19,7 @@ const badgeTypes = [
 	"skill",
 ] as const;
 
-export interface activeItem {
+export interface ActiveItem {
 	slug: string;
 	label: string;
 }
@@ -27,8 +27,8 @@ export interface activeItem {
 export interface ProjectBoxProps extends contents.project.Item {
 	maxSkills?: number;
 	className?: string;
-	activeTags?: activeItem[] | null;
-	activeSkills?: activeItem[] | null;
+	activeTags?: ActiveItem[] | null;
+	activeSkills?: ActiveItem[] | null;
 }
 
 export function ProjectBox({
@@ -55,7 +55,7 @@ export function ProjectBox({
 
 	const badgeMap: Record<BadgeType, {
 		max?: number;
-		items: activeItem[];
+		items: ActiveItem[];
 		Badge: typeof TagBadge | typeof SkillBadge;
 	}> = {
 		tag: {
@@ -74,7 +74,7 @@ export function ProjectBox({
 		skill: new Set(activeSkills?.map(x => x.slug) ?? []),
 	};
 
-	const isActive = (key: BadgeType, value: activeItem) => {
+	const isActive = (key: BadgeType, value: ActiveItem) => {
 		return activeMap[key].has(value.slug);
 	}
 

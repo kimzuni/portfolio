@@ -35,7 +35,7 @@ export interface ItemRaw {
 	href: string;
 	disabled?: boolean;
 	hidden?: boolean;
-	items?: Array<Omit<Item, "items">>;
+	items?: Array<Omit<ItemRaw, "items">>;
 }
 
 export interface Item extends ItemRaw {

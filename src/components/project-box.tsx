@@ -82,8 +82,7 @@ export function ProjectBox({
 		<Card className={cn("max-w-75 w-full gap-2", className)}>
 			<CardHeader className="gap-0">
 				<PeriodBox
-					start={period[0]}
-					end={period[1]}
+					period={period}
 					className="text-xs"
 					render={<CardDescription/>}
 				/>

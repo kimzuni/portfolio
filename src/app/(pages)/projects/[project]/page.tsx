@@ -192,8 +192,7 @@ export default async function Project(props: Props) {
 				</div>
 
 				<PeriodBox
-					start={period[0]}
-					end={period[1]}
+					period={period}
 					className="text-muted-foreground text-sm"
 				/>
 

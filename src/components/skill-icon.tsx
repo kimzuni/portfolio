@@ -39,10 +39,10 @@ export function SkillIcon({
 
 	return (
 		<TooltipWithMobile
-			tooltip={<>
+			tooltip={<div className="font-mono text-center">
 				<p>{level}</p>
 				<p>{label}</p>
-			</>}
+			</div>}
 			{...props}
 		>
 			{/* eslint-disable-next-line @next/next/no-img-element */}

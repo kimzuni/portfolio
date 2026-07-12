@@ -10,15 +10,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
 
 
-export type Provider = "tandpfun" | "syvixor";
-
-export interface SkillData {
-	provider?: Provider;
-	icon?: string;
-	label: string;
-}
-
-export interface TooltipWithMobileProps extends React.ComponentProps<typeof TooltipTrigger> {
+export interface TooltipWithMobileProps extends Omit<React.ComponentProps<typeof TooltipTrigger>, "render"> {
 	tooltip: React.ReactNode;
 }
 
@@ -39,7 +31,7 @@ export function TooltipWithMobile({
 				className={cn("size-fit", className)}
 				{...props}
 			/>
-			<TooltipContent className="font-mono flex-col">
+			<TooltipContent className="max-w-full">
 				{tooltip}
 			</TooltipContent>
 		</Tooltip>

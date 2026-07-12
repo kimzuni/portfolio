@@ -3,6 +3,7 @@ import { ThemeProvider } from "next-themes";
 
 import { cn } from "@/lib/utils";
 
+import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { LayoutBreadcrumbProvider, LayoutBreadcrumb } from "@/components/layout-breadcrumb";
@@ -39,6 +40,12 @@ export default async function AppLayout({
 			enableColorScheme
 			disableTransitionOnChange={false}
 		>
+			<Toaster
+				className={cn(
+					"**:data-[type=success]:[&_svg]:text-primary",
+					"**:data-[type=error]:[&_svg]:text-destructive",
+				)}
+			/>
 			<TooltipProvider><BackButtonProvider><LayoutBreadcrumbProvider>
 					<SidebarProvider defaultOpen={sidebarOpen}>
 						<Sidebar

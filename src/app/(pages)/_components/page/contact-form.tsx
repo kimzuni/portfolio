@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useTransition } from "react";
+import { toast, type ExternalToast } from "sonner";
 
 import { cn } from "@/lib/utils";
 
@@ -42,6 +43,14 @@ function useStatus(url: string) {
 
 
 
+const commonToastOption: ExternalToast = {
+	position: "top-center",
+	action: {
+		label: "Close",
+		onClick: () => {},
+	},
+};
+
 export interface ContactFormProps extends Omit<React.ComponentProps<"form">, "children">, Pick<contents.home.ContactForm, "to" | "message"> {
 	checkInterval?: number;
 	url: string;
@@ -72,7 +81,7 @@ export function ContactForm({
 	const onSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		if (!status.ok || isPending) return;
+		if (isPending) return;
 
 		startTransition(async () => {
 			try {
@@ -87,8 +96,23 @@ export function ContactForm({
 				if (response.ok) {
 					setSubject("");
 					setContent("");
+
+					toast.success("메일이 성공적으로 전송되었어요!", {
+						description: "소중한 의견을 보내주셔서 감사합니다",
+						...commonToastOption,
+					});
+				} else {
+					const { message } = await response.json();
+					toast.error("메일 전송 중 오류가 발생했어요", {
+						description: message,
+						...commonToastOption,
+					});
 				}
-			} catch {
+			} catch (e) {
+				toast.error("메일 전송 중 오류가 발생했어요", {
+					description: e instanceof Error ? e.message : "알 수 없는 오류가 발생했어요",
+					...commonToastOption,
+				});
 			}
 		});
 	};

@@ -25,7 +25,7 @@ export const _items = [
 	},
 ] as const satisfies ItemRaw[];
 
-const checkInterval = 1000 * 60;
+const checkInterval = 1000 * 5;
 export const _form = {
 	enable: true,
 	to: app.item.email,

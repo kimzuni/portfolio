@@ -1,6 +1,7 @@
 "use client";
 
-import { useId, useState, useEffect, useCallback, useTransition } from "react";
+import { useId, useRef, useState, useEffect, useCallback, useTransition } from "react";
+import { useMergedRefs } from "@base-ui/utils/useMergedRefs";
 import { toast, type ExternalToast } from "sonner";
 
 import { cn } from "@/lib/utils";
@@ -79,6 +80,7 @@ export interface ContactFormProps extends Omit<React.ComponentProps<"form">, "ch
 }
 
 export function ContactForm({
+	ref: refProp,
 	id,
 	url,
 	to,
@@ -90,6 +92,11 @@ export function ContactForm({
 	autoCheckKey,
 	...props
 }: ContactFormProps) {
+	const localRef = useRef<HTMLFormElement>(null);
+	const ref = useMergedRefs(localRef, refProp);
+
+	const [isIntersecting, setIsIntersecting] = useState(false);
+	const [isVisible, setIsVisible] = useState(false);
 	const [modelOpen, setModalOpen] = useState(false);
 	const [autoCheck, setAutoCheck] = useState(_autoCheck);
 
@@ -103,6 +110,7 @@ export function ContactForm({
 
 	const isSubmittable = (
 		isActive
+		&& isVisible
 		&& !!(subject || content)
 		&& (
 			(!!status.ok && !isPending)
@@ -116,10 +124,37 @@ export function ContactForm({
 	};
 
 	useEffect(() => {
+		const handleVisibilityChange = () => {
+			setIsVisible(document.visibilityState === "visible");
+		};
+
+		handleVisibilityChange();
+		document.addEventListener("visibilitychange", handleVisibilityChange);
+		return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+	}, []);
+
+	useEffect(() => {
+		const target = localRef.current;
+		if (!target) return;
+
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				setIsIntersecting(entry!.isIntersecting);
+			},
+			{
+				threshold: 0.1,
+			},
+		);
+
+		observer.observe(target);
+		return () => observer.disconnect();
+	}, []);
+
+	useEffect(() => {
 		if (!isActive) return;
 
 		const check = () => {
-			if (autoCheck && !document.hidden) {
+			if (autoCheck && !document.hidden && isIntersecting) {
 				status.check();
 			}
 		};
@@ -129,7 +164,7 @@ export function ContactForm({
 			check();
 		}, checkInterval);
 		return () => clearInterval(interval);
-	}, [isActive, autoCheck, status, checkInterval]);
+	}, [isActive, autoCheck, isIntersecting, status, checkInterval]);
 
 	const onSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -174,6 +209,7 @@ export function ContactForm({
 	return (
 		<form
 			{...props}
+			ref={ref}
 			id={formId}
 			onSubmit={onSubmit}
 		>

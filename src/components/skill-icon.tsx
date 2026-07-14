@@ -40,7 +40,7 @@ export function SkillIcon({
 	return (
 		<TooltipWithMobile
 			tooltip={<div className="font-mono text-center">
-				<p>{level}</p>
+				<p className="border-b border-primary w-full text-center">{level}</p>
 				<p>{label}</p>
 			</div>}
 			{...props}

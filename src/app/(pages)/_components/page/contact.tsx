@@ -10,6 +10,8 @@ import type * as contents from "@/contents";
 
 
 export interface ContactProps extends Omit<SectionProps, "children">, contents.home.Contacts {
+	isLatest: boolean;
+	isLocalhost: boolean;
 }
 
 export function Contact({
@@ -18,6 +20,8 @@ export function Contact({
 	iconSize,
 	items,
 	form,
+	isLatest,
+	isLocalhost,
 	...props
 }: ContactProps) {
 	return (
@@ -44,6 +48,7 @@ export function Contact({
 					url={form.server.href}
 					to={form.to}
 					message={form.message}
+					isActive={isLocalhost || isLatest}
 					className="mx-auto max-w-2xl w-full"
 				/>
 			)}

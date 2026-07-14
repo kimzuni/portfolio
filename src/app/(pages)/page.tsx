@@ -20,6 +20,8 @@ export const metadata = seo.createMetadata(contents.home.metadata);
 
 
 
+const LOCALHOST_REGEX = /^(localhost|127\.\d+\.\d+\.\d+)(:\d+)?$/;
+
 export default async function Home() {
 	const { app, home } = contents;
 
@@ -27,6 +29,7 @@ export default async function Home() {
 	const host = header.get("host");
 
 	const isLatest = app.item.mode === "production" && app.item.url.host === host;
+	const isLocalhost = LOCALHOST_REGEX.test(host ?? "");
 
 	return (
 		<>
@@ -76,6 +79,8 @@ export default async function Home() {
 
 			<Contact
 				id="contact"
+				isLatest={isLatest}
+				isLocalhost={isLocalhost}
 				{...home.contacts}
 			/>
 		</>

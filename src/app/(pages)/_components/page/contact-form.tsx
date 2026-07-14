@@ -53,12 +53,14 @@ const commonToastOption: ExternalToast = {
 
 export interface ContactFormProps extends Omit<React.ComponentProps<"form">, "children">, Pick<contents.home.ContactForm, "to" | "message"> {
 	checkInterval?: number;
+	isActive: boolean;
 	url: string;
 }
 
 export function ContactForm({
 	url,
 	to,
+	isActive,
 	checkInterval = 1000 * 60,
 	message,
 	...props
@@ -68,9 +70,11 @@ export function ContactForm({
 	const [content, setContent] = useState("");
 	const status = useStatus(url);
 
-	const isSubmittable = !!status.ok && !isPending && !!(subject || content);
+	const isSubmittable = isActive && !!status.ok && !isPending && !!(subject || content);
 
 	useEffect(() => {
+		if (!isActive) return;
+
 		status.check();
 		const interval = setInterval(() => {
 			if (!document.hidden) {
@@ -78,12 +82,12 @@ export function ContactForm({
 			}
 		}, checkInterval);
 		return () => clearInterval(interval);
-	}, [status, checkInterval]);
+	}, [isActive, status, checkInterval]);
 
 	const onSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		if (isPending) return;
+		if (!isActive || isPending) return;
 
 		startTransition(async () => {
 			try {
@@ -138,6 +142,7 @@ export function ContactForm({
 					onChange={(e) => setSubject(e.target.value)}
 					className="py-3!"
 					autoComplete="off"
+					disabled={!isActive}
 				/>
 				<Separator/>
 				<InputGroupTextarea
@@ -146,6 +151,7 @@ export function ContactForm({
 					value={content}
 					onChange={(e) => setContent(e.target.value)}
 					className="max-h-72 min-h-32 h-full"
+					disabled={!isActive}
 				/>
 				<Separator/>
 				<InputGroupAddon align="block-end" className="py-3!">
@@ -154,13 +160,15 @@ export function ContactForm({
 							className={cn(
 								"size-2 rounded-full bg-primary/50",
 								status.ok === true && "bg-green-600",
-								status.ok === false && "bg-red-600",
+								(!isActive || status.ok === false) && "bg-red-600",
 							)}
 						/>
 						<span>{
-							status.ok === undefined
-								? "Checking status..."
-								: status.ok ? "Online" : "Offline"
+							!isActive
+								? "Disabled"
+								: status.ok === undefined
+									? "Checking status..."
+									: status.ok ? "Online" : "Offline"
 						}</span>
 					</InputGroupText>
 					<InputGroupButton

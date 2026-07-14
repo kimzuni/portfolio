@@ -4,15 +4,22 @@ import { useState, useEffect, useCallback, useTransition } from "react";
 import { toast, type ExternalToast } from "sonner";
 
 import { cn } from "@/lib/utils";
+import * as cookie from "@/lib/cookie";
 
 import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
+import {
+	Field,
+	FieldGroup,
+	FieldLabel,
+	FieldSet,
+} from "@/components/ui/field";
 import {
 	InputGroup,
 	InputGroupAddon,
 	InputGroupButton,
 	InputGroupTextarea,
-	InputGroupText,
 	InputGroupInput,
 } from "@/components/ui/input-group";
 import { Icon } from "@/components/icon";
@@ -56,6 +63,8 @@ const commonToastOption: ExternalToast = {
 export interface ContactFormProps extends Omit<React.ComponentProps<"form">, "children">, Pick<contents.home.ContactForm, "to" | "message" | "checkInterval" | "ulist"> {
 	isActive: boolean;
 	url: string;
+	autoCheck: boolean;
+	autoCheckKey: string;
 }
 
 export function ContactForm({
@@ -65,26 +74,46 @@ export function ContactForm({
 	checkInterval,
 	ulist,
 	message,
+	autoCheck: _autoCheck,
+	autoCheckKey,
 	...props
 }: ContactFormProps) {
+	const [autoCheck, setAutoCheck] = useState(_autoCheck);
+
 	const [isPending, startTransition] = useTransition();
 	const [subject, setSubject] = useState("");
 	const [content, setContent] = useState("");
 	const status = useStatus(url);
 
-	const isSubmittable = isActive && !!status.ok && !isPending && !!(subject || content);
+	const isSubmittable = (
+		isActive
+		&& !!(subject || content)
+		&& (
+			(!!status.ok && !isPending)
+			|| !autoCheck
+		)
+	);
+
+	const updateAutoCheck = (value: boolean) => {
+		setAutoCheck(value);
+		cookie.set(autoCheckKey, `${value}`);
+	};
 
 	useEffect(() => {
 		if (!isActive) return;
 
-		status.check();
-		const interval = setInterval(() => {
-			if (!document.hidden) {
+		const check = () => {
+			if (autoCheck && !document.hidden) {
 				status.check();
 			}
+		};
+
+		check();
+		const interval = setInterval(() => {
+			check();
 		}, checkInterval);
 		return () => clearInterval(interval);
-	}, [isActive, status, checkInterval]);
+	}, [isActive, autoCheck, status, checkInterval]);
 
 	const onSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -170,23 +199,62 @@ export function ContactForm({
 					disabled={!isActive}
 				/>
 				<Separator/>
-				<InputGroupAddon align="block-end" className="py-3!">
-					<InputGroupText className="px-2">
-						<span
-							className={cn(
-								"size-2 rounded-full bg-primary/50",
-								status.ok === true && "bg-green-600",
-								(!isActive || status.ok === false) && "bg-red-600",
-							)}
-						/>
-						<span>{
-							!isActive
-								? "Disabled"
-								: status.ok === undefined
-									? "Checking status..."
-									: status.ok ? "Online" : "Offline"
-						}</span>
-					</InputGroupText>
+				<InputGroupAddon
+					align="block-end"
+					className="py-3!"
+					onClick={(e) => {
+						if (e.target === e.currentTarget) {
+							e.currentTarget.parentElement?.querySelector("input")?.focus();
+						}
+					}}
+				>
+					<div className="pl-2.5">
+						<FieldSet>
+							<FieldGroup>
+								<Field orientation="horizontal" data-disabled={!isActive}>
+									<Checkbox
+										id="mail-form-auto-check"
+										checked={autoCheck}
+										onCheckedChange={updateAutoCheck}
+										disabled={!isActive}
+										className={cn(
+											"*:hidden! rounded-full size-2 data-checked:border-input",
+											"bg-(--c)! border-(--c)!",
+										)}
+										style={{
+											"--c": !autoCheck
+													? "var(--input)"
+													: status.ok === undefined
+														? "var(--input)"
+														: status.ok
+															? "var(--color-green-600)"
+															: "var(--color-red-600)",
+											"--ring": !autoCheck
+													? "var(--primary)"
+													: "var(--c)",
+										} as React.CSSProperties}
+									/>
+									<FieldLabel
+										htmlFor="mail-form-auto-check"
+										className="text-nowrap group-hover/field:text-primary"
+										onClick={(e) => {
+											e.preventDefault();
+											if (!isActive) return;
+											updateAutoCheck(!autoCheck);
+										}}
+									>{
+										!isActive
+											? "Not Available"
+											: !autoCheck
+												? "Status Check Disabled"
+												: status.ok === undefined
+													? "Checking status..."
+													: status.ok ? "Online" : "Offline"
+									}</FieldLabel>
+								</Field>
+							</FieldGroup>
+						</FieldSet>
+					</div>
 					<InputGroupButton
 						size="sm"
 						variant="default"

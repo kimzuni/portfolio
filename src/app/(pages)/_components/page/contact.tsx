@@ -1,3 +1,5 @@
+import { cookies } from "next/headers";
+
 import { LinkButton } from "@/components/link-button";
 import { Heading } from "@/components/heading";
 
@@ -14,7 +16,9 @@ export interface ContactProps extends Omit<SectionProps, "children">, contents.h
 	isLocalhost: boolean;
 }
 
-export function Contact({
+const AUTO_CHECK_KEY = "contact_form_auto_check";
+
+export async function Contact({
 	heading,
 	message,
 	iconSize,
@@ -24,6 +28,9 @@ export function Contact({
 	isLocalhost,
 	...props
 }: ContactProps) {
+	const cookieStore = await cookies();
+	const autoCheck = cookieStore.get(AUTO_CHECK_KEY)?.value !== "false";
+
 	return (
 		<Section {...props}>
 			<div className="space-y-4 text-center">
@@ -52,6 +59,8 @@ export function Contact({
 					checkInterval={form.checkInterval}
 					ulist={form.ulist}
 					className="mx-auto max-w-2xl w-full"
+					autoCheck={autoCheck}
+					autoCheckKey={AUTO_CHECK_KEY}
 				/>
 			)}
 		</Section>

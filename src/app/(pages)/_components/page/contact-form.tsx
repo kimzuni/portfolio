@@ -15,6 +15,8 @@ import {
 	InputGroupText,
 	InputGroupInput,
 } from "@/components/ui/input-group";
+import { Icon } from "@/components/icon";
+import { TooltipWithMobile } from "@/components/tooltip-with-mobile";
 
 import { Message } from "./message";
 
@@ -51,8 +53,7 @@ const commonToastOption: ExternalToast = {
 	},
 };
 
-export interface ContactFormProps extends Omit<React.ComponentProps<"form">, "children">, Pick<contents.home.ContactForm, "to" | "message"> {
-	checkInterval?: number;
+export interface ContactFormProps extends Omit<React.ComponentProps<"form">, "children">, Pick<contents.home.ContactForm, "to" | "message" | "checkInterval" | "ulist"> {
 	isActive: boolean;
 	url: string;
 }
@@ -61,7 +62,8 @@ export function ContactForm({
 	url,
 	to,
 	isActive,
-	checkInterval = 1000 * 60,
+	checkInterval,
+	ulist,
 	message,
 	...props
 }: ContactFormProps) {
@@ -128,7 +130,21 @@ export function ContactForm({
 			{...props}
 			onSubmit={onSubmit}
 		>
-			<Message className="text-center text-base mb-4">{message}</Message>
+			<div className="mb-4 flex flex-wrap-reverse items-center-safe justify-center-safe gap-1">
+				<Message className="text-center text-base">
+					{message}
+				</Message>
+				{ulist && (
+					<TooltipWithMobile
+						className="text-muted-foreground relative -top-0.75"
+						tooltip={<ul className="pl-3 list-decimal text-sm">
+							{ulist.map(item => <li key={item}>{item}</li>)}
+						</ul>}
+					>
+						<Icon icon="OctagonAlert" size={12}/>
+					</TooltipWithMobile>
+				)}
+			</div>
 			<div className="flex gap-2 items-center-safe mb-2">
 				<span>To:</span>
 				<Input type="email" placeholder="Email..." value={to} disabled/>

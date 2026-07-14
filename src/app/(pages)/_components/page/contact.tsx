@@ -49,6 +49,8 @@ export function Contact({
 					to={form.to}
 					message={form.message}
 					isActive={isLocalhost || isLatest}
+					checkInterval={form.checkInterval}
+					ulist={form.ulist}
 					className="mx-auto max-w-2xl w-full"
 				/>
 			)}

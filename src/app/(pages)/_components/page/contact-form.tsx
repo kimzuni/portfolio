@@ -68,6 +68,8 @@ export function ContactForm({
 	const [content, setContent] = useState("");
 	const status = useStatus(url);
 
+	const isSubmittable = !!status.ok && !isPending && !!(subject || content);
+
 	useEffect(() => {
 		status.check();
 		const interval = setInterval(() => {
@@ -166,7 +168,7 @@ export function ContactForm({
 						variant="default"
 						type="submit"
 						className="ml-auto"
-						disabled={!status.ok}
+						disabled={!isSubmittable}
 					>Submit</InputGroupButton>
 				</InputGroupAddon>
 			</InputGroup>

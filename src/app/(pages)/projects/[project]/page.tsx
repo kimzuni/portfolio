@@ -126,7 +126,7 @@ function Article({ blocks }: contents.project.Article) {
 					{block.media && (
 							<Media
 								{...(block.media.type !== "image" ? {} : {
-									sizes: `(max-width: 768px) 100vw, ${100 / cols}vw`,
+									sizes: `(max-width: 768px) 100vw, ${100 / cols * (block.colSpan ?? 1)}vw`,
 								})}
 								{...block.media}
 								className={cn("rounded-lg shadow-sm", block.media.className)}

@@ -79,7 +79,7 @@ export function Slider({
 	...props
 }: SliderProps) {
 	const [localYears, setLocalYears] = useState(value);
-	const { updateParam } = useSearchParamRouter();
+	const { updateParams } = useSearchParamRouter();
 
 	const onValueChange = (value: number | readonly number[]) => {
 		const curr = value as [number, number];
@@ -93,7 +93,7 @@ export function Slider({
 		const isDefault = join === [min, max].join(",");
 		const nextValue = isDefault ? null : join;
 
-		updateParam(searchParamKey, nextValue);
+		updateParams(searchParamKey, nextValue);
 	};
 
 	return (
@@ -150,7 +150,7 @@ export function ComboboxMultiple<V extends string>({
 	...props
 }: ComboboxMultipleProps<V>) {
 	const anchor = useComboboxAnchor();
-	const { updateParam } = useSearchParamRouter();
+	const { updateParams } = useSearchParamRouter();
 
 	const mapByLabel = items.reduce<Record<string, FilterItem>>((acc, cur) => {
 		if ("slug" in cur) {
@@ -164,12 +164,12 @@ export function ComboboxMultiple<V extends string>({
 	}, {});
 
 	const onSwitchCheckedChange = (key: string, checked: boolean) => {
-		updateParam(key, checked ? "true" : undefined);
+		updateParams(key, checked ? "true" : undefined);
 	};
 
 	const onValueChange = (key: string, value: V[]) => {
 		const items = value.map(x => mapByLabel[x]?.slug).filter(x => x !== undefined);
-		updateParam(key, items.length ? items.join(",") : undefined);
+		updateParams(key, items.length ? items.join(",") : undefined);
 	};
 
 	return (

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { ProjectBox } from "@/components/project-box";
 
-import type { FilterItem } from "../page";
+import type { ItemMetadata } from "../page";
 
 import type * as contents from "@/contents";
 
@@ -12,9 +12,10 @@ import type * as contents from "@/contents";
 
 export interface ProjectGridProps {
 	projects: contents.project.Item[];
-	activeTags?: FilterItem[];
-	activeSkills?: FilterItem[];
+	activeTags?: ItemMetadata[];
+	activeSkills?: ItemMetadata[];
 	pageSize?: number;
+	fallback: React.ReactNode;
 }
 
 export function ProjectGrid({
@@ -22,6 +23,7 @@ export function ProjectGrid({
 	activeTags,
 	activeSkills,
 	pageSize = 12,
+	fallback,
 }: ProjectGridProps) {
 	const [visibleCount, setVisibleCount] = useState(pageSize);
 	const sentinelRef = useRef<HTMLDivElement>(null);
@@ -57,6 +59,11 @@ export function ProjectGrid({
 			))}
 			{visibleCount < projects.length && (
 				<div ref={sentinelRef} className="col-span-full h-px" aria-hidden/>
+			)}
+			{!visibleProjects.length && (
+				<p className="text-center">
+					{fallback}
+				</p>
 			)}
 		</>
 	);

@@ -9,6 +9,7 @@ import {
 	ResetButton,
 	type FilterItem,
 	type FilterGroupItem,
+	Tabs,
 	Slider,
 	type SliderProps,
 	Switch,
@@ -48,6 +49,23 @@ function FilterLabel({
 
 
 
+const scopes: FilterItem[] = [
+	{
+		label: "All",
+		slug: "all",
+	},
+	{
+		label: "Personal",
+		slug: "personal",
+	},
+	{
+		label: "Team",
+		slug: "team",
+	},
+];
+
+
+
 export interface ClientProps {
 	projects: contents.project.Item[];
 	years: [number, number];
@@ -67,9 +85,11 @@ export function Client({
 	});
 
 	const flattenedSkills = skills.map(x => x.items).flat();
+	const scopeMap = new Map(scopes.map(x => [x.slug, x]));
 	const tagMap = new Map(tags.map(x => [x.slug, x]));
 	const skillMap = new Map(flattenedSkills.map(x => [x.slug, x]));
 
+	const scope = scopeMap.get(searchParams.get("scope") ?? "") ?? scopes[0]!;
 	const _currYears = searchParams.get("years")?.split(",").map(x => x.trim()).filter(x => x).map(Number) ?? [];
 	const currYears: ClientProps["years"] = [_currYears[0] ?? years[0], _currYears[1] ?? years[1]];
 	const currTags = searchParams.get("tags")?.split(",").map(x => tagMap.get(x.trim())).filter(x => x != undefined) ?? [];
@@ -80,14 +100,26 @@ export function Client({
 	const tagFilterKey = currMatchAllTags ? "every" : "some";
 	const skillFilterKey = currMatchAllSkills ? "every" : "some";
 	const filteredProjects = projects.filter((project) => {
+		const teamSize = project.team?.size ?? 1;
+		const teamMatch = (
+			scope.slug === "all"
+			|| (scope.slug === "team" && teamSize > 1)
+			|| (scope.slug === "personal" && teamSize === 1)
+		);
+
 		const startYear = project.period[0].getFullYear();
 		const endYear = (project.period[1] ?? new Date()).getFullYear();
 		const yearMatch = !(currYears[0] > endYear || currYears[1] < startYear);
 
 		const tagMatch = !currTags.length ? true : currTags[tagFilterKey](tag => project.tags.find(x => x.slug === tag.slug));
 		const skillMatch = !currSkills.length ? true : currSkills[skillFilterKey](skill => project.skills.find(x => x.slug === skill.slug));
-		return yearMatch && tagMatch && skillMatch;
+
+		return teamMatch && yearMatch && tagMatch && skillMatch;
 	});
+
+	const handleScopeValueChange = (key: string, { slug }: FilterItem) => {
+		updateParams(key, !slug || slug === "all" ? null : slug);
+	};
 
 	const handleYearsValueChange: SliderProps["onValueChange"] = (...args) => {
 		const curr = args[0] as [number, number];
@@ -110,6 +142,15 @@ export function Client({
 		<>
 			<FadeSection>
 				<div className="space-y-6 *:space-y-3 *:w-full *:max-w-md">
+					<div className="pb-2">
+						<Tabs
+							value={scope}
+							onValueChange={(item) => handleScopeValueChange("scope", item)}
+							variant="line"
+							items={scopes}
+						/>
+					</div>
+
 					<div>
 						<FilterLabel label="Years">
 							<span className="text-muted-foreground text-sm">{currYears.join(" ~ ")}</span>

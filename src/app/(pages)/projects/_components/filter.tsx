@@ -1,5 +1,7 @@
 "use client";
 
+import type { TabsRootChangeEventDetails } from "@base-ui/react/tabs";
+
 import { cn } from "@/lib/utils";
 import { useSearchParamRouter } from "@/hooks/use-search-param-router";
 
@@ -27,6 +29,11 @@ import {
 	ItemDescription,
 	ItemTitle,
 } from "@/components/ui/item";
+import {
+	Tabs as BaseTabs,
+	TabsList,
+	TabsTrigger,
+} from "@/components/ui/tabs";
 import { LinkButton } from "@/components/link-button";
 
 import type { ItemMetadata } from "../page";
@@ -60,6 +67,35 @@ export function ResetButton({
 			disabled={disabled}
 			{...props}
 		/>
+	);
+}
+
+
+
+interface BaseTabsProps extends React.ComponentProps<typeof BaseTabs> {
+}
+export interface TabsProps extends Omit<BaseTabsProps, "onValueChange"> {
+	variant?: React.ComponentProps<typeof TabsList>["variant"];
+	onValueChange?: (value: FilterItem, eventDetails: TabsRootChangeEventDetails) => void;
+	items: FilterItem[];
+}
+
+export function Tabs({
+	items,
+	variant,
+	...props
+}: TabsProps) {
+	return (
+		<BaseTabs {...props}>
+			<TabsList variant={variant}>
+				{items.map(item => (
+					<TabsTrigger
+						key={item.slug}
+						value={item}
+					>{item.label}</TabsTrigger>
+				))}
+			</TabsList>
+		</BaseTabs>
 	);
 }
 

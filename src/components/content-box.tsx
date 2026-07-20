@@ -16,6 +16,9 @@ export function ContentBox({
 	const defaultProps: useRender.ElementProps<"div"> = {
 		className: cn(
 			"prose dark:prose-invert max-w-none",
+			"prose-p:text-justify",
+			"prose-a:text-primary prose-a:hover:text-primary/80",
+			"prose-code:before:hidden prose-code:after:hidden prose-code:bg-muted prose-code:text-foreground prose-code:font-[length:inherit] prose-code:rounded-md prose-code:px-1.5 prose-code:py-0.5",
 		),
 	};
 

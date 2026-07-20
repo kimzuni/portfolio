@@ -1,4 +1,4 @@
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
 import { SkillIcon } from "@/components/skill-icon";
 import { Icon } from "@/components/icon";
 import { Heading } from "@/components/heading";
@@ -21,7 +21,7 @@ function SkillBox({
 	return (
 		<article className="flex flex-col justify-center-safe">
 			<Card {...props}>
-				<CardContent className="flex items-center gap-3">
+				<CardHeader className="flex items-center gap-3">
 					<Icon
 						icon={group.icon}
 						size={24}
@@ -33,7 +33,7 @@ function SkillBox({
 					<div className="flex-1">
 						<CardTitle className="font-mono">{group.label}</CardTitle>
 					</div>
-				</CardContent>
+				</CardHeader>
 				<CardContent className="grid grid-cols-5 gap-2">
 					{items.map(props => (
 						<SkillIcon

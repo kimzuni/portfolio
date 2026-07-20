@@ -46,21 +46,24 @@ export function Image({
 	const _darkSrc = (darkSrc ?? src) as ImageSRC;
 	const isSame = _lightSrc === _darkSrc;
 
+	const hasFigure = !!caption || !!alwaysWrap;
+
 	return (
 		<Figure
 			caption={caption}
 			captionPosition={captionPosition}
 			alwaysWrap={alwaysWrap}
+			className={hasFigure ? className : undefined}
 		>
 			{
 				isSame
-				? <BaseImage src={_lightSrc} className={className} {...props}/>
+				? <BaseImage src={_lightSrc} className={hasFigure ? undefined : className} {...props}/>
 				: <>
 					<BaseImage
 						src={_lightSrc}
 						className={cn(
 							"dark:hidden",
-							className,
+							!hasFigure && className,
 						)}
 						{...props}
 					/>
@@ -68,7 +71,7 @@ export function Image({
 						src={_darkSrc}
 						className={cn(
 							"not-dark:hidden",
-							className,
+							!hasFigure && className,
 						)}
 						{...props}
 					/>
@@ -83,6 +86,14 @@ export function Image({
 export interface VideoProps extends React.ComponentProps<"video">, FigureOption {
 	sourceProps?: React.ComponentProps<"source"> | Array<React.ComponentProps<"source">>;
 	trackProps?: React.ComponentProps<"track"> | Array<React.ComponentProps<"track">>;
+}
+
+function VideoSource(props: React.ComponentProps<"source">) {
+	const type = props.type ?? !props.src ? undefined : `video/${props.src.split(".").pop()}`;
+
+	return (
+		<source type={type} {...props}/>
+	);
 }
 
 export function Video({
@@ -103,7 +114,7 @@ export function Video({
 			alwaysWrap={alwaysWrap}
 		>
 			<video
-				preload="none"
+				preload="metadata"
 				loop
 				autoPlay
 				muted
@@ -112,7 +123,7 @@ export function Video({
 				{...props}
 			>
 				{sourceProps.map((props, idx) => (
-					<source key={props.src ?? idx} type="video/mp4" {...props}/>
+					<VideoSource key={props.src ?? idx} {...props}/>
 				))}
 				{trackProps.map((props, idx) => (
 					<track key={props.src ?? idx} {...props}/>

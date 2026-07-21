@@ -10,19 +10,16 @@ export function Link({
 	href,
 	...props
 }: LinkProps) {
-	const externalProps: Partial<LinkProps> = {
-		target: "_blank",
-		rel: "noopener noreferrer",
+	const isExternal = href.startsWith("http://") || href.startsWith("https://") || href.startsWith("://");
+	const extraProps: Partial<LinkProps> = {
+		target: !isExternal ? undefined : "_blank",
+		rel: !isExternal ? undefined : "noopener noreferrer",
 	};
 
 	return (
 		<Base
 			href={href}
-			{...(
-				href.startsWith("http://") || href.startsWith("https://") || href.startsWith("://")
-					? externalProps
-					: {}
-			)}
+			{...extraProps}
 			{...props}
 		/>
 	);

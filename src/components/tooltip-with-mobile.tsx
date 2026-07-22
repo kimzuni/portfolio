@@ -10,28 +10,40 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
 
 
-export interface TooltipWithMobileProps extends Omit<React.ComponentProps<typeof TooltipTrigger>, "render"> {
+export interface TooltipWithMobileProps extends Omit<React.ComponentProps<typeof Tooltip>, "render"> {
+	className?: string;
 	tooltip: React.ReactNode;
+	children?: React.ReactNode;
 }
 
 export function TooltipWithMobile({
 	tooltip,
 	className,
+	open = false,
+	onOpenChange,
+	children,
 	...props
 }: TooltipWithMobileProps) {
-	const [isOpen, setIsOpen] = useState(false);
+	const [isOpen, setIsOpen] = useState(open);
+
+	const updateIsOpen: typeof onOpenChange = (...args) => {
+		const [value] = args;
+		setIsOpen(value);
+		onOpenChange?.(...args);
+	}
 
 	return (
-		<Tooltip open={isOpen}>
+		<Tooltip
+			open={isOpen}
+			onOpenChange={updateIsOpen}
+			{...props}
+		>
 			<TooltipTrigger
 				onClick={() => setIsOpen(true)}
-				onMouseEnter={() => setIsOpen(true)}
-				onMouseLeave={() => setIsOpen(false)}
-				onTouchStart={() => setIsOpen(true)}
 				className={cn("size-fit", className)}
-				{...props}
-			/>
-			<TooltipContent className="max-w-full">
+			>{children}</TooltipTrigger>
+
+			<TooltipContent className="max-w-[min(90svw,550px)]">
 				{tooltip}
 			</TooltipContent>
 		</Tooltip>

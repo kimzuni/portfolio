@@ -42,7 +42,7 @@ function SkillBox({
 							label={props.label}
 							level={props.level.label}
 							provider={props.provider}
-							className="place-self-center hover:scale-125 hover:-translate-y-1.5 transition-[scale,translate]"
+							className="place-self-center data-popup-open:scale-125 data-popup-open:-translate-y-1.5 transition-[scale,translate]"
 						/>
 					))}
 				</CardContent>

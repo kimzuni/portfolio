@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import * as seo from "@/lib/seo";
 import type * as markdown from "@/lib/markdown";
 
-import { FadeSection } from "@/components/fade";
+import { FadeHeader } from "@/components/fade";
 import { PageBadge } from "@/components/page-badge";
 import { Heading } from "@/components/heading";
 
@@ -208,7 +208,7 @@ export default async function Projects({
 
 	return (
 		<div className="space-y-12">
-			<FadeSection>
+			<FadeHeader>
 				<div className="flex items-center justify-between mb-0">
 					<PageBadge
 						className="mb-4"
@@ -226,7 +226,7 @@ export default async function Projects({
 				</div>
 
 				<Heading>{title}</Heading>
-			</FadeSection>
+			</FadeHeader>
 
 			<FadeSection>
 				<FilterTabs

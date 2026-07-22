@@ -59,6 +59,16 @@ export function Fade<T extends TagName = "div">({
 
 
 
+export type FadeHeaderProps = Omit<FadeProps<"header">, "tagName">;
+
+export function FadeHeader(props: FadeHeaderProps) {
+	return (
+		<Fade tagName="header" {...props}/>
+	);
+}
+
+
+
 export type FadeSectionProps = Omit<FadeProps<"section">, "tagName">;
 
 export function FadeSection(props: FadeSectionProps) {

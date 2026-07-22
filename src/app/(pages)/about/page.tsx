@@ -1,7 +1,7 @@
 import * as seo from "@/lib/seo";
 import * as format from "@/lib/format";
 
-import { FadeSection } from "@/components/fade";
+import { FadeHeader, FadeSection } from "@/components/fade";
 import { Card, CardHeader, CardContent, CardFooter, CardTitle, CardDescription } from "@/components/ui/card";
 import { Time } from "@/components/time";
 import { Badge } from "@/components/ui/badge";
@@ -73,8 +73,8 @@ export default function About() {
 	return (
 		<div className="space-y-32">
 			{/* Intro Section */}
-			<FadeSection className="space-y-8 max-w-3xl">
-				<header>
+			<FadeHeader className="space-y-8 max-w-3xl">
+				<div>
 					<PageBadge
 						className="mb-4"
 						label={data.label}
@@ -84,12 +84,12 @@ export default function About() {
 							{data.title}
 						</span>
 					</h1>
-				</header>
+				</div>
 				<MarkdownBox
 					className="prose-xl"
 					source={data.introduction.lines}
 				/>
-			</FadeSection>
+			</FadeHeader>
 
 			{/* Philosophies Section */}
 			<FadeSection>

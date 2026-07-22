@@ -6,7 +6,7 @@ import * as group from "./group";
 
 export const _items = [
 	{
-		icon: "Code2",
+		icon: "CodeXml",
 		group: "language-and-runtime",
 		slug: "language",
 		label: "Language",

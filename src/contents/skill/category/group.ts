@@ -4,7 +4,7 @@ import type { IconName } from "@/components/icon";
 
 export const _items = [
 	{
-		icon: "Code2",
+		icon: "CodeXml",
 		slug: "language-and-runtime",
 		label: "Language & Runtime",
 	},

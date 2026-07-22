@@ -20,7 +20,7 @@ export const _item = {
 	button: {
 		label: "저를 따라오세요!",
 		size: "lg",
-		icon: "Home",
+		icon: "House",
 		iconScale: 1.2,
 		iconPosition: "right",
 	},

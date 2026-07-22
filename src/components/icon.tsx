@@ -1,4 +1,4 @@
-import type { LucideProps } from "lucide-react";
+import type { icons, LucideProps } from "lucide-react";
 import * as lucide from "lucide-react";
 import type { IconType as SiIconType } from "@icons-pack/react-simple-icons";
 import {
@@ -7,11 +7,7 @@ import {
 
 
 
-type _LucideIconName = keyof typeof lucide extends infer T
-	? T extends `Lucide${infer U}`
-		? U
-		: never
-	: never;
+type _LucideIconName = keyof typeof icons;
 
 export type LucideIconName = _LucideIconName | null;
 export interface LucideIconProps extends LucideProps {
@@ -23,9 +19,7 @@ export function LucideIcon({ icon, ...props }: LucideIconProps) {
 		return null;
 	}
 
-	const I = lucide[`Lucide${icon}`];
-
-	// @ts-expect-error: ts(2322)
+	const I = lucide[icon];
 	return <I {...props}/>;
 }
 

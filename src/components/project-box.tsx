@@ -93,7 +93,7 @@ export function ProjectBox({
 					<CardTitle className="overflow-hidden text-ellipsis text-nowrap">{title}</CardTitle>
 					<div className="relative aspect-video rounded-lg overflow-hidden shadow-md">
 						<div className="absolute inset-0 bg-black/50 text-primary flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity">
-							<Icon icon="ArrowRightCircle"/>
+							<Icon icon="CircleArrowRight"/>
 						</div>
 						<Image
 							{...cover}

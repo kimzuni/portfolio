@@ -7,7 +7,7 @@ export interface TagBadgeProps extends Omit<LinkBadgeProps, "variant"> {
 }
 
 export function TagBadge({
-	icon = "Funnel",
+	icon = null,
 	className,
 	...props
 }: TagBadgeProps) {
@@ -32,7 +32,7 @@ export interface SkillBadgeProps extends Omit<LinkBadgeProps, "variant"> {
 }
 
 export function SkillBadge({
-	icon = "Funnel",
+	icon = null,
 	className,
 	...props
 }: SkillBadgeProps) {

@@ -1,21 +1,29 @@
+"use client";
+
+import { useRender, mergeProps } from "@base-ui/react";
+
 import { cn } from "@/lib/utils";
 
 
 
-export interface ContentBoxProps extends React.ComponentProps<"div"> {
+export interface ContentBoxProps extends useRender.ComponentProps<"div"> {
 }
 
 export function ContentBox({
-	className,
+	render,
 	...props
 }: ContentBoxProps) {
-	return (
-		<div
-			className={cn(
-				"prose dark:prose-invert max-w-none",
-				className,
-			)}
-			{...props}
-		/>
-	);
+	const defaultProps: useRender.ElementProps<"div"> = {
+		className: cn(
+			"prose dark:prose-invert max-w-none",
+		),
+	};
+
+	const element = useRender({
+		defaultTagName: "div",
+		render,
+		props: mergeProps<"div">(defaultProps, props),
+	});
+
+	return element;
 }

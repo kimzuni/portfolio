@@ -17,7 +17,7 @@ export function About({
 	heading,
 	message,
 	features,
-	certificates,
+	certifications,
 	awards,
 	linkButton,
 	...props
@@ -35,7 +35,7 @@ export function About({
 
 			<div className="flex justify-center items-end gap-8 md:gap-16">
 				{
-					Object.entries({ certificates, awards }).map(([key, value], i) => (
+					Object.entries({ certifications, awards }).map(([key, value], i) => (
 						<div
 							key={key}
 							className="flex flex-col items-center gap-1 font-mono"

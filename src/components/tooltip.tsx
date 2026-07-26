@@ -17,6 +17,7 @@ export interface TooltipProps extends React.ComponentProps<typeof HoverCard> {
 	align?: HoverCardContentProps["align"];
 	alignOffset?: HoverCardContentProps["alignOffset"];
 	triggerProps?: HoverCardTriggerProps;
+	className?: string;
 	children?: React.ReactNode;
 }
 

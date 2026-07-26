@@ -177,13 +177,15 @@ export function LayoutBreadcrumb({
 			<BreadcrumbList>
 				{items.map((item, idx) => (
 					<Fragment key={idx}>
-						<BreadcrumbItem>
+						<BreadcrumbItem className="empty:hidden">
 							{
 								"ellipsis" in item
 								? <BreadcrumbEllipsis/>
 								: "href" in item
 									? <BreadcrumbLink render={<Link href={item.href}/>}>{item.label}</BreadcrumbLink>
-									: <BreadcrumbPage>{item.label}</BreadcrumbPage>
+									: item.label
+										? <BreadcrumbPage>{item.label}</BreadcrumbPage>
+										: null
 							}
 						</BreadcrumbItem>
 						{idx !== items.length - 1 && <BreadcrumbSeparator/>}

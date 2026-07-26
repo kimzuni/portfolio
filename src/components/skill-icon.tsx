@@ -12,6 +12,7 @@ export interface SkillIconOptions {
 }
 
 export interface SkillIconProps extends SkillIconOptions, Omit<React.ComponentProps<typeof Tooltip>, "children" | "tooltip"> {
+	withTooltip?: boolean;
 	perline?: number;
 	alt?: string;
 	width?: number;
@@ -24,41 +25,50 @@ export function SkillIcon({
 	label,
 	level,
 	provider = "syvixor",
-	perline = 5,
+	perline = 1,
 	width = 48,
 	height = 48,
+	withTooltip,
 	className,
 	...props
 }: SkillIconProps) {
+	const id = `${icon}-skill-tooltip`;
+
 	let src: string;
-	if (!icon?.includes("/")) {
-		const baseURL = provider === "tandpfun" ? "https://skillicons.dev" : "https://skills.syvixor.com/api";
-		icon = icon ?? label.toLowerCase().replace(/[ /.]/, "");
-		src = `${baseURL}/icons?perline=${perline}&i=${icon}`;
+	if (icon?.includes("/")) {
+		src = icon;
 	} else {
-		src = icon ?? "";
+		const baseURL = provider === "tandpfun" ? "https://skillicons.dev" : "https://skills.syvixor.com/api";
+		const slug = icon ?? label.toLowerCase().replace(/[ /.]/, "");
+		src = `${baseURL}/icons?perline=${perline}&i=${slug}`;
+	}
+
+	const image = (
+		// eslint-disable-next-line @next/next/no-img-element
+		<img
+			src={src}
+			alt={`Skill - ${icon}`}
+			aria-describedby={id}
+			width={width}
+			height={height}
+			loading="lazy"
+			decoding="async"
+		/>
+	);
+
+	if (!withTooltip) {
+		return image;
 	}
 
 	return (
 		<Tooltip
 			triggerProps={{
 				className,
-				children: (
-					// eslint-disable-next-line @next/next/no-img-element
-					<img
-						src={src}
-						alt={`Skill - ${icon}`}
-						aria-label={`Skill - ${icon}`}
-						width={width}
-						height={height}
-						loading="lazy"
-						decoding="async"
-					/>
-				),
+				children: image,
 			}}
 			{...props}
 		>
-			<div className="font-mono text-center">
+			<div id={id} className="font-mono text-center">
 				<p className="border-b border-primary w-full text-center">{level}</p>
 				<p>{label}</p>
 			</div>

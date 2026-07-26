@@ -1,12 +1,6 @@
 import { cn } from "@/lib/utils";
 
-import {
-	Carousel,
-	CarouselContent,
-	CarouselItem,
-	CarouselPrevious,
-	CarouselNext,
-} from "@/components/ui/carousel";
+import { Carousel, CarouselItem } from "@/components/carousel";
 import { LinkButton } from "@/components/link-button";
 import { Heading } from "@/components/heading";
 import { ProjectBox } from "@/components/project-box";
@@ -15,6 +9,48 @@ import { Section, type SectionProps } from "./section";
 import { Message } from "./message";
 
 import type * as contents from "@/contents";
+
+
+
+export interface ProjectCarouselProps {
+	items: contents.project.Item[];
+	fallback?: React.ReactNode;
+}
+
+export function ProjectCarousel({
+	items,
+	fallback,
+}: ProjectCarouselProps) {
+	if (!items.length) {
+		return fallback ?? null;
+	}
+
+	return (
+		<Carousel>
+			{items.map(project => (
+				<CarouselItem key={project.slug} className="basis-auto flex">
+					<ProjectBox
+						className="select-none"
+						slug={project.slug}
+						cover={project.cover}
+						name={project.name}
+						description={project.description.lines}
+						period={project.period}
+						tags={project.tags.map(tag => ({
+							slug: tag.slug,
+							label: tag.label,
+						}))}
+						skills={project.skills.primary.map(skill => ({
+							slug: skill.slug,
+							label: skill.label,
+						}))}
+						isTeam={!!project.team}
+					/>
+				</CarouselItem>
+			))}
+		</Carousel>
+	);
+}
 
 
 
@@ -47,21 +83,9 @@ export function Projects({
 				</Message>
 			</div>
 
-			<Carousel
-				className="mx-12 *:px-2"
-				opts={{
-					align: "start",
-					dragFree: true,
-				}}
-			>
-				<CarouselContent className="py-2 items-stretch">
-					{items.filter(x => x.pin).map(project => <CarouselItem key={project.slug} className="basis-auto flex">
-						<ProjectBox className="select-none" {...project}/>
-					</CarouselItem>)}
-				</CarouselContent>
-				<CarouselPrevious/>
-				<CarouselNext/>
-			</Carousel>
+			<ProjectCarousel
+				items={items}
+			/>
 		</Section>
 	);
 }

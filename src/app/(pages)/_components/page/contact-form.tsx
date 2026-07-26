@@ -3,6 +3,7 @@
 import { useId, useRef, useState, useEffect, useTransition } from "react";
 import { useMergedRefs } from "@base-ui/utils/useMergedRefs";
 
+import { APP_URL } from "@/config/constants";
 import { cn } from "@/lib/utils";
 import * as cookie from "@/lib/cookie";
 import { useServerCheck } from "@/hooks/use-server-check";
@@ -32,6 +33,7 @@ import {
 } from "@/components/dialog";
 import { Icon } from "@/components/icon";
 import { Tooltip } from "@/components/tooltip";
+import { ContentLink } from "@/components/content-link";
 
 import { Message } from "./message";
 
@@ -185,15 +187,33 @@ export function ContactForm({
 				<Message className="text-center text-base">
 					{message}
 				</Message>
-				{ulist && (
+				{(ulist || !isActive) && (
 					<Tooltip
 						triggerProps={{
 							className: "text-muted-foreground relative -top-0.75",
-							children: <Icon icon="OctagonAlert" size={12}/>,
+							children: (
+								<Icon
+									icon="OctagonAlert"
+									className={isActive ? undefined : "text-destructive"}
+									size={12}
+								/>
+							),
 						}}
 					>
-						<ul className="pl-3 list-decimal text-sm">
-							{ulist.map(item => <li key={item}>{item}</li>)}
+						<ul
+							className={cn(
+								"text-sm",
+								isActive && "pl-3 list-decimal",
+							)}
+						>
+							{
+								isActive
+									? ulist!.map(item => <li key={item}>{item}</li>)
+									: <li>
+										<ContentLink href={APP_URL}>최신 릴리즈 버전</ContentLink>
+										의 웹 포트폴리오에서만 메일을 전송할 수 있어요
+									</li>
+							}
 						</ul>
 					</Tooltip>
 				)}
@@ -232,31 +252,29 @@ export function ContactForm({
 						}
 					}}
 				>
-					<div className="pl-2.5">
-						<Toggle
-							title="Auto Check Server Status"
-							pressed={autoCheck}
-							onPressedChange={updateAutoCheck}
-							disabled={!isActive}
-							data-ok={ok}
-							className={cn(
-								"bg-transparent! hover:text-primary gap-2",
-								"data-[ok=false]:[--c:var(--color-red-600)]",
-								"data-[ok=true]:[--c:var(--color-green-600)]",
-								"group-data-auto-check/contact-form:[--bd:var(--c,var(--primary))]!",
-								"not-group-data-auto-check/contact-form:[--c:var(--input)]!",
-							)}
-						>
-							<Dot className="border border-(--bd,var(--c)) bg-(--bg,var(--c))"/>
-							{
-								!isActive ? "Not Available" :
-								!autoCheck ? "Press to Check" :
-								ok === undefined ? "Checking..." :
-								ok ? "Online" :
-								"Offline"
-							}
-						</Toggle>
-					</div>
+					<Toggle
+						title="Auto Check Server Status"
+						pressed={autoCheck}
+						onPressedChange={updateAutoCheck}
+						disabled={!isActive}
+						data-ok={ok}
+						className={cn(
+							"bg-transparent! hover:text-primary gap-2",
+							"data-[ok=false]:[--c:var(--color-red-600)]",
+							"data-[ok=true]:[--c:var(--color-green-600)]",
+							"group-data-auto-check/contact-form:[--bd:var(--c,var(--primary))]!",
+							"not-group-data-auto-check/contact-form:[--c:var(--input)]!",
+						)}
+					>
+						<Dot className="border border-(--bd,var(--c)) bg-(--bg,var(--c))"/>
+						{
+							!isActive ? "Not Available" :
+							!autoCheck ? "Press to Check" :
+							ok === undefined ? "Checking..." :
+							ok ? "Online" :
+							"Offline"
+						}
+					</Toggle>
 					<InputGroupButton
 						size="sm"
 						variant="default"

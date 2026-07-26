@@ -40,7 +40,7 @@ export function PeriodBox({
 	...props
 }: PeriodBoxProps) {
 	const start: Date = _start ?? period?.[0];
-	const end: Date = _end ?? period?.[1];
+	const end: Date | undefined = _end ?? period?.[1];
 	const isSame = start.getTime() === end?.getTime();
 
 	const defaultProps: useRender.ElementProps<"p"> = {

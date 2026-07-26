@@ -1,15 +1,16 @@
 "use client";
 
+import type { StaticImageData } from "next/image";
+
 import { cn } from "@/lib/utils";
 
 import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter } from "@/components/ui/card";
-import { Image } from "@/components/media";
+import { Badge } from "@/components/ui/badge";
+import { Image, type GenerateImageThemedMap } from "@/components/media";
 import { Link } from "@/components/link";
 import { Icon } from "@/components/icon";
-import { PeriodBox } from "@/components/period-box";
+import { PeriodBox, type Period } from "@/components/period-box";
 import { TagBadge, SkillBadge } from "@/components/project-badge";
-
-import type * as contents from "@/contents";
 
 
 
@@ -19,43 +20,50 @@ const badgeTypes = [
 	"skill",
 ] as const;
 
-export interface ActiveItem {
+export interface ProjectBoxBadgeItem {
 	slug: string;
 	label: string;
 }
 
-export interface ProjectBoxProps extends contents.project.Item {
+export interface ProjectBoxItem {
+	slug: string;
+	cover?: StaticImageData | GenerateImageThemedMap<StaticImageData> | null;
+	name: string;
+	description?: string | string[];
+	period?: Period<Date>;
+	tags?: ProjectBoxBadgeItem[];
+	skills?: ProjectBoxBadgeItem[];
+	isTeam: boolean;
+}
+
+export interface ProjectBoxProps extends React.ComponentProps<typeof Card>, ProjectBoxItem {
 	maxSkills?: number;
 	className?: string;
-	activeTags?: ActiveItem[] | null;
-	activeSkills?: ActiveItem[] | null;
+	activeTags?: ProjectBoxBadgeItem[];
+	activeSkills?: ProjectBoxBadgeItem[];
 }
 
 export function ProjectBox({
 	slug,
 	cover,
-	title,
+	name,
 	description,
 	period,
-	tags,
-	skills,
-	team,
-	maxSkills = 5,
-	className,
+	tags = [],
+	skills = [],
+	isTeam,
+	maxSkills: _maxSkills = 5,
 	activeTags,
 	activeSkills,
+	className,
+	...props
 }: ProjectBoxProps) {
+	const maxSkills = _maxSkills < 0 ? skills.length : _maxSkills;
 	const href = `/projects/${slug}/`;
-	const avgContribution = !team
-		? 100
-		: Math.round(
-			team.contributions.reduce((a, c) => a + c.percentage, 0)
-			/ team.contributions.length,
-		);
 
 	const badgeMap: Record<BadgeType, {
 		max?: number;
-		items: ActiveItem[];
+		items: ProjectBoxBadgeItem[];
 		Badge: typeof TagBadge | typeof SkillBadge;
 	}> = {
 		tag: {
@@ -74,42 +82,75 @@ export function ProjectBox({
 		skill: new Set(activeSkills?.map(x => x.slug) ?? []),
 	};
 
-	const isActive = (key: BadgeType, value: ActiveItem) => {
+	const isActive = (key: BadgeType, value: ProjectBoxBadgeItem) => {
 		return activeMap[key].has(value.slug);
 	}
 
 	return (
-		<Card className={cn("max-w-75 w-full gap-2", className)}>
-			<CardHeader className="gap-0">
-				<PeriodBox
-					period={period}
-					className="text-xs"
-					render={<CardDescription/>}
-				/>
+		<Card
+			className={cn(
+				"relative max-w-75 w-full gap-2 transition-all",
+				"hover:ring-primary/70",
+				"hover:-translate-y-1",
+				className,
+			)}
+			{...props}
+		>
+			{isTeam && (
+				<Badge variant="ghost" className="absolute top-2 right-1 text-primary pointer-events-none">
+					<Icon icon="Users"/>
+				</Badge>
+			)}
+			<CardHeader className="gap-0 empty:hidden">
+				{period && (
+					<PeriodBox
+						period={period}
+						className="text-xs"
+						render={<CardDescription/>}
+					/>
+				)}
 			</CardHeader>
 			<CardContent className="flex-1 flex flex-col gap-2">
-				<Link href={href} className="group rounded-lg space-y-2 hover:text-primary hover:scale-110 transition-[scale]">
-					<CardTitle className="overflow-hidden text-ellipsis text-nowrap">{title}</CardTitle>
-					<div className="relative aspect-video rounded-lg overflow-hidden shadow-md">
-						<div className="absolute inset-0 bg-black/50 text-primary flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity">
-							<Icon icon="CircleArrowRight"/>
+				<Link href={href} className="group/projectbox-link rounded-lg space-y-2 hover:text-primary">
+					<CardTitle className="truncate font-semibold">{name}</CardTitle>
+					{cover === undefined ? null : (
+						<div className="relative aspect-video rounded-lg overflow-hidden shadow-md">
+							<div className="absolute inset-0 bg-black/50 flex justify-center items-center opacity-0 group-hover/projectbox-link:opacity-100 transition-opacity">
+								<Icon icon="CircleArrowRight"/>
+							</div>
+							{
+								cover === null ? (
+									<div
+										className={cn(
+											"flex items-center-safe justify-center-safe bg-background/30",
+											"w-full h-full object-cover",
+											"text-center text-muted-foreground font-medium italic",
+											"after:block after:content-['No_Image_Available']",
+										)}
+									/>
+								) : (
+									<Image
+										{...cover}
+										alt={`cover - project: ${name}`}
+										className="w-full h-full object-cover"
+										width={300}
+									/>
+								)
+							}
 						</div>
-						<Image
-							{...cover}
-							alt={`cover - project: ${title}`}
-							className="w-full h-full object-cover"
-							width={300}
-						/>
-					</div>
+					)}
+					{description && (
+						<p className="line-clamp-2 text-sm text-muted-foreground group-hover/projectbox-link:text-inherit">
+							{description}
+						</p>
+					)}
 				</Link>
-
-				<p className="empty:hidden line-clamp-2 text-sm text-muted-foreground">
-					{description.lines?.join(" ")}
-				</p>
 			</CardContent>
-			<CardFooter className="flex-1 flex-col items-start pt-2 gap-2 *:flex *:flex-wrap *:gap-1 *:empty:hidden">
+			<CardFooter className="flex-1 flex-col items-start pt-2 gap-2 *:flex *:flex-wrap *:gap-x-1 *:gap-y-2 empty:hidden">
 				{badgeTypes.map(x => {
 					const { max, items, Badge } = badgeMap[x];
+					if (!items.length) return null;
+
 					return (
 						<div key={x}>
 							{items.map(item => <Badge
@@ -122,23 +163,6 @@ export function ProjectBox({
 						</div>
 					);
 				})}
-				{team && (
-					<div className="flex-1 w-full items-end text-muted-foreground text-sm">
-						<div className="flex items-center gap-1 w-full">
-							<span>Contrib.</span>
-							<span
-								className={cn(
-									"flex-1 bg-accent h-2 rounded-full overflow-hidden",
-									"before:block before:bg-primary before:h-full before:w-(--avg)",
-								)}
-								style={{
-									"--avg": `${avgContribution}%`,
-								} as React.CSSProperties}
-							/>
-							<span>{avgContribution}%</span>
-						</div>
-					</div>
-				)}
 			</CardFooter>
 		</Card>
 	);

@@ -1,41 +1,85 @@
 import type { ItemRaw } from "../types";
 
-import methods from "./methods.png";
-import render from "./render.png";
-import help from "./help.png";
-import cli from "./cli.png";
+import benchmark from "./benchmark.png";
+import overview from "./overview.png";
+import playground from "./playground.png";
+
+const cli = "cli.webm";
 
 
 
 export const item: ItemRaw = {
-	cover: methods,
-	title: "templify",
-	description: [
-		"Python의 `printf` 스타일 포맷팅에서 영감을 얻어, 외부 의존성 없이 구현한 92KB 규모의 경량 템플릿 파싱 및 렌더링 엔진을 개발했습니다.",
-		"템플릿의 구조를 분석하여 메타데이터를 추출하는 파서(Parser) 기능을 내장하고 있습니다.",
-		"파일 시스템에 의존하지 않는 순수 함수형 설계를 통해 브라우저부터 서버까지 어떤 환경에서도 유연하게 통합 가능하며,",
-		"라이브러리 코어와 CLI 패키지를 분리하여 개발 생산성과 운영 범용성을 모두 확보했습니다.",
+	cover: overview,
+	name: "Templify",
+	description: `
+		단순한 문자열 치환을 넘어, 룰을 커스텀하여 다양한 형태의 템플릿을 유연하게 다룰 수 있는 초경량 템플릿 엔진 및 CLI 툴입니다.
+		개발 과정에서 에러 메시지 등 반복되는 문자열 포맷팅을 위해 매번 \`.replace\`나 별도의 함수를 작성해야 하는 번거로움을 해결하고자 개발했습니다.
+	`,
+	highlights: [
+		{
+			label: "~2KB Size",
+			value: "Zero Dependency로 구현된 초경량 템플릿 엔진",
+		},
+		{
+			label: "Lazy Evaluation & Cache",
+			value: "클로저와 Map 캐싱을 활용한 지연 평가 및 중복 경로 탐색 비용 제거",
+		},
+		{
+			label: "Cross-Environment",
+			value: "Node.js, Deno, Bun, 브라우저 등 다양한 환경 지원",
+		},
+		{
+			label: "CLI Integration",
+			value: "표준 입력(stdin) 및 `.env`, `.json` 데이터 파일 로드 지원",
+		},
+		{
+			label: "99%+ Coverage",
+			value: "99% 이상의 높은 커버리지로 신뢰성 확보",
+		},
 	],
 	period: [
 		new Date("2025-10-21"),
-		new Date("2026-04-27"),
+		new Date("2026-08-30"),
 	],
 	tags: [
-		"package",
-		"deployment",
+		"dev-tools",
+		"open-source",
+		"published",
+		"frontend",
 	],
-	skills: [
-		"bun",
-		"node-js",
-		"typescript",
-		"github-actions",
-	],
+	skills: {
+		primary: [
+			"typescript",
+			"javascript",
+			"node-js",
+		],
+		secondary: [
+			"bun",
+			"npm",
+			"react",
+			"tailwind-css",
+			"shadcn-ui",
+			"github-actions",
+		],
+	},
 	shields: [
 		{
-			service: "github",
-			user: "kimzuni-labs",
-			repo: "templify",
-			badge: "last-commit",
+			service: "npm",
+			badge: "bundlejs",
+			packageName: "@kimzuni/templify",
+			link: "https://bundlephobia.com/package/@kimzuni/templify",
+		},
+		{
+			service: "npm",
+			badge: "unpacked-size",
+			packageName: "@kimzuni/templify",
+			link: true,
+			linkSuffix: "?activeTab=code",
+		},
+		{
+			service: "static",
+			badge: "dependency_count-0-blue",
+			link: "https://www.npmjs.com/package/@kimzuni/templify?activeTab=dependencies",
 		},
 		{
 			logo: "codecov",
@@ -46,74 +90,117 @@ export const item: ItemRaw = {
 			repo: "templify",
 			link: true,
 		},
+		{
+			service: "github",
+			user: "kimzuni-labs",
+			repo: "templify",
+			badge: "last-commit",
+		},
 	],
-	badges: [
+	links: [
+		{
+			label: "Playground",
+			href: "https://labs.kimzuni.com/templify/",
+		},
 		{
 			label: "GitHub",
 			href: "https://github.com/kimzuni-labs/templify",
 		},
 		{
-			label: "NPM",
+			label: "npm",
 			href: "https://www.npmjs.com/package/@kimzuni/templify",
 		},
 		{
-			label: "NPM(CLI)",
+			label: "npm(CLI)",
 			href: "https://www.npmjs.com/package/@kimzuni/templify-cli",
 		},
 	],
 	articles: [
 		{
+			maxWidth: 1100,
 			blocks: [
 				{
 					media: {
 						type: "image",
-						src: methods,
-						alt: "templify 코드 예시 - methods",
+						src: benchmark,
+						alt: "Templify 엔진 벤치마크",
+						caption: "tinybench로 측정한 네이티브 템플릿 리터럴과 유명 템플릿 라이브러리들과의 성능 벤치마크 비교",
 					},
-					text: [
-						"단순 문자열 치환을 넘어, 템플릿의 구조를 해석하여 데이터 명세를 추출하는 지능형 분석 기능을 제공합니다.",
-						"`keys`, `placeholders`/`fields`, `groups` 함수를 통해 템플릿에 필요한 필드를 사전에 파악하거나 복잡한 패턴 속 특정 그룹을 정교하게 분리할 수 있습니다.",
-					],
-				},
-				{
-					media: {
-						type: "image",
-						src: render,
-						alt: "templify 코드 예시 - render",
-					},
-					text: [
-						"사용자 워크플로우에 최적화된 유연한 렌더링 방식을 지원합니다.",
-						"단순 일회성 치환을 위한 `render` 함수뿐만 아니라, 동일 템플릿을 여러 데이터로 반복 호출해야 하는 상황을 고려한 `compile` 패턴을 제공합니다.",
-						"이를 통해 템플릿 처리 로직을 변수화하여 코드의 재사용성을 높이고, 비즈니스 로직과 템플릿 정의를 명확히 분리한 선언적인 코드를 작성할 수 있습니다.",
-					],
+					text: `
+						엔진을 벤치마크한 결과, 초당 100만 회 이상의 연산 처리량과 1000ns 이하의 평균 지연 시간을 기록했습니다.
+						이는 범용 템플릿 엔진인 \`handlebars.js\`와 비슷한 수준의 처리량을 보여주며,
+						테스트에서 가장 빠른 \`mustache.js\`의 성능에도 근접한 결과입니다.
+
+						이러한 성능을 확보하기 위해 다음과 같은 설계와 최적화를 적용했습니다.
+
+						1. **지연 평가(Lazy Evaluation)**:
+							\`compile\` 내 키 패턴과 메타데이터는 선언 즉시 계산되지 않고, 클로저와 Getter를 통해 실제 값이 필요한 시점에 동적으로 평가되도록 구현하여 불필요한 연산을 방지했습니다.
+						2. **경로 파싱 및 캐싱**:
+							중첩된 객체나 배열의 속성 탐색 시 \`Map\` 기반의 캐싱을 적용하여 반복 렌더링 시 발생하는 중복 문자열 연산을 최소화했습니다.
+					`,
 				},
 			],
 		},
 		{
+			maxWidth: 1100,
 			blocks: [
 				{
 					media: {
 						type: "image",
-						src: help,
-						alt: "templify-cli --help 출력 결과",
+						src: overview,
+						alt: "Templify 기본 예제 코드(.mjs) 및 실행 결과",
+						caption: "사전 컴파일 방식과 즉시 렌더링 방식의 예제 코드 및 결과",
 					},
-					text: [
-						"코어 엔진의 강력한 커스터마이징 옵션을 터미널 환경에서도 제약 없이 활용할 수 있는 전용 CLI 도구를 제공합니다.",
-						"`templify` 및 별칭 `tply` 명령어를 통해 복잡한 템플릿 처리 로직을 쉘 스크립트나 자동화 파이프라인에 즉각 통합할 수 있으며,",
-						"직관적인 도움말 시스템을 내장하여 모든 플래그와 사용법을 에디터 밖에서도 손쉽게 참조할 수 있습니다.",
-					],
+					text: `
+						템플릿 문자열을 분석 및 렌더링할 수 있는 \`compile\` 함수와,
+						즉시 렌더링이 가능하고 트리 셰이킹에 친화적인 \`render\` 함수로 분리 설계하여
+						직관적인 개발자 경험(DX)을 제공하고 프로젝트 빌드 시 번들 크기 최적화를 지원합니다.
+						특히 \`compile\` 함수는 템플릿 문자열에서 메타데이터(\`keys\`, \`placeholders\`, \`groups\`)를 추출할 수 있어,
+						렌더링 전 템플릿이나 컨텍스트 데이터를 검증하는 등 유연한 사전 처리가 가능하도록 합니다.
+
+						또한 어떠한 형태의 템플릿 문자열에도 대응할 수 있도록,
+						템플릿 구문 커스터마이징(구분자 및 공백 규칙),
+						정규식을 활용한 키(key) 패턴,
+						탐색 깊이 제한(depth),
+						그리고 누락 데이터 기본값(fallback) 처리 등
+						세분화된 설정 옵션을 지원합니다.
+					`,
 				},
+			],
+		},
+		{
+			maxWidth: 1100,
+			blocks: [
+				{
+					media: {
+						type: "video",
+						src: cli,
+						caption: "Templify CLI 실행 및 결과 예시",
+					},
+					text: `
+						템플릿 엔진을 터미널 환경이나 자동화 배치 스크립트 등 쉘 환경에서 유연하게 통합할 수 있도록 CLI 툴을 제공하며,
+						Node.js, Deno, Bun 등 다양한 런타임 환경에서 실행할 수 있습니다.
+						템플릿 문자열은 인자, 파일, 표준 입력(stdin) 등 다양한 방식으로 전달할 수 있으며,
+						옵션을 활용해 데이터 파일(\`.env\`, \`.json\`)을 로드하거나 환경 변수를 컨텍스트로 활용할 수 있습니다.
+					`,
+				},
+			],
+		},
+		{
+			maxWidth: 1100,
+			blocks: [
 				{
 					media: {
 						type: "image",
-						src: cli,
-						alt: "templify-cli 명령어 예시",
+						src: playground,
+						alt: "Templify Playground 페이지",
+						caption: "다중 버전을 지원하는 CSR 기반의 Playground",
 					},
-					text: [
-						"유닉스 철학을 계승하여 표준 입력(stdin)과 파이프라인(|)을 완벽하게 지원합니다.",
-						"인라인 인자 전달부터 타 도구와의 출력을 연동하는 유기적인 워크플로우를 구성할 수 있으며,",
-						"런타임 플래그를 통한 즉각적인 규칙 변경으로 복잡한 자동화 스크립트 내에서도 정교하고 예측 가능한 템플릿 처리를 보장합니다.",
-					],
+					text: `
+						템플릿 엔진을 테스트할 수 있는 [Playground](https://labs.kimzuni.com/templify/)를 제공합니다.
+						템플릿 문자열과 컨텍스트 데이터를 입력하면 즉시 렌더링 결과와 메타데이터를 확인할 수 있으며,
+						템플릿 규칙을 커스터마이징하여 다양한 형태의 템플릿 문자열을 테스트할 수 있습니다.
+					`,
 				},
 			],
 		},

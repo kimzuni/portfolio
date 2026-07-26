@@ -1,8 +1,43 @@
+
+import { cache } from "react";
+import * as runtime from "react/jsx-runtime";
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkGfm from "remark-gfm";
+import remarkRehype from "remark-rehype";
+import rehypeReact, { type Components } from "rehype-react";
+
+import * as array from "@/lib/array";
+
+import { ContentLink } from "@/components/content-link";
+
+
+
+const processor = unified()
+	.use(remarkParse)
+	.use(remarkGfm)
+	.use(remarkRehype)
+	.use(rehypeReact, {
+		...runtime,
+		components: {
+			a: ContentLink,
+		} satisfies Components,
+	});
+
+const process = cache(
+	(lines: string[]): Promise<React.ReactNode> => processor
+		.process(lines.join("\n"))
+		.then(({ result }: { result: React.ReactNode }) => result)
+);
+
+
+
 export type Source = string | string[];
 
 interface BaseResult {
 	raw: Source;
 	lines: string[];
+	result: React.ReactNode;
 }
 
 type AllUndefined<T> = { [K in keyof T]: undefined };
@@ -15,23 +50,14 @@ const SPACE_REGEXP = /^\s*/;
 const NEW_LINE_REGEXP = /\r?\n/;
 
 export const getLines = (value: Source | undefined): Result["lines"] => {
-	let tmp: string[];
-	if (typeof value === "string") {
-		tmp = [value];
-	} else if (Array.isArray(value) && value[0] !== undefined) {
-		tmp = value;
-	} else {
-		return undefined;
-	}
-
 	const detectSpaceLength = (line: string) => {
 		return line.match(SPACE_REGEXP)?.[0].length ?? 0
 	}
 
 	let spaceLength: number | undefined;
 	const arr: string[] = [];
-	for (const x of tmp) {
-		const split = x.split(NEW_LINE_REGEXP);
+	for (const item of array.to(value)) {
+		const split = item.split(NEW_LINE_REGEXP);
 		for (let line of split) {
 			if (spaceLength === undefined && !line.trim()) {
 				continue;
@@ -47,13 +73,15 @@ export const getLines = (value: Source | undefined): Result["lines"] => {
 
 export async function render(raw: Source | undefined): Promise<Result> {
 	const lines = getLines(raw);
+	const result = lines ? await process(lines) : undefined;
 	if (!raw || !lines) {
 		return {
 			raw: undefined,
 			lines: undefined,
+			result: undefined,
 		};
 	}
-	return { raw, lines };
+	return { raw, lines, result };
 }
 
 export async function renders<

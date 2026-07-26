@@ -3,15 +3,16 @@ import { notFound } from "next/navigation";
 import { cn } from "@/lib/utils";
 import * as seo from "@/lib/seo";
 
-import { Fade, FadeHeader, FadeSection } from "@/components/fade";
+import { FadeHeader, FadeSection, FadeArticle } from "@/components/fade";
 import { Item, ItemContent, ItemActions, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/dialog";
 import { PageBadge } from "@/components/page-badge";
 import { Icon } from "@/components/icon";
 import { PeriodBox } from "@/components/period-box";
-import { MarkdownBox } from "@/components/markdown-box";
+import { ContentBox } from "@/components/content-box";
 import { Heading } from "@/components/heading";
 import { Shield } from "@/components/shield";
 import { LinkBadge } from "@/components/link-badge";
@@ -30,10 +31,10 @@ export type Props = PageProps<"/projects/[project]">;
 async function getProjectOrNotFound({ params }: Props) {
 	const { project } = await params;
 	const slug = decodeURIComponent(project);
-	if (!contents.project.has(slug)) {
+	if (!contents.project.map.has(slug)) {
 		return notFound();
 	}
-	return contents.project.get(slug)!;
+	return contents.project.map.get(slug)!;
 }
 
 
@@ -41,9 +42,59 @@ async function getProjectOrNotFound({ params }: Props) {
 export async function generateMetadata(props: Props) {
 	const data = await getProjectOrNotFound(props);
 	return seo.createMetadata({
-		title: `${data.title} - 프로젝트`,
-		description: data.description.raw,
+		title: `${data.name} - 프로젝트`,
+		description: data.description.lines,
 	})
+}
+
+
+
+
+interface InfoBadgeProps extends React.ComponentProps<typeof Badge> {
+}
+
+function InfoBadge({
+	className,
+	...props
+}: InfoBadgeProps) {
+	return (
+		<Badge
+			variant="outline"
+			className={cn(
+				"border-primary font-mono",
+				className,
+			)}
+			{...props}
+		/>
+	);
+}
+
+
+
+interface BadgeContainerProps extends React.ComponentProps<"div"> {
+	label: string;
+}
+
+function BadgeContainer({
+	label,
+	className,
+	children,
+	...props
+}: BadgeContainerProps) {
+	return (
+		<div
+			className={cn(
+				"flex flex-col gap-1.5",
+				className,
+			)}
+			{...props}
+		>
+			<span className="opacity-80 text-sm font-semibold">{label}</span>
+			<div className="flex flex-wrap gap-2 border-l-3 pl-2 py-0.5">
+				{children}
+			</div>
+		</div>
+	);
 }
 
 
@@ -58,21 +109,20 @@ function ContributionDialog({
 				className="border hover:text-primary hover:border-primary! dark:border-input"
 				render={<LinkButton
 					variant="secondary"
-					label="기여도 보기"
+					label="상세 보기"
 				/>}
 			/>
-			<DialogContent className="**:data-[slot=dialog-close]:cursor-pointer">
+			<DialogContent>
 				<DialogHeader>
-					<DialogTitle>기여도</DialogTitle>
+					<DialogTitle>역할 및 기여도 상세 정보</DialogTitle>
 					<DialogDescription
 						className="empty:hidden"
-						render={<MarkdownBox source={description.lines}/>}
+						render={<ContentBox>{description.result}</ContentBox>}
 					/>
 				</DialogHeader>
-				<div className="space-y-4 mt-4">
-					{contributions.map(({ label, percentage, description }, idx) => (
-						<div key={label} className="space-y-2">
-							{idx !== 0 && <Separator/>}
+				<ScrollArea className="space-y-4 mt-4 -mx-4 max-h-[50vh] px-4">
+					{contributions.map(({ label, percentage, description }) => (
+						<div key={label} className="flex flex-col gap-2 not-last:mb-3 not-last:pb-3 not-last:border-b">
 							<div className="flex items-center justify-between">
 								<h2 className="font-semibold font-mono">{label}</h2>
 								<span className="text-sm text-muted-foreground">
@@ -89,10 +139,12 @@ function ContributionDialog({
 									"--percentage": `${percentage}%`,
 								} as React.CSSProperties}
 							/>
-							<MarkdownBox className="prose-sm" source={description.lines}/>
+							<ContentBox className="prose-sm prose-li:my-0 data-is-empty:hidden">
+								{description?.result}
+							</ContentBox>
 						</div>
 					))}
-				</div>
+				</ScrollArea>
 			</DialogContent>
 		</Dialog>
 	);
@@ -100,51 +152,71 @@ function ContributionDialog({
 
 
 
-function Article({ blocks }: contents.project.Article) {
+function Article({
+	linkedToPrevious,
+	maxWidth,
+	blocks,
+}: contents.project.Article) {
 	const cols = blocks.reduce((acc, cur) => acc + (cur.colSpan || 1), 0);
-	const onlyText = blocks.every(x => !x.media);
 
 	return (
 		<div
 			className={cn(
-				"grid grid-cols-1 md:grid-cols-(--cols) gap-x-16 gap-y-8 md:gap-x-6 xl:gap-x-12 auto-rows-auto",
-				onlyText ? "mt-0!" : "",
+				"grid grid-cols-1 gap-x-16 gap-y-8 @5xl:gap-x-12 auto-rows-auto mx-auto",
+				"@5xl:grid-cols-(--cols) max-w-(--max-width)",
+				linkedToPrevious ? "mt-4" : "mt-16",
 			)}
 			style={{
 				"--cols": `repeat(${cols}, minmax(0, 1fr))`,
+				"--max-width": typeof maxWidth === "number" ? `${maxWidth}px` : maxWidth ?? "none",
 			} as React.CSSProperties}
 		>
 			{blocks.map((block, idx) => (
-				<Fade
-					tagName="article"
+				<FadeArticle
 					key={idx}
-					className="col-span-1 md:col-span-(--col-span) grid grid-rows-subgrid row-span-2 items-center-safe gap-y-2"
+					className={cn(
+						"empty:hidden",
+						"grid grid-rows-subgrid items-center-safe gap-y-2",
+						"col-span-1 @5xl:col-span-(--col-span)",
+						"row-span-(--row-span) @5xl:row-span-2",
+					)}
 					style={{
 						"--col-span": block.colSpan || 1,
+						"--row-span": block.media && block.text.raw ? 2 : 1,
 					} as React.CSSProperties}
 				>
 					{block.media && (
 							<Media
+								{...block.media}
 								{...(block.media.type !== "image" ? {} : {
 									sizes: `(max-width: 768px) 100vw, ${100 / cols * (block.colSpan ?? 1)}vw`,
+									zoomable: true,
 								})}
-								{...block.media}
-								className={cn("rounded-lg shadow-sm", block.media.className)}
+								figureClassName={cn(
+									"mx-auto",
+									!block.text.lines?.length && "row-span-2",
+									block.media.figureClassName,
+								)}
+								className={cn(
+									"rounded-lg shadow-sm justify-self-center-safe",
+									block.text.lines?.length ? "self-end-safe" : "self-center-safe row-span-2",
+									block.media.className,
+								)}
 							/>
 					)}
 
 					{!!block.text.lines?.length && (
-						<MarkdownBox
-							source={block.text.lines}
+						<ContentBox
 							className={cn(
-								"h-full text-muted-foreground font-medium py-2 flex flex-col gap-2 justify-start items-start",
-								"[&_a]:underline [&_a]:text-primary [&_a]:hover:text-primary/80 [&_a]:transition-colors",
-								!block.media && "row-span-2 justify-center-safe",
+								"empty:hidden mx-auto py-2 w-fit font-medium",
+								block.media ? "self-start" : "self-center-safe row-span-2",
 								blocks.length === 1 && "items-center-safe",
 							)}
-						/>
+						>
+							{block.text.result}
+						</ContentBox>
 					)}
-				</Fade>
+				</FadeArticle>
 			))}
 		</div>
 	);
@@ -154,20 +226,18 @@ function Article({ blocks }: contents.project.Article) {
 
 export default async function Project(props: Props) {
 	const {
-		title,
+		name,
 		description,
+		highlights,
 		period,
-		tags: _tags,
-		skills: _skills,
+		tags,
+		skills,
 		shields,
-		badges,
+		links,
 		team,
 		articles,
 		isOngoing: _isOngoing,
 	} = await getProjectOrNotFound(props);
-
-	const tags = _tags.sort((a, b) => a.label.localeCompare(b.label));
-	const skills = _skills.sort((a, b) => a.label.localeCompare(b.label));
 
 	const isOngoing = (
 		_isOngoing
@@ -180,73 +250,99 @@ export default async function Project(props: Props) {
 	return (
 		<div className="space-y-8">
 			{/* Header */}
-			<FadeHeader className="space-y-4">
+			<FadeHeader className="space-y-4 max-w-3xl">
 				<div className="flex flex-wrap items-center gap-3">
 					<PageBadge label="Project Detail"/>
+					{team && (
+						<InfoBadge>
+							<Icon icon="Users"/>
+							Team
+						</InfoBadge>
+					)}
 					{isOngoing && (
-						<Badge variant="outline" className="border-primary font-mono">
+						<InfoBadge>
 							<Icon icon="RefreshCcw"/>
 							Ongoing
-						</Badge>
+						</InfoBadge>
 					)}
 				</div>
+
+				<Heading level={1}>{name}</Heading>
 
 				<PeriodBox
 					period={period}
 					className="text-muted-foreground text-sm"
 				/>
 
-				<Heading level={1}>{title}</Heading>
+				<div className="flex flex-wrap gap-2 empty:hidden py-2">
+					{shields?.map((props, idx) => <Shield
+						key={idx}
+						{...props}
+					/>)}
+				</div>
 
-				<MarkdownBox
-					source={description.lines}
-					className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-3xl"
-				/>
+				<ContentBox className="text-base sm:text-lg leading-relaxed">
+					{description.result}
+				</ContentBox>
+
+				<ContentBox className="text-base sm:text-lg leading-relaxed empty:hidden">
+					{highlights.result}
+				</ContentBox>
 			</FadeHeader>
 
 			<FadeSection className="space-y-8">
-				{/* badges */}
-				<div className="space-y-6 *:flex *:flex-wrap *:gap-2 *:empty:hidden">
-					<div>
-						{shields?.map((props, idx) => <Shield
-							key={idx}
-							{...props}
-						/>)}
-					</div>
+				{/* links */}
+				<div className="space-y-6">
+					{!!links?.length && (
+						<BadgeContainer label="Links">
+							{links?.map(badge => (
+								<LinkBadge
+									key={badge.label}
+									variant="ghost"
+									className="font-mono hover:text-primary"
+									{...badge}
+								/>
+							))}
+						</BadgeContainer>
+					)}
 
-					<div>
-						{badges?.map(({ className, ...badge }) => (
-							<LinkBadge
-								key={badge.label}
-								variant="ghost"
-								className={cn("font-mono hover:text-primary", className)}
-								{...badge}
-							/>
-						))}
-					</div>
+					{!!tags.length && (
+						<BadgeContainer label="Tags">
+							{tags.map(tag => <TagBadge
+								key={tag.slug}
+								icon="Funnel"
+								label={tag.label}
+								href={`/projects/?tag=${tag.slug}`}
+							/>)}
+						</BadgeContainer>
+					)}
 
-					<div>
-						{tags.map(tag => <TagBadge
-							key={tag.slug}
-							icon="Funnel"
-							label={tag.label}
-							href={`/projects/?tags=${tag.slug}`}
-						/>)}
-					</div>
+					{!!skills.primary.length && (
+						<BadgeContainer label="Primary Skills">
+							{skills.primary.map(skill => <SkillBadge
+								key={skill.slug}
+								icon="Funnel"
+								label={skill.label}
+								href={`/projects/?skill=${skill.slug}`}
+							/>)}
+						</BadgeContainer>
+					)}
 
-					<div>
-						{skills.map(skill => <SkillBadge
-							key={skill.slug}
-							icon="Funnel"
-							label={skill.label}
-							href={`/projects/?skills=${skill.slug}`}
-						/>)}
-					</div>
+					{!!skills.secondary.length && (
+						<BadgeContainer label="Secondary Skills">
+							{skills.secondary.map(skill => <SkillBadge
+								key={skill.slug}
+								icon="Funnel"
+								label={skill.label}
+								href={`/projects/?skill=${skill.slug}`}
+							/>)}
+						</BadgeContainer>
+					)}
 				</div>
 
 				{team && (
 					<Item variant="outline" className="shadow-xs">
-						<ItemMedia variant="icon">
+						<ItemMedia variant="image">
 							<Icon icon="ChartBar"/>
 						</ItemMedia>
 						<ItemContent>
@@ -268,7 +364,7 @@ export default async function Project(props: Props) {
 			</FadeSection>
 
 			{/* Sections */}
-			<FadeSection className="*:mt-16">
+			<FadeSection className="@container">
 				{articles.map((article, idx) => <Article
 					key={idx}
 					{...article}

@@ -1,3 +1,7 @@
+import type * as project from "./items/types";
+
+
+
 export interface ItemRaw {
 	slug: string;
 	label: string;
@@ -5,6 +9,7 @@ export interface ItemRaw {
 
 
 export interface Item extends ItemRaw {
+	projects: project.Item[];
 }
 
 
@@ -19,37 +24,43 @@ export const _items = [
 		label: "Frontend",
 	},
 	{
+		slug: "ssr",
+		label: "SSR",
+	},
+	{
 		slug: "container",
 		label: "Container",
 	},
 	{
-		slug: "deployment",
-		label: "Deployment",
+		slug: "cloud",
+		label: "Cloud",
 	},
 	{
-		slug: "package",
-		label: "Package",
+		slug: "dev-tools",
+		label: "Dev Tools",
+	},
+	{
+		slug: "open-source",
+		label: "Open Source",
+	},
+	{
+		slug: "deployed",
+		label: "Deployed",
+	},
+	{
+		slug: "published",
+		label: "Published",
 	},
 ] as const satisfies ItemRaw[];
 
 
 
-export const items: Item[] = _items;
+export const items = _items.map<Item>(x => ({
+	...x,
+	projects: [],
+}));
 
 export type Slug = typeof slugs[number];
 export const slugs = _items.map(item => item.slug);
 
-export const map = items.reduce((acc, item) => {
-	acc[item.slug] = item;
-	return acc;
-}, {} as Record<string, Item>);
-
-
-
-export const get = (slug: string) => {
-	return map[slug];
-}
-
-export const has = (slug: string): slug is Slug => {
-	return slug in map;
-}
+export const map = new Map(items.map(item => [item.slug, item]));

@@ -1,14 +1,16 @@
 import { cn } from "@/lib/utils";
 import * as seo from "@/lib/seo";
+import * as markdown from "@/lib/markdown";
 
-import { FadeHeader, FadeSection } from "@/components/fade";
+import { FadeHeader, FadeSection, FadeArticle } from "@/components/fade";
 import { Card, CardHeader, CardContent, CardFooter, CardTitle, CardDescription } from "@/components/ui/card";
-import { Time } from "@/components/time";
-import { PeriodBox } from "@/components/period-box";
+import { PeriodBox, type Period } from "@/components/period-box";
 import { Badge } from "@/components/ui/badge";
 import { PageBadge } from "@/components/page-badge";
+import { Icon } from "@/components/icon";
+import { Link } from "@/components/link";
 import { Heading as BaseHeading, type HeadingProps as BaseHeadingProps } from "@/components/heading";
-import { MarkdownBox } from "@/components/markdown-box";
+import { ContentBox } from "@/components/content-box";
 
 import { Features } from "./_components/features";
 
@@ -32,7 +34,7 @@ function Heading({
 		<BaseHeading
 			level={level}
 			className={cn(
-				"mb-12 border-l-4 border-primary pl-4 font-mono",
+				"mb-6 border-l-4 border-primary pl-4 font-mono",
 				className,
 			)}
 			{...props}
@@ -41,47 +43,65 @@ function Heading({
 }
 
 /**
- * for Certificates and Awards
+ * for Certifications, Awards, Training
  */
-function CertAndAwardsSection({
+function CardBox({
 	heading,
 	items,
 }: {
 	heading: string;
 	items: Array<{
-		date: Date;
+		period: Period<Date>;
 		title: string;
-		label: string;
+		issuer: string;
+		description?: markdown.Result;
+		link?: string;
+		rank?: string;
 	}>;
 }) {
 	return (
-		<FadeSection className="space-y-4">
-			<Heading>{heading}</Heading>
-			{items.map(({ title, date, label }) => (
-				<article key={title}>
+		<FadeArticle className="space-y-6">
+			<Heading className="mb-8">{heading}</Heading>
+			{items.map(({ title, period, issuer, description, link, rank }) => (
+				<article key={title} className="relative">
+					{rank && (
+						<Badge variant="secondary" className="absolute -top-2.5 left-2 text-sm p-2.5">{rank}</Badge>
+					)}
 					<Card className="flex-row items-center-safe gap-0">
 						<CardContent className="flex-1 space-y-2">
-							<CardTitle>{title}</CardTitle>
+							<CardTitle className="text-lg font-bold">
+								{
+									!link ? title : (
+										<Link href={link} className="w-fit flex items-center gap-1.5 hover:text-primary underline underline-offset-2">
+											<span className="flex-1">{title}</span>
+											<Icon icon="BadgeCheck" size={14} className="text-primary -translate-y-0.5"/>
+										</Link>
+									)
+								}
+							</CardTitle>
 							<CardDescription>
-								<Time value={date}/>
+								<ContentBox className="mb-2 text-sm empty:hidden">
+									{description?.result}
+								</ContentBox>
+								<PeriodBox period={period}/>
 							</CardDescription>
 						</CardContent>
-						<CardFooter className="border-l border-primary rounded-none pl-2 max-w-28">
-							<CardDescription className="font-medium text-end">
-								{label}
+						<CardFooter className="border-l border-primary rounded-none pl-2 w-28">
+							<CardDescription className="w-full font-medium text-end py-1">
+								{issuer}
 							</CardDescription>
 						</CardFooter>
 					</Card>
 				</article>
 			))}
-		</FadeSection>
+		</FadeArticle>
 	);
 }
 
 /**
  * for Educations
  */
-function EducationsSection({
+function EducationsBox({
 	heading,
 	items,
 }: {
@@ -89,17 +109,30 @@ function EducationsSection({
 	items: contents.about.Education[];
 }) {
 	return (
-		<FadeSection className="space-y-6">
-			<Heading>{heading}</Heading>
-			{items.map(({ school, major, status, period }) => (
-				<article key={`${school}/${major}`}>
+		<FadeArticle className="space-y-6">
+			<Heading className="mb-8">{heading}</Heading>
+			{items.map(({ school, major, degree, status, type, gpa, period }) => (
+				<article key={`${school}/${major}`} className="relative">
+					{degree && (
+						<Badge variant="secondary" className="absolute -top-2.5 left-2 text-sm p-2.5">{degree}</Badge>
+					)}
 					<Card className="gap-1">
 						<CardHeader className="flex justify-between items-start">
-							<CardTitle className="text-lg font-bold">{school}</CardTitle>
-							<Badge variant="outline">{status}</Badge>
+							<CardTitle>
+								<span className="text-lg font-bold">{school}</span>
+								{type && (
+									<span className="text-sm"> ({type})</span>
+								)}
+							</CardTitle>
+							<Badge variant="secondary">{status}</Badge>
 						</CardHeader>
 						<CardContent>
-							<CardDescription className="font-medium">{major}</CardDescription>
+							<CardDescription>
+								<span className="text-base font-medium">{major}</span>
+								{gpa && (
+									<span className="text-sm"> ({gpa.value}/{gpa.scale})</span>
+								)}
+							</CardDescription>
 						</CardContent>
 						<CardFooter>
 							<CardDescription>
@@ -109,7 +142,7 @@ function EducationsSection({
 					</Card>
 				</article>
 			))}
-		</FadeSection>
+		</FadeArticle>
 	);
 }
 
@@ -131,48 +164,53 @@ export default function About() {
 						</span>
 					</h1>
 				</div>
-				<MarkdownBox
-					className="prose-xl"
-					source={data.introduction.lines}
-				/>
+				<ContentBox className="prose-lg">
+					{data.introduction.result}
+				</ContentBox>
 			</FadeHeader>
 
 			{/* Features Section */}
 			<FadeSection>
-				<Heading>Features</Heading>
+				<Heading className="mb-12">Features</Heading>
 				<Features
 					items={data.features}
 				/>
 			</FadeSection>
 
-			<div className="grid md:grid-cols-2 gap-16 md:gap-24">
-				{/* Left Column, Education */}
-				<EducationsSection
+			<section className="grid gap-16 md:grid-cols-2">
+				{/* Education */}
+				<EducationsBox
 					heading="Education"
 					items={data.educations}
 				/>
 
-				{/* Right Column */}
-				<div className="space-y-20">
-					{/* Certificates */}
-					<CertAndAwardsSection
-						heading="Certificates"
-						items={data.certificates.map(item => ({
-							...item,
-							label: item.issuer,
-						}))}
-					/>
+				{/* Certifications */}
+				<CardBox
+					heading="Certifications"
+					items={data.certifications.map(item => ({
+						...item,
+						period: [item.date, item.date],
+					}))}
+				/>
 
-					{/* Awards */}
-					<CertAndAwardsSection
-						heading="Awards"
-						items={data.awards.map(item => ({
-							...item,
-							label: typeof item.rank === "number" ? `${item.rank}위` : item.rank,
-						}))}
-					/>
-				</div>
-			</div>
+				{/* Awards */}
+				<CardBox
+					heading="Awards"
+					items={data.awards.map(item => ({
+						...item,
+						period: [item.date, item.date],
+						rank: typeof item.rank === "number" ? `${item.rank}위` : item.rank,
+					}))}
+				/>
+
+				{/* Training */}
+				<CardBox
+					heading="Training"
+					items={data.training.map(item => ({
+						...item,
+					}))}
+				/>
+			</section>
 		</div>
 	);
 }

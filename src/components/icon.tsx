@@ -3,6 +3,8 @@ import * as lucide from "lucide-react";
 import type { IconType as SiIconType } from "@icons-pack/react-simple-icons";
 import {
 	SiGithub as GitHub,
+	SiGitlab as GitLab,
+	SiBitbucket as Bitbucket,
 } from "@icons-pack/react-simple-icons";
 
 
@@ -27,6 +29,8 @@ export function LucideIcon({ icon, ...props }: LucideIconProps) {
 
 const simpleIcons = {
 	GitHub,
+	GitLab,
+	Bitbucket,
 };
 
 export type SimpleIconName = keyof typeof simpleIcons | null;

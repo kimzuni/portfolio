@@ -2,6 +2,8 @@ import * as markdown from "@/lib/markdown";
 
 import type { Provider } from "@/components/skill-icon";
 
+import type * as contribution from "@/contents/contribution";
+import type * as project from "@/contents/project";
 import * as category from "./category";
 import * as level from "./level";
 
@@ -10,518 +12,467 @@ import * as level from "./level";
 export const _items = [
 	{
 		pin: true,
-		group: "language-and-runtime",
-		category: "language",
+		category: "programming",
 		slug: "javascript",
 		label: "JavaScript",
 		level: 3.5,
-		description: [
-		],
+		description: ``,
 	},
 	{
 		pin: true,
-		group: "language-and-runtime",
-		category: "language",
+		category: "programming",
 		slug: "typescript",
 		label: "TypeScript",
 		level: 3.5,
-		description: [
-		],
+		description: ``,
 	},
 	{
 		pin: true,
-		group: "language-and-runtime",
-		category: "language",
+		category: "programming",
 		slug: "python",
 		label: "Python",
 		level: 3.5,
-		description: [
-		],
+		description: ``,
 	},
 	{
-		group: "language-and-runtime",
-		category: "language",
+		category: "programming",
+		slug: "c",
+		label: "C",
+		level: 2,
+		description: ``,
+	},
+	{
+		category: "programming",
 		slug: "go",
 		label: "Go",
 		level: 1.5,
-		description: [
-		],
+		description: ``,
 	},
 	{
-		group: "language-and-runtime",
-		category: "language",
-		slug: "c",
-		label: "C",
-		level: 1.5,
-		description: [
-		],
-	},
-	{
-		group: "language-and-runtime",
-		category: "language",
+		category: "programming",
 		slug: "ruby",
 		label: "Ruby",
 		level: 1.5,
-		description: [
-		],
+		description: ``,
 	},
 
 	{
-		pin: true,
-		group: "language-and-runtime",
-		category: "runtime",
-		slug: "node-js",
-		label: "Node.js",
-		level: 2.5,
-		description: [
-		],
-	},
-	{
-		pin: true,
-		group: "language-and-runtime",
-		category: "runtime",
-		slug: "bun",
-		label: "Bun",
-		level: 3.5,
-		description: [
-		],
-	},
-
-
-
-	{
-		pin: true,
-		group: "backend",
-		category: "framework",
-		slug: "elysia",
-		label: "Elysia",
-		level: 3.5,
-		description: [
-		],
-	},
-	{
-		pin: true,
-		group: "backend",
-		category: "framework",
-		slug: "fastapi",
-		label: "FastAPI",
-		level: 3,
-		description: [
-		],
-	},
-	{
-		pin: true,
-		group: "backend",
-		category: "framework",
-		slug: "express-js",
-		label: "Express.js",
-		level: 3,
-		description: [
-		],
-	},
-	{
-		pin: true,
-		group: "backend",
-		category: "framework",
-		slug: "django",
-		label: "Django",
-		level: 3,
-		description: [
-		],
-	},
-	{
-		group: "backend",
-		category: "framework",
-		slug: "gin",
-		label: "Gin",
-		level: 1.5,
-		description: [
-		],
-	},
-
-
-
-	{
-		group: "frontend-and-ui",
-		category: "markup",
+		category: "markup-style",
 		slug: "html",
 		label: "HTML",
 		level: 3.5,
-		description: [
-		],
+		description: ``,
 	},
-
 	{
-		group: "frontend-and-ui",
-		category: "style",
+		category: "markup-style",
 		slug: "css",
 		label: "CSS",
 		level: 3.5,
-		description: [
-		],
-	},
-	{
-		pin: true,
-		group: "frontend-and-ui",
-		category: "style",
-		slug: "tailwind-css",
-		label: "Tailwind CSS",
-		level: 3,
-		description: [
-		],
-	},
-	{
-		group: "frontend-and-ui",
-		category: "style",
-		slug: "bootstrap",
-		label: "Bootstrap",
-		level: 2,
-		description: [
-		],
+		description: ``,
 	},
 
 	{
 		pin: true,
-		group: "frontend-and-ui",
-		category: "framework",
+		category: "shell",
+		slug: "bash",
+		label: "Bash",
+		level: 3.5,
+		description: ``,
+	},
+
+
+
+	{
+		pin: true,
+		category: "frontend-frameworks",
 		slug: "react",
 		label: "React",
 		level: 3,
-		description: [
-		],
+		description: ``,
 	},
 	{
 		pin: true,
-		group: "frontend-and-ui",
-		category: "framework",
+		category: "frontend-frameworks",
 		slug: "next-js",
 		label: "Next.js",
 		level: 2.5,
-		description: [
-		],
+		description: ``,
 	},
 	{
-		group: "frontend-and-ui",
-		category: "framework",
+		category: "frontend-frameworks",
 		slug: "vue-js",
 		label: "Vue.js",
 		level: 1.5,
-		description: [
-		],
+		description: ``,
 	},
 
 	{
 		pin: true,
-		group: "frontend-and-ui",
-		category: "library",
+		category: "styling-ui",
+		slug: "tailwind-css",
+		label: "Tailwind CSS",
+		level: 3,
+		description: ``,
+	},
+	{
+		category: "styling-ui",
+		slug: "bootstrap",
+		label: "Bootstrap",
+		level: 2,
+		description: ``,
+	},
+	{
+		pin: true,
+		category: "styling-ui",
 		slug: "shadcn-ui",
 		label: "shadcn/ui",
 		level: 2.5,
-		description: [
-		],
+		description: ``,
 	},
+
 	{
-		group: "frontend-and-ui",
-		category: "library",
+		category: "frontend-libraries",
 		slug: "chart-js",
 		label: "Chart.js",
 		level: 0.5,
-		description: [
-		],
+		description: ``,
 	},
 
 	{
-		group: "frontend-and-ui",
-		category: "static-site-generator",
-		slug: "vitepress",
-		label: "VitePress",
-		level: 1.5,
-		description: [
-		],
-	},
-	{
-		group: "frontend-and-ui",
-		category: "static-site-generator",
+		category: "static-sites",
 		slug: "jekyll",
 		label: "Jekyll",
 		level: 3,
-		description: [
-		],
+		description: ``,
+	},
+	{
+		category: "static-sites",
+		slug: "vitepress",
+		label: "VitePress",
+		level: 1.5,
+		description: ``,
 	},
 
 
 
 	{
 		pin: true,
-		group: "data-and-storage",
-		category: "database",
-		slug: "mariadb",
-		label: "MariaDB",
+		category: "runtimes",
+		slug: "node-js",
+		label: "Node.js",
 		level: 3,
-		description: [
-		],
+		description: ``,
 	},
 	{
-		group: "data-and-storage",
-		category: "database",
+		pin: true,
+		category: "runtimes",
+		slug: "bun",
+		label: "Bun",
+		level: 3,
+		description: ``,
+	},
+
+	{
+		pin: true,
+		category: "backend-frameworks",
+		slug: "elysia",
+		label: "Elysia",
+		level: 3,
+		description: ``,
+	},
+	{
+		pin: true,
+		category: "backend-frameworks",
+		slug: "fastapi",
+		label: "FastAPI",
+		level: 3,
+		description: ``,
+	},
+	{
+		pin: true,
+		category: "backend-frameworks",
+		slug: "express-js",
+		label: "Express.js",
+		level: 3,
+		description: ``,
+	},
+	{
+		pin: true,
+		category: "backend-frameworks",
+		slug: "django",
+		label: "Django",
+		level: 3,
+		description: ``,
+	},
+	{
+		category: "backend-frameworks",
+		slug: "gin",
+		label: "Gin",
+		level: 1.5,
+		description: ``,
+	},
+
+
+
+	{
+		pin: true,
+		category: "databases",
+		slug: "mariadb",
+		label: "MariaDB",
+		level: 2.5,
+		description: ``,
+	},
+	{
+		category: "databases",
 		slug: "postgresql",
 		label: "PostgreSQL",
 		level: 0,
-		description: [
-		],
+		description: ``,
 	},
 	{
-		group: "data-and-storage",
-		category: "database",
+		category: "databases",
 		slug: "sqlite",
 		label: "SQLite",
 		level: 1.5,
-		description: [
-		],
+		description: ``,
 	},
 
 	{
 		pin: true,
-		group: "data-and-storage",
 		category: "cache",
 		slug: "redis",
 		label: "Redis",
 		level: 2.5,
-		description: [
-		],
+		description: ``,
 	},
 
 	{
 		pin: true,
 		icon: "drizzle",
-		group: "data-and-storage",
-		category: "orm",
+		category: "orms",
 		slug: "drizzle-orm",
 		label: "Drizzle ORM",
-		level: 2.5,
-		description: [
-		],
+		level: 3,
+		description: ``,
 	},
 	{
-		group: "data-and-storage",
-		category: "orm",
+		category: "orms",
 		slug: "sequelize",
 		label: "Sequelize",
 		level: 3,
-		description: [
-		],
+		description: ``,
 	},
 	{
-		group: "data-and-storage",
-		category: "orm",
+		category: "orms",
+		slug: "sqlalchemy",
+		label: "SQLAlchemy",
+		level: 2,
+		description: ``,
+	},
+	{
+		category: "orms",
 		slug: "prisma",
 		label: "Prisma",
 		level: 1.5,
-		description: [
-		],
+		description: ``,
 	},
 	{
 		icon: "django",
-		group: "data-and-storage",
-		category: "orm",
+		category: "orms",
 		slug: "django-orm",
 		label: "Django ORM",
 		level: 1,
-		description: [
-		],
+		description: ``,
 	},
 	{
-		group: "data-and-storage",
-		category: "orm",
+		category: "orms",
 		slug: "gorm",
 		label: "GORM",
 		level: 0.5,
-		description: [
-		],
+		description: ``,
 	},
 
 
 
 	{
 		pin: true,
-		group: "devops-and-infra",
-		category: "os-shell",
-		slug: "bash",
-		label: "Bash",
-		level: 3.5,
-		description: [
-		],
-	},
-	{
-		pin: true,
-		group: "devops-and-infra",
-		category: "os-shell",
+		category: "System-containers",
 		slug: "linux",
 		label: "Linux",
 		level: 3.5,
-		description: [
-		],
+		description: ``,
 	},
 
 	{
 		pin: true,
-		group: "devops-and-infra",
-		category: "cloud-container",
+		category: "System-containers",
 		slug: "docker",
 		label: "Docker",
 		level: 3.5,
-		description: [
-		],
+		description: ``,
 	},
+
 	{
-		group: "devops-and-infra",
-		category: "cloud-container",
+		category: "Cloud-hosting",
 		slug: "aws",
 		label: "AWS",
 		level: 1,
-		description: [
-		],
+		description: ``,
+	},
+	{
+		category: "Cloud-hosting",
+		slug: "vercel",
+		label: "Vercel",
+		level: 1,
+		description: ``,
 	},
 
 	{
 		pin: true,
-		group: "devops-and-infra",
 		category: "ci-cd",
 		slug: "github-actions",
 		label: "GitHub Actions",
 		level: 3,
-		description: [
-		],
+		description: ``,
 	},
 
 
 
 	{
 		pin: true,
-		group: "tools",
-		category: "collaboration",
+		category: "version-control",
 		slug: "git",
 		label: "Git",
 		level: 3.5,
-		description: [
-		],
+		description: ``,
 	},
+
 	{
-		group: "tools",
-		category: "network",
-		slug: "axios",
-		label: "Axios",
-		level: 2,
-		description: [
-		],
-	},
-	{
-		group: "tools",
-		category: "network",
-		slug: "websocket",
-		label: "WebSocket",
+		category: "package-managers",
+		slug: "npm",
+		label: "npm",
 		level: 2.5,
-		description: [
-		],
+		description: ``,
 	},
 	{
-		group: "tools",
+		category: "package-managers",
+		slug: "pnpm",
+		label: "pnpm",
+		level: 2,
+		description: ``,
+	},
+
+	{
 		category: "build",
 		slug: "vite",
 		label: "Vite",
 		level: 1.5,
-		description: [
-		],
-	},
-	{
-		group: "tools",
-		category: "package",
-		slug: "npm",
-		label: "npm",
-		level: 2.5,
-		description: [
-		],
-	},
-	{
-		group: "tools",
-		category: "package",
-		slug: "pnpm",
-		label: "pnpm",
-		level: 2,
-		description: [
-		],
+		description: ``,
 	},
 
 	{
 		pin: true,
-		group: "tools",
 		category: "testing",
 		slug: "vitest",
 		label: "Vitest",
 		level: 2,
-		description: [
-		],
+		description: ``,
 	},
 	{
-		group: "tools",
 		category: "testing",
 		slug: "jest",
 		label: "Jest",
 		level: 1,
-		description: [
-		],
+		description: ``,
+	},
+
+	{
+		category: "network-api",
+		slug: "axios",
+		label: "Axios",
+		level: 2,
+		description: ``,
+	},
+	{
+		category: "network-api",
+		slug: "websocket",
+		label: "WebSocket",
+		level: 2.5,
+		description: ``,
 	},
 
 
 
 	{
-		group: "others",
+		icon: "vscode",
+		category: "extensions",
+		slug: "vscode-extension",
+		label: "VS Code Extension",
+		level: 1.5,
+		description: ``,
+	},
+
+	{
 		category: "ai",
 		slug: "ollama",
 		label: "Ollama",
 		level: 1.5,
-		description: [
-		],
+		description: ``,
 	},
 
 	{
 		icon: "https://cdn.phaser.io/images/logo/phaser-planet-small.png",
-		group: "others",
 		category: "game-dev",
 		slug: "phaser",
 		label: "Phaser",
 		level: 1.5,
-		description: [
-		],
+		description: ``,
 	},
 	{
 		icon: "https://www.mapeditor.org/img/tiled-logo-header.png",
-		group: "others",
 		category: "game-dev",
 		slug: "tiled",
 		label: "Tiled",
 		level: 2,
-		description: [
-		],
+		description: ``,
 	},
 ] as const satisfies ItemRaw[];
 
 
 
-export const items: Item[] = await Promise.all(_items.map(async item => ({
-	...item,
-	group: category.group.get(item.group)!,
-	category: category.get(item.group, item.category)!,
-	level: level.get(item.level)!,
-	description: await markdown.render(item.description),
-})));
+export const items: Item[] = await Promise.all(
+	_items
+		.map<Promise<Item>>(async (item) => ({
+			...item,
+			group: category.map.get(item.category)!.group,
+			category: category.map.get(item.category)!,
+			level: level.map.get(item.level)!,
+			description: await markdown.render(item.description),
+			projects: {
+				all: [],
+				primary: [],
+				secondary: [],
+			},
+			contributions: {
+				all: [],
+				primary: [],
+				secondary: [],
+			},
+		}))
+);
+
+// 역참조 구성
+for (const item of items) {
+	item.group.skills.push(item);
+	item.category.skills.push(item);
+	item.level.skills.push(item);
+}
 
 export type Slug<
-	G extends category.group.Slug = category.group.Slug,
-	C extends category.Slug<G> = category.Slug<G>,
+	C extends category.Slug = category.Slug,
 > = (
 	typeof _items[number] extends infer T
-		? T extends { group: G; category: C; slug: string }
+		? T extends { category: C; slug: string }
 			? T["slug"]
 			: never
 		: never
@@ -529,10 +480,10 @@ export type Slug<
 
 export const slugs = _items.map(item => item.slug);
 
-export const map = items.reduce((acc, item) => {
+export const map = items.reduce<Record<string, Item>>((acc, item) => {
 	acc[item.slug] = item;
 	return acc;
-}, {} as Record<string, Item>);
+}, {});
 
 export const get = (slug: string) => {
 	return map[slug];
@@ -544,28 +495,26 @@ export const has = (slug: string): slug is Slug => {
 
 
 
-export type ItemRaw<G extends category.group.Slug = category.group.Slug> = G extends category.group.Slug
-	? {
-		pin?: boolean;
-		level: level.Slug;
-		group: G;
-		category: category.Slug<G>;
-		slug: string;
-		label: string;
+export interface ItemRaw {
+	pin?: boolean;
+	level: level.Slug;
+	category: category.Slug;
+	slug: string;
+	label: string;
 
-		icon?: string;
-		provider?: Provider,
-		description?: markdown.Source;
-		warmup?: boolean;
-		hidden?: boolean;
-	}
-	: never;
+	icon?: string;
+	provider?: Provider,
+	description?: markdown.Source;
+	warmup?: boolean;
+	hidden?: boolean;
+}
 
-export type Item =
-	& Omit<ItemRaw<category.group.Slug>, "level" | "group" | "category" | "description">
-	& {
-		level: level.Item;
-		group: category.group.Item;
-		category: category.Item;
-		description: markdown.Result;
-	};
+export interface Item extends Omit<ItemRaw, "level" | "group" | "category" | "description"> {
+	level: level.Item;
+	group: category.group.Item;
+	category: category.Item;
+	slug: Slug;
+	description: markdown.Result;
+	projects: Record<"all" | "primary" | "secondary", project.Item[]>;
+	contributions: Record<"all" | "primary" | "secondary", contribution.Item[]>;
+}

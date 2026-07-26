@@ -10,39 +10,70 @@ const vscode = "vscode-preview.webm";
 
 export const item: ItemRaw = {
 	pin: true,
-	isOngoing: true,
 	cover: overview,
-	title: "yamllint-js",
-	description: [
-		"기존 `yamllint` 사용 시 필수적이었던 Python 런타임 종속성을 제거하고, 로컬 환경부터 CI/CD 파이프라인까지의 검증 도구를 Node.js 단일 스택으로 통합했습니다.",
-		"이를 통해 파편화되어 있던 기존의 별도 환경 구축 및 Job/Step 설정을 `package.json` 스크립트 하나로 응집시켜 도구 체인의 관리 포인트를 최소화했습니다.",
-		"원본과의 100% 호환을 목표로 모든 로직을 TypeScript로 포팅하여, 환경에 구애받지 않는 안정적이고 일관된 YAML 검증 환경을 제공합니다.",
+	name: "yamllint-js",
+	description: `
+		Python 기반의 \`yamllint\`를 JavaScript 환경에서 사용할 수 있도록 포팅한 YAML 린트 도구입니다.
+		Node.js 프로젝트에서 YAML 린팅을 위해 별도의 Python을 사용해야 하는 이질감과 번거로움을 해결하고자 개발했습니다.
+	`,
+	highlights: [
+		{
+			label: "Python-Free",
+			value: "모든 로직 및 테스트 코드를 TypeScript로 재작성하여 Python 의존성 100% 제거",
+		},
+		{
+			label: "Type-Safe Config",
+			value: "스크립트 기반 설정 파일 지원 및 완벽한 타입 추론 제공",
+		},
+		{
+			label: "98%+ Coverage",
+			value: "98% 이상의 높은 커버리지로 신뢰성 확보",
+		},
+		{
+			label: "Issue Fix",
+			value: "`new-lines` 규칙에 대한 알려진 이슈([#475](https://github.com/adrienverge/yamllint/issues/475)) 해결",
+		},
+		{
+			label: "VS Code Extension",
+			value: "전용 VS Code 확장을 통해 실시간 린트 결과 및 피드백 제공",
+		},
 	],
 	period: [
 		new Date("2025-11-02"),
 		new Date("2026-02-22"),
 	],
 	tags: [
-		"package",
-		"deployment",
+		"dev-tools",
+		"open-source",
+		"published",
 	],
-	skills: [
-		"node-js",
-		"typescript",
-		"github-actions",
-	],
+	skills: {
+		primary: [
+			"typescript",
+			"javascript",
+			"node-js",
+		],
+		secondary: [
+			"npm",
+			"vitest",
+			"vscode-extension",
+			"github-actions",
+		],
+	},
 	shields: [
 		{
-			service: "github",
-			user: "kimzuni-labs",
-			repo: "yamllint-js",
-			badge: "last-commit",
+			service: "npm",
+			badge: "downloads",
+			packageName: "yamllint-js",
+			interval: "dy",
+			link: true,
 		},
 		{
 			service: "npm",
 			badge: "downloads",
 			packageName: "yamllint-js",
-			interval: "d18m",
+			interval: "dw",
+			link: true,
 		},
 		{
 			logo: "codecov",
@@ -53,76 +84,116 @@ export const item: ItemRaw = {
 			repo: "yamllint-js",
 			link: true,
 		},
-	],
-	badges: [
 		{
-			label: "Upstream",
-			href: "https://github.com/adrienverge/yamllint",
+			service: "github",
+			user: "kimzuni-labs",
+			repo: "yamllint-js",
+			badge: "last-commit",
 		},
+	],
+	links: [
 		{
 			label: "GitHub",
 			href: "https://github.com/kimzuni-labs/yamllint-js",
 		},
 		{
-			label: "NPM",
+			label: "npm",
 			href: "https://www.npmjs.com/package/yamllint-js",
 		},
 		{
-			label: "VSCode Marketplace",
+			label: "VS Code Marketplace",
 			href: "https://marketplace.visualstudio.com/items?itemName=kimzuni.vscode-yamllint-js",
+		},
+		{
+			label: "Upstream",
+			href: "https://github.com/adrienverge/yamllint",
 		},
 	],
 	articles: [
 		{
 			blocks: [
 				{
+					colSpan: 2,
 					media: {
 						type: "image",
 						src: overview,
-						alt: "린트 결과 캡쳐",
+						alt: "Python 버전 확인 결과 및 린트 실행 결과",
+						caption: "node:24-alpine 기반 컨테이너 환경에서의 린트 실행 결과",
 					},
-					text: [
-						"이제 YAML 린트를 위해 Python을 설치하거나 CI/CD 설정을 별도로 구성할 필요가 없습니다.",
-						"`package.json`에 스크립트 한 줄을 추가하는 것만으로, 로컬과 GitHub Actions 등 어디서든 즉시 동작하는 단일 린트 환경을 구성할 수 있습니다.",
-					],
 				},
+				{
+					colSpan: 3,
+					media: {
+						type: "image",
+						src: coverage,
+						alt: "테스트 커버리지 결과",
+						caption: "Vitest 기반 테스트 커버리지 결과",
+					},
+				},
+			],
+		},
+		{
+			linkedToPrevious: true,
+			blocks: [
+				{
+					text: `
+						Python이 설치되지 않은 환경에서도 안정적으로 린트를 수행할 수 있도록 모든 로직과 테스트 코드를 TypeScript로 재작성하여 Python 의존성을 제거했습니다.
+						특히 PyPI의 \`PyYAML\`과 npm의 \`yaml\` 간의 파서 토큰 구조 차이를 다음과 같은 로직을 적용하여 해결함으로써 98% 이상의 높은 테스트 커버리지를 확보했습니다.
+
+						1. **불일치 토큰 필터링**: \`PyYAML\`에 존재하지 않는 \`space\`, \`comment\`, \`newline\` 토큰을 제너레이터 단계에서 무시하도록 처리하여 \`PyYAML\`과 동일한 토큰을 생성하도록 구성했습니다.
+						2. **누락 토큰 대체 및 상태 판별**: 반대로 \`yaml\`에 존재하지 않는 \`BlockEnd\` 토큰을 대신 처리하기 위해 \`Token\` 클래스 내부에 \`isBlockEnd\` Getter를 구현하여 \`PyYAML\`과 동일한 흐름으로 동작하도록 보완했습니다.
+					`,
+				},
+			],
+		},
+		{
+			maxWidth: 1100,
+			blocks: [
 				{
 					media: {
 						type: "image",
 						src: config,
 						alt: "yamllint-js.config.js 자동 완성",
+						caption: "VS Code에서 UserConfig 타입을 활용한 타입 추론 및 자동 완성",
 					},
-					text: [
-						"단순 텍스트 설정을 넘어 정적 타입을 지원하는 구성 파일(`config.mjs` 등) 방식을 도입했습니다.",
-						"IDE의 타입 추론과 자동 완성을 통해 별도의 문서를 조회하는 번거로움 없이, 누구나 정확하고 빠르게 린트 환경을 구성할 수 있습니다.",
-					],
+					text: `
+						\`yamllint\`에서 사용 가능한 \`.yamllint.yml\` 등의 정적 설정 파일 외에도,
+						Node.js 생태계에 친숙한 \`yamllint-js.config.js\`와 같은 스크립트 기반 설정 파일을 지원합니다.
+						이를 통해 코드 에디터에서의 강력한 타입 추론과 자동완성을 제공함으로써,
+						별도의 문서 조회 없이도 정확하고 신속하게 린트 환경을 구성할 수 있는 개발자 경험(DX)를 제공합니다.
+					`,
+				},
+			],
+		},
+		{
+			maxWidth: 1100,
+			blocks: [
+				{
+					media: {
+						type: "video",
+						src: vscode,
+						caption: "VS Code 확장을 통해 실시간 린트 결과 및 피드백을 확인하는 장면",
+					},
+					text: `
+						\`yamllint\`의 공식 VS Code 확장의 부재를 해결하기 위해 전용 VS Code 확장을 개발했습니다.
+						이를 통해 별도의 명령어나 도구를 사용하지 않고도 VS Code 내에서 실시간으로 린트 결과를 확인하고 즉각적인 피드백을 받을 수 있습니다.
+					`,
 				},
 			],
 		},
 		{
 			blocks: [
 				{
-					colSpan: 3,
-					media: {
-						type: "image",
-						src: coverage,
-						alt: "커버리지 결과",
-					},
-					text: [
-						"원본의 검증 로직을 TypeScript로 포팅하고, 98% 이상의 높은 테스트 커버리지를 통해 원본과의 기능적 정합성을 극대화했습니다.",
-						"파이썬 의존성은 제거하면서도 라이브러리 본연의 신뢰도를 유지하여, 실제 운영 파이프라인에서 안심하고 사용할 수 있는 안정적인 검증 환경을 제공합니다.",
-					],
-				},
-				{
-					colSpan: 2,
-					media: {
-						type: "video",
-						src: vscode,
-					},
-					text: [
-						"공식 `yamllint` 확장의 부재로 인한 에디터 연동의 불편함을 해결하고자 전용 VS Code 확장을 직접 개발하여 배포했습니다.",
-						"`yamllint-js`를 기반으로 타이핑과 동시에 실시간 피드백을 제공하며, 별도의 명령어나 도구 전환 없이 IDE 내에서 즉각적인 문법 교정이 가능한 최적의 개발 흐름을 구축했습니다.",
-					],
+					text: `
+						### Next Steps
+
+						1. 모노레포 아키텍처 전환 및 패키지 분리
+							- 웹 브라우저 환경에서도 제약 없이 동작하도록 핵심 로직을 모듈화하여 분리
+							- VS Code 확장 패키지의 번들 사이즈 최적화 및 실시간 피드백 성능 개선
+							- 사용자 정의 커스텀 룰 및 플러그인 확장 아키텍처 지원
+						2. 에디터 생태계 확장
+							- Cursor, Antigravity 등 다양한 개발 에디터 환경으로 지원 범위 확대
+					`,
 				},
 			],
 		},

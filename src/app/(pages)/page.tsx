@@ -10,6 +10,7 @@ import { Hero } from "./_components/page/hero";
 import { About } from "./_components/page/about";
 import { Skills } from "./_components/page/skills";
 import { Projects } from "./_components/page/projects";
+import { Contributions } from "./_components/page/contributions";
 import { Contact } from "./_components/page/contact";
 
 import * as contents from "@/contents";
@@ -75,6 +76,11 @@ export default async function Home() {
 			<Projects
 				id="projects"
 				{...home.projects}
+			/>
+
+			<Contributions
+				id="contributions"
+				{...home.contributions}
 			/>
 
 			<Contact

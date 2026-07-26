@@ -21,8 +21,6 @@ export interface LinkBadgeProps extends Omit<React.ComponentProps<typeof Badge>,
 
 
 
-export const EXTERNAL_REGEX = /^https?:\/\//i;
-
 export function LinkBadge({
 	label,
 	href,
@@ -41,7 +39,7 @@ export function LinkBadge({
 }: LinkBadgeProps) {
 	// null means no icon, undefined means auto-detect
 	if (icon === undefined) {
-		icon = href && EXTERNAL_REGEX.test(href) ? "ExternalLink" : "Link";
+		icon = href && (href.startsWith("//") || href.includes("://")) ? "ExternalLink" : "Link";
 	}
 	if (activeIcon === undefined) {
 		activeIcon = icon;

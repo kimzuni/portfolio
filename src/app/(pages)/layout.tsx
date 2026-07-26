@@ -11,6 +11,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { Icon } from "@/components/icon";
 
 import { Sidebar, SidebarTrigger } from "./_components/layout/sidebar";
+import { Background } from "./_components/layout/background";
 import { Header } from "./_components/layout/header";
 import { Footer } from "./_components/layout/footer";
 
@@ -41,6 +42,7 @@ export default async function AppLayout({
 		>
 			<Toaster/>
 			<BackButtonProvider><LayoutBreadcrumbProvider>
+					<Background className="absolute right-0 top-0 -z-1 not-data-[pathname=/]:hidden"/>
 					<SidebarProvider defaultOpen={sidebarOpen}>
 						<Sidebar
 							items={contents.link.items}
@@ -48,7 +50,7 @@ export default async function AppLayout({
 							variant="floating"
 							autoClose={autoClose}
 							autoCloseKey={SIDEBAR_AUTO_CLOSE_KEY}
-							className="z-100"
+							className="z-1"
 						/>
 						<div
 							className="flex-1 flex flex-col z-10"
@@ -62,7 +64,7 @@ export default async function AppLayout({
 								)}
 							>
 								<SidebarTrigger className="size-8" icon={["PanelLeftClose", "PanelLeftOpen"]}/>
-								<BackButton className="size-8"><Icon icon="ArrowLeft"/></BackButton>
+								<BackButton aria-label="Back to previous" className="size-8"><Icon icon="ArrowLeft"/></BackButton>
 								<p className="px-1 flex-1 text-lg font-semibold">
 									KIM JOON HEE
 								</p>
@@ -72,7 +74,8 @@ export default async function AppLayout({
 								className={cn(
 									"flex-1 z-11",
 									"mx-auto max-w-384 w-full",
-									"px-6 py-16 pb-20",
+									"px-6 pt-6 pb-20",
+									"md:pt-12 xl:pt-16",
 									"md:px-12 xl:px-16",
 								)}
 							>

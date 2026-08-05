@@ -70,6 +70,7 @@ export function ContactForm({
 	message,
 	autoCheck: _autoCheck,
 	autoCheckKey,
+	onSubmit,
 	...props
 }: ContactFormProps) {
 	const localRef = useRef<HTMLFormElement>(null);
@@ -133,10 +134,13 @@ export function ContactForm({
 		return () => observer.disconnect();
 	}, []);
 
-	const onSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+		onSubmit?.(e);
+
+		const { defaultPrevented } = e;
 		e.preventDefault();
 
-		if (!isActive || isPending) return;
+		if (defaultPrevented || !isActive || isPending) return;
 
 		startTransition(async () => {
 			try {
@@ -178,7 +182,7 @@ export function ContactForm({
 			{...props}
 			ref={ref}
 			id={formId}
-			onSubmit={onSubmit}
+			onSubmit={handleSubmit}
 		>
 			<div className="mb-4 flex flex-wrap-reverse items-center-safe justify-center-safe gap-1">
 				<Message className="text-center text-base">

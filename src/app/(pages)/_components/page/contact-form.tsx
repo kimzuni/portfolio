@@ -1,11 +1,12 @@
 "use client";
 
-import { useId, useRef, useState, useEffect, useCallback, useTransition } from "react";
+import { useId, useRef, useState, useEffect, useTransition } from "react";
 import { useMergedRefs } from "@base-ui/utils/useMergedRefs";
 import { toast, type ExternalToast } from "sonner";
 
 import { cn } from "@/lib/utils";
 import * as cookie from "@/lib/cookie";
+import { useServerCheck } from "@/hooks/use-server-check";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
@@ -40,27 +41,6 @@ import { TooltipWithMobile } from "@/components/tooltip-with-mobile";
 import { Message } from "./message";
 
 import type * as contents from "@/contents";
-
-
-
-function useStatus(url: string) {
-	const [ok, setOk] = useState<boolean | undefined>(undefined);
-	const [isPending, setIsPending] = useState(false);
-
-	const check = useCallback(async () => {
-		setIsPending(true);
-		try {
-			const response = await fetch(url, { method: "HEAD" });
-			setOk(response.ok);
-		} catch {
-			setOk(false);
-		} finally {
-			setIsPending(false);
-		}
-	}, [url]);
-
-	return { ok, isPending, check };
-}
 
 
 
@@ -100,22 +80,25 @@ export function ContactForm({
 	const [modelOpen, setModalOpen] = useState(false);
 	const [autoCheck, setAutoCheck] = useState(_autoCheck);
 
-	const [isPending, startTransition] = useTransition();
-	const [subject, setSubject] = useState("");
-	const [content, setContent] = useState("");
-	const status = useStatus(url);
+	const checkOptions = {
+		autoCheck: isActive && isVisible && autoCheck && isIntersecting,
+		interval: checkInterval,
+	};
+	const { ok } = useServerCheck(url, checkOptions);
+
+
 
 	const randomId = useId();
 	const formId = id || `contact-form-${randomId}`;
 
+	const [isPending, startTransition] = useTransition();
+	const [subject, setSubject] = useState("");
+	const [content, setContent] = useState("");
+
 	const isSubmittable = (
-		isActive
-		&& isVisible
+		(!checkOptions.autoCheck || !!ok)
+		&& !isPending
 		&& !!(subject || content)
-		&& (
-			(!!status.ok && !isPending)
-			|| !autoCheck
-		)
 	);
 
 	const updateAutoCheck = (value: boolean) => {
@@ -149,22 +132,6 @@ export function ContactForm({
 		observer.observe(target);
 		return () => observer.disconnect();
 	}, []);
-
-	useEffect(() => {
-		if (!isActive) return;
-
-		const check = () => {
-			if (autoCheck && !document.hidden && isIntersecting) {
-				status.check();
-			}
-		};
-
-		check();
-		const interval = setInterval(() => {
-			check();
-		}, checkInterval);
-		return () => clearInterval(interval);
-	}, [isActive, autoCheck, isIntersecting, status, checkInterval]);
 
 	const onSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -278,9 +245,9 @@ export function ContactForm({
 										style={{
 											"--c": !autoCheck
 													? "var(--input)"
-													: status.ok === undefined
+													: ok === undefined
 														? "var(--input)"
-														: status.ok
+														: ok
 															? "var(--color-green-600)"
 															: "var(--color-red-600)",
 											"--ring": !autoCheck
@@ -301,9 +268,9 @@ export function ContactForm({
 											? "Not Available"
 											: !autoCheck
 												? "Status Check Disabled"
-												: status.ok === undefined
+												: ok === undefined
 													? "Checking status..."
-													: status.ok ? "Online" : "Offline"
+													: ok ? "Online" : "Offline"
 									}</FieldLabel>
 								</Field>
 							</FieldGroup>

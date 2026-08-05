@@ -2,8 +2,6 @@
 
 import { motion } from "framer-motion";
 
-import { cn } from "@/lib/utils";
-
 
 
 type M = typeof motion;
@@ -19,19 +17,12 @@ export type MotionProps<T extends TagName = "div"> =
 
 export function Motion<T extends TagName = "div">({
 	tagName = "div" as T,
-	className,
 	...props
 }: MotionProps<T>) {
 	const Comp = motion[tagName];
 
 	return (
 		// @ts-expect-error: ts(2589)
-		<Comp
-			className={cn(
-				"will-change-[opacity,transform]",
-				className,
-			)}
-			{...props}
-		/>
+		<Comp {...props}/>
 	);
 }

@@ -15,7 +15,7 @@ export function Section({
 		<FadeSection
 			once={false}
 			className={cn(
-				"py-28 space-y-12 flex flex-col justify-center-safe",
+				"py-28 flex flex-col justify-center-safe gap-y-12",
 				className,
 			)}
 			{...props}

@@ -5,7 +5,8 @@ import { useTheme } from "next-themes";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
-	DropdownMenuItem,
+	DropdownMenuRadioGroup,
+	DropdownMenuRadioItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
@@ -30,16 +31,15 @@ export function ModeToggle(props: ModeToggleProps) {
 			/>
 			<DropdownMenuContent align="end">
 				{themes.map(curr => (
-					<DropdownMenuItem
+					<DropdownMenuRadioGroup
 						key={curr}
-						onClick={() => setTheme(curr)}
-						className="flex justify-between items-center gap-2"
+						value={theme}
+						onValueChange={setTheme}
 					>
-						<span className="capitalize font-mono">
+						<DropdownMenuRadioItem value={curr} className="capitalize font-mono">
 							{curr}
-						</span>
-						{theme === curr && <Icon icon="Check" className="text-primary"/>}
-					</DropdownMenuItem>
+						</DropdownMenuRadioItem>
+					</DropdownMenuRadioGroup>
 				))}
 			</DropdownMenuContent>
 		</DropdownMenu>

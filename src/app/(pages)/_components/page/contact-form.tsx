@@ -10,15 +10,10 @@ import { useServerCheck } from "@/hooks/use-server-check";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Toggle } from "@/components/ui/toggle";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import {
-	Field,
-	FieldGroup,
-	FieldLabel,
-	FieldSet,
-} from "@/components/ui/field";
+import { Dot } from "@/components/dot";
 import {
 	InputGroup,
 	InputGroupAddon,
@@ -71,6 +66,7 @@ export function ContactForm({
 	autoCheck: _autoCheck,
 	autoCheckKey,
 	onSubmit,
+	className,
 	...props
 }: ContactFormProps) {
 	const localRef = useRef<HTMLFormElement>(null);
@@ -103,6 +99,7 @@ export function ContactForm({
 	);
 
 	const updateAutoCheck = (value: boolean) => {
+		if (!isActive) return;
 		setAutoCheck(value);
 		cookie.set(autoCheckKey, `${value}`);
 	};
@@ -179,10 +176,15 @@ export function ContactForm({
 
 	return (
 		<form
-			{...props}
 			ref={ref}
 			id={formId}
 			onSubmit={handleSubmit}
+			data-auto-check={autoCheck ? "" : undefined}
+			className={cn(
+				"group/contact-form",
+				className,
+			)}
+			{...props}
 		>
 			<div className="mb-4 flex flex-wrap-reverse items-center-safe justify-center-safe gap-1">
 				<Message className="text-center text-base">
@@ -234,51 +236,29 @@ export function ContactForm({
 					}}
 				>
 					<div className="pl-2.5">
-						<FieldSet>
-							<FieldGroup>
-								<Field orientation="horizontal" data-disabled={!isActive}>
-									<Checkbox
-										id="mail-form-auto-check"
-										checked={autoCheck}
-										onCheckedChange={updateAutoCheck}
-										disabled={!isActive}
-										className={cn(
-											"*:hidden! rounded-full size-2 data-checked:border-input",
-											"bg-(--c)! border-(--c)!",
-										)}
-										style={{
-											"--c": !autoCheck
-													? "var(--input)"
-													: ok === undefined
-														? "var(--input)"
-														: ok
-															? "var(--color-green-600)"
-															: "var(--color-red-600)",
-											"--ring": !autoCheck
-													? "var(--primary)"
-													: "var(--c)",
-										} as React.CSSProperties}
-									/>
-									<FieldLabel
-										htmlFor="mail-form-auto-check"
-										className="text-nowrap group-hover/field:text-primary"
-										onClick={(e) => {
-											e.preventDefault();
-											if (!isActive) return;
-											updateAutoCheck(!autoCheck);
-										}}
-									>{
-										!isActive
-											? "Not Available"
-											: !autoCheck
-												? "Status Check Disabled"
-												: ok === undefined
-													? "Checking status..."
-													: ok ? "Online" : "Offline"
-									}</FieldLabel>
-								</Field>
-							</FieldGroup>
-						</FieldSet>
+						<Toggle
+							title="Auto Check Server Status"
+							pressed={autoCheck}
+							onPressedChange={updateAutoCheck}
+							disabled={!isActive}
+							data-ok={ok}
+							className={cn(
+								"bg-transparent! hover:text-primary gap-2",
+								"data-[ok=false]:[--c:var(--color-red-600)]",
+								"data-[ok=true]:[--c:var(--color-green-600)]",
+								"group-data-auto-check/contact-form:[--bd:var(--c,var(--primary))]!",
+								"not-group-data-auto-check/contact-form:[--c:var(--input)]!",
+							)}
+						>
+							<Dot className="border border-(--bd,var(--c)) bg-(--bg,var(--c))"/>
+							{
+								!isActive ? "Not Available" :
+								!autoCheck ? "Press to Check" :
+								ok === undefined ? "Checking..." :
+								ok ? "Online" :
+								"Offline"
+							}
+						</Toggle>
 					</div>
 					<InputGroupButton
 						size="sm"

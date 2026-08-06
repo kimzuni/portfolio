@@ -21,10 +21,10 @@ export const metadata = seo.createMetadata(contents.home.metadata);
 
 
 export default async function Home() {
+	const { app, home } = contents;
+
 	const header = await headers();
 	const host = header.get("host");
-
-	const { app, home } = contents;
 
 	const isLatest = app.item.mode === "production" && app.item.url.host === host;
 
@@ -37,27 +37,20 @@ export default async function Home() {
 			>
 				<p className="flex flex-col gap-1 items-center-safe text-sm text-muted-foreground">
 					<span>
-						{isLatest ? "Last Updated" : "Build Time"}
-						: <Time date={app.item.buildTime}/>
+						{isLatest ? "Last Updated" : "Release Date"}
+						: <Time date={app.item.releaseDate}/>
 					</span>
 					{app.item.mode !== "production" && (
 						<span>({app.item.mode} mode)</span>
 					)}
 					{!isLatest && (
-						<span>
-							{
-								app.item.mode !== "production"
-									? ""
-									: ""
-							}
-							<LinkBadge
-								variant="link"
-								icon="ExternalLink"
-								href={app.item.url.href}
-								label="정식 릴리즈 버전 보러 가기"
-								className="text-sm"
-							/>
-						</span>
+						<LinkBadge
+							variant="link"
+							icon="ExternalLink"
+							href={app.item.url.href}
+							label="최신 릴리즈 버전 보러 가기"
+							className="text-sm"
+						/>
 					)}
 				</p>
 				<div className="mx-auto w-fit text-muted-foreground">

@@ -9,7 +9,7 @@ export const _item = {
 	service: "web-portfolio",
 	title: "kimzuni - 웹 포트폴리오",
 	description: "풀스택 개발자 김준희의 웹 포트폴리오입니다.",
-	buildTime: Number(process.env.BUILD_TIME),
+	releaseDate: Number(process.env.NEXT_PUBLIC_RELEASE_DATE) || null,
 } as const satisfies ItemRaw;
 
 
@@ -17,7 +17,7 @@ export const _item = {
 export const item: Item = {
 	..._item,
 	description: await markdown.render(_item.description),
-	buildTime: new Date(_item.buildTime),
+	releaseDate: new Date(_item.releaseDate ?? Date.now()),
 	url: new URL(_item.url),
 };
 
@@ -30,11 +30,11 @@ export interface ItemRaw {
 	service: string;
 	title: string;
 	description: markdown.Source;
-	buildTime: number;
+	releaseDate: number | null;
 }
 
-export interface Item extends Omit<ItemRaw, "description" | "buildTime" | "url"> {
+export interface Item extends Omit<ItemRaw, "description" | "releaseDate" | "url"> {
 	description: markdown.Result<ItemRaw["description"]>;
-	buildTime: Date;
+	releaseDate: Date;
 	url: URL;
 }

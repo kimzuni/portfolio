@@ -72,7 +72,7 @@ export default async function AppLayout({
 							)}
 						>{children}</main>
 						<Footer className="z-12 text-sm text-center leading-12 text-muted-foreground">
-							&copy; {data.buildTime.getFullYear()} zuni.kim
+							&copy; {data.releaseDate.getFullYear()} zuni.kim
 						</Footer>
 					</div>
 				</SidebarProvider>

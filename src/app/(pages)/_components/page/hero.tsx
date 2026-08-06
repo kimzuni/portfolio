@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-import { LinkButton } from "@/components/link-button";
+import { AnchorButton } from "@/components/anchor-button";
 import { MarkdownBox } from "@/components/markdown-box";
 
 import { Section, type SectionProps } from "./section";
@@ -16,7 +16,7 @@ export function Hero({
 	heading,
 	subheading,
 	tagline,
-	buttons,
+	anchorButton,
 	children,
 	...props
 }: HeroProps) {
@@ -43,7 +43,9 @@ export function Hero({
 						className="pt-4 font-medium md:text-lg max-w-2xl mx-auto leading-relaxed *:m-0"
 					/>
 					<div className="empty:hidden flex flex-wrap items-center justify-center gap-4 pt-8">
-						{buttons?.map(button => <LinkButton key={button.label} {...button}/>)}
+						<AnchorButton
+							{...anchorButton}
+						/>
 					</div>
 				</div>
 

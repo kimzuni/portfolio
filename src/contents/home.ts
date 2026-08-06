@@ -1,6 +1,7 @@
 import type * as seo from "@/lib/seo";
 
 import type { LinkButtonProps } from "@/components/link-button";
+import type { AnchorButtonProps } from "@/components/anchor-button";
 
 import * as _app from "./app";
 import * as _hero from "./hero";
@@ -21,22 +22,20 @@ export const metadata: seo.MetadataOptions = {
 
 
 export interface Hero extends _hero.Item {
-	buttons?: LinkButtonProps[];
+	anchorButton: AnchorButtonProps;
 }
 
 export const hero: Hero = {
 	..._hero.item,
-	buttons: [
-		{
-			variant: "default",
-			label: "Read More",
-			href: "#about",
-			size: "lg",
-			icon: "ArrowDown",
-			iconTranslateY: 5,
-			iconPosition: "right",
-		},
-	],
+	anchorButton: {
+		variant: "default",
+		label: "Read More",
+		targetId: "#about",
+		size: "lg",
+		icon: "ArrowDown",
+		iconTranslateY: 5,
+		iconPosition: "right",
+	},
 };
 
 

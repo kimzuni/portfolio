@@ -2,12 +2,12 @@
 
 import { useId, useRef, useState, useEffect, useTransition } from "react";
 import { useMergedRefs } from "@base-ui/utils/useMergedRefs";
-import { toast, type ExternalToast } from "sonner";
 
 import { cn } from "@/lib/utils";
 import * as cookie from "@/lib/cookie";
 import { useServerCheck } from "@/hooks/use-server-check";
 
+import { toast } from "@/components/ui/toast";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
 import { Toggle } from "@/components/ui/toggle";
@@ -31,21 +31,13 @@ import {
 	DialogTitle,
 } from "@/components/dialog";
 import { Icon } from "@/components/icon";
-import { TooltipWithMobile } from "@/components/tooltip-with-mobile";
+import { Tooltip } from "@/components/tooltip";
 
 import { Message } from "./message";
 
 import type * as contents from "@/contents";
 
 
-
-const commonToastOption: ExternalToast = {
-	position: "top-center",
-	action: {
-		label: "Close",
-		onClick: () => {},
-	},
-};
 
 export interface ContactFormProps extends Omit<React.ComponentProps<"form">, "children">, Pick<contents.home.ContactForm, "to" | "message" | "checkInterval" | "ulist"> {
 	isActive: boolean;
@@ -154,21 +146,24 @@ export function ContactForm({
 					setSubject("");
 					setContent("");
 
-					toast.success("메일이 성공적으로 전송되었어요!", {
+					toast.add({
+						type: "success",
+						title: "메일이 성공적으로 전송되었어요!",
 						description: "소중한 의견을 보내주셔서 감사합니다",
-						...commonToastOption,
 					});
 				} else {
 					const { message } = await response.json();
-					toast.error("메일 전송 중 오류가 발생했어요", {
+					toast.add({
+						type: "error",
+						title: "메일 전송 중 오류가 발생했어요",
 						description: message,
-						...commonToastOption,
 					});
 				}
 			} catch (e) {
-				toast.error("메일 전송 중 오류가 발생했어요", {
+				toast.add({
+					type: "error",
+					title: "메일 전송 중 오류가 발생했어요",
 					description: e instanceof Error ? e.message : "알 수 없는 오류가 발생했어요",
-					...commonToastOption,
 				});
 			}
 		});
@@ -191,14 +186,16 @@ export function ContactForm({
 					{message}
 				</Message>
 				{ulist && (
-					<TooltipWithMobile
-						className="text-muted-foreground relative -top-0.75"
-						tooltip={<ul className="pl-3 list-decimal text-sm">
-							{ulist.map(item => <li key={item}>{item}</li>)}
-						</ul>}
+					<Tooltip
+						triggerProps={{
+							className: "text-muted-foreground relative -top-0.75",
+							children: <Icon icon="OctagonAlert" size={12}/>,
+						}}
 					>
-						<Icon icon="OctagonAlert" size={12}/>
-					</TooltipWithMobile>
+						<ul className="pl-3 list-decimal text-sm">
+							{ulist.map(item => <li key={item}>{item}</li>)}
+						</ul>
+					</Tooltip>
 				)}
 			</div>
 			<div className="flex gap-2 items-center-safe mb-2">

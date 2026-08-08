@@ -1,4 +1,4 @@
-import { TooltipWithMobile } from "@/components/tooltip-with-mobile";
+import { Tooltip } from "@/components/tooltip";
 
 
 
@@ -11,11 +11,12 @@ export interface SkillIconOptions {
 	level: string;
 }
 
-export interface SkillIconProps extends SkillIconOptions, Omit<React.ComponentProps<typeof TooltipWithMobile>, "children" | "src" | "alt" | "tooltip"> {
+export interface SkillIconProps extends SkillIconOptions, Omit<React.ComponentProps<typeof Tooltip>, "children" | "tooltip"> {
 	perline?: number;
 	alt?: string;
 	width?: number;
 	height?: number;
+	className?: string;
 }
 
 export function SkillIcon({
@@ -26,6 +27,7 @@ export function SkillIcon({
 	perline = 5,
 	width = 48,
 	height = 48,
+	className,
 	...props
 }: SkillIconProps) {
 	let src: string;
@@ -38,23 +40,28 @@ export function SkillIcon({
 	}
 
 	return (
-		<TooltipWithMobile
-			tooltip={<div className="font-mono text-center">
-				<p className="border-b border-primary w-full text-center">{level}</p>
-				<p>{label}</p>
-			</div>}
+		<Tooltip
+			triggerProps={{
+				className,
+				children: (
+					// eslint-disable-next-line @next/next/no-img-element
+					<img
+						src={src}
+						alt={`Skill - ${icon}`}
+						aria-label={`Skill - ${icon}`}
+						width={width}
+						height={height}
+						loading="lazy"
+						decoding="async"
+					/>
+				),
+			}}
 			{...props}
 		>
-			{/* eslint-disable-next-line @next/next/no-img-element */}
-			<img
-				src={src}
-				alt={`Skill - ${icon}`}
-				aria-label={`Skill - ${icon}`}
-				width={width}
-				height={height}
-				loading="lazy"
-				decoding="async"
-			/>
-		</TooltipWithMobile>
+			<div className="font-mono text-center">
+				<p className="border-b border-primary w-full text-center">{level}</p>
+				<p>{label}</p>
+			</div>
+		</Tooltip>
 	);
 }

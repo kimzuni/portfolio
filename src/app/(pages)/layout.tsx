@@ -37,7 +37,7 @@ export default async function AppLayout({
 			defaultTheme="system"
 			enableSystem
 			enableColorScheme
-			disableTransitionOnChange={false}
+			disableTransitionOnChange={true}
 		>
 			<Toaster/>
 			<BackButtonProvider><LayoutBreadcrumbProvider>

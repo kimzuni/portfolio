@@ -55,6 +55,9 @@
 }
 
 :root {
+	/* https://github.com/orioncactus/pretendard#font-family */
+	--font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+
 	--primary: oklch(0.79372 0.1255 233.048); /* #5cc9ff */
 	--ring: oklch(0.89372 0.1255 233.048);
 	--sidebar-primary: var(--primary);

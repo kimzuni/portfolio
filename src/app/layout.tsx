@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Noto_Sans_Mono } from "next/font/google";
-import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -9,6 +8,7 @@ import * as seo from "@/lib/seo";
 
 import * as contents from "@/contents";
 
+import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
 import "./styles/index.css";
 
 
@@ -21,13 +21,6 @@ const title: Metadata["title"] = {
 const description = contents.app.item.description.lines;
 
 
-
-const pretendard = localFont({
-	src: "../fonts/PretendardVariable.woff2",
-	display: "swap",
-	weight: "45 920",
-	variable: "--font-sans",
-});
 
 const notoSansMono = Noto_Sans_Mono({
 	variable: "--font-mono",
@@ -63,7 +56,7 @@ export default function RootLayout({
 	return (
 		<html
 			lang="ko"
-			className={cn("h-full", "antialiased", "font-sans", pretendard.variable, notoSansMono.variable)}
+			className={cn("h-full", "antialiased", "font-sans", notoSansMono.variable)}
 			data-scroll-behavior="smooth"
 			suppressHydrationWarning
 		>

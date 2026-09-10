@@ -4,8 +4,8 @@ import { useState, useEffect, useCallback, useTransition } from "react";
 
 import { cn } from "@/lib/utils";
 
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
 import {
 	InputGroup,
 	InputGroupAddon,
@@ -112,15 +112,15 @@ export function ContactForm({
 					onChange={(e) => setSubject(e.target.value)}
 					className="py-3!"
 				/>
-				<ScrollArea className="w-full max-h-72 h-32 border-b border-t">
-					<InputGroupTextarea
-						name="content"
-						placeholder="Message..."
-						value={content}
-						onChange={(e) => setContent(e.target.value)}
-						className="h-full"
-					/>
-				</ScrollArea>
+				<Separator/>
+				<InputGroupTextarea
+					name="content"
+					placeholder="Message..."
+					value={content}
+					onChange={(e) => setContent(e.target.value)}
+					className="max-h-72 min-h-32 h-full"
+				/>
+				<Separator/>
 				<InputGroupAddon align="block-end" className="py-3!">
 					<InputGroupText className="px-2">
 						<span

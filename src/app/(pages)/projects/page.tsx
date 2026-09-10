@@ -207,7 +207,7 @@ export default async function Projects({
 	});
 
 	return (
-		<div className="page-content space-y-12">
+		<div className="space-y-12">
 			<FadeSection>
 				<div className="flex items-center justify-between mb-0">
 					<PageBadge

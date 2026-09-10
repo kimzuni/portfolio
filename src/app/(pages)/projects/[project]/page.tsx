@@ -178,7 +178,7 @@ export default async function Project(props: Props) {
 	);
 
 	return (
-		<div className="page-content space-y-8">
+		<div className="space-y-8">
 			{/* Header */}
 			<Fade tagName="header" className="space-y-4">
 				<div className="flex flex-wrap items-center gap-3">

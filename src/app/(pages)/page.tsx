@@ -32,7 +32,7 @@ export default async function Home() {
 		<>
 			<Hero
 				id="hero"
-				className="page-content min-h-[calc(100svh-var(--header-height))]"
+				className="relative -top-(--header-height) min-h-[calc(100svh-var(--header-height))]"
 				{...home.hero}
 			>
 				<p className="flex flex-col gap-1 items-center-safe text-sm text-muted-foreground">
@@ -67,25 +67,21 @@ export default async function Home() {
 
 			<About
 				id="about"
-				className="page-content"
 				{...home.about}
 			/>
 
 			<Skills
 				id="skills"
-				className="page-content"
 				{...home.skills}
 			/>
 
 			<Projects
 				id="projects"
-				className="page-content"
 				{...home.projects}
 			/>
 
 			<Contact
 				id="contact"
-				className="page-content"
 				{...home.contacts}
 			/>
 		</>

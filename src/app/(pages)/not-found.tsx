@@ -22,7 +22,7 @@ export default async function NotFound() {
 	return (
 		<div
 			className={cn(
-				"page-content p-0 h-full text-center",
+				"p-0 h-full text-center",
 				"flex flex-col items-center justify-center gap-6",
 			)}
 		>

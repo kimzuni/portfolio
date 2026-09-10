@@ -63,9 +63,14 @@ export default async function AppLayout({
 							</p>
 							<ModeToggle/>
 						</Header>
-						<main className="flex-1 z-11 relative">
-							{children}
-						</main>
+						<main
+							className={cn(
+								"flex-1 z-11",
+								"mx-auto max-w-384 w-full",
+								"px-6 py-16 pb-20",
+								"md:px-12 xl:px-16",
+							)}
+						>{children}</main>
 						<Footer className="z-12 text-sm text-center leading-12 text-muted-foreground">
 							&copy; {data.buildTime.getFullYear()} zuni.kim
 						</Footer>

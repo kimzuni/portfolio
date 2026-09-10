@@ -71,7 +71,7 @@ export default async function About() {
 	const data = contents.about.item;
 
 	return (
-		<div className="page-content space-y-32">
+		<div className="space-y-32">
 			{/* Intro Section */}
 			<FadeSection className="space-y-8 max-w-3xl">
 				<header>

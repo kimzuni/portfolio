@@ -4,10 +4,10 @@ import { cn } from "@/lib/utils";
 import * as seo from "@/lib/seo";
 
 import { Fade, FadeHeader, FadeSection } from "@/components/fade";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Item, ItemContent, ItemActions, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/dialog";
 import { PageBadge } from "@/components/page-badge";
 import { Icon } from "@/components/icon";
 import { PeriodBox } from "@/components/period-box";

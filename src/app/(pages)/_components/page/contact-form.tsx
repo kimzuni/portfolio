@@ -1,13 +1,15 @@
 "use client";
 
-import { useState, useEffect, useCallback, useTransition } from "react";
+import { useId, useState, useEffect, useCallback, useTransition } from "react";
 import { toast, type ExternalToast } from "sonner";
 
 import { cn } from "@/lib/utils";
 import * as cookie from "@/lib/cookie";
 
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
 	Field,
@@ -22,6 +24,15 @@ import {
 	InputGroupTextarea,
 	InputGroupInput,
 } from "@/components/ui/input-group";
+import {
+	Dialog,
+	DialogClose,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+} from "@/components/dialog";
 import { Icon } from "@/components/icon";
 import { TooltipWithMobile } from "@/components/tooltip-with-mobile";
 
@@ -68,6 +79,7 @@ export interface ContactFormProps extends Omit<React.ComponentProps<"form">, "ch
 }
 
 export function ContactForm({
+	id,
 	url,
 	to,
 	isActive,
@@ -78,12 +90,16 @@ export function ContactForm({
 	autoCheckKey,
 	...props
 }: ContactFormProps) {
+	const [modelOpen, setModalOpen] = useState(false);
 	const [autoCheck, setAutoCheck] = useState(_autoCheck);
 
 	const [isPending, startTransition] = useTransition();
 	const [subject, setSubject] = useState("");
 	const [content, setContent] = useState("");
 	const status = useStatus(url);
+
+	const randomId = useId();
+	const formId = id || `contact-form-${randomId}`;
 
 	const isSubmittable = (
 		isActive
@@ -131,6 +147,7 @@ export function ContactForm({
 				});
 
 				if (response.ok) {
+					setModalOpen(false);
 					setSubject("");
 					setContent("");
 
@@ -157,6 +174,7 @@ export function ContactForm({
 	return (
 		<form
 			{...props}
+			id={formId}
 			onSubmit={onSubmit}
 		>
 			<div className="mb-4 flex flex-wrap-reverse items-center-safe justify-center-safe gap-1">
@@ -258,12 +276,61 @@ export function ContactForm({
 					<InputGroupButton
 						size="sm"
 						variant="default"
-						type="submit"
+						type="button"
 						className="ml-auto"
 						disabled={!isSubmittable}
-					>Submit</InputGroupButton>
+						onClick={() => setModalOpen(true)}
+					>Send Message</InputGroupButton>
 				</InputGroupAddon>
 			</InputGroup>
+			<Dialog
+				open={modelOpen}
+				onOpenChange={setModalOpen}
+			>
+				<DialogContent className="sm:max-w-sm">
+					<DialogHeader>
+						<DialogTitle>메일을 전송하시겠어요?</DialogTitle>
+						<DialogDescription>
+							입력하신 내용이 맞는지 다시 한번 확인할게요!
+						</DialogDescription>
+					</DialogHeader>
+					<div className="rounded-lg border bg-muted/50 p-4 space-y-3">
+						<div className="space-y-1">
+							<p className="text-xs font-semibold text-muted-foreground">Subject</p>
+							<p
+								className={cn(
+									"font-medium text-foreground break-all",
+									!subject && "text-muted-foreground text-xs italic",
+								)}
+							>
+								{subject || "No Subject"}
+							</p>
+						</div>
+
+						<Separator/>
+
+						<div className="space-y-1">
+							<p className="text-xs font-semibold text-muted-foreground">Message</p>
+							<ScrollArea
+								className="h-48 -mr-4 pr-4"
+							>
+								<p
+									className={cn(
+										"text-foreground whitespace-pre-wrap break-all",
+										!content && "text-muted-foreground text-xs italic",
+									)}
+								>
+									{content || "No Message"}
+								</p>
+							</ScrollArea>
+						</div>
+					</div>
+					<DialogFooter>
+						<DialogClose render={<Button variant="outline">Cancel</Button>}/>
+						<Button type="submit" form={formId}>Submit</Button>
+					</DialogFooter>
+				</DialogContent>
+			</Dialog>
 		</form>
 	);
 }

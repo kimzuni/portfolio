@@ -10,6 +10,7 @@ import type { ItemRaw, Item } from "./types";
 
 
 const importSlugs = [
+	"c-cli-minesweeper",
 	"inst@gram",
 	"longvinter-docker-server",
 	"generative-agents",

@@ -51,6 +51,14 @@ export const _items = [
 		slug: "published",
 		label: "Published",
 	},
+	{
+		slug: "security",
+		label: "Security",
+	},
+	{
+		slug: "toy-project",
+		label: "Toy Project",
+	},
 ] as const satisfies ItemRaw[];
 
 

@@ -42,6 +42,7 @@ export const item: ItemRaw = {
 	tags: [
 		"frontend",
 		"backend",
+		"toy-project",
 	],
 	skills: {
 		primary: [

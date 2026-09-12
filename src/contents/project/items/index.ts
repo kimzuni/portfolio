@@ -11,6 +11,7 @@ import type { ItemRaw, Item } from "./types";
 
 const importSlugs = [
 	"c-cli-minesweeper",
+	"sqlmapbash",
 	"inst@gram",
 	"longvinter-docker-server",
 	"generative-agents",

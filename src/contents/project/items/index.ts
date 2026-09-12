@@ -16,6 +16,7 @@ const importSlugs = [
 	"templify",
 	"yamllint-js",
 	"web-portfolio",
+	"lifemap-matcher",
 ] as const;
 
 const promises = importSlugs.map(async slug => (

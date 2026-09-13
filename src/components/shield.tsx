@@ -6,6 +6,8 @@ import { Link } from "@/components/link";
 
 
 const urls = {
+	shieldsio: "https://img.shields.io",
+
 	github: "https://github.com",
 	gitlab: "https://gitlab.com",
 	bitbucket: "https://bitbucket.org",
@@ -13,6 +15,8 @@ const urls = {
 	npm: "https://www.npmjs.com",
 	codecov: "https://app.codecov.io",
 	coveralls: "https://coveralls.io",
+	bundlephobia: "https://bundlephobia.com/package",
+	bundlejs: "https://bundlejs.com/?q=",
 };
 
 
@@ -51,6 +55,8 @@ export interface Badge {
 		| "downloads"
 		| "license"
 		| "unpacked-size"
+		| "bundlephobia"
+		| "bundlejs"
 		| "version";
 
 	coverage:
@@ -91,17 +97,27 @@ export interface CommonBadgeProps<
 
 
 
-export interface StaticBadgeProps extends CommonBadgeProps<"static"> {
+export interface LinkOptions {
+	link?: string | boolean;
+	linkSuffix?: string;
+}
+
+export interface UserRepoOptions {
+	user: string;
+	repo: string;
+}
+
+
+
+export interface StaticBadgeProps extends CommonBadgeProps<"static">, LinkOptions {
 	link?: string;
 }
 
 
+
 export interface CommonGitHubBadgeProps<
 	K extends Badge["github"] = Badge["github"],
-> extends CommonBadgeProps<"github", K> {
-	link?: string | boolean;
-	user: string;
-	repo: string;
+> extends CommonBadgeProps<"github", K>, LinkOptions, UserRepoOptions {
 }
 
 export interface GitHubBadgeProps extends CommonGitHubBadgeProps<Exclude<Badge["github"], "workflow">> {
@@ -116,10 +132,7 @@ export interface GitHubWorkflowBadgeProps extends CommonGitHubBadgeProps<"workfl
 
 export interface CommonDockerBadgeProps<
 	K extends Badge["docker"] = Badge["docker"],
-> extends CommonBadgeProps<"docker", K> {
-	link?: string | boolean;
-	user: string;
-	repo: string;
+> extends CommonBadgeProps<"docker", K>, LinkOptions, UserRepoOptions {
 }
 
 export interface DockerBadgeProps extends CommonDockerBadgeProps<Exclude<Badge["docker"], "image-size" | "image-version">> {
@@ -133,12 +146,11 @@ export interface DockerTagBadgeProps extends CommonDockerBadgeProps<"image-size"
 
 export interface CommonNPMBadgeProps<
 	K extends Badge["npm"] = Badge["npm"],
-> extends CommonBadgeProps<"npm", K> {
-	link?: string | boolean;
+> extends CommonBadgeProps<"npm", K>, LinkOptions {
 	packageName: string;
 }
 
-export interface NPMBadgeProps extends CommonNPMBadgeProps<Exclude<Badge["npm"], "last-update" | "downloads" | "unpacked-size" | "version">> {
+export interface NPMBadgeProps extends CommonNPMBadgeProps<Exclude<Badge["npm"], "last-update" | "downloads" | "unpacked-size" | "bundlephobia" | "version">> {
 }
 
 export interface NPMMaybeTagBadgeProps extends CommonNPMBadgeProps<"last-update" | "version"> {
@@ -153,7 +165,12 @@ export interface NPMDownloadsByAuthorBadgeProps extends Omit<NPMDownloadsBadgePr
 	author: string;
 }
 
-export interface NPMSizeBadgeProps extends CommonNPMBadgeProps<"unpacked-size"> {
+export interface NPMBundlephobiaBadgeProps extends CommonNPMBadgeProps<"bundlephobia"> {
+	format?: "minzip" | "gzip";
+	version?: string;
+}
+
+export interface NPMUnpackedSizeBadgeProps extends CommonNPMBadgeProps<"unpacked-size"> {
 	version?: string;
 }
 
@@ -161,11 +178,8 @@ export interface NPMSizeBadgeProps extends CommonNPMBadgeProps<"unpacked-size"> 
 
 export interface CommonCoverageBadgeProps<
 	K extends Badge["coverage"] = Badge["coverage"],
-> extends CommonBadgeProps<"coverage", K> {
-	link?: string | boolean;
+> extends CommonBadgeProps<"coverage", K>, LinkOptions, UserRepoOptions {
 	vcs: "github" | "gitlab" | "bitbucket";
-	user: string;
-	repo: string;
 }
 
 export interface CoverallsBadgeProps extends CommonCoverageBadgeProps<"coveralls"> {
@@ -187,117 +201,162 @@ export type ShieldProps =
 	| NPMMaybeTagBadgeProps
 	| NPMDownloadsBadgeProps
 	| NPMDownloadsByAuthorBadgeProps
-	| NPMSizeBadgeProps
+	| NPMBundlephobiaBadgeProps
+	| NPMUnpackedSizeBadgeProps
 	| CoverallsBadgeProps
 	| CodecovBadgeProps;
 
 
 
-export function Shield({
-	style = "flat",
-	...props
-}: ShieldProps) {
-	let link;
-	if (typeof props.link === "string") {
-		link = props.link;
-	} else if (props.link && props.service !== "static") {
-		if (props.service === "github" || props.service === "docker") {
+const getLink = (props: ShieldProps) => {
+	if (typeof props.link === "string") return props.link;
+	if (props.link !== true || props.service === "static") return;
+
+	let link: string;
+	switch (props.service) {
+		case "github":
+		case "docker":
 			link = `${urls[props.service]}/${props.user}/${props.repo}`;
-		} else if (props.service === "npm") {
-			if ("author" in props) {
-				link = `${urls.npm}/~${props.author}`;
-			} else {
-				link = `${urls.npm}/package/${props.packageName}`;
-			}
-		} else if (props.service === "coverage") {
+			break;
+		case "coverage":
 			link = `${urls[props.badge]}/${props.vcs}/${props.user}/${props.repo}`;
-		}
+			break;
+		case "npm":
+			if ("author" in props) link = `${urls.npm}/~${props.author}`;
+			else if (props.badge === "bundlephobia") link = `${urls.bundlephobia}/${props.packageName}`;
+			else if (props.badge === "bundlejs") link = `${urls.bundlejs}${props.packageName}`;
+			else link = `${urls.npm}/package/${props.packageName}`;
+			break;
 	}
+	return link + `${props.linkSuffix ?? ""}`;
+};
 
-	let src = `https://img.shields.io/${props.service}`;
-	if (props.service === "static") {
-		src = `/badge/${props.badge}`;
-	} else if (props.badge === "workflow" && props.provider === "github") {
-		src = `https://github.com/${props.user}/${props.repo}/actions/workflows/${props.workflow}/badge.svg`;
-	} else if (props.service === "github" || props.service === "docker") {
-		if (["release", "tag", "imageVersion"].includes(props.badge)) {
-			src += "/v";
-		} else if (props.badge === "workflow") {
-			src += "/actions";
-		} else if (props.badge === "code-size") {
-			src += "/languages";
-		}
-
-		if (!["imageVersion"].includes(props.badge)) {
-			src += `/${props.badge}`;
-		}
-
-		if (["workflow"].includes(props.badge)) {
-			src += "/status";
-		}
-
-		src += `/${props.user}/${props.repo}`;
-
-		if (props.service === "docker" && "tag" in props && props.tag) {
-			src += `/${props.tag}`;
-		}
-
-		if (props.badge === "workflow") {
-			src += `/${props.workflow}`;
-		}
-	} else if (props.service === "npm") {
-		if ("interval" in props) {
-			if ("author" in props) {
-				src += `-stat/${props.interval}/${props.author}`;
-			} else {
-				src += `/${props.interval}/${props.packageName}`;
-			}
-		} else {
-			if (props.badge === "license") {
-				src += "/l";
-			} else if (props.badge === "version") {
-				src += "/v";
-			} else {
-				src += `/${props.badge}`;
+const getSrc = (props: ShieldProps) => {
+	let baseUrl = urls.shieldsio;
+	let prefix = "";
+	const paths: Array<string | undefined> = [];
+	switch (props.service) {
+		case "static":
+			paths.push("badge", props.badge);
+			break;
+		case "github":
+		case "docker":
+			prefix = props.service;
+			switch (props.badge) {
+				case "workflow":
+					if (props.provider === "github") {
+						baseUrl = urls.github;
+						prefix = "";
+						paths.push(props.user, props.repo, "actions", "workflows", props.workflow, "badge.svg");
+						break;
+					}
+					paths.push("actions", "workflows", "status", props.user, props.repo, props.workflow);
+					break;
+				case "tag":
+				case "image-version":
+					paths.push("v", props.user, props.repo);
+					break;
+				case "release":
+					paths.push("v", "release", props.user, props.repo);
+					break;
+				case "code-size":
+					paths.push("languages", "code-size", props.user, props.repo);
+					break;
+				default:
+					paths.push(props.badge, props.user, props.repo);
+					break;
 			}
 
-			src += `/${props.packageName}`;
-
-			if ("tag" in props) {
-				src += `/${props.tag}`;
+			if ("tag" in props && props.tag) {
+				paths.push(props.tag);
 			}
-		}
-	} else if (props.service === "coverage") {
-		src = "https://img.shields.io";
-		if (props.badge === "coveralls") {
-			src += "/coverallsCoverage";
-		} else if (props.badge === "codecov") {
-			src += "/codecov/c";
-		}
 
-		src += `/${props.vcs}/${props.user}/${props.repo}`;
+			break;
+		case "npm":
+			prefix = "npm";
 
-		if (props.badge === "codecov" && props.branch) {
-			src += `/${props.branch}`;
-		}
+			switch (props.badge) {
+				case "downloads":
+					if ("author" in props) {
+						prefix += "-stat";
+						paths.push(props.interval, props.author);
+					} else {
+						paths.push(props.interval, props.packageName);
+					}
+					break;
+				case "license":
+					paths.push("l", props.packageName);
+					break;
+				case "version":
+					paths.push("v", props.packageName);
+					// break; // last-update와 함께 tag를 사용함
+				case "last-update":
+					if (props.tag) {
+						paths.push(props.tag);
+					}
+					break;
+				case "bundlephobia":
+					prefix = "";
+					paths.push("bundlephobia", props.format || "minzip", props.packageName);
+					break;
+				case "bundlejs":
+					prefix = "";
+					paths.push("bundlejs", "size", props.packageName);
+					break;
+				default:
+					paths.push(props.badge, props.packageName);
+					break;
+			}
+
+			break;
+		case "coverage":
+			switch (props.badge) {
+				case "coveralls":
+					paths.push(`coverallsCoverage`, props.vcs, props.user, props.repo);
+					break;
+				case "codecov":
+					paths.push(
+						`codecov`,
+						"c",
+						props.vcs,
+						props.user,
+						props.repo,
+						props.branch ? props.branch : "",
+					);
+					break;
+			}
+
+			break;
 	}
 
-	let query;
-	if (
-		!("provider" in props)
-		|| (
-			props.provider
-			&& props.provider === "shield"
-		)
-	) {
-		query = badgeOptionList.filter(x => x !== "style")
-			.reduce<string[]>((acc, key) => {
-				const value = props[key];
-				if (value) acc.push(`${key}=${value}`);
-				return acc;
-			}, [`style=${style}`])
-			.join("&");
+	const src = [
+		baseUrl,
+		prefix,
+		...paths,
+	].filter(Boolean).join("/");
+
+	return src;
+};
+
+const getQuery = (props: ShieldProps) => {
+	const isShieldsio = !("provider" in props) || props.provider === "shield";
+	if (!isShieldsio) return;
+
+	const params = new URLSearchParams();
+	for (const key of badgeOptionList) {
+		const value = props[key];
+		if (value) params.set(key, value);
 	}
+
+	return params.toString();
+};
+
+
+
+export function Shield(props: ShieldProps) {
+	const link = getLink(props);
+	const src = getSrc(props);
+	const query = getQuery(props);
 
 	const alt = `${props.service !== "static" ? props.service : "custom"} badge - ${props.badge}`;
 	const img = (

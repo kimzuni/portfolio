@@ -2,10 +2,10 @@ import type { ItemRaw } from "../types";
 
 import n25 from "./n25.png";
 import panel from "./panel.png";
+import externalAddress from "./external-address.png";
+import api from "./docker-api.png";
 
 const play = "play.webm";
-const api = "docker-api.webm";
-const externalAddress = "external-address.webm";
 const forkComparison = "fork-comparison.webm";
 
 
@@ -13,12 +13,28 @@ const forkComparison = "fork-comparison.webm";
 export const item: ItemRaw = {
 	pin: true,
 	cover: n25,
-	title: "LLM 기반 해킹 공격 및 방어 시뮬레이션 플랫폼",
-	description: [
-		"'Generative Agents' 프로젝트를 포크하여,",
-		"LLM 에이전트 간의 자율적인 사이버 공격 및 방어 시나리오를 통해 웹 서버의 취약점을 탐지하고 패치 제안을 생성하는 시뮬레이션 환경을 구축하였습니다.",
-		"시뮬레이션 전 과정에서 생성되는 모든 데이터를 수집하여 통계 요약 및 상세 로그를 제공하며,",
-		"Ollama 연동형 Docker 컨테이너화를 통해 로컬 GPU 자원을 활용한 독립적이고 이식성 높은 시뮬레이션 인프라를 구현하였습니다.",
+	name: "LLM 에이전트 기반 모의 침투 테스트 시스템",
+	description: `
+		LLM 에이전트를 활용하여 웹 서버의 취약점을 자동으로 탐지하고 패치 방법을 제안하는 자율형 모의 침투 테스트 시스템입니다.
+		실제 공격 발생 전 위험을 사전에 차단하고, 보안 연구 및 교육에 필요한 실전 데이터 부족 문제를 함께 해결하고자 개발했습니다.
+	`,
+	highlights: [
+		{
+			label: "Autonomous Agents",
+			value: "자율형 LLM 에이전트 기반 모의 침투 테스트 시스템",
+		},
+		{
+			label: "Target Validation",
+			value: "공격 대상 서버의 사설 IP 대역 검증 로직 적용으로 악용 및 오용 방지",
+		},
+		{
+			label: "Local LLM Integration",
+			value: "Ollama 기반 사용자 지정 로컬 LLM 연동으로 프라이빗 환경 제공",
+		},
+		{
+			label: "Container Image",
+			value: "전용 컨테이너 이미지 배포 및 편의를 위한 쉘 스크립트(실행, API 조회 등) 제공",
+		},
 	],
 	period: [
 		new Date("2024-09-02"),
@@ -29,69 +45,79 @@ export const item: ItemRaw = {
 		"backend",
 		"container",
 	],
-	skills: [
-		"django",
-		"bootstrap",
-		"bash",
-		"docker",
-		"ollama",
-		"phaser",
-		"tiled",
-		"github-actions",
-	],
+	skills: {
+		primary: [
+			"python",
+			"django",
+			"html",
+			"bootstrap",
+			"javascript",
+			"bash",
+			"docker",
+			"phaser",
+			"tiled",
+		],
+		secondary: [
+			"ollama",
+			"github-actions",
+			"chart-js",
+		],
+	},
 	team: {
 		size: 2,
 		contributions: [
 			{
-				label: "Backend (Web)",
-				percentage: 100,
-				description: [
-					"Django 기반 사용자 권한 관리 시스템 구축 및 시뮬레이션 데이터 조회용 API 구현",
-				],
-			},
-			{
-				label: "DevOps/Infra",
-				percentage: 100,
-				description: [
-					"Docker 기반 서비스 컨테이너화 및 Ollama 연동형 멀티 컨테이너 환경 구축",
-				],
-			},
-			{
 				label: "Frontend",
 				percentage: 100,
 				description: [
-					"전반적인 UI/UX 설계 및 구현",
-					"Phaser 구조 리펙토링 및 커스텀 맵 제작",
+					"UI/UX 설계 및 구현",
+					"Phaser 구조 리팩토링 및 Tiled 기반 커스텀 맵 제작",
+					"사용자 및 테스트 목록 관리를 위한 관리 페이지 구현",
+				],
+			},
+			{
+				label: "Backend (Web)",
+				percentage: 100,
+				description: [
+					"Django 기반 사용자 권한 관리 시스템 구축",
+					"모의 침투 테스트 데이터 조회를 위한 REST API 구현",
+					"사용자 및 테스트 목록 제어를 위한 RBAC 기반 REST API 구현",
+				],
+			},
+			{
+				label: "Deployment & Infra",
+				percentage: 100,
+				description: [
+					"전용 컨테이너 이미지 개발 및 Ollama 연동 멀티 컨테이너 환경 구성",
+					"데모 시연을 위한 라이브 서버 배포 및 운영",
+				],
+			},
+			{
+				label: "Backend (Engine)",
+				percentage: 10,
+				description: [
+					"백엔드 단독 실행을 위한 프론트엔드 의존성 제거",
+					"공격 대상 서버의 사설 IP 대역 검증 로직 구현",
 				],
 			},
 			{
 				label: "AI Engineering",
 				percentage: 0,
-				description: [
-					"자율형 에이전트 구현을 위한 멀티 스텝 프롬프트 설계 및 공격/방어 시나리오 생성",
-				],
-			},
-			{
-				label: "Backend (AI)",
-				percentage: 0,
-				description: [
-					"의사결정 로직과 시뮬레이션 환경 간의 인터페이스 구축 및 행동 자동화 스크립트 구현",
-				],
 			},
 		],
 	},
-	badges: [
-		{
-			label: "Forked from",
-			href: "https://github.com/joonspk-research/generative_agents",
-		},
+	links: [
 		{
 			label: "GitHub",
 			href: "https://github.com/JustPersona/generative-agents",
 		},
 		{
-			label: "GitHub(Docker Image)",
+			label: "GitHub(Image)",
 			href: "https://github.com/JustPersona/generative-agents-docker",
+		},
+		{
+			label: "Forked from",
+			href: "https://github.com/joonspk-research/generative_agents",
 		},
 	],
 	articles: [
@@ -103,22 +129,20 @@ export const item: ItemRaw = {
 						type: "image",
 						src: n25,
 						alt: "커스텀 맵 전체 이미지",
-						caption: "Tiled로 제작한 커스텀 맵 전체 이미지",
+						caption: "Tiled로 제작한 커스텀 맵 전체 화면",
 					},
-					text: [
-						"AGI를 목표로 한 프로젝트 방향에 맞추어, AI 에이전트들이 실제 해킹 공격 및 방어 상황을 연출할 수 있도록 커스텀 맵을 제작하였습니다.",
-					],
 				},
 				{
 					colSpan: 3,
 					media: {
 						type: "video",
 						src: forkComparison,
+						caption: "원본과 프로젝트 결과물의 웹 UI 비교 영상",
 					},
-					text: [
-						"기존 프로젝트는 단순 시뮬레이션 재생 기능과 방향키 조작만 지원하였으며, 시뮬레이션 재생, 스텝 이동, 속도 조절 등을 위해서는 URL을 직접 입력해야 하는 불편함이 있었습니다.",
-						"접근성 및 사용성을 개선하기 위해 대시보드를 만들고, 시뮬레이션 재생 시에는 마우스 이벤트와 주변 컨트롤러를 통해 디테일한 조작이 가능하도록 구현하였습니다.",
-					],
+					text: `
+						단순 서버 상태만 알려주던 메인 페이지를, 모의 침투 테스트 결과와 데이터를 한눈에 확인하고 시각화할 수 있는 대시보드로 구축했습니다.
+						또한 다양한 조작이 불편했던 시뮬레이션 페이지에 스텝 이동, 속도 조절, 컨트롤러 등 오직 마우스만으로 디테일한 조작이 가능하도록 개선했습니다.
+					`,
 				},
 			],
 		},
@@ -128,50 +152,74 @@ export const item: ItemRaw = {
 					media: {
 						type: "image",
 						src: panel,
-						alt: "판넬 Result 섹션 캡쳐본",
+						alt: "발표 시 사용된 판넬의 Result 섹션",
+						caption: "프로젝트 핵심 기능, 대시보드, 재생 페이지에 대한 간단 설명",
 					},
 				},
 				{
 					media: {
 						type: "video",
 						src: play,
+						caption: "모의 침투 테스트 중 취약점을 발견한 상황",
 					},
 				},
 			],
 		},
 		{
+			linkedToPrevious: true,
 			blocks: [
 				{
-					text: [
-						"대시보드에는 진행된 시뮬레이션 목록과 함께 탐지된 취약점과 생성된 패치 제안, URL 및 공격 유형별로 요약된 통계 정보가 제공됩니다.",
-						"또한 시뮬레이션별 모달을 통해 시뮬레이션 결과에 대한 상세 정보와 시뮬레이션 재생 페이지로 이동할 수 있도록 구현하였습니다.",
-						"재생 페이지에서는 재생 중인 화면에 대응하는 데이터를 실시간으로 표시합니다.",
-					],
+					text: `
+						대시보드에서는 진행된 테스트에 대한 요약 정보를 확인할 수 있습니다.
+						진행된 모의 침투 테스트 목록과 함께 URL 및 공격 유형별로 요약된 통계 정보를 제공하며,
+						각 테스트별로 상세 정보를 확인할 수 있습니다.
+						또한 재생 페이지에서는 화면 조작 뿐만 아니라
+						화면에 해당하는 각 에이전트의 상태 및 행동,
+						생성된 공격 페이로드와 성공 여부,
+						해당 취약점에 대한 패치 제안 등의
+						상세 내용을 확인할 수 있도록 개선했습니다.
+					`,
 				},
 			],
 		},
 		{
+			maxWidth: 1100,
 			blocks: [
 				{
-					colSpan: 3,
 					media: {
-						type: "video",
-						src: api,
-					},
-					text: [
-						"전용 도커 이미지를 통해 서버를 쉽게 구성할 수 있으며, 프론트엔드, 백엔드, API 조회 등 주요 서비스를 손쉽게 실행할 수 있습니다.",
-					],
-				},
-				{
-					colSpan: 2,
-					media: {
-						type: "video",
+						type: "image",
 						src: externalAddress,
+						alt: "서버 공격 대상 검증 테스트",
+						caption: "공격 대상 서버로 외부로 연결되는 호스트를 입력하여 백엔드 프로세스가 종료됨",
 					},
-					text: [
-						"AI 에이전트들은 지정된 웹 서버에 대해서만 공격 및 방어 시나리오를 수행하도록 설계되어 있으며,",
-						"공격 대상 서버를 내부 네트워크로 제한하여 보안성을 강화하였습니다.",
-					],
+				},
+			],
+		},
+		{
+			linkedToPrevious: true,
+			maxWidth: 1100,
+			blocks: [
+				{
+					media: {
+						type: "image",
+						src: api,
+						alt: "docker 명령어 활용 REST API 조회 결과",
+						caption: "컨테이너에 내장된 API 조회 스크립트를 활용하여 REST API 결과 조회",
+					},
+				},
+			],
+		},
+		{
+			linkedToPrevious: true,
+			maxWidth: 1100,
+			blocks: [
+				{
+					text: `
+						모의 침투 테스트 환경을 쉽게 구성할 수 있도록 전용 컨테이너 이미지를 제공하여,
+						이를 활용해 Ollama 연동 기반 멀티 컨테이너 환경을 손쉽게 구축할 수 있습니다.
+						또한 컨테이너 쉘에 직접 연결하지 않고 즉시 주요 서비스를 실행할 수 있도록 내장 스크립트를 제공합니다.
+						이를 통해 REST API 기반 테스트 결과 조회, 백엔드 프로세스 실행 등 주요 서비스를 간편하게 실행할 수 있습니다.
+					`,
 				},
 			],
 		},

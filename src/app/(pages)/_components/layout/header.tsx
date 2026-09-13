@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 export interface HeaderProps extends React.ComponentProps<"header"> {
 }
 
-export async function Header({
+export function Header({
 	className,
 	...props
 }: HeaderProps) {

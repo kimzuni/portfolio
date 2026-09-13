@@ -3,7 +3,7 @@ import * as seo from "@/lib/seo";
 
 import { Motion } from "@/components/motion";
 import { LinkButton } from "@/components/link-button";
-import { MarkdownBox } from "@/components/markdown-box";
+import { ContentBox } from "@/components/content-box";
 
 import * as contents from "@/contents";
 
@@ -13,7 +13,7 @@ export const metadata = seo.createMetadata(contents.notFound.metadata);
 
 
 
-export default async function NotFound() {
+export default function NotFound() {
 	const {
 		messages,
 		button,
@@ -22,7 +22,7 @@ export default async function NotFound() {
 	return (
 		<div
 			className={cn(
-				"page-content p-0 h-full text-center",
+				"p-0 h-full text-center",
 				"flex flex-col items-center justify-center gap-6",
 			)}
 		>
@@ -51,9 +51,10 @@ export default async function NotFound() {
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
 				transition={{ delay: 0.4, duration: 0.5 }}
-				className="text-muted-foreground text-lg"
 			>
-				<MarkdownBox source={messages}/>
+				<ContentBox className="text-lg text-muted-foreground *:m-0">
+					{messages.result}
+				</ContentBox>
 			</Motion>
 
 			<Motion

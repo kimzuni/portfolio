@@ -29,7 +29,18 @@ jobs:
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Build Project Artifacts
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+        run: |
+          UNIX_TIMESTAMP="$(date +%s)"
+          NEXT_PUBLIC_RELEASE_DATE="${UNIX_TIMESTAMP}000" vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Generate Markdown Message
+        run: |
+          echo "### 🚀 Vercel Preview Deployed!" > summary.md
+          echo "🔗 **Preview URL:** <${{ steps.deploy.outputs.PREVIEW_URL }}>" >> summary.md
+
+      - name: Write Job Summary
+        run: |
+          cat summary.md >> $GITHUB_STEP_SUMMARY

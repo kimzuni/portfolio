@@ -8,18 +8,16 @@ export const _items = [
 		href: "/about",
 	},
 	{
+		label: "Skills",
+		href: "/skills",
+	},
+	{
 		label: "Projects",
 		href: "/projects",
 	},
 	{
-		label: "Skills (Coming Soon)",
-		href: "/skills",
-		disabled: true,
-	},
-	{
-		label: "Contrib... (Coming Soon)",
+		label: "Contributions",
 		href: "/contributions",
-		disabled: true,
 	},
 ] as const satisfies ItemRaw[];
 
@@ -35,7 +33,7 @@ export interface ItemRaw {
 	href: string;
 	disabled?: boolean;
 	hidden?: boolean;
-	items?: Array<Omit<Item, "items">>;
+	items?: Array<Omit<ItemRaw, "items">>;
 }
 
 export interface Item extends ItemRaw {

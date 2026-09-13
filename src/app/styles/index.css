@@ -55,11 +55,14 @@
 }
 
 :root {
+	/* https://github.com/orioncactus/pretendard#font-family */
+	--font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+
 	--primary: oklch(0.79372 0.1255 233.048); /* #5cc9ff */
 	--ring: oklch(0.89372 0.1255 233.048);
 	--sidebar-primary: var(--primary);
 	--sidebar-ring: var(--ring);
-	/* --accent-foreground: var(--primary); */
+	--accent-foreground: var(--primary);
 
 	--background: oklch(1 0 0);
 	--foreground: oklch(0.145 0 0);
@@ -74,7 +77,7 @@
 	--muted: oklch(0.97 0 0);
 	--muted-foreground: oklch(0.556 0 0);
 	--accent: oklch(0.97 0 0);
-	--accent-foreground: oklch(0.205 0 0);
+	/* --accent-foreground: oklch(0.205 0 0); */
 	--destructive: oklch(0.577 0.245 27.325);
 	--border: oklch(0.922 0 0);
 	--input: oklch(0.922 0 0);
@@ -101,7 +104,7 @@
 	--sidebar-primary: var(--primary);
 	--sidebar-ring: var(--ring);
 	--sidebar-primary-foreground: var(--primary-foreground);
-	/* --accent-foreground: var(--primary); */
+	--accent-foreground: var(--primary);
 
 	--background: oklch(0.145 0 0);
 	--foreground: oklch(0.985 0 0);

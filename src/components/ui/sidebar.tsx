@@ -23,7 +23,8 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { PanelLeftIcon } from "lucide-react"
+// import { PanelLeftIcon } from "lucide-react"
+import { Icon, type IconName } from "@/components/icon"
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -252,26 +253,43 @@ function Sidebar({
 }
 
 function SidebarTrigger({
+  //
+  icon: _icon,
   className,
   onClick,
   ...props
-}: React.ComponentProps<typeof Button>) {
-  const { toggleSidebar } = useSidebar()
+// }: React.ComponentProps<typeof Button>) {
+}: React.ComponentProps<typeof Button> & { icon?: IconName | [openedIcon: IconName, closedIcon: IconName] }) {
+  // const { toggleSidebar } = useSidebar()
+  const { open, toggleSidebar } = useSidebar()
+
+  //
+  const icon: [IconName, IconName] | undefined = Array.isArray(_icon) ? _icon : _icon ? [_icon, _icon] : undefined;
+  const isSingle =  icon?.[0] === icon?.[1]
 
   return (
     <Button
+      // 
+      data-sidebar-state={open ? "expanded" : "collapsed"}
       data-sidebar="trigger"
       data-slot="sidebar-trigger"
       variant="ghost"
       size="icon-sm"
-      className={cn(className)}
+      // className={cn(className)}
+      className={cn("group/sidebar-trigger relative overflow-hidden", className)}
       onClick={(event) => {
         onClick?.(event)
         toggleSidebar()
       }}
       {...props}
     >
-      <PanelLeftIcon />
+      {/* <PanelLeftIcon /> */}
+      {
+        !icon || isSingle ? <Icon icon={icon?.[0] ?? "PanelLeft"}/> : <>
+          <Icon icon={icon[1]} className="translate-x-0 transition-all group-data-[sidebar-state=expanded]/sidebar-trigger:-translate-x-2/1"/>
+          <Icon icon={icon[0]} className="absolute translate-x-0 transition-all group-data-[sidebar-state=collapsed]/sidebar-trigger:translate-x-2/1"/>
+        </>
+      }
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   )

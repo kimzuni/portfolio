@@ -13,14 +13,15 @@ export const metadata: seo.MetadataOptions = {
 
 
 export const _item = {
-	messages: [
-		"앗, 혹시 길을 잃으셨나요?",
-		"집으로 안내해 드릴게요!",
-	],
+	messages: `
+		앗, 혹시 길을 잃으셨나요?
+
+		집으로 안내해 드릴게요!
+	`,
 	button: {
 		label: "저를 따라오세요!",
 		size: "lg",
-		icon: "Home",
+		icon: "House",
 		iconScale: 1.2,
 		iconPosition: "right",
 	},
@@ -41,5 +42,5 @@ export interface ItemRaw {
 }
 
 export interface Item extends Omit<ItemRaw, "messages"> {
-	messages: markdown.Result<ItemRaw["messages"]>;
+	messages: markdown.Result;
 }

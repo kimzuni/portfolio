@@ -5,11 +5,11 @@ import * as markdown from "@/lib/markdown";
 export const _item = {
 	heading: "KIM JOON HEE",
 	subheading: "Full-stack Developer",
-	tagline: [
-		"무언가에 깊게 빠져드는 것을 좋아합니다.",
-		"",
-		"안정적인 서비스를 위해 필요한 영역은 가리지 않고 직접 부딪히며 배우고 있습니다.",
-	],
+	tagline: `
+		보안 전공자로서 사용자가 신뢰할 수 있는 서비스를 개발합니다.
+
+		코드를 통해 보다 더 나은 사용자 경험을 구현하는 데 집중합니다.
+	`,
 } as const satisfies ItemRaw;
 
 export const item: Item = {
@@ -26,5 +26,5 @@ export interface ItemRaw {
 }
 
 export interface Item extends Omit<ItemRaw, "tagline"> {
-	tagline: markdown.Result<ItemRaw["tagline"]>;
+	tagline: markdown.Result;
 }

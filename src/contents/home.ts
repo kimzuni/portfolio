@@ -1,12 +1,14 @@
 import type * as seo from "@/lib/seo";
 
 import type { LinkButtonProps } from "@/components/link-button";
+import type { AnchorButtonProps } from "@/components/anchor-button";
 
 import * as _app from "./app";
 import * as _hero from "./hero";
 import * as _about from "./about";
 import * as _skill from "./skill";
 import * as _project from "./project";
+import * as _contribution from "./contribution";
 import * as _contact from "./contact";
 
 
@@ -15,36 +17,34 @@ export const metadata: seo.MetadataOptions = {
 	title: {
 		absolute: _app.item.title,
 	},
-	description: _app.item.description.raw,
+	description: _app.item.description.lines,
 };
 
 
 
 export interface Hero extends _hero.Item {
-	buttons?: LinkButtonProps[];
+	anchorButton: AnchorButtonProps;
 }
 
 export const hero: Hero = {
 	..._hero.item,
-	buttons: [
-		{
-			variant: "default",
-			label: "Read More",
-			href: "#about",
-			size: "lg",
-			icon: "ArrowDown",
-			iconTranslateY: 5,
-			iconPosition: "right",
-		},
-	],
+	anchorButton: {
+		variant: "default",
+		label: "Read More",
+		targetId: "#about",
+		size: "lg",
+		icon: "ArrowDown",
+		iconTranslateY: 5,
+		iconPosition: "right",
+	},
 };
 
 
 
-export interface About extends Pick<_about.Item, "philosophies"> {
+export interface About extends Pick<_about.Item, "features"> {
 	heading: string;
 	message: string;
-	certificates: number;
+	certifications: number;
 	awards: number;
 	linkButton: LinkButtonProps;
 }
@@ -52,8 +52,8 @@ export interface About extends Pick<_about.Item, "philosophies"> {
 export const about: About = {
 	heading: _about.item.title,
 	message: "안녕하세요! 아, 제가 누구냐구요?",
-	philosophies: _about.item.philosophies,
-	certificates: _about.item.certificates.length,
+	features: _about.item.features,
+	certifications: _about.item.certifications.length,
 	awards: _about.item.awards.length,
 	linkButton: {
 		variant: "default",
@@ -75,13 +75,22 @@ export interface Skill {
 export interface Skills {
 	heading: string;
 	message: string;
+	linkButton: LinkButtonProps;
 	items: Skill[];
 }
 
 const minLevel: _skill.level.Slug = 0;
 export const skills: Skills = {
 	heading: "What I Use",
-	message: "프로젝트를 진행할 때 주로 사용하는 기술들이에요!",
+	message: "프로젝트를 진행할 때 주로 사용하는 스킬이에요!",
+	linkButton: {
+		variant: "outline",
+		label: "More Skills",
+		size: "lg",
+		icon: "ArrowRight",
+		iconTranslateX: 5,
+		iconPosition: "right",
+	},
 	items: _skill.category.group.items.map(group => ({
 		group,
 		items: _skill.items.filter(x => (
@@ -120,6 +129,29 @@ export const projects: Projects = {
 		iconPosition: "right",
 	},
 	items: _project.items.filter(x => x.pin),
+};
+
+
+
+export interface Contributions {
+	heading: string;
+	message: string;
+	linkButton: LinkButtonProps;
+	items: _contribution.Item[];
+}
+
+export const contributions: Contributions = {
+	heading: "What I Contributed",
+	message: "오픈소스를 사용하며 마주한 불편함을 직접 해결했어요!",
+	linkButton: {
+		variant: "outline",
+		label: "More Contributions",
+		size: "lg",
+		icon: "ArrowRight",
+		iconTranslateX: 5,
+		iconPosition: "right",
+	},
+	items: _contribution.items.filter(x => x.pin),
 };
 
 

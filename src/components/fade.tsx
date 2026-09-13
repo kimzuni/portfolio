@@ -5,13 +5,12 @@ import { Motion, type MotionProps, type TagName } from "@/components/motion";
 
 
 export type FadeProps<T extends TagName = "div"> =
-	& Omit<MotionProps<T>, "children" | "initial" | "whileInView" | "viewport" | "transition">
+	& Omit<MotionProps<T>, "initial" | "whileInView" | "viewport" | "transition">
 	& {
-		children?: React.ReactNode;
-		opacity?: number;
 		x?: number;
 		y?: number;
 		once?: boolean;
+		opacity?: number;
 		amount?: number;
 		margin?: number;
 		duration?: number;
@@ -20,38 +19,28 @@ export type FadeProps<T extends TagName = "div"> =
 	};
 
 export function Fade<T extends TagName = "div">({
-	once = true,
 	x = 0,
 	y = 20,
+	once = true,
 	opacity = 0,
-	amount = 0.2,
+	amount = 0,
 	margin = 100,
 	duration = 1,
 	delay = 0,
 	ease = "easeOut",
 	...props
 }: FadeProps<T>) {
+	const initialConfig = { opacity, x, y };
+	const animateConfig = { opacity: 1, x: 0, y: 0 };
+	const viewportConfig = { once, amount, margin: `${margin}px 0px ${margin}px 0px` };
+	const transitionConfig = { duration, delay, ease };
+
 	return (
 		<Motion
-			initial={{
-				opacity,
-				x, y,
-			}}
-			whileInView={{
-				opacity: 1,
-				x: 0,
-				y: 0,
-			}}
-			viewport={{
-				once,
-				amount,
-				margin: `${margin}px 0px ${margin}px 0px`,
-			}}
-			transition={{
-				duration,
-				delay,
-				ease,
-			}}
+			initial={initialConfig}
+			whileInView={animateConfig}
+			viewport={viewportConfig}
+			transition={transitionConfig}
 			{...props}
 		/>
 	);
@@ -59,10 +48,33 @@ export function Fade<T extends TagName = "div">({
 
 
 
-export type FadeSectionProps = Omit<FadeProps<"section">, "tagName">;
+export interface FadeHeaderProps extends Omit<FadeProps<"header">, "tagName"> {
+}
+
+export function FadeHeader(props: FadeHeaderProps) {
+	return (
+		<Fade tagName="header" {...props}/>
+	);
+}
+
+
+
+export interface FadeSectionProps extends Omit<FadeProps<"section">, "tagName"> {
+}
 
 export function FadeSection(props: FadeSectionProps) {
 	return (
 		<Fade tagName="section" {...props}/>
+	);
+}
+
+
+
+export interface FadeArticleProps extends Omit<FadeProps<"article">, "tagName"> {
+}
+
+export function FadeArticle(props: FadeArticleProps) {
+	return (
+		<Fade tagName="article" {...props}/>
 	);
 }

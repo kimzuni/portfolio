@@ -1,4 +1,5 @@
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
+import { LinkButton } from "@/components/link-button";
 import { SkillIcon } from "@/components/skill-icon";
 import { Icon } from "@/components/icon";
 import { Heading } from "@/components/heading";
@@ -21,7 +22,7 @@ function SkillBox({
 	return (
 		<article className="flex flex-col justify-center-safe">
 			<Card {...props}>
-				<CardContent className="flex items-center gap-3">
+				<CardHeader className="flex items-center gap-3">
 					<Icon
 						icon={group.icon}
 						size={24}
@@ -33,16 +34,17 @@ function SkillBox({
 					<div className="flex-1">
 						<CardTitle className="font-mono">{group.label}</CardTitle>
 					</div>
-				</CardContent>
+				</CardHeader>
 				<CardContent className="grid grid-cols-5 gap-2">
 					{items.map(props => (
 						<SkillIcon
+							withTooltip
 							key={props.label}
 							icon={props.icon}
 							label={props.label}
 							level={props.level.label}
 							provider={props.provider}
-							className="place-self-center hover:scale-125 hover:-translate-y-1.5 transition-[scale,translate]"
+							className="place-self-center data-popup-open:scale-125 data-popup-open:-translate-y-1.5 transition-[scale,translate]"
 						/>
 					))}
 				</CardContent>
@@ -59,6 +61,7 @@ export interface SkillsProps extends Omit<SectionProps, "children">, contents.ho
 export function Skills({
 	heading,
 	message,
+	linkButton,
 	items,
 	...props
 }: SkillsProps) {
@@ -73,7 +76,7 @@ export function Skills({
 					className="text-center"
 				>{message}</Message>
 			</div>
-			<div className="grid grid-cols-[repeat(auto-fit,minmax(auto,350px))] gap-6 justify-center">
+			<div className="grid grid-cols-[repeat(auto-fit,minmax(auto,350px))] gap-6 justify-center-safe">
 				{items.filter(x => x.items.length).map(({ group, items }) => (
 					<SkillBox
 						key={group.slug}
@@ -81,6 +84,13 @@ export function Skills({
 						items={items}
 					/>
 				))}
+			</div>
+
+			<div className="w-fit mx-auto">
+				<LinkButton
+					href="/skills/"
+					{...linkButton}
+				/>
 			</div>
 		</Section>
 	);

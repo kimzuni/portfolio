@@ -1,26 +1,16 @@
+import type * as seo from "@/lib/seo";
+
 export * as category from "./category";
 export * as level from "./level";
-
-export type {
-	Item,
-	ItemRaw,
-	Slug,
-} from "./items";
-
-export {
-	_items,
-	items,
-	slugs,
-	map,
-	has,
-	get,
-} from "./items";
+export * from "./items";
 
 
 
-import { items, type Item } from "./items";
+export const label: string = "Skills";
+export const title: string = "기술 스택";
+export const description: string = "사용 가능한 기술 스택의 전체 목록";
 
-export const tree = items.reduce((acc, item) => {
-	((acc[item.group.slug] ??= {})[item.category.slug] ??= {})[item.slug] = item;
-	return acc;
-}, {} as Record<string, Record<string, Record<string, Item>>>);
+export const metadata: seo.MetadataOptions = {
+	title,
+	description,
+};

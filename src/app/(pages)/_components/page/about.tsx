@@ -1,4 +1,4 @@
-import { Philosophies } from "@/pages/about/_components/philosophies";
+import { Features } from "@/pages/about/_components/features";
 
 import { LinkButton } from "@/components/link-button";
 import { Heading } from "@/components/heading";
@@ -16,8 +16,8 @@ export interface AboutProps extends Omit<SectionProps, "children" | "title">, co
 export function About({
 	heading,
 	message,
-	philosophies,
-	certificates,
+	features,
+	certifications,
 	awards,
 	linkButton,
 	...props
@@ -31,11 +31,11 @@ export function About({
 				</Heading>
 			</div>
 
-			<Philosophies items={philosophies}/>
+			<Features items={features}/>
 
 			<div className="flex justify-center items-end gap-8 md:gap-16">
 				{
-					Object.entries({ certificates, awards }).map(([key, value], i) => (
+					Object.entries({ certifications, awards }).map(([key, value], i) => (
 						<div
 							key={key}
 							className="flex flex-col items-center gap-1 font-mono"

@@ -6,8 +6,8 @@ import { Icon, type IconName } from "@/components/icon";
 
 
 
-export interface LinkButtonProps extends Omit<React.ComponentProps<typeof Button>, "render" | "children"> {
-	label: string;
+export interface LinkButtonProps extends Omit<React.ComponentProps<typeof Button>, "render"> {
+	label?: string;
 	href?: string;
 	icon?: IconName;
 	iconPosition?: "left" | "right";
@@ -28,8 +28,9 @@ export function LinkButton({
 	iconRotate = 0,
 	iconTranslateX = 0,
 	iconTranslateY = 0,
-	className,
 	variant = "default",
+	className,
+	children: _children,
 	...props
 }: LinkButtonProps) {
 	const children = (
@@ -38,8 +39,8 @@ export function LinkButton({
 				<Icon
 					icon={icon}
 					className={cn(
-						"group-hover:translate-x-(--tx) group-hover:translate-y-(--ty) group-hover:rotate-(--rotate)",
-						"group-hover:scale-(--scale)",
+						"group-hover/link-button:translate-x-(--tx) group-hover/link-button:translate-y-(--ty) group-hover/link-button:rotate-(--rotate)",
+						"group-hover/link-button:scale-(--scale)",
 						"transition-transform",
 					)}
 					style={{
@@ -51,6 +52,7 @@ export function LinkButton({
 				/>
 			)}
 			{label}
+			{_children}
 		</>
 	);
 
@@ -59,11 +61,13 @@ export function LinkButton({
 			variant={variant}
 			nativeButton={!href}
 			className={cn(
-				"group flex items-center",
+				"group/link-button flex items-center",
 				iconPosition === "left" ? "flex-row" : "flex-row-reverse",
 				variant === "default" ? "rounded-full" : "",
+				variant === "outline" ? "hover:text-primary hover:border-primary!" : "",
 				className,
 			)}
+			size={label ? "default" : "icon"}
 			render={
 				!href
 					? <button>{children}</button>

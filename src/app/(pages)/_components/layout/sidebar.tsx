@@ -1,9 +1,9 @@
 "use client";
 
-import { useRef, useEffect, startTransition } from "react";
+import { useRef, useState, useEffect } from "react";
 
 import { cn } from "@/lib/utils";
-import { setCookie } from "@/app/actions";
+import * as cookie from "@/lib/cookie";
 import { useNavigation } from "@/hooks/use-navigation";
 
 import {
@@ -25,6 +25,7 @@ import {
 	SidebarMenuSubItem,
 	SidebarMenuSubButton,
 	SidebarFooter,
+	SidebarTrigger as BaseTrigger,
 	useSidebar,
 } from "@/components/ui/sidebar";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
@@ -33,6 +34,13 @@ import { Icon } from "@/components/icon";
 import { Link } from "@/components/link";
 
 import type * as contents from "@/contents";
+
+
+
+export interface SidebarTriggerProps extends React.ComponentProps<typeof BaseTrigger> {
+}
+
+export const SidebarTrigger = BaseTrigger;
 
 
 
@@ -46,11 +54,12 @@ export interface SidebarProps extends Omit<React.ComponentProps<typeof Base>, "c
 export function Sidebar({
 	label,
 	items,
-	autoClose = false,
+	autoClose: _autoClose,
 	autoCloseKey,
 	...props
 }: SidebarProps) {
 	const { isMobile, open, setOpenMobile, setOpen } = useSidebar();
+	const [autoClose, setAutoClose] = useState(_autoClose);
 	const navigation = useNavigation();
 	const prevPath = useRef(navigation.pathname);
 
@@ -71,9 +80,8 @@ export function Sidebar({
 
 	const onCheckedChange = (checked: boolean) => {
 		if (autoCloseKey !== undefined) {
-			startTransition(async () => {
-				await setCookie(autoCloseKey, `${checked}`);
-			});
+			cookie.set(autoCloseKey, `${checked}`);
+			setAutoClose(checked);
 		}
 	};
 
@@ -95,14 +103,12 @@ export function Sidebar({
 											isActive={navigation.isCurrent(href)}
 											render={<Link href={disabled ? "#" : href}><span>{label}</span></Link>}
 											disabled={disabled}
-											aria-disabled={disabled}
 											tabIndex={disabled ? -1 : undefined}
 										/>
 										{items && (
 											<>
 												<SidebarMenuAction
 													hidden={!items.length}
-													aria-hidden={!items.length}
 													render={<CollapsibleTrigger className="transition-transform data-panel-open:rotate-90">
 														<Icon icon="ChevronRight"/>
 														<span className="sr-only">Toggle</span>
@@ -115,7 +121,7 @@ export function Sidebar({
 																<SidebarMenuSubButton
 																	className={!item.disabled ? undefined : "pointer-events-none opacity-50"}
 																	isActive={navigation.isCurrent(item.href)}
-																	render={<Link href={item.href}><span>{item.label}</span></Link>}
+																	render={<Link href={item.disabled ? "#" : item.href}><span>{item.label}</span></Link>}
 																	aria-disabled={item.disabled}
 																	tabIndex={item.disabled ? -1 : undefined}
 																/>

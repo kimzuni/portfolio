@@ -6,9 +6,7 @@ import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toast";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { LayoutBreadcrumbProvider, LayoutBreadcrumb } from "@/components/layout-breadcrumb";
-import { BackButtonProvider, BackButton } from "@/components/back-button";
 import { ModeToggle } from "@/components/mode-toggle";
-import { Icon } from "@/components/icon";
 
 import { Sidebar, SidebarTrigger } from "./_components/layout/sidebar";
 import { Background } from "./_components/layout/background";
@@ -41,7 +39,7 @@ export default async function AppLayout({
 			disableTransitionOnChange={true}
 		>
 			<Toaster/>
-			<BackButtonProvider><LayoutBreadcrumbProvider>
+			<LayoutBreadcrumbProvider>
 					<Background className="absolute right-0 top-0 -z-1 not-data-[pathname=/]:hidden"/>
 					<SidebarProvider defaultOpen={sidebarOpen}>
 						<Sidebar
@@ -64,7 +62,6 @@ export default async function AppLayout({
 								)}
 							>
 								<SidebarTrigger className="size-8" icon={["PanelLeftClose", "PanelLeftOpen"]}/>
-								<BackButton aria-label="Back to previous" className="size-8"><Icon icon="ArrowLeft"/></BackButton>
 								<p className="px-1 flex-1 text-lg font-semibold">
 									KIM JOON HEE
 								</p>
@@ -87,7 +84,7 @@ export default async function AppLayout({
 							</Footer>
 						</div>
 					</SidebarProvider>
-			</LayoutBreadcrumbProvider></BackButtonProvider>
+			</LayoutBreadcrumbProvider>
 		</ThemeProvider>
 	);
 }

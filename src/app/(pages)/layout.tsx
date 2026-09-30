@@ -76,7 +76,7 @@ export default async function AppLayout({
 									"md:px-12 xl:px-16",
 								)}
 							>
-								<LayoutBreadcrumb className="mb-4"/>
+								<LayoutBreadcrumb className="mb-4 has-[+_[data-is-not-found-page]]:hidden"/>
 								{children}
 							</main>
 							<Footer className="z-12 text-sm text-center leading-12 text-muted-foreground">

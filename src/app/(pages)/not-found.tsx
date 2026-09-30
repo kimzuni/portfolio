@@ -21,6 +21,7 @@ export default function NotFound() {
 
 	return (
 		<div
+			data-is-not-found-page
 			className={cn(
 				"p-0 h-full text-center",
 				"flex flex-col items-center justify-center gap-6",

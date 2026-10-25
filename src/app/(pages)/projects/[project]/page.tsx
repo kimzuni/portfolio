@@ -19,6 +19,7 @@ import { LinkBadge } from "@/components/link-badge";
 import { LinkButton } from "@/components/link-button";
 import { TagBadge, SkillBadge } from "@/components/project-badge";
 import { Media } from "@/components/media";
+import { Tabs, TabsContent } from "@/components/filter";
 
 import * as contents from "@/contents";
 
@@ -239,6 +240,14 @@ export default async function Project(props: Props) {
 		isOngoing: _isOngoing,
 	} = await getProjectOrNotFound(props);
 
+	// tab이 없는 article은 모든 tab에 포함됨
+	const allTabs = new Set(articles.map(art => art.tab).filter(x => x !== undefined)).values().toArray();
+	const tabs = (allTabs.length ? allTabs : [null]).map(tab => ({
+		slug: tab,
+		label: tab ?? "Default",
+	}))
+	const articlesMap = new Map(tabs.map(({ slug }) => [slug, articles.filter(art => !art.tab || art.tab === slug)]));
+
 	const isOngoing = (
 		_isOngoing
 		?? (
@@ -366,16 +375,29 @@ export default async function Project(props: Props) {
 						</ItemActions>
 					</Item>
 				)}
-
-				<Separator/>
 			</FadeSection>
 
 			{/* Sections */}
 			<FadeSection className="@container">
-				{articles.map((article, idx) => <Article
-					key={idx}
-					{...article}
-				/>)}
+				<Tabs
+					className={cn(
+						"gap-0",
+						tabs.length === 1 && "*:data-[slot=tabs-list]:hidden",
+					)}
+					variant="line"
+					items={tabs}
+				>
+					<Separator/>
+
+					{tabs.map(tab => (
+						<TabsContent key={tab.label} value={tab}>
+							{articlesMap.get(tab.slug)?.map((article, idx) => <Article
+								key={idx}
+								{...article}
+							/>)}
+						</TabsContent>
+					))}
+				</Tabs>
 			</FadeSection>
 		</div>
 	);

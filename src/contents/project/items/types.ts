@@ -69,6 +69,7 @@ export interface Link extends LinkRaw {
 
 
 export interface ArticleRaw {
+	tab?: string;
 	linkedToPrevious?: boolean;
 	maxWidth?: number | string;
 	blocks: BlockRaw[];

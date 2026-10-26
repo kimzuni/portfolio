@@ -52,7 +52,6 @@ export function useServerCheck(
 
 		let ok = false;
 		try {
-
 			const response = await request(url, timeout);
 			ok = response.ok;
 		} catch {

@@ -205,7 +205,7 @@ export function LayoutBreadcrumbConfig({
 	label?: string | null;
 	ellipsis?: boolean | null;
 }) {
-	const { setEllipsis, setLabel} = useLayoutBreadcrumb();
+	const { setEllipsis, setLabel } = useLayoutBreadcrumb();
 
 	useLayoutEffect(() => {
 		if (label !== undefined) {

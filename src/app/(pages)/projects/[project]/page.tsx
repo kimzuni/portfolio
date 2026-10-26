@@ -255,7 +255,7 @@ export default async function Project(props: Props) {
 					<PageBadge label="Project Detail"/>
 					{team && (
 						<InfoBadge>
-							<Icon icon="Users"/>
+							<Icon icon="UserGroup"/>
 							Team
 						</InfoBadge>
 					)}

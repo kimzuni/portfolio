@@ -98,7 +98,7 @@ export function ProjectBox({
 		>
 			{isTeam && (
 				<Badge variant="ghost" className="absolute top-2 right-1 text-primary pointer-events-none">
-					<Icon icon="Users"/>
+					<Icon icon="UserGroup"/>
 				</Badge>
 			)}
 			<CardHeader className="gap-0 empty:hidden">

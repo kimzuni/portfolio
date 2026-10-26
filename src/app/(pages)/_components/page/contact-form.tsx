@@ -9,7 +9,6 @@ import * as cookie from "@/lib/cookie";
 import { useServerCheck } from "@/hooks/use-server-check";
 
 import { toast } from "@/components/ui/toast";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
 import { Toggle } from "@/components/ui/toggle";
 import { Button } from "@/components/ui/button";
@@ -293,40 +292,9 @@ export function ContactForm({
 					<DialogHeader>
 						<DialogTitle>메일을 전송하시겠어요?</DialogTitle>
 						<DialogDescription>
-							입력하신 내용이 맞는지 다시 한번 확인할게요!
+							한 번 전송한 메일은 취소할 수 없으니 신중하게 확인해주세요.
 						</DialogDescription>
 					</DialogHeader>
-					<div className="rounded-lg border bg-muted/50 p-4 space-y-3">
-						<div className="space-y-1">
-							<p className="text-xs font-semibold text-muted-foreground">Subject</p>
-							<p
-								className={cn(
-									"font-medium text-foreground break-all",
-									!subject && "text-muted-foreground text-xs italic",
-								)}
-							>
-								{subject || "No Subject"}
-							</p>
-						</div>
-
-						<Separator/>
-
-						<div className="space-y-1">
-							<p className="text-xs font-semibold text-muted-foreground">Message</p>
-							<ScrollArea
-								className="h-48 -mr-4 pr-4"
-							>
-								<p
-									className={cn(
-										"text-foreground whitespace-pre-wrap break-all",
-										!content && "text-muted-foreground text-xs italic",
-									)}
-								>
-									{content || "No Message"}
-								</p>
-							</ScrollArea>
-						</div>
-					</div>
 					<DialogFooter>
 						<DialogClose render={<Button variant="outline">Cancel</Button>}/>
 						<Button type="submit" form={formId}>Submit</Button>

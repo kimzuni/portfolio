@@ -253,12 +253,19 @@ export default async function Project(props: Props) {
 			<FadeHeader className="space-y-4 max-w-3xl">
 				<div className="flex flex-wrap items-center gap-3">
 					<PageBadge label="Project Detail"/>
-					{team && (
-						<InfoBadge>
-							<Icon icon="UserGroup"/>
-							Team
-						</InfoBadge>
-					)}
+					{
+						team ? (
+							<InfoBadge>
+								<Icon icon="UserGroup"/>
+								Team
+							</InfoBadge>
+						) : (
+							<InfoBadge>
+								<Icon icon="User"/>
+								Solo
+							</InfoBadge>
+						)
+					}
 					{isOngoing && (
 						<InfoBadge>
 							<Icon icon="RefreshCcw"/>

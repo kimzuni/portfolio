@@ -302,7 +302,7 @@ export function DropdownMenuCheckboxGroup<
 		<>
 			<Base.DropdownMenuLabel className="empty:hidden">{label}</Base.DropdownMenuLabel>
 			<CheckboxGroup
-				value={value.map(x => x.label)}
+				value={value?.map(x => x.label) ?? []}
 				onValueChange={handleValueChange}
 			>
 				{items.map(({ icon, label }) => (
@@ -318,7 +318,7 @@ export function DropdownMenuCheckboxGroup<
 									<Checkbox.Indicator className="pointer-events-none absolute right-2 flex items-center justify-center">
 										{
 											showOrder ? (
-												<span className="font-semibold text-xs">{value.findIndex(x => x.label === label) + 1}</span>
+												<span className="font-semibold text-xs">{(value ?? []).findIndex(x => x.label === label) + 1}</span>
 											) : (
 												<Icon icon="Check"/>
 											)

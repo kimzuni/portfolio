@@ -56,8 +56,8 @@ const VIEW_KEY_MAP = {
 	VIEW_DATE: "view-date",
 	VIEW_STATUSES: "view-statuses",
 	VIEW_DESCRIPTION: "view-description",
-	VIEW_PRIMARY_SKILLS: "view-primary-skills",
-	VIEW_SECONDARY_SKILLS: "view-secondary-skills",
+	VIEW_PRIMARY_SKILLS: "view-core-skills",
+	VIEW_SECONDARY_SKILLS: "view-sub-skills",
 	VIEW_FOOTER: "view-footer",
 	REVERSE: "reverse",
 } as const;
@@ -426,12 +426,12 @@ export function Client({
 							onCheckedChange: checked => handleValueChange(PARAM_KEY_MAP.VIEW_DESCRIPTION, checked, true),
 						},
 						{
-							label: "Primary Skills",
+							label: "Core Skills",
 							checked: currViewPrimarySkills,
 							onCheckedChange: checked => handleValueChange(PARAM_KEY_MAP.VIEW_PRIMARY_SKILLS, checked, true),
 						},
 						{
-							label: "Secondary Skills",
+							label: "Sub Skills",
 							checked: currViewSecondarySkills,
 							onCheckedChange: checked => handleValueChange(PARAM_KEY_MAP.VIEW_SECONDARY_SKILLS, checked, false),
 						},

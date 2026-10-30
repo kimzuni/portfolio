@@ -7,8 +7,6 @@ import { FadeHeader, FadeSection, FadeArticle } from "@/components/fade";
 import { Item, ItemContent, ItemActions, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/dialog";
 import { PageBadge } from "@/components/page-badge";
 import { Icon } from "@/components/icon";
 import { PeriodBox } from "@/components/period-box";
@@ -16,7 +14,6 @@ import { ContentBox } from "@/components/content-box";
 import { Heading } from "@/components/heading";
 import { Shield } from "@/components/shield";
 import { LinkBadge } from "@/components/link-badge";
-import { LinkButton } from "@/components/link-button";
 import { TagBadge, SkillBadge } from "@/components/project-badge";
 import { Media } from "@/components/media";
 import { Tabs, TabsContent } from "@/components/filter";
@@ -95,59 +92,6 @@ function BadgeContainer({
 				{children}
 			</div>
 		</div>
-	);
-}
-
-
-
-function ContributionDialog({
-	description,
-	contributions,
-}: contents.project.Team) {
-	return (
-		<Dialog>
-			<DialogTrigger
-				className="border hover:text-primary hover:border-primary! dark:border-input"
-				render={<LinkButton
-					variant="secondary"
-					label="상세 보기"
-				/>}
-			/>
-			<DialogContent>
-				<DialogHeader>
-					<DialogTitle>역할 및 기여도 상세 정보</DialogTitle>
-					<DialogDescription
-						className="empty:hidden"
-						render={<ContentBox>{description.result}</ContentBox>}
-					/>
-				</DialogHeader>
-				<ScrollArea className="space-y-4 mt-4 -mx-4 max-h-[50vh] px-4">
-					{contributions.map(({ label, percentage, description }) => (
-						<div key={label} className="flex flex-col gap-2 not-last:mb-3 not-last:pb-3 not-last:border-b">
-							<div className="flex items-center justify-between">
-								<h2 className="font-semibold font-mono">{label}</h2>
-								<span className="text-sm text-muted-foreground">
-									{percentage}%
-								</span>
-							</div>
-							<div
-								className={cn(
-									"h-2 bg-muted rounded-full overflow-hidden",
-									"before:block before:h-full before:w-(--percentage) before:bg-primary before:rounded-full",
-									"before:transition-all",
-								)}
-								style={{
-									"--percentage": `${percentage}%`,
-								} as React.CSSProperties}
-							/>
-							<ContentBox className="prose-sm prose-li:my-0 data-is-empty:hidden">
-								{description?.result}
-							</ContentBox>
-						</div>
-					))}
-				</ScrollArea>
-			</DialogContent>
-		</Dialog>
 	);
 }
 
@@ -334,7 +278,7 @@ export default async function Project(props: Props) {
 					)}
 
 					{!!skills.primary.length && (
-						<BadgeContainer label="Primary Skills">
+						<BadgeContainer label="Core Skills">
 							{skills.primary.map(skill => <SkillBadge
 								key={skill.slug}
 								icon="Funnel"
@@ -345,7 +289,7 @@ export default async function Project(props: Props) {
 					)}
 
 					{!!skills.secondary.length && (
-						<BadgeContainer label="Secondary Skills">
+						<BadgeContainer label="Sub Skills">
 							{skills.secondary.map(skill => <SkillBadge
 								key={skill.slug}
 								icon="Funnel"

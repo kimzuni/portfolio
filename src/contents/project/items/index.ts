@@ -37,14 +37,6 @@ const promises = importSlugs.map(async slug => (
 				primary: (array.is(item.skills) ? item.skills : (item.skills.primary ?? [])).map(x => skill.map[x]!),
 				secondary: (array.is(item.skills) ? [] : (item.skills.secondary ?? [])).map(x => skill.map[x]!),
 			},
-			team: item.team && {
-				...item.team,
-				description: await markdown.render(item.team.description),
-				contributions: await Promise.all(item.team.contributions.map(async contribution => ({
-					...contribution,
-					description: await markdown.render(contribution.description?.map(x => `- ${x}`).join("\n")),
-				}))),
-			},
 			description: await markdown.render(item.description),
 			highlights: await markdown.render((item.highlights ?? []).map(highlight => `- **${highlight.label}**: ${highlight.value}`).join("\n")),
 			articles: await Promise.all(item.articles.map(async article => ({

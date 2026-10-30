@@ -20,32 +20,6 @@ export type Highlights = markdown.Result;
 
 
 
-export interface ContributionRaw {
-	label: string;
-	percentage: number;
-	description?: string[];
-}
-
-export interface Contribution extends Omit<ContributionRaw, "description"> {
-	description?: markdown.Result;
-}
-
-
-
-export interface TeamRaw {
-	size: number;
-	isAtLeast?: boolean;
-	description?: markdown.Source;
-	contributions: ContributionRaw[];
-}
-
-export interface Team extends Omit<TeamRaw, "description" | "contributions"> {
-	description: markdown.Result;
-	contributions: Contribution[];
-}
-
-
-
 export interface BlockRaw {
 	colSpan?: number;
 	text?: markdown.Source;
@@ -93,17 +67,16 @@ export interface ItemRaw {
 	links?: LinkRaw[];
 	tags: tag.Slug[];
 	skills: contents.skill.Slug[] | Partial<Record<"primary" | "secondary", contents.skill.Slug[]>>;
-	team?: TeamRaw;
+	team?: number;
 	articles: ArticleRaw[];
 }
 
-export interface Item extends Omit<ItemRaw, "cover" | "description" | "highlights" | "list" | "tags" | "skills" | "team" | "articles"> {
+export interface Item extends Omit<ItemRaw, "cover" | "description" | "highlights" | "list" | "tags" | "skills" | "articles"> {
 	slug: string;
 	cover: GenerateImageThemedMap<StaticImageData> | null;
 	description: markdown.Result;
 	highlights: Highlights;
 	tags: tag.Item[];
 	skills: Record<"all" | "primary" | "secondary", contents.skill.Item[]>;
-	team?: Team;
 	articles: Article[];
 }

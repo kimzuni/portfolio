@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils";
 import * as seo from "@/lib/seo";
 
 import { FadeHeader, FadeSection, FadeArticle } from "@/components/fade";
-import { Item, ItemContent, ItemActions, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { PageBadge } from "@/components/page-badge";
@@ -299,26 +298,6 @@ export default async function Project(props: Props) {
 						</BadgeContainer>
 					)}
 				</div>
-
-				{team && (
-					<Item variant="outline" className="shadow-xs">
-						<ItemMedia variant="image">
-							<Icon icon="ChartBar"/>
-						</ItemMedia>
-						<ItemContent>
-							<ItemTitle>
-								{team.size && `${team.size}인 ${team.isAtLeast ? "이상 " : ""}`}
-								팀 프로젝트
-							</ItemTitle>
-							<ItemDescription>
-								역할과 기여 비율을 자세히 확인해 보세요.
-							</ItemDescription>
-						</ItemContent>
-						<ItemActions>
-							<ContributionDialog {...team}/>
-						</ItemActions>
-					</Item>
-				)}
 			</FadeSection>
 
 			{/* Sections */}

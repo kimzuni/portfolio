@@ -15,7 +15,7 @@ export const item: ItemRaw = {
 	name: "Inst@gram",
 	description: `
 		인스타그램의 주요 기능을 일부 구현한 백엔드 중심의 프로젝트입니다.
-		자유 주제로 진행한 개인 프로젝트 과제로 제출한 결과물입니다.
+		학기 중 자유 주제로 진행한 개인 프로젝트 과제 결과물입니다.
 	`,
 	highlights: [
 		{
@@ -46,15 +46,15 @@ export const item: ItemRaw = {
 	],
 	skills: {
 		primary: [
-			"html",
-			"css",
-			"javascript",
 			"node-js",
 			"express-js",
 			"sequelize",
-			"websocket",
 		],
 		secondary: [
+			"html",
+			"css",
+			"javascript",
+			"websocket",
 			"mariadb",
 			"sqlite",
 		],
@@ -74,7 +74,7 @@ export const item: ItemRaw = {
 						type: "image",
 						src: dbDiagram,
 						alt: "데이터베이스 다이어그램",
-						caption: "DBEaver로 조회한 데이터베이스 다이어그램",
+						caption: "DBeaver로 조회한 데이터베이스 다이어그램",
 					},
 					text: `
 						데이터베이스는 제3정규형(3NF)을 준수하여 설계하였으며,
@@ -131,6 +131,7 @@ export const item: ItemRaw = {
 					},
 					text: `
 						프로필 페이지에서는 해당 사용자가 작성한 게시글, 팔로워, 팔로잉 수를 볼 수 있습니다.
+						팔로워 및 팔로잉 수를 클릭하면 해당 사용자 목록을 확인할 수 있습니다.
 					`,
 				},
 			],
@@ -144,8 +145,9 @@ export const item: ItemRaw = {
 						caption: "홈에서부터 채팅방으로 이동하여 실시간 채팅을 하는 모습",
 					},
 					text: `
-						사용자의 팔로워 및 팔로잉 수를 클릭하면 해당 목록을 볼 수 있으며,
-						Message 버튼을 통해 새로운 채팅방을 생성하거나 사용자와의 채팅방으로 이동하여 실시간 채팅을 할 수 있습니다.
+						사이드바의 Messages 탭을 통해 채팅방 목록을 확인할 수 있으며,
+						채팅방을 클릭하거나 사용자 프로필에서 Message 버튼을 클릭하면 채팅방으로 이동합니다.
+						채팅방 접속 시 이전 대화 목록과 읽지 않은 메시지를 표시하고, 실시간 양방향 채팅을 지원합니다.
 					`,
 				},
 			],

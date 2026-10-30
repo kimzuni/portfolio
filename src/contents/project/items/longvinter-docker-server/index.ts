@@ -10,7 +10,7 @@ export const item: ItemRaw = {
 	cover: dockerLogs,
 	name: "Longvinter 서버용 도커 이미지",
 	description: `
-		컨테이너 환경에서 Longvinter 서버를 구동할 수 있는 도커 이미지입니다.
+		컨테이너 환경에서 Longvinter 게임 서버를 구동할 수 있는 도커 이미지입니다.
 		Longvinter 공식 이미지의 ARM 아키텍처 미지원 문제와 수동 운영의 번거로움을 해결하고자,
 		Palworld의 유명 비공식 오픈소스 도커 이미지를 Longvinter 환경에 맞게 재구성하여 배포하였습니다.
 	`,
@@ -25,7 +25,7 @@ export const item: ItemRaw = {
 		},
 		{
 			label: "Discord Webhook",
-			value: "서버 생명 주기 및 플레이어 접속/종료 이벤트에 대한 실시간 디스코드 알림 제공",
+			value: "서버 생명 주기 및 플레이어 접속/종료 이벤트에 대한 실시간 디스코드 알림 발송",
 		},
 	],
 	period: [
@@ -35,7 +35,7 @@ export const item: ItemRaw = {
 	tags: [
 		"container",
 		"open-source",
-		"published",
+		"ci-cd",
 	],
 	skills: {
 		primary: [
@@ -70,6 +70,7 @@ export const item: ItemRaw = {
 	],
 	articles: [
 		{
+			tab: "Main",
 			maxWidth: 850,
 			blocks: [
 				{
@@ -91,6 +92,7 @@ export const item: ItemRaw = {
 			],
 		},
 		{
+			tab: "Main",
 			blocks: [
 				{
 					media: {
@@ -112,9 +114,9 @@ export const item: ItemRaw = {
 						caption: "실제 운영 중인 서버에서 플레이어 접속 및 종료 이벤트를 감지하여 전송된 디스코드 알림",
 					},
 					text: `
-
-						RCON 및 REST API를 지원하지 않는 Longvinter 환경에서 원본 이미지와 동일한 수준의 실시간 알림 기능을 제공하기 위해
-						로그 테일링 방식을 활용해 서버 로그를 주기적으로 감시하고 플레이어 접속 및 종료 이벤트를 감지하여 디스코드 알림을 전송합니다.
+						RCON 및 REST API를 지원하지 않는 Longvinter 환경에서 플레이어 접속 및 종료 이벤트를 감지하기 위해 로그 파일을 파싱합니다.
+						기존의 주기적으로 플레이어 목록을 조회 및 비교하는 방식을 대체하고 동일한 수준의 실시간 알림을 제공하기 위해,
+						마지막으로 읽은 라인 번호를 추적함으로써 중복 처리 없이 신규 접속 및 종료 이벤트만 파싱하여 Discord로 전송합니다.
 					`,
 				},
 			],

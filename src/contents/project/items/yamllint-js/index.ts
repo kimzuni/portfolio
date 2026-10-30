@@ -45,19 +45,19 @@ export const item: ItemRaw = {
 	tags: [
 		"dev-tools",
 		"open-source",
-		"published",
+		"ci-cd",
 	],
 	skills: {
 		primary: [
 			"typescript",
-			"javascript",
 			"node-js",
 		],
 		secondary: [
+			"javascript",
 			"npm",
 			"vitest",
-			"vscode-extension",
 			"github-actions",
+			"vscode-extension",
 		],
 	},
 	shields: [
@@ -111,6 +111,7 @@ export const item: ItemRaw = {
 	],
 	articles: [
 		{
+			tab: "Engine",
 			blocks: [
 				{
 					colSpan: 2,
@@ -133,6 +134,7 @@ export const item: ItemRaw = {
 			],
 		},
 		{
+			tab: "Engine",
 			linkedToPrevious: true,
 			blocks: [
 				{
@@ -147,6 +149,7 @@ export const item: ItemRaw = {
 			],
 		},
 		{
+			tab: "Engine",
 			maxWidth: 1100,
 			blocks: [
 				{
@@ -165,7 +168,11 @@ export const item: ItemRaw = {
 				},
 			],
 		},
+
+
+
 		{
+			tab: "VS Code Extension",
 			maxWidth: 1100,
 			blocks: [
 				{
@@ -181,6 +188,9 @@ export const item: ItemRaw = {
 				},
 			],
 		},
+
+
+
 		{
 			blocks: [
 				{

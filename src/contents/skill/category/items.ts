@@ -66,7 +66,7 @@ export const _items = [
 		icon: "Cpu",
 		group: "backend",
 		slug: "runtimes",
-		label: "runtimes",
+		label: "Runtimes",
 	},
 	{
 		color: "var(--color-teal-400)",

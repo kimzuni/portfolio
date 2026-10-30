@@ -132,6 +132,21 @@ export const _items = [
 
 	{
 		category: "frontend-libraries",
+		slug: "zustand",
+		label: "Zustand",
+		level: 1.0,
+		description: ``,
+	},
+	{
+		category: "frontend-libraries",
+		slug: "react-query",
+		label: "React Query",
+		icon: "tanstack",
+		level: 1.0,
+		description: ``,
+	},
+	{
+		category: "frontend-libraries",
 		slug: "chart-js",
 		label: "Chart.js",
 		level: 0.5,

@@ -14,6 +14,7 @@ export const item: ItemRaw = {
 	pin: true,
 	cover: n25,
 	name: "LLM 에이전트 기반 모의 침투 테스트 시스템",
+	team: 2,
 	description: `
 		LLM 에이전트를 활용하여 웹 서버의 취약점을 자동으로 탐지하고 패치 방법을 제안하는 자율형 모의 침투 테스트 시스템입니다.
 		실제 공격 발생 전 위험을 사전에 차단하고, 보안 연구 및 교육에 필요한 실전 데이터 부족 문제를 함께 해결하고자 개발했습니다.
@@ -44,68 +45,69 @@ export const item: ItemRaw = {
 		"frontend",
 		"backend",
 		"container",
+		"ci-cd",
 	],
 	skills: {
 		primary: [
-			"python",
 			"django",
-			"html",
-			"bootstrap",
-			"javascript",
-			"bash",
 			"docker",
 			"phaser",
-			"tiled",
 		],
 		secondary: [
+			"python",
+			"html",
+			"javascript",
+			"bootstrap",
 			"ollama",
 			"github-actions",
 			"chart-js",
+			"bash",
+			"tiled",
 		],
 	},
-	team: {
-		size: 2,
-		contributions: [
-			{
-				label: "Frontend",
-				percentage: 100,
-				description: [
-					"UI/UX 설계 및 구현",
-					"Phaser 구조 리팩토링 및 Tiled 기반 커스텀 맵 제작",
-					"사용자 및 테스트 목록 관리를 위한 관리 페이지 구현",
-				],
-			},
-			{
-				label: "Backend (Web)",
-				percentage: 100,
-				description: [
-					"Django 기반 사용자 권한 관리 시스템 구축",
-					"모의 침투 테스트 데이터 조회를 위한 REST API 구현",
-					"사용자 및 테스트 목록 제어를 위한 RBAC 기반 REST API 구현",
-				],
-			},
-			{
-				label: "Deployment & Infra",
-				percentage: 100,
-				description: [
-					"전용 컨테이너 이미지 개발 및 Ollama 연동 멀티 컨테이너 환경 구성",
-					"데모 시연을 위한 라이브 서버 배포 및 운영",
-				],
-			},
-			{
-				label: "Backend (Engine)",
-				percentage: 10,
-				description: [
-					"백엔드 단독 실행을 위한 프론트엔드 의존성 제거",
-					"공격 대상 서버의 사설 IP 대역 검증 로직 구현",
-				],
-			},
-			{
-				label: "AI Engineering",
-				percentage: 0,
-			},
-		],
-	},
+	// team: {
+	// 	size: 2,
+	// 	contributions: [
+	// 		{
+	// 			label: "Frontend",
+	// 			percentage: 100,
+	// 			description: [
+	// 				"UI/UX 설계 및 구현",
+	// 				"Phaser 구조 리팩토링 및 Tiled 기반 커스텀 맵 제작",
+	// 				"사용자 및 테스트 목록 관리를 위한 관리 페이지 구현",
+	// 			],
+	// 		},
+	// 		{
+	// 			label: "Backend (Web)",
+	// 			percentage: 100,
+	// 			description: [
+	// 				"Django 기반 사용자 권한 관리 시스템 구축",
+	// 				"모의 침투 테스트 데이터 조회를 위한 REST API 구현",
+	// 				"사용자 및 테스트 목록 제어를 위한 RBAC 기반 REST API 구현",
+	// 			],
+	// 		},
+	// 		{
+	// 			label: "Deployment & Infra",
+	// 			percentage: 100,
+	// 			description: [
+	// 				"전용 컨테이너 이미지 개발 및 Ollama 연동 멀티 컨테이너 환경 구성",
+	// 				"데모 시연을 위한 라이브 서버 배포 및 운영",
+	// 			],
+	// 		},
+	// 		{
+	// 			label: "Backend (Engine)",
+	// 			percentage: 10,
+	// 			description: [
+	// 				"백엔드 단독 실행을 위한 프론트엔드 의존성 제거",
+	// 				"공격 대상 서버의 사설 IP 대역 검증 로직 구현",
+	// 			],
+	// 		},
+	// 		{
+	// 			label: "AI Engineering",
+	// 			percentage: 0,
+	// 		},
+	// 	],
+	// },
 	links: [
 		{
 			label: "GitHub",
@@ -122,6 +124,7 @@ export const item: ItemRaw = {
 	],
 	articles: [
 		{
+			tab: "Web",
 			blocks: [
 				{
 					colSpan: 2,
@@ -147,6 +150,7 @@ export const item: ItemRaw = {
 			],
 		},
 		{
+			tab: "Web",
 			blocks: [
 				{
 					media: {
@@ -166,12 +170,15 @@ export const item: ItemRaw = {
 			],
 		},
 		{
+			tab: "Web",
 			linkedToPrevious: true,
 			blocks: [
 				{
 					text: `
-						대시보드에서는 진행된 테스트에 대한 요약 정보를 확인할 수 있습니다.
-						진행된 모의 침투 테스트 목록과 함께 URL 및 공격 유형별로 요약된 통계 정보를 제공하며,
+						모의 침투 테스트 전용으로 확장한 에이전트의 행동 정보를 기반으로 요약 및 상세정보를 제공합니다.
+						대시보드에서는 진행된 테스트에 대한 요약 정보와
+						진행된 모의 침투 테스트 목록,
+						URL 및 공격 유형별로 요약된 통계 정보를 제공하며,
 						각 테스트별로 상세 정보를 확인할 수 있습니다.
 						또한 재생 페이지에서는 화면 조작 뿐만 아니라
 						화면에 해당하는 각 에이전트의 상태 및 행동,
@@ -182,7 +189,11 @@ export const item: ItemRaw = {
 				},
 			],
 		},
+
+
+
 		{
+			tab: "Container",
 			maxWidth: 1100,
 			blocks: [
 				{
@@ -196,6 +207,7 @@ export const item: ItemRaw = {
 			],
 		},
 		{
+			tab: "Container",
 			linkedToPrevious: true,
 			maxWidth: 1100,
 			blocks: [
@@ -210,6 +222,7 @@ export const item: ItemRaw = {
 			],
 		},
 		{
+			tab: "Container",
 			linkedToPrevious: true,
 			maxWidth: 1100,
 			blocks: [

@@ -26,7 +26,7 @@ export const item: ItemRaw = {
 	},
 	links: [
 		{
-			label: "GitHub",
+			label: "Source Code",
 			href: "https://github.com/jh1950/study/blob/main/c/project/mines.c",
 		},
 	],

@@ -8,6 +8,9 @@ import mailFormLightSrc from "./mail-form-light.png";
 import mailFormDarkSrc from "./mail-form-dark.png";
 import lighthouse from "./lighthouse.png";
 import performance from "./performance.png";
+import vercelDeployments from "./vercel-deployments.png";
+import deployURLActionsSummary from "./deploy-url-in-actions-summary.png";
+import deployURLInPrComment from "./deploy-url-in-pr-comment.png";
 
 
 
@@ -20,21 +23,25 @@ export const item: ItemRaw = {
 	name: "웹 포트폴리오",
 	description: `
 		개발자로서의 성장 과정과 스킬, 프로젝트, 오픈소스 기여 활동을 기록하기 위해 개발한 개인 웹 포트폴리오입니다.
-		Next.js의 SSR 환경과 shadcn/ui 컴포넌트 라이브러리를 활용해 일관된 UI를 구축했으며,
-		전용 이메일 전송 API 기반의 이메일 전송 기능과 마크다운 렌더링을 구현했습니다.
+		Next.js 기반의 SSR 환경에서 shadcn/ui 컴포넌트 라이브러리와 Tailwind CSS를 사용하여 UI/UX를 구현했으며,
+		별도로 개발한 이메일 전송 API를 활용해 실제 전송이 가능한 익명 이메일 전송 서비스를 제공합니다.
 	`,
 	highlights: [
 		{
 			label: "Performance & Quality",
-			value: "모든 페이지 Lighthouse 전 항목 **90~100점** 달성, 불필요한 **렌더링 최적화**",
+			value: "모든 페이지 Lighthouse 전 항목 **90~100점**, 불필요한 **렌더링 최적화**",
 		},
 		{
-            label: "Email Integration",
-            value: "실시간 **Health Check** 및 **백그라운드 폴링 자동 중단**이 적용된 이메일 전송 폼 구현",
+			label: "Runtime Performance",
+			value: "**LCP 1.57s** 달성, 메인 스레드 **병목 최소화** (152ms)",
 		},
 		{
-            label: "Responsive Design",
-			value: "모바일 및 데스크탑 환경에 최적화된 **반응형 UI** 구현",
+			label: "Responsive Design",
+			value: "모바일 및 데스크탑 환경에 최적화된 **반응형 UI**",
+		},
+		{
+			label: "CI/CD Automation",
+			value: "GitHub Actions 기반 **배포 자동화** 및 Preview 배포 URL **코멘트 자동화**",
 		},
 	],
 	period: [
@@ -44,18 +51,18 @@ export const item: ItemRaw = {
 	tags: [
 		"ssr",
 		"frontend",
-		"deployed",
+		"ci-cd",
 	],
 	skills: {
 		primary: [
 			"typescript",
-			"javascript",
-			"react",
-			"tailwind-css",
-			"shadcn-ui",
 			"next-js",
+			"react",
 		],
 		secondary: [
+			"javascript",
+			"shadcn-ui",
+			"tailwind-css",
 			"vercel",
 			"github-actions",
 		],
@@ -68,6 +75,7 @@ export const item: ItemRaw = {
 	],
 	articles: [
 		{
+			tab: "Performance",
 			maxWidth: 850,
 			blocks: [
 				{
@@ -87,6 +95,7 @@ export const item: ItemRaw = {
 			],
 		},
 		{
+			tab: "Performance",
 			maxWidth: 1100,
 			blocks: [
 				{
@@ -94,17 +103,18 @@ export const item: ItemRaw = {
 						type: "image",
 						src: performance,
 						alt: "Chrome DevTools Performance 탭의 타임라인 및 메모리 프로파일링 측정 그래프 화면",
-						caption: "Vercel Preview 배포 환경 초기 로딩 프로파일링 (0~5.3초 구간)",
+						caption: "Vercel 배포 환경 초기 로딩 프로파일링 (0 ~ 약 2초 구간)",
 					},
 					text: `
-						페이지 진입 직후 약 1.45초 구간까지 컴포넌트 마운트 및 초기 스크립트 실행으로 인해 일시적인 메인 스레드 점유(55.59ms)와 일부 프레임 드롭이 발생하지만,
-						LCP 도달 이후에는 메인 스레드가 유휴 상태로 전환되며 프레임 드롭 없이 안정적인 초록색 프레임을 유지합니다.
-						또한 실행 과정 전반에 걸쳐 JS Heap 메모리가 11MB~22MB 대의 일정한 수준을 유지하여 메모리 누수 없이 리소스가 안정적으로 관리되고 있음을 확인했습니다.
+						약 3.4MB 규모의 리소스를 로드하는 환경에서 LCP 1.57초를 기록하여 초기 뷰 렌더링을 빠르게 완료했습니다.
+						특히 컴포넌트 마운트 및 스크립트 평가에 소요되는 Scripting 시간을 152ms, Rendering 시간을 139ms 수준으로 통제하여 메인 스레드 병목을 최소화하고, 지연 없이 유휴(Idle) 상태로 전환되도록 최적화했습니다.
+						또한 초기 로딩 구간 동안 JS Heap 메모리가 11.1MB~22.5MB 대에서 안정적으로 할당 및 관리되는 쾌적한 환경을 구축했습니다.
 					`,
 				},
 			],
 		},
 		{
+			tab: "Performance",
 			maxWidth: 1100,
 			blocks: [
 				{
@@ -116,9 +126,73 @@ export const item: ItemRaw = {
 						caption: "실시간 Health Check 결과가 반영된 이메일 전송을 위한 입력 폼(Form)",
 					},
 					text: `
-						별도로 개발한 REST API 서버의 이메일 전송 기능을 연동하여 메인 화면에서 직접 이메일을 보낼 수 있는 폼(Form)을 구현했습니다.
-						사용자가 전송 가능 여부를 직관적으로 인지할 수 있도록 API 서버 상태를 실시간으로 확인하여 UI에 표시하고,
-						불필요한 리소스 낭비를 방지하기 위해 입력 폼이 뷰포트를 벗어나거나 브라우저 탭이 비활성화되는 경우 상태 체크를 자동으로 중단하도록 처리했습니다.
+						별도로 구축한 REST API 서버와 연동하여 메인 화면에서 직접 이메일을 전송할 수 있는 폼(Form)을 구현했습니다.
+						사용자 편의를 위해 API 서버의 Health Check를 실시간(Polling)으로 체크하여 결과를 UI에 표시하고,
+						불필요한 리소스 낭비를 방지하기 위해 입력 폼이 뷰포트를 벗어나거나 브라우저 탭이 비활성화될 경우
+						**상태 체크를 일지 정지**합니다.
+					`,
+				},
+			],
+		},
+
+
+
+		{
+			tab: "CI/CD",
+			maxWidth: 1100,
+			blocks: [
+				{
+					media: {
+						type: "image",
+						src: vercelDeployments,
+						alt: "Vercel의 Deployments 페이지 화면",
+						caption: "Vercel Deployments 페이지에서 확인할 수 있는 Production 및 Preview 배포 내역",
+					},
+					text: `
+						Vercel 기반 Production 및 Preview 배포를 GitHub Actions를 통해 자동화했습니다.
+						Preview는 main 브랜치를 대상으로 PR을 열거나 Push 이벤트가 발생하면 배포되며,
+						Production은 Release가 게시되면 배포되도록 구성했습니다.
+					`,
+				},
+			],
+		},
+		{
+			tab: "CI/CD",
+			maxWidth: 1100,
+			blocks: [
+				{
+					media: {
+						type: "image",
+						src: deployURLActionsSummary,
+						alt: "GitHub Actions Job Summary에 게시된 배포 URL",
+					},
+				},
+			],
+		},
+		{
+			tab: "CI/CD",
+			maxWidth: 1100,
+			linkedToPrevious: true,
+			blocks: [
+				{
+					media: {
+						type: "image",
+						src: deployURLInPrComment,
+						alt: "GitHub PR 코멘트에 게시된 배포 URL",
+					},
+				},
+			],
+		},
+		{
+			tab: "CI/CD",
+			maxWidth: 1100,
+			linkedToPrevious: true,
+			blocks: [
+				{
+					text: `
+						매번 달라지는 Preview 배포 URL을 쉽게 확인할 수 있도록
+						GitHub Actions를 통해 배포된 URL을 Job Summary 및 PR 코멘트에 자동으로 게시되도록 구성했습니다.
+						[Workflow](https://github.com/kimzuni/portfolio/blob/main/.github/workflows/preview.yml#L41-L61)
 					`,
 				},
 			],

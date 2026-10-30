@@ -44,12 +44,8 @@ export const _items = [
 		label: "Open Source",
 	},
 	{
-		slug: "deployed",
-		label: "Deployed",
-	},
-	{
-		slug: "published",
-		label: "Published",
+		slug: "ci-cd",
+		label: "CI/CD",
 	},
 	{
 		slug: "security",

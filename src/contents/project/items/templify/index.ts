@@ -9,6 +9,7 @@ const cli = "cli.webm";
 
 
 export const item: ItemRaw = {
+	pin: true,
 	cover: overview,
 	name: "Templify",
 	description: `
@@ -44,16 +45,16 @@ export const item: ItemRaw = {
 	tags: [
 		"dev-tools",
 		"open-source",
-		"published",
+		"ci-cd",
 		"frontend",
 	],
 	skills: {
 		primary: [
 			"typescript",
-			"javascript",
 			"node-js",
 		],
 		secondary: [
+			"javascript",
 			"bun",
 			"npm",
 			"react",
@@ -68,13 +69,6 @@ export const item: ItemRaw = {
 			badge: "bundlejs",
 			packageName: "@kimzuni/templify",
 			link: "https://bundlephobia.com/package/@kimzuni/templify",
-		},
-		{
-			service: "npm",
-			badge: "unpacked-size",
-			packageName: "@kimzuni/templify",
-			link: true,
-			linkSuffix: "?activeTab=code",
 		},
 		{
 			service: "static",
@@ -117,6 +111,7 @@ export const item: ItemRaw = {
 	],
 	articles: [
 		{
+			tab: "Engine",
 			maxWidth: 1100,
 			blocks: [
 				{
@@ -142,6 +137,7 @@ export const item: ItemRaw = {
 			],
 		},
 		{
+			tab: "Engine",
 			maxWidth: 1100,
 			blocks: [
 				{
@@ -168,7 +164,11 @@ export const item: ItemRaw = {
 				},
 			],
 		},
+
+
+
 		{
+			tab: "CLI",
 			maxWidth: 1100,
 			blocks: [
 				{
@@ -186,7 +186,11 @@ export const item: ItemRaw = {
 				},
 			],
 		},
+
+
+
 		{
+			tab: "Playground",
 			maxWidth: 1100,
 			blocks: [
 				{
@@ -194,12 +198,12 @@ export const item: ItemRaw = {
 						type: "image",
 						src: playground,
 						alt: "Templify Playground 페이지",
-						caption: "다중 버전을 지원하는 CSR 기반의 Playground",
+						caption: "다중 버전을 지원하는 React 기반 Playground",
 					},
 					text: `
-						템플릿 엔진을 테스트할 수 있는 [Playground](https://labs.kimzuni.com/templify/)를 제공합니다.
-						템플릿 문자열과 컨텍스트 데이터를 입력하면 즉시 렌더링 결과와 메타데이터를 확인할 수 있으며,
-						템플릿 규칙을 커스터마이징하여 다양한 형태의 템플릿 문자열을 테스트할 수 있습니다.
+						템플릿 엔진을 실시간으로 테스트할 수 있는 [Playground](https://labs.kimzuni.com/templify/)를 제공합니다.
+						템플릿, 컨텍스트 데이터, 커스텀 옵션 등 입력된 값에 따라 JavaScript 코드와 CLI 명령어가 실시간으로 구성되며,
+						그에 따른 렌더링 결과와 메타데이터까지 즉시 확인할 수 있습니다.
 					`,
 				},
 			],

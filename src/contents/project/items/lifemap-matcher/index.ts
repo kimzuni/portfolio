@@ -10,11 +10,6 @@ import imageSizeOptimization from "./docker-image-size-optimization-result.png";
 
 
 
-// 524608 + 89638 + 50100 + 25493 + 2874 + 12011 + 783 + 1104 + 76 + 1041 + 18376 + 328102 + 46939 + 94974 1196119
-// = 1196119 lines
-
-
-
 export const item: ItemRaw = {
 	pin: true,
 	cover: map,
@@ -75,54 +70,6 @@ export const item: ItemRaw = {
 			"aws",
 		],
 	},
-	// team: {
-	// 	size: 4,
-	// 	contributions: [
-	// 		{
-	// 			label: "Planning",
-	// 			percentage: 25,
-	// 			description: [
-	// 				"주제 선정 및 기획 방향성 논의",
-	// 				"생활 인프라 가중치, 필터링 등 주요 기능 요구사항 논의",
-	// 				"개발 진행 상황 공유 및 산출물 조율을 위한 전반적인 팀 커뮤니케이션 참여",
-	// 			],
-	// 		},
-	// 		{
-	// 			label: "Initial Prototyping",
-	// 			percentage: 0,
-	// 		},
-	// 		{
-	// 			label: "Frontend",
-	// 			percentage: 100,
-	// 			description: [
-	// 				"단일 `.html` 파일로 구성된 프로토타입을 TypeScript 및 React 기반으로 재설계 및 구현",
-	// 				"백엔드 REST API 연동 및 Zustand 기반 전역 상태 관리, TanStack Query 기반 캐싱 활용",
-	// 				"API 요청/응답 데이터의 런타임 스키마 검증(Validation), 네이밍 컨벤션(Case) 자동 변환 인터셉터 적용",
-	// 				"카카오맵 API 연동 및 추천 결과의 위치를 마커로 시각화 및 모바일 환경에 최적화된 바텀시트 UI 구현",
-	// 			],
-	// 		},
-	// 		{
-	// 			label: "Backend",
-	// 			percentage: 80,
-	// 			description: [
-	// 				"FastAPI 기반 REST API 서버 구축 및 SQLAlchemy를 활용한 데이터베이스 ORM 설계",
-	// 				"Argon2 해시 알고리즘을 통한 보안 강화 및 Redis 기반 캐싱을 도입하여 데이터 조회 성능 최적화",
-	// 				"대용량 공공데이터의 효율적 관리를 위해 `gdown`와 version.txt 기반의 조건부 자동 업데이트 파이프라인 구축",
-	// 				"GeoAlchemy2 및 Geopandas를 활용한 공간 데이터(GIS) 쿼리 처리 및 인프라 가중치 기반 스코어링 알고리즘 개발",
-	// 			],
-	// 		},
-	// 		{
-	//             label: "Deployment & Infra",
-	//             percentage: 100,
-	//             description: [
-	//                 "Docker 및 Docker Compose 기반 멀티 컨테이너 환경 구축과 개발/운영(Dev/Prod) 환경 분리",
-	//                 "Frontend 및 Backend 멀티 스테이지 빌드 적용을 통한 컨테이너 이미지 최적화",
-	//                 "Linuxserver 팀의 Alpine 베이스 이미지 및 s6-overlay 기반의 서비스 초기화 및 실행 스크립트 작성",
-	//                 "호스트와 컨테이너 간 `PUID`/`PGID` 매핑 및 파일 권한 동기화를 통한 볼륨 마운트 권한 이슈 차단",
-	//             ],
-	//         },
-	// 	],
-	// },
 	links: [
 		{
 			label: "GitHub(Setup)",

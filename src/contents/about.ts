@@ -129,6 +129,7 @@ export const _item: ItemRaw = {
 			title: "전국 창의코딩 경진대회",
 			issuer: "공학기술교육혁신센터",
 			rank: "금상",
+			link: `${constants.SITE.cdn}/credentials/awards/2023-national-creative-coding-contest.pdf`,
 		},
 	],
 };

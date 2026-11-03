@@ -6,6 +6,7 @@ run-name: Deploy (${{ github.event.release.tag_name }})
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  PRODUCTION_URL: "https://zuni.kim"
 
 on:
   release:
@@ -42,7 +43,9 @@ jobs:
       - name: Generate Markdown Message
         run: |
           echo "### 🚀 Vercel Production Deployed!" > summary.md
-          echo "🔗 **Production URL:** <${{ steps.deploy.outputs.PRODUCTION_URL }}>" >> summary.md
+          echo "🔗 **Production URL:**" >> summary.md
+          echo "  - <${{ steps.deploy.outputs.PRODUCTION_URL }}>" >> summary.md
+          echo "  - <${{ env.PRODUCTION_URL }}>" >> summary.md
 
       - name: Write Job Summary
         run: |

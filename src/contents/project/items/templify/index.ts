@@ -51,7 +51,6 @@ export const item: ItemRaw = {
 	skills: {
 		primary: [
 			"typescript",
-			"node-js",
 		],
 		secondary: [
 			"javascript",

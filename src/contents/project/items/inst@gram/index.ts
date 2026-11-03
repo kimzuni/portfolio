@@ -46,7 +46,6 @@ export const item: ItemRaw = {
 	],
 	skills: {
 		primary: [
-			"node-js",
 			"express-js",
 			"sequelize",
 		],

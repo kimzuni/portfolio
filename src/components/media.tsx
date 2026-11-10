@@ -75,28 +75,46 @@ export function Image({
 	const _darkSrc = (darkSrc ?? src) as ImageSRC;
 	const isSame = _lightSrc === _darkSrc;
 
-	const imageElement = (
-		isSame
-		? <BaseImage src={_lightSrc} className={className} {...props}/>
-		: <>
-			<BaseImage
-				src={_lightSrc}
-				className={cn(
-					"dark:hidden",
-					className,
-				)}
-				{...props}
-			/>
-			<BaseImage
-				src={_darkSrc}
-				className={cn(
-					"not-dark:hidden",
-					className,
-				)}
-				{...props}
-			/>
-		</>
-	);
+	const renderImage = (isModal = false) => {
+		const imageSizes = isModal ? "100vw" : props.sizes;
+		const imageClassName = isModal
+			? "rounded-md shadow-2xl"
+			: className;
+
+		if (isSame) {
+			return (
+				<BaseImage
+					src={_lightSrc}
+					className={imageClassName}
+					{...props}
+					sizes={imageSizes}
+				/>
+			);
+		}
+
+		return (
+			<>
+				<BaseImage
+					src={_lightSrc}
+					className={cn(
+						"dark:hidden",
+						imageClassName,
+					)}
+					{...props}
+					sizes={imageSizes}
+				/>
+				<BaseImage
+					src={_darkSrc}
+					className={cn(
+						"not-dark:hidden",
+						imageClassName,
+					)}
+					{...props}
+					sizes={imageSizes}
+				/>
+			</>
+		);
+	};
 
 	if (!zoomable) {
 		return (
@@ -106,7 +124,7 @@ export function Image({
 				alwaysWrap={alwaysWrap}
 				className={figureClassName}
 			>
-				{imageElement}
+				{renderImage(false)}
 			</Figure>
 		);
 	}
@@ -126,7 +144,7 @@ export function Image({
 					captionPosition={captionPosition}
 					alwaysWrap={alwaysWrap}
 				>
-					{imageElement}
+					{renderImage(false)}
 				</Figure>
 				<span
 					className={cn(
@@ -170,14 +188,25 @@ export function Image({
 					<Icon icon="X"/>
 					<span className="sr-only">Close</span>
 				</DialogClose>
-				<div className="mx-12 size-fit pointer-events-auto">
+				<div
+					className={cn(
+						"mx-4 sm:mx-12 size-fit pointer-events-auto",
+						"flex flex-col items-center justify-center",
+						"max-h-[calc(100svh-3rem)] sm:max-h-[calc(100svh-4rem)]",
+						"max-w-[calc(100svw-2rem)] sm:max-w-[calc(100svw-6rem)]",
+						caption
+							? "**:[img]:max-h-[calc(100svh-6.5rem)] sm:**:[img]:max-h-[calc(100svh-7.5rem)]"
+							: "**:[img]:max-h-[calc(100svh-4rem)] sm:**:[img]:max-h-[calc(100svh-5rem)]",
+						"**:[img]:w-auto **:[img]:max-w-full **:[img]:object-contain",
+					)}
+				>
 					<Figure
 						caption={caption}
 						captionPosition={captionPosition}
 						alwaysWrap={alwaysWrap}
-						className={figureClassName}
+						className="size-fit flex flex-col items-center justify-center"
 					>
-						{imageElement}
+						{renderImage(true)}
 					</Figure>
 				</div>
 			</DialogContent>

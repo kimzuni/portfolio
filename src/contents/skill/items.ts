@@ -434,6 +434,58 @@ export const _items = [
 
 
 	{
+		category: "pentest",
+		slug: "burp-suite",
+		label: "Burp Suite",
+		icon: "https://cdn.simpleicons.org/burpsuite",
+		level: 2.5,
+		description: ``,
+	},
+	{
+		category: "pentest",
+		slug: "sqlmap",
+		label: "SQLMap",
+		icon: "/icons/sqlmap.svg",
+		level: 2.5,
+		description: ``,
+	},
+
+	{
+		category: "network",
+		slug: "wireshark",
+		label: "Wireshark",
+		icon: "https://cdn.simpleicons.org/wireshark",
+		level: 3,
+		description: ``,
+	},
+	{
+		category: "network",
+		slug: "nmap",
+		label: "Nmap",
+		level: 2.5,
+		description: ``,
+	},
+	{
+		category: "network",
+		slug: "shodan",
+		label: "Shodan",
+		icon: "/icons/shodan.svg",
+		level: 2.5,
+		description: ``,
+	},
+
+	{
+		category: "exploit",
+		slug: "kali-linux",
+		label: "Kali Linux",
+		icon: "kali",
+		level: 3.0,
+		description: ``,
+	},
+
+
+
+	{
 		category: "cross-platform",
 		slug: "electron",
 		label: "Electron",

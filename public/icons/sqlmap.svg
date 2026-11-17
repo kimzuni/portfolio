@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <rect width="48" height="48" rx="10" fill="#1e1e24"/>
+  <!-- SQLMap Database & Injection Arrow -->
+  <ellipse cx="24" cy="14" rx="13" ry="4.5" fill="#E53E3E"/>
+  <path d="M11 14 v8 c0 2.5 5.8 4.5 13 4.5 s13 -2 13 -4.5 v-8" fill="none" stroke="#E53E3E" stroke-width="2.5"/>
+  <path d="M11 22 v8 c0 2.5 5.8 4.5 13 4.5 s13 -2 13 -4.5 v-8" fill="none" stroke="#E53E3E" stroke-width="2.5"/>
+  <text x="24" y="38" font-family="monospace" font-weight="900" font-size="10" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">SQLi</text>
+</svg>

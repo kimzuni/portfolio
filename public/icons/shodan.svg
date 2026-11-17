@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <rect width="48" height="48" rx="10" fill="#1e1e24"/>
+  <!-- Shodan Red Tile & S -->
+  <rect x="9" y="9" width="30" height="30" rx="6" fill="#D8252C"/>
+  <path d="M28 17 C28 17 21 16 19 20 C17 24 29 23 28 29 C27 33 19 32 19 32 M19 31 L20 32" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+</svg>

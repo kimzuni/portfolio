@@ -45,6 +45,7 @@ export const item: ItemRaw = {
 	skills: {
 		primary: [
 			"bash",
+			"sqlmap",
 		],
 	},
 	links: [

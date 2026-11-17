@@ -165,6 +165,30 @@ export const _items = [
 
 
 	{
+		color: "var(--color-rose-400)",
+		icon: "Bug",
+		group: "security",
+		slug: "pentest",
+		label: "Pentest",
+	},
+	{
+		color: "var(--color-red-400)",
+		icon: "Radio",
+		group: "security",
+		slug: "network",
+		label: "Network",
+	},
+	{
+		color: "var(--color-orange-400)",
+		icon: "Terminal",
+		group: "security",
+		slug: "exploit",
+		label: "Exploitation",
+	},
+
+
+
+	{
 		color: "var(--color-indigo-400)",
 		icon: "MonitorSmartphone",
 		group: "others",

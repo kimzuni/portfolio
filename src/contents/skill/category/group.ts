@@ -43,6 +43,12 @@ export const _items = [
 		label: "Tools & Core",
 	},
 	{
+		color: "var(--color-rose-500)",
+		icon: "ShieldExclamationPoint",
+		slug: "security",
+		label: "Security",
+	},
+	{
 		color: "var(--color-slate-500)",
 		icon: "FolderGit2",
 		slug: "others",

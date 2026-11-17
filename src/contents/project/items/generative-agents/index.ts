@@ -16,7 +16,7 @@ export const item: ItemRaw = {
 	name: "LLM 에이전트 기반 모의 침투 테스트 시스템",
 	team: 2,
 	description: `
-		LLM 에이전트를 활용하여 웹 서버의 취약점을 자동으로 탐지하고 패치 방법을 제안하는 자율형 모의 침투 테스트 시스템입니다.
+		LLM 에이전트 기반으로 공격 페이로드를 생성하여 웹 서버의 취약점을 자동으로 탐지하고, 발견된 취약점에 대한 패치 방안까지 제안하는 자율형 웹 모의 침투 테스트 시스템입니다.
 		실제 공격 발생 전 위험을 사전에 차단하고, 보안 연구 및 교육에 필요한 실전 데이터 부족 문제를 함께 해결하고자 개발했습니다.
 	`,
 	highlights: [
@@ -26,15 +26,19 @@ export const item: ItemRaw = {
 		},
 		{
 			label: "Target Validation",
-			value: "공격 대상 서버의 사설 IP 대역 검증 로직 적용으로 악용 및 오용 방지",
+			value: "공격 대상 서버의 사설 IP 대역 검증 로직 구현으로 외부망 공격 및 비인가 오용 차단",
 		},
 		{
 			label: "Local LLM Integration",
-			value: "Ollama 기반 사용자 지정 로컬 LLM 연동으로 프라이빗 환경 제공",
+			value: "Ollama 기반 로컬 LLM 연동으로 데이터 유출 없는 독립 침투 환경 구축",
 		},
 		{
-			label: "Container Image",
-			value: "전용 컨테이너 이미지 배포 및 편의를 위한 쉘 스크립트(실행, API 조회 등) 제공",
+			label: "Remediation Guidance",
+			value: "탐지된 취약점에 대한 공격 성공 여부 및 상세 패치 가이드라인 자동 생성",
+		},
+		{
+			label: "Containerized Testbed",
+			value: "멀티 컨테이너 기반 침투 환경 배포 및 CLI 스크립트를 통한 간편한 제어 지원",
 		},
 	],
 	period: [
@@ -45,6 +49,7 @@ export const item: ItemRaw = {
 		"frontend",
 		"backend",
 		"container",
+		"security",
 		"ci-cd",
 	],
 	skills: {

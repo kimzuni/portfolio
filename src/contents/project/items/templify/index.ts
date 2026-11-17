@@ -13,13 +13,13 @@ export const item: ItemRaw = {
 	cover: overview,
 	name: "Templify",
 	description: `
-		단순한 문자열 치환을 넘어, 룰을 커스텀하여 다양한 형태의 템플릿을 유연하게 다룰 수 있는 초경량 템플릿 엔진 및 CLI 툴입니다.
-		개발 과정에서 에러 메시지 등 반복되는 문자열 포맷팅을 위해 매번 \`.replace\`나 별도의 함수를 작성해야 하는 번거로움을 해결하고자 개발했습니다.
+		단순한 문자열 치환을 넘어, 룰을 커스텀하여 다양한 형태의 템플릿을 유연하게 다룰 수 있는 초경량 템플릿 엔진 및 CLI 도구입니다.
+		JavaScript 환경에서 반복되는 문자열 포맷팅을 위해 매번 반복 코드를 작성해야 하는 비효율을 해결하고자 개발했습니다.
 	`,
 	highlights: [
 		{
-			label: "~2KB Size",
-			value: "Zero Dependency로 구현된 초경량 템플릿 엔진",
+			label: "Zero Dependency & ~2KB",
+			value: "외부 의존성 없는 초경량 템플릿 엔진",
 		},
 		{
 			label: "Lazy Evaluation & Cache",
@@ -31,7 +31,7 @@ export const item: ItemRaw = {
 		},
 		{
 			label: "CLI Integration",
-			value: "표준 입력(stdin) 및 `.env`, `.json` 데이터 파일 로드 지원",
+			value: "표준 입력(stdin) 및 데이터 파일 파이프라인을 지원하는 CLI 도구 지원",
 		},
 		{
 			label: "99%+ Coverage",

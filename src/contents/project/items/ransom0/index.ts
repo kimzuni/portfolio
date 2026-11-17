@@ -14,25 +14,25 @@ export const item: ItemRaw = {
 	name: "Ransom0",
 	team: 3,
 	description: `
-		랜섬웨어 공격을 사전에 탐지하고 차단하는 안티 랜섬웨어 프로젝트입니다.
-		랜섬웨어 또는 비슷한 유형의 공격에 대해 자동 대응하여 사용자의 데이터를 안전하게 보호합니다.
+		랜섬웨어 공격을 실시간으로 탐지 및 차단하고, WFP(Windows Filtering Platform) 기반으로 C2 통신을 방지하는 보안 및 위협 대응 시스템입니다.
+		프로세스 제어와 화이트리스트 기반 네트워크 격리를 통해 사용자 자산 침해를 사전에 방지합니다.
 	`,
 	highlights: [
 		{
 			label: "Real-time Monitoring",
-			value: "실시간 공격 탐지 및 방어, 모니터링, 알림(Tray & Toast) 기능 구현",
+			value: "실시간 공격 탐지 Tray/Toast 경보 시스템 구축",
 		},
 		{
 			label: "Cross Platform",
-			value: "Electron 기반으로 Windows, Linux, macOS를 지원하는 UI 개발",
+			value: "Electron 기반의 Windows, Linux, macOS용 UI 개발",
 		},
 		{
-			label: "Firewall Management",
-			value: "WFP 기반 네트워크 차단 및 화이트리스트 관리",
+			label: "WFP Firewall Isolation",
+			value: "WFP 기반 네트워크 격리 및 화이트리스트 제어 도구 개발",
 		},
 		{
-			label: "IPC Communication",
-			value: "Named Pipe(Windows) 및 Socket(Linux, macOS) 기반 IPC 통신 구현",
+			label: "Cross-Platform IPC",
+			value: "Named Pipe(Windows) 및 Socket(Linux/macOS) 기반 IPC 채널 구현",
 		},
 		{
 			label: "Build & Deployment",

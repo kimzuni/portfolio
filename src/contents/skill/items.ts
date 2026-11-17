@@ -55,6 +55,13 @@ export const _items = [
 		level: 1.5,
 		description: ``,
 	},
+	{
+		category: "programming",
+		slug: "cpp",
+		label: "C++",
+		level: 1,
+		description: ``,
+	},
 
 	{
 		category: "markup-style",
@@ -415,8 +422,23 @@ export const _items = [
 		level: 2.5,
 		description: ``,
 	},
+	{
+		category: "network-api",
+		slug: "ipc",
+		label: "IPC",
+		level: 3.0,
+		description: ``,
+	},
 
 
+
+	{
+		category: "cross-platform",
+		slug: "electron",
+		label: "Electron",
+		level: 2,
+		description: ``,
+	},
 
 	{
 		icon: "vscode",

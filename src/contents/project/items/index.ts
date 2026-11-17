@@ -19,6 +19,7 @@ const importSlugs = [
 	"yamllint-js",
 	"web-portfolio",
 	"lifemap-matcher",
+	"ransom0",
 ] as const;
 
 const promises = importSlugs.map(async slug => (

@@ -165,6 +165,13 @@ export const _items = [
 
 
 	{
+		color: "var(--color-indigo-400)",
+		icon: "MonitorSmartphone",
+		group: "others",
+		slug: "cross-platform",
+		label: "Cross Platform",
+	},
+	{
 		color: "var(--color-sky-400)",
 		icon: "Blocks",
 		group: "others",

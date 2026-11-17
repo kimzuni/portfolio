@@ -131,6 +131,13 @@ export const _item: ItemRaw = {
 			rank: "금상",
 			link: `${constants.SITE.cdn}/credentials/awards/2023-national-creative-coding-contest.pdf`,
 		},
+		{
+			date: new Date("2023-11-02"),
+			title: "제8회 Y.CTF",
+			issuer: "영남이공대학교 사이버보안스쿨",
+			rank: "우수상",
+			link: `${constants.SITE.cdn}/credentials/awards/2023-y-dot-ctf.pdf`,
+		},
 	],
 };
 

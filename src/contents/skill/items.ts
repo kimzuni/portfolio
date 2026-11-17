@@ -426,6 +426,7 @@ export const _items = [
 		category: "network-api",
 		slug: "ipc",
 		label: "IPC",
+		icon: "socketio",
 		level: 3.0,
 		description: ``,
 	},

@@ -47,7 +47,7 @@ export const _items = [
 		icon: "FolderGit2",
 		slug: "others",
 		label: "Others",
-	}
+	},
 ] as const satisfies ItemRaw[];
 
 

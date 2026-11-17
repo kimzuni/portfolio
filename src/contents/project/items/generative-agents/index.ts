@@ -65,49 +65,6 @@ export const item: ItemRaw = {
 			"tiled",
 		],
 	},
-	// team: {
-	// 	size: 2,
-	// 	contributions: [
-	// 		{
-	// 			label: "Frontend",
-	// 			percentage: 100,
-	// 			description: [
-	// 				"UI/UX 설계 및 구현",
-	// 				"Phaser 구조 리팩토링 및 Tiled 기반 커스텀 맵 제작",
-	// 				"사용자 및 테스트 목록 관리를 위한 관리 페이지 구현",
-	// 			],
-	// 		},
-	// 		{
-	// 			label: "Backend (Web)",
-	// 			percentage: 100,
-	// 			description: [
-	// 				"Django 기반 사용자 권한 관리 시스템 구축",
-	// 				"모의 침투 테스트 데이터 조회를 위한 REST API 구현",
-	// 				"사용자 및 테스트 목록 제어를 위한 RBAC 기반 REST API 구현",
-	// 			],
-	// 		},
-	// 		{
-	// 			label: "Deployment & Infra",
-	// 			percentage: 100,
-	// 			description: [
-	// 				"전용 컨테이너 이미지 개발 및 Ollama 연동 멀티 컨테이너 환경 구성",
-	// 				"데모 시연을 위한 라이브 서버 배포 및 운영",
-	// 			],
-	// 		},
-	// 		{
-	// 			label: "Backend (Engine)",
-	// 			percentage: 10,
-	// 			description: [
-	// 				"백엔드 단독 실행을 위한 프론트엔드 의존성 제거",
-	// 				"공격 대상 서버의 사설 IP 대역 검증 로직 구현",
-	// 			],
-	// 		},
-	// 		{
-	// 			label: "AI Engineering",
-	// 			percentage: 0,
-	// 		},
-	// 	],
-	// },
 	links: [
 		{
 			label: "GitHub",

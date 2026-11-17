@@ -192,7 +192,7 @@ export function ContactForm({
 							className: "text-muted-foreground relative -top-0.75",
 							children: (
 								<Icon
-									icon="OctagonAlert"
+									icon="OctagonExclamationPoint"
 									className={isActive ? undefined : "text-destructive"}
 									size={12}
 								/>

@@ -35,7 +35,7 @@ function SkillBox({
 						<CardTitle className="font-mono">{group.label}</CardTitle>
 					</div>
 				</CardHeader>
-				<CardContent className="grid grid-cols-5 gap-2">
+				<CardContent className="grid grid-cols-5 gap-5">
 					{items.map(props => (
 						<SkillIcon
 							withTooltip

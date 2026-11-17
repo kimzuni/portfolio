@@ -3,6 +3,7 @@
 import type { StaticImageData } from "next/image";
 
 import { cn } from "@/lib/utils";
+import * as array from "@/lib/array";
 
 import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -47,7 +48,7 @@ export function ProjectBox({
 	slug,
 	cover,
 	name,
-	description,
+	description: _description,
 	period,
 	tags = [],
 	skills = [],
@@ -60,6 +61,8 @@ export function ProjectBox({
 }: ProjectBoxProps) {
 	const maxSkills = _maxSkills < 0 ? skills.length : _maxSkills;
 	const href = `/projects/${slug}/`;
+
+	const description = array.to(_description);
 
 	const badgeMap: Record<BadgeType, {
 		max?: number;
@@ -139,9 +142,9 @@ export function ProjectBox({
 							}
 						</div>
 					)}
-					{description && (
+					{description.length && (
 						<p className="line-clamp-2 text-sm text-muted-foreground group-hover/projectbox-link:text-inherit">
-							{description}
+							{description.join(" ")}
 						</p>
 					)}
 				</Link>

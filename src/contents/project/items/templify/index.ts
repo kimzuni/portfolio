@@ -19,11 +19,11 @@ export const item: ItemRaw = {
 	highlights: [
 		{
 			label: "Zero Dependency & ~2KB",
-			value: "외부 의존성 없는 초경량 템플릿 엔진",
+			value: "외부 의존성 없는 초경량 아키텍처로 런타임 공격 표면 최소화",
 		},
 		{
-			label: "Lazy Evaluation & Cache",
-			value: "클로저와 Map 캐싱을 활용한 지연 평가 및 중복 경로 탐색 비용 제거",
+			label: "Safe Metadata Extraction",
+			value: "렌더링 전 템플릿 메타데이터 추출을 통한 입력 컨텍스트 사전 검증 지원",
 		},
 		{
 			label: "Cross-Environment",

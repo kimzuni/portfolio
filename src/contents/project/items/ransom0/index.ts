@@ -23,10 +23,6 @@ export const item: ItemRaw = {
 			value: "실시간 공격 탐지 Tray/Toast 경보 시스템 구축",
 		},
 		{
-			label: "Cross Platform",
-			value: "Electron 기반의 Windows, Linux, macOS용 UI 개발",
-		},
-		{
 			label: "WFP Firewall Isolation",
 			value: "WFP 기반 네트워크 격리 및 화이트리스트 제어 도구 개발",
 		},
@@ -44,9 +40,9 @@ export const item: ItemRaw = {
 		new Date("2026-12-12"),
 	],
 	tags: [
-		"frontend",
-		"backend",
 		"security",
+		"backend",
+		"frontend",
 	],
 	skills: {
 		primary: [
@@ -55,15 +51,15 @@ export const item: ItemRaw = {
 			"node-js",
 		],
 		secondary: [
+			"ipc",
+			"sqlite",
+			"cpp",
+			"github-actions",
 			"javascript",
 			"react",
 			"zustand",
 			"shadcn-ui",
 			"tailwind-css",
-			"ipc",
-			"sqlite",
-			"cpp",
-			"github-actions",
 		],
 	},
 	links: [

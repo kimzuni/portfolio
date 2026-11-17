@@ -21,7 +21,7 @@ export const item: ItemRaw = {
 	`,
 	highlights: [
 		{
-			label: "Autonomous Agents",
+			label: "Autonomous Pentesting",
 			value: "자율형 LLM 에이전트 기반 모의 침투 테스트 시스템",
 		},
 		{
@@ -46,10 +46,10 @@ export const item: ItemRaw = {
 		new Date("2024-12-04"),
 	],
 	tags: [
-		"frontend",
-		"backend",
-		"container",
 		"security",
+		"container",
+		"backend",
+		"frontend",
 		"ci-cd",
 	],
 	skills: {
@@ -60,13 +60,13 @@ export const item: ItemRaw = {
 		],
 		secondary: [
 			"python",
-			"html",
-			"javascript",
-			"bootstrap",
 			"ollama",
-			"github-actions",
-			"chart-js",
 			"bash",
+			"javascript",
+			"github-actions",
+			"html",
+			"bootstrap",
+			"chart-js",
 			"tiled",
 		],
 	},

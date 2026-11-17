@@ -90,7 +90,6 @@ export const _items = [
 
 
 	{
-		pin: true,
 		category: "frontend-frameworks",
 		slug: "react",
 		label: "React",
@@ -98,7 +97,6 @@ export const _items = [
 		description: ``,
 	},
 	{
-		pin: true,
 		category: "frontend-frameworks",
 		slug: "next-js",
 		label: "Next.js",
@@ -114,7 +112,6 @@ export const _items = [
 	},
 
 	{
-		pin: true,
 		category: "styling-ui",
 		slug: "tailwind-css",
 		label: "Tailwind CSS",
@@ -129,7 +126,6 @@ export const _items = [
 		description: ``,
 	},
 	{
-		pin: true,
 		category: "styling-ui",
 		slug: "shadcn-ui",
 		label: "shadcn/ui",
@@ -186,7 +182,6 @@ export const _items = [
 		description: ``,
 	},
 	{
-		pin: true,
 		category: "runtimes",
 		slug: "bun",
 		label: "Bun",
@@ -195,7 +190,6 @@ export const _items = [
 	},
 
 	{
-		pin: true,
 		category: "backend-frameworks",
 		slug: "elysia",
 		label: "Elysia",
@@ -219,7 +213,6 @@ export const _items = [
 		description: ``,
 	},
 	{
-		pin: true,
 		category: "backend-frameworks",
 		slug: "django",
 		label: "Django",
@@ -269,7 +262,6 @@ export const _items = [
 	},
 
 	{
-		pin: true,
 		icon: "drizzle",
 		category: "orms",
 		slug: "drizzle-orm",
@@ -393,7 +385,6 @@ export const _items = [
 	},
 
 	{
-		pin: true,
 		category: "testing",
 		slug: "vitest",
 		label: "Vitest",
@@ -434,6 +425,7 @@ export const _items = [
 
 
 	{
+		pin: true,
 		category: "pentest",
 		slug: "burp-suite",
 		label: "Burp Suite",
@@ -442,6 +434,7 @@ export const _items = [
 		description: ``,
 	},
 	{
+		pin: true,
 		category: "pentest",
 		slug: "sqlmap",
 		label: "SQLMap",
@@ -451,6 +444,7 @@ export const _items = [
 	},
 
 	{
+		pin: true,
 		category: "network",
 		slug: "wireshark",
 		label: "Wireshark",
@@ -459,6 +453,7 @@ export const _items = [
 		description: ``,
 	},
 	{
+		pin: true,
 		category: "network",
 		slug: "nmap",
 		label: "Nmap",
@@ -466,6 +461,7 @@ export const _items = [
 		description: ``,
 	},
 	{
+		pin: true,
 		category: "network",
 		slug: "shodan",
 		label: "Shodan",
@@ -475,6 +471,7 @@ export const _items = [
 	},
 
 	{
+		pin: true,
 		category: "exploit",
 		slug: "kali-linux",
 		label: "Kali Linux",

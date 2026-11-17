@@ -1,4 +1,4 @@
-export const APP_URL = "https://zuni.kim";
+export const APP_URL = "https://pentest.zuni.kim";
 
 
 

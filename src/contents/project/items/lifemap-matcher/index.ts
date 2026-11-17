@@ -11,7 +11,6 @@ import imageSizeOptimization from "./docker-image-size-optimization-result.png";
 
 
 export const item: ItemRaw = {
-	pin: true,
 	cover: map,
 	name: "라이프맵 매처",
 	team: 4,

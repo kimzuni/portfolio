@@ -82,7 +82,7 @@ export interface Skills {
 const minLevel: _skill.level.Slug = 0;
 export const skills: Skills = {
 	heading: "What I Use",
-	message: "프로젝트를 진행할 때 주로 사용하는 스킬이에요!",
+	message: "모의해킹 및 취약점 분석, 도구 개발 시 주로 사용하는 스킬이에요!",
 	linkButton: {
 		variant: "outline",
 		label: "More Skills",

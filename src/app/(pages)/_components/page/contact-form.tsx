@@ -136,7 +136,10 @@ export function ContactForm({
 			try {
 				const response = await fetch(url, {
 					method: "POST",
-					body: JSON.stringify({ subject, content }),
+					body: JSON.stringify({
+						subject: `[Pentest] ${subject}`,
+						content,
+					}),
 					headers: {
 						"Content-Type": "application/json",
 					},
